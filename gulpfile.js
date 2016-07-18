@@ -35,11 +35,11 @@ gulp.task('sources', () => {
 
 gulp.task('vendorScripts', () => {
     return gulp.src([
-        './node_modules/jquery/dist/jquery.js',
-        './node_modules/bootstrap/dist/js/bootstrap.js',
-        './node_modules/gentelella/build/js/custom.js',
-        './node_modules/angular/angular.js',
-        './node_modules/@angular/router/angular1/angular_1_router.js'
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/gentelella/build/js/custom.js',
+        'node_modules/angular/angular.js',
+        'node_modules/@angular/router/angular1/angular_1_router.js'
     ])
         .pipe(uglify())
         .pipe(concat('vendor.min.js'))
@@ -48,8 +48,8 @@ gulp.task('vendorScripts', () => {
 
 gulp.task('vendorStyles', () => {
     return gulp.src([
-        './node_modules/bootstrap/dist/css/bootstrap.css',
-        './node_modules/gentelella/build/css/custom.css'
+        'node_modules/bootstrap/dist/css/bootstrap.css',
+        'node_modules/gentelella/build/css/custom.css'
     ])
         .pipe(cleanCSS())
         .pipe(concat('vendor.min.css'))
