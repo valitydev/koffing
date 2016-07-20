@@ -46,6 +46,9 @@ gulp.task('vendorScripts', () => {
         'node_modules/jquery/dist/jquery.js',
         'node_modules/bootstrap/dist/js/bootstrap.js',
         'node_modules/gentelella/build/js/custom.js',
+        'node_modules/moment/moment.js',
+        'node_modules/bootstrap-daterangepicker/daterangepicker.js',
+        'node_modules/select2/dist/js/select2.full.js',
         'node_modules/angular/angular.js',
         'node_modules/@angular/router/angular1/angular_1_router.js',
         'node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.bundle.js',
@@ -59,6 +62,7 @@ gulp.task('vendorScripts', () => {
 gulp.task('vendorStyles', () => {
     return gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.css',
+        'node_modules/select2/dist/css/select2.css',
         'node_modules/gentelella/build/css/custom.css'
     ])
         .pipe(cleanCSS())

@@ -13,6 +13,7 @@ turnover.component('turnover', {
             console.log(points, evt);
         };
         this.options = {
+            animation: false
         };
     }
 });

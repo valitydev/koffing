@@ -9,7 +9,8 @@ geolocation.component('geolocation', {
             legend: {
                 display: true,
                 position: 'left'
-            }
+            },
+            animation: false
         }
     }
 });

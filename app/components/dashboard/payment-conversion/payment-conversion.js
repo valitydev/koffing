@@ -35,7 +35,8 @@ paymentConversion.component('paymentConversion', {
             },
             legend: {
                 display: true
-            }
+            },
+            animation: false
         };
     }
 });

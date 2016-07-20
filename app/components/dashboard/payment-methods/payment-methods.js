@@ -10,7 +10,8 @@ paymentMathods.component('paymentMethods', {
             legend: {
                 display: true,
                 position: 'left'
-            }
+            },
+            animation: false
         }
     }
 });

@@ -11,7 +11,7 @@
                         a(ng-link="[\'Dashboard\']")
                             i.fa.fa-home
                             | Обзор
-                    li
-                        a
+                    li(ng-class="{active: $ctrl.isActive('/finance')}")
+                        a(ng-link="[\'Finance\']")
                             i.fa.fa-bar-chart-o
                             | Финансы
