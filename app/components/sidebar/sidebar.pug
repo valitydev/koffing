@@ -7,11 +7,11 @@
         #sidebar-menu.main_menu_side.hidden-print.main_menu
             .menu_section
                 ul.nav.side-menu
-                    li.active
+                    li(ng-class="{active: $ctrl.isActive('/dashboard')}")
                         a(ng-link="[\'Dashboard\']")
                             i.fa.fa-home
                             | Обзор
-                    li
-                        a
+                    li(ng-class="{active: $ctrl.isActive('/finance')}")
+                        a(ng-link="[\'Finance\']")
                             i.fa.fa-bar-chart-o
                             | Финансы

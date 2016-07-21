@@ -1,0 +1,22 @@
+table.table.table-hover.table-striped
+    thead
+        tr
+            th ID Платежа
+            th Дата
+            th Номер кошелька отправителя
+            th Отправитель
+            th Сумма платежа
+            th Счет
+            th Комментарий к покупке
+    tbody
+        tr(ng-repeat="result in $ctrl.searchResult")
+            td {{result.paymentId}}
+            td {{result.date}}
+            td {{result.walletNumber}}
+            td {{result.payer}}
+            td {{result.sum}}
+            td {{result.accountNumber}}
+            td {{result.comment}}
+.row
+    .col-md-12
+        paginate
