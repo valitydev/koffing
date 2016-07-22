@@ -16,7 +16,7 @@ koffing.value('$routerRootComponent', 'app');
 koffing.component('app', {
     templateUrl: 'components/app/app.html',
     $routeConfig: [
-        { path: '/dashboard', name: 'Dashboard', component: 'dashboard', useAsDefault: true },
-        { path: '/finance', name: 'Finance', component: 'finance' }
+        {path: '/dashboard', name: 'Dashboard', component: 'dashboard', useAsDefault: true},
+        {path: '/finance', name: 'Finance', component: 'finance'}
     ]
 });

@@ -22,7 +22,6 @@ function prepareTemplates() {
 
 gulp.task('sources', () => {
     return gulp.src([
-        'app/app/app.js',
         'app/**/*.module.js',
         'app/**/*.js'
     ])
@@ -49,6 +48,7 @@ gulp.task('vendorScripts', () => {
         'node_modules/moment/moment.js',
         'node_modules/bootstrap-daterangepicker/daterangepicker.js',
         'node_modules/select2/dist/js/select2.full.js',
+        'node_modules/keycloak-js/dist/keycloak.js',
         'node_modules/angular/angular.js',
         'node_modules/@angular/router/angular1/angular_1_router.js',
         'node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.bundle.js',
@@ -79,6 +79,11 @@ gulp.task('index', () => {
         .pipe(livereload());
 });
 
+gulp.task('keycloak', () => {
+    return gulp.src('app/keycloak.json')
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('connect', () => {
     connect.server({
         root: 'dist',
@@ -96,5 +101,5 @@ gulp.task('watch', () => {
     gulp.watch('app/assets/**/*.less', ['styles']);
 });
 
-gulp.task('build', ['index', 'sources', 'styles', 'vendorScripts', 'vendorStyles']);
+gulp.task('build', ['index', 'sources', 'styles', 'vendorScripts', 'vendorStyles', 'keycloak']);
 gulp.task('default', ['connect', 'watch', 'build']);

@@ -1,0 +1,8 @@
+{
+  "realm" : "rbkmoney",
+  "realm-public-key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAivW3w/R4jVZ4ZFmqidkuR7BZG0NVPBFUGzeUdOHGfbRrCnEXQDUT9oZ7ytrBnlX8pL2OzOzfNJAF7pAE3OB/CCY/OaF3o86u/HIVSt+MncPh39fyp6ZNw5DGLfsQIUb3m57KT/cnulq6hUFjMFUSren8kSo88uZ0Jgr2fyqCa7fWL9H67R/zfm22b9TskLy8kj0fD6F7DvQJ8n8psfTlVmLZl/90vFyenz8ffnQNLSrEoHdwwF8vO0kYx1uWdqFUOYaQ4vIENGe3DA7xo7pixQcLUlzZXN+PWfDEk4lxNMYNkmCU1LztSWUuRSzxgoWYHIft2me3Udr4z1bNfurUewIDAQAB",
+  "auth-server-url" : "http://localhost:31235/auth",
+  "ssl-required" : "external",
+  "resource" : "koffing",
+  "public-client" : true
+}
