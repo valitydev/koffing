@@ -9,6 +9,7 @@ const addStream = require('add-stream');
 const uglify = require('gulp-uglify');
 const cleanCSS = require('gulp-clean-css');
 const less = require('gulp-less');
+const babel = require('gulp-babel');
 
 function prepareTemplates() {
     return gulp.src('app/**/*.pug')
@@ -27,6 +28,9 @@ gulp.task('sources', () => {
     ])
         .pipe(addStream.obj(prepareTemplates()))
         .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(concat('source.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist'))
