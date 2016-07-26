@@ -19,7 +19,8 @@
     "gulp-less": "^3.1.0",
     "gulp-livereload": "^3.8.1",
     "gulp-pug": "^3.0.3",
-    "gulp-sourcemaps": "^1.6.0"
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.4"
   },
   "dependencies": {
     "@angular/router": "^0.2.0",
