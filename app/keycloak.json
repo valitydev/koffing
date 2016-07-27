@@ -1,0 +1,8 @@
+{
+  "realm" : "",
+  "realm-public-key" : "",
+  "auth-server-url" : "",
+  "ssl-required" : "external",
+  "resource" : "koffing",
+  "public-client" : true
+}
