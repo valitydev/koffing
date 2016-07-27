@@ -10,7 +10,5 @@ angular.element(document).ready(function () {
             };
         });
         angular.bootstrap(document, ['koffing']);
-    }).error(function () {
-        window.location.reload();
     });
 });
