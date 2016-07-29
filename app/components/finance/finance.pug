@@ -4,9 +4,11 @@
             .x_title
                 h3 Поиск
             .x_content
-                search-form
+                search-form(search-params="$ctrl.searchParams" on-search="$ctrl.search()")
 .row
-    .col-md-12.col-sm-12.col-xs-12
+    i.fa.fa-cog.fa-spin.fa-5x.fa-fw(style="width:100%" ng-show="false")
+
+    .col-md-12.col-sm-12.col-xs-12(ng-show="true")
         .x_panel.tile
             .x_content
-                search-result
+                search-result(searched-invoices="$ctrl.searchedInvoices")

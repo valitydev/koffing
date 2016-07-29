@@ -4,47 +4,32 @@ form.form-horizontal.form-label-left
             .form-group
                 label.control-label.col-md-4 Дата с:
                 .col-md-6
-                    datepicker
+                    datepicker(date="$ctrl.searchParams.from")
+                    //datepicker-test(ng-model="$ctrl.searchParams.from")
             .form-group
                 label.control-label.col-md-4 Дата по:
                 .col-md-6
-                    datepicker
-            .form-group
-                label.control-label.col-md-4 Готовые установки:
-                .col-md-6
-                    custom-select
+                    datepicker(date="$ctrl.searchParams.to")
         .col-md-6
             .form-group
                 label.control-label.col-md-3 Статус платежа:
                 .col-md-6
-                    custom-select
+                    custom-select(options="$ctrl.statuses" selected="$ctrl.searchParams.status")
             .form-group
-                label.control-label.col-md-3 Магазин:
+                label.control-label.col-md-3 Номер инвойса:
                 .col-md-6
-                    custom-select
-            .form-group
-                label.control-label.col-md-3 Номер платежа:
-                .col-md-6
-                    input.form-control(type="text")
-            .form-group
-                label.control-label.col-md-3 E-mail клиента:
-                .col-md-6
-                    input.form-control(type="text")
-            .form-group.credit_card_group
-                label.control-label.col-md-3 Банковская карта клиента:
-                .col-md-3
-                    input.form-control(type="number")
-                .col-md-1 ******
-                .col-md-2
-                    input.form-control(type="number")
-            .form-group
-                label.control-label.col-md-3
-                .col-md-6.credit_card_description От 1 до 6 первых, от 1 до 4 последних цифр
-            .form-group
-                label.control-label.col-md-3 Комментарий:
-                .col-md-6
-                    textarea.form-control(rows="2")
+                    input.form-control(type="text" ng-model="$ctrl.searchParams.invoiceId")
+            //.form-group.credit_card_group
+            //    label.control-label.col-md-3 Банковская карта клиента?:
+            //    .col-md-3
+            //        input.form-control(type="number")
+            //    .col-md-1 ******
+            //    .col-md-2
+            //        input.form-control(type="number")
+            //.form-group
+            //    label.control-label.col-md-3
+            //    .col-md-6.credit_card_description От 1 до 6 первых, от 1 до 4 последних цифр
             .form-group
                 .row
                     .col-md-9
-                        button.btn.btn-primary.pull-right Найти
+                        button.btn.btn-primary.pull-right(ng-click="$ctrl.onSearch()" ng-disabled="!$ctrl.isParams()") Найти

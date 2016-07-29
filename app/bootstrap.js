@@ -6,7 +6,9 @@ angular.element(document).ready(function () {
             $log.debug(keycloakAuth);
             return {
                 profileName: keycloakAuth.tokenParsed.name,
-                logout: keycloakAuth.logout
+                logout: keycloakAuth.logout,
+                token: keycloakAuth.token,
+                updateToken: keycloakAuth.updateToken
             };
         });
         angular.bootstrap(document, ['koffing']);

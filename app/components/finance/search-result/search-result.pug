@@ -1,22 +1,28 @@
+//i.fa.fa-cog.fa-spin.fa-5x.fa-fw(style="width:100%" ng-show="true")
+
 table.table.table-hover.table-striped
     thead
         tr
-            th ID Платежа
-            th Дата
-            th Номер кошелька отправителя
-            th Отправитель
-            th Сумма платежа
-            th Счет
-            th Комментарий к покупке
+            th #
+            th ID
+            th Shop ID
+            th Amount
+            th Currency
+            th Due Date
+            th Status
+            th Product
+            th Description
     tbody
-        tr(ng-repeat="result in $ctrl.searchResult")
-            td {{result.paymentId}}
-            td {{result.date}}
-            td {{result.walletNumber}}
-            td {{result.payer}}
-            td {{result.sum}}
-            td {{result.accountNumber}}
-            td {{result.comment}}
+        tr(ng-repeat="result in $ctrl.searchedInvoices")
+            td {{$index + 1}}
+            td {{result.id}}
+            td {{result.shopID}}
+            td {{result.amount}}
+            td {{result.currency}}
+            td {{result.dueDate}}
+            td {{result.status}}
+            td {{result.product}}
+            td {{result.description}}
 .row
     .col-md-12
         paginate
