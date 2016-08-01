@@ -6,6 +6,6 @@ searchResult.component('searchResult', {
         searchedInvoices: '<'
     },
     controller: function () {
-
+        this.itemsOnPage = 10;
     }
 });

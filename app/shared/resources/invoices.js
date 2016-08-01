@@ -1,5 +1,4 @@
-resources.factory('Invoices', function ($resource, URL, Auth) {
-    console.log(Auth);
+resources.factory('Invoices', function ($resource, URL) {
     return $resource(URL.capiUrl + 'shops/:id/invoices', {
         id: 1
     }, {

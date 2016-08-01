@@ -54,6 +54,7 @@ gulp.task('vendorScripts', () => {
         'node_modules/bootstrap-daterangepicker/daterangepicker.js',
         'node_modules/select2/dist/js/select2.full.js',
         'node_modules/keycloak-js/dist/keycloak.js',
+        'node_modules/lodash/lodash.js',
         'node_modules/angular/angular.js',
         'node_modules/angular-resource/angular-resource.js',
         'node_modules/@angular/router/angular1/angular_1_router.js',
