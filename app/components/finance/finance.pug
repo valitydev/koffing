@@ -6,9 +6,9 @@
             .x_content
                 search-form(search-params="$ctrl.searchParams" on-search="$ctrl.search()")
 .row
-    i.fa.fa-cog.fa-spin.fa-5x.fa-fw(style="width:100%" ng-show="false")
-
-    .col-md-12.col-sm-12.col-xs-12(ng-show="true")
+    .col-md-12.col-sm-12.col-xs-12(ng-show="$ctrl.isSearched")
         .x_panel.tile
             .x_content
-                search-result(searched-invoices="$ctrl.searchedInvoices")
+                loading(is-loading="$ctrl.isLoading")
+                    search-result(searched-invoices="$ctrl.searchedInvoices" offset="$ctrl.searchParams.offset" limit="$ctrl.searchParams.limit")
+                    paginate(limit="$ctrl.searchParams.limit" offset="$ctrl.searchParams.offset" size="$ctrl.searchedInvoices.length" on-change="$ctrl.search(offset)")

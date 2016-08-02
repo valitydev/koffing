@@ -6,10 +6,17 @@ select.component('customSelect', {
                     <option ng-repeat="option in $ctrl.options" value="{{option.key}}">{{option.name}}</option>
                 </select>`,
     bindings: {
-        options: '<',
         selected: '='
     },
-    controller: function () {
+    controller: function (PAYMENT_STATUSES) {
+        this.options = [
+            {key: 'unpaid', name: 'Неоплаченный'},
+            {key: 'cancelled', name: 'Отмененный'},
+            {key: 'paid', name: 'Оплаченный'},
+            {key: 'refunded', name: 'Возвращенный'},
+            {key: 'fulfilled', name: 'Выполненный'}
+        ];
+
         $(".select2_single").select2({
             minimumResultsForSearch: -1,
             allowClear: true,

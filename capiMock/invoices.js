@@ -15,4 +15,4 @@ function createInvoices(count) {
     return result;
 }
 
-module.exports = createInvoices(55);
+module.exports = createInvoices(255);

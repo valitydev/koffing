@@ -12,8 +12,8 @@ app.use((req, res, next) => {
     next();
 });
 
-router.route('/invoices').get((req, res) => setTimeout(() => res.json(invoices), 0));
+router.route('/invoices').get((req, res) => setTimeout(() => res.json(invoices), 300));
 
-app.use('/v2/shops/1', router);
+app.use('/v1/analytics/shops/1', router);
 
 app.listen(9000);

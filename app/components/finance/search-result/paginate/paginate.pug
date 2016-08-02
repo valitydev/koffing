@@ -1,8 +1,0 @@
-.dataTables_paginate.paging_simple_numbers
-    ul.pagination.custom_pagination
-        li.paginate_button.previous.disabled
-            a.fa.fa-chevron-left
-        li.paginate_button(ng-repeat="page in $ctrl.pages" ng-class="{'active': page.active}" ng-click="$ctrl.select(page)")
-            a(href="") {{page.label}}
-        li.paginate_button.next
-            a.fa.fa-chevron-right

@@ -1,11 +1,11 @@
-var searchResult = angular.module('searchResult', ['paginate']);
-
 searchResult.component('searchResult', {
     templateUrl: 'components/finance/search-result/search-result.html',
-    bindings: {
-        searchedInvoices: '<'
+    require: {
+        loadingCtrl: '^loading'
     },
-    controller: function () {
-        this.itemsOnPage = 10;
+    bindings: {
+        searchedInvoices: '<',
+        offset: '<',
+        limit: '<'
     }
 });
