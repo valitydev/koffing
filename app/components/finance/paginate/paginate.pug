@@ -1,0 +1,10 @@
+.row
+    .col-md-12
+        .dataTables_paginate.paging_simple_numbers
+            ul.pagination.custom_pagination
+                li.paginate_button.previous(ng-click="$ctrl.back()")
+                    a.fa.fa-chevron-left(href="")
+                li.paginate_button(ng-repeat="page in $ctrl.pages" ng-class="{'active': page.active}" ng-click="$ctrl.select(page)")
+                    a(href="") {{page.label}}
+                li.paginate_button.next(ng-click="$ctrl.forward()")
+                    a.fa.fa-chevron-right(href="")

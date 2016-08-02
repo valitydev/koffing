@@ -2,7 +2,8 @@ var searchForm = angular.module('searchForm', ['datepicker', 'customSelect']);
 
 searchForm.component('searchForm', {
     templateUrl: 'components/finance/search-form/search-form.html',
-    controller: function () {
-
+    bindings: {
+        searchParams: '=',
+        onSearch: '&'
     }
 });

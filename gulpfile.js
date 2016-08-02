@@ -10,6 +10,7 @@ const uglify = require('gulp-uglify');
 const cleanCSS = require('gulp-clean-css');
 const less = require('gulp-less');
 const babel = require('gulp-babel');
+const nodemon = require('gulp-nodemon');
 
 function prepareTemplates() {
     return gulp.src('app/**/*.pug')
@@ -53,7 +54,9 @@ gulp.task('vendorScripts', () => {
         'node_modules/bootstrap-daterangepicker/daterangepicker.js',
         'node_modules/select2/dist/js/select2.full.js',
         'node_modules/keycloak-js/dist/keycloak.js',
+        'node_modules/lodash/lodash.js',
         'node_modules/angular/angular.js',
+        'node_modules/angular-resource/angular-resource.js',
         'node_modules/@angular/router/angular1/angular_1_router.js',
         'node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.bundle.js',
         'node_modules/angular-chart.js/dist/angular-chart.js'
@@ -103,6 +106,18 @@ gulp.task('watch', () => {
     gulp.watch(['app/**/*.js', 'app/**/*.pug'], ['sources']);
     gulp.watch('app/index.pug', ['index']);
     gulp.watch('app/assets/**/*.less', ['styles']);
+});
+
+gulp.task('capiMock', () => {
+    var started = false;
+    return nodemon({
+        script: 'capiMock/capi.js'
+    }).on('start', () => {
+        if (!started) {
+            cb();
+            started = true;
+        }
+    });
 });
 
 gulp.task('build', ['index', 'sources', 'styles', 'vendorScripts', 'vendorStyles', 'keycloak']);
