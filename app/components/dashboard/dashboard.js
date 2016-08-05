@@ -1,8 +1,8 @@
-var dashboard = angular.module('dashboard', ['revenue', 'conversion', 'geolocation']);
+var dashboard = angular.module('dashboard', ['infoPanel', 'revenue', 'conversion', 'geolocation']);
 
 dashboard.component('dashboard', {
     templateUrl: 'components/dashboard/dashboard.html',
-    controller: function (appConfig) {
+    controller: function (appConfig, Stats) {
         this.toTime = moment().format(appConfig.capiDatetimeFormat);
 
         this.fromTime = moment(this.toTime)
@@ -13,13 +13,67 @@ dashboard.component('dashboard', {
             .milliseconds(0)
             .format(appConfig.capiDatetimeFormat);
 
-        this.statisticInfo = [
-            // {title: 'Баланс', count: '63 000', bottom: 'Рублей'},
-            {title: 'Оборот', count: '1 325 000', bottom: 'Рублей'},
-            {title: 'Успешные', count: '1 274 300', bottom: 'Рублей'},
-            {title: 'Незавершенные', count: '50 700', bottom: 'Рублей'},
-            // {title: 'Средний чек', count: '8 700', bottom: 'Рублей'},
-            {title: 'Плательщиков', count: '598', bottom: ''}
-        ];
+        Stats.conversion({
+            fromTime: this.fromTime,
+            toTime: this.toTime,
+            splitUnit: 'day',
+            splitSize: 2
+        }, conversionStat => {
+            this.conversionChartData = _.map(conversionStat, item => {
+                return {
+                    conversion: item.conversion,
+                    offset: item.offset
+                }
+            });
+
+            const paymentCountInfo = _.reduce(conversionStat, (acc, item) => {
+                return {
+                    successfulCount: acc.successfulCount + item.successfulCount,
+                    unfinishedCount: acc.unfinishedCount + (item.totalCount - item.successfulCount)
+                };
+            }, {
+                successfulCount: 0,
+                unfinishedCount: 0
+            });
+            this.successfulCount = paymentCountInfo.successfulCount;
+            this.unfinishedCount = paymentCountInfo.unfinishedCount;
+        });
+
+        Stats.revenue({
+            fromTime: this.fromTime,
+            toTime: this.toTime,
+            splitUnit: 'day',
+            splitSize: 1
+        }, revenueStat => {
+            this.revenueChartData = _.map(revenueStat, item => {
+                return {
+                    profit: item.profit,
+                    offset: item.offset
+                }
+            });
+
+            this.profit = _.reduce(revenueStat, (acc, item) => acc + item.profit / 100, 0);
+        });
+
+        Stats.geo({
+            fromTime: this.fromTime,
+            toTime: this.toTime,
+            splitUnit: 'day',
+            splitSize: 1
+        }, geoStat => {
+            this.geoChartData = _.map(geoStat, item => {
+                return {
+                    cityName: item.cityName,
+                    profit: item.profit
+                }
+            });
+        });
+
+        Stats.rate({
+            fromTime: this.fromTime,
+            toTime: this.toTime
+        }, rateStat => {
+            this.uniqueCount = rateStat.uniqueCount;
+        });
     }
 });

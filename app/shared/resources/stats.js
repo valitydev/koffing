@@ -42,6 +42,17 @@ resources.factory('Stats', function ($resource, appConfig) {
         /**
          * @returns {Array.<PaymentGeoStat>}
          */
-        geo: {method: 'GET', isArray: true, params: {statsType: 'geo'}}
+        geo: {method: 'GET', isArray: true, params: {statsType: 'geo'}},
+
+        /**
+         * @typedef {Object} Parameters
+         * @property {dateTime} fromTime
+         * @property {dateTime} toTime
+         */
+
+        /**
+         * @returns {PaymentRateStat}
+         */
+        rate: {method: 'GET', params: {statsType: 'rate'}}
     });
 });

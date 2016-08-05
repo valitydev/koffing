@@ -1,21 +1,27 @@
-var geolocation = angular.module('geolocation', ['chart.js', 'resources']);
+var geolocation = angular.module('geolocation', []);
 
 geolocation.component('geolocation', {
-    template: `<div><canvas class="chart chart-doughnut" chart-data="$ctrl.data" chart-labels="$ctrl.labels" chart-options="$ctrl.options"></canvas> </div>`,
+    template: `<loading is-loading="$ctrl.isLoading">
+        <canvas class="chart chart-doughnut" chart-data="$ctrl.data" chart-labels="$ctrl.labels" chart-options="$ctrl.options"></canvas>
+    </loading>`,
     bindings: {
-        fromTime: '<',
-        toTime: '<'
+        chartData: '<'
     },
-    controller: function (Stats) {
-        Stats.geo({
-            fromTime: this.fromTime,
-            toTime: this.toTime,
-            splitUnit: 'month',
-            splitSize: 1
-        }, result => {
-            this.labels = _.map(result, item => item.city_name);
-            this.data = _.chain(result).map(item => item.profit / 100).value();
-        });
+    controller: function () {
+        this.isLoading = true;
+        this.$onChanges = () => {
+            if (this.chartData) {
+                this.isLoading = false;
+                const grouped = _.groupBy(this.chartData, 'cityName');
+                const cities = _.keys(grouped);
+                const data = [];
+                _.forEach(cities, city => {
+                    data.push(_.reduce(grouped[city], (acc, item) => acc + (item.profit / 100), 0));
+                });
+                this.labels = cities;
+                this.data = data;
+            }
+        };
 
         this.options = {
             legend: {

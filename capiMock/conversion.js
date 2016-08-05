@@ -7,9 +7,9 @@ function createConversion(count) {
     for (var i = 0; i <= count; i++) {
         result.push({
             offset: (i * 2) * 86400,
-            successful_count: random(190, 200),
-            total_count: random(200, 210),
-            conversion: random(10, 90)
+            successfulCount: random(190, 200),
+            totalCount: random(200, 210),
+            conversion: Math.random() * (0.95 - 0.1) + 0.1
         });
     }
     return result;

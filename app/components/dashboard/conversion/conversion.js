@@ -1,22 +1,23 @@
-var conversion = angular.module('conversion', ['chart.js', 'resources']);
+var conversion = angular.module('conversion', []);
 
 conversion.component('conversion', {
-    template: `<div><canvas class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels" 
-        chart-options="$ctrl.options" height="150"></canvas></div>`,
+    template: `<loading is-loading="$ctrl.isLoading">
+        <canvas class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels" chart-options="$ctrl.options" height="150"></canvas>
+    </loading>`,
     bindings: {
         fromTime: '<',
-        toTime: '<'
+        chartData: '<'
     },
-    controller: function (Stats) {
-        Stats.conversion({
-            fromTime: this.fromTime,
-            toTime: this.toTime,
-            splitUnit: 'day',
-            splitSize: 2
-        }, result => {
-            this.labels = _.map(result, item => moment(this.fromTime).add(item.offset, 's').format('DD.MM'));
-            this.data = _.chain(result).map(item => item.conversion).chunk(result.length).value();
-        });
+    controller: function () {
+        this.isLoading = true;
+
+        this.$onChanges = () => {
+            if (this.chartData) {
+                this.isLoading = false;
+                this.labels = _.map(this.chartData, item => moment(this.fromTime).add(item.offset, 's').format('DD.MM'));
+                this.data = _.chain(this.chartData).map(item => item.conversion * 100).chunk(this.chartData.length).value();
+            }
+        };
 
         this.options = {
             scales: {

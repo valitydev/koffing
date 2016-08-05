@@ -1,38 +1,25 @@
-module.exports = [
-    {
-        offset: 0,
-        city_name: 'Москва',
-        currency: 'RUB',
-        profit: 90000000,
-        revenue: 90100000
-    },
-    {
-        offset: 0,
-        city_name: 'Санкт-Петербург',
-        currency: 'RUB',
-        profit: 70000000,
-        revenue: 70100000
-    },
-    {
-        offset: 0,
-        city_name: 'Самара',
-        currency: 'RUB',
-        profit: 50000000,
-        revenue: 50100000
-    },
-    {
-        offset: 0,
-        city_name: 'Краснодар',
-        currency: 'RUB',
-        profit: 40000000,
-        revenue: 40100000
-    },
-    {
-        offset: 0,
-        city_name: 'Пенза',
-        currency: 'RUB',
-        profit: 30000000,
-        revenue: 30100000
-    }
-];
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
+function getCity(id) {
+    var cities = ['Москва', 'Санкт-Петербург', 'Самара', 'Краснодар', 'Пенза'];
+    return cities[id];
+}
+
+function createGeo(count) {
+    var result = [];
+    for (var i = 0; i <= count; i++) {
+        var profit = random(1000, 7000) * 100;
+        result.push({
+            offset: i * 86400,
+            cityName: getCity(random(0, 4)),
+            currency: 'RUB',
+            profit: profit,
+            revenue: profit * 0.3
+        });
+    }
+    return result;
+}
+
+module.exports = createGeo(900);
