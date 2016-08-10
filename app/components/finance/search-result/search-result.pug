@@ -11,7 +11,7 @@ table.table.table-hover.table-striped
     tbody
         tr(ng-repeat="result in $ctrl.searchedInvoices | limitTo: $ctrl.limit : $ctrl.offset")
             td {{result.id}}
-            td {{result.amount | currency}}
+            td {{result.amount | roubleCurrency}}
             td {{result.currency}}
             td {{result.dueDate | date : 'dd.MM.yyyy'}}
             td {{result.status | paymentStatus}}

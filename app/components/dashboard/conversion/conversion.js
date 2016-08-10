@@ -2,7 +2,8 @@ var conversion = angular.module('conversion', []);
 
 conversion.component('conversion', {
     template: `<loading is-loading="$ctrl.isLoading">
-        <canvas class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels" chart-options="$ctrl.options" height="150"></canvas>
+        <canvas class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels" 
+        chart-series="['Конверсия']" chart-options="$ctrl.options" height="150"></canvas>
     </loading>`,
     bindings: {
         fromTime: '<',
@@ -15,7 +16,10 @@ conversion.component('conversion', {
             if (this.chartData) {
                 this.isLoading = false;
                 this.labels = _.map(this.chartData, item => moment(this.fromTime).add(item.offset, 's').format('DD.MM'));
-                this.data = _.chain(this.chartData).map(item => item.conversion * 100).chunk(this.chartData.length).value();
+                this.data = _.chain(this.chartData)
+                    .map(item => _.round(item.conversion * 100, 0))
+                    .chunk(this.chartData.length)
+                    .value();
             }
         };
 

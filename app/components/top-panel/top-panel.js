@@ -5,5 +5,6 @@ topPanel.component('topPanel', {
     controller: function (Auth) {
         this.profileName = Auth.profileName;
         this.logout = Auth.logout;
+        this.token = Auth.token;
     }
 });

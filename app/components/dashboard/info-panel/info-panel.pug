@@ -3,7 +3,7 @@
         span.count_top Оборот
             .dashboard_stats_count
                 loading(is-loading="$ctrl.profitLoading")
-                    div {{$ctrl.profit}}
+                    div {{$ctrl.profit | roubleCurrency}}
         span.count_bottom Рублей
     .col-md-3.col-sm-4.col-xs-6.tile_stats_count
         span.count_top Успешных платежей

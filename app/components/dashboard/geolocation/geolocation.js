@@ -15,9 +15,12 @@ geolocation.component('geolocation', {
                 const grouped = _.groupBy(this.chartData, 'cityName');
                 const cities = _.keys(grouped);
                 const data = [];
-                _.forEach(cities, city => {
-                    data.push(_.reduce(grouped[city], (acc, item) => acc + (item.profit / 100), 0));
-                });
+                _.forEach(cities, city => data.push(
+                    _.chain(grouped[city])
+                        .reduce((acc, item) => acc + item.profit, 0)
+                        .divide(100)
+                        .value()
+                ));
                 this.labels = cities;
                 this.data = data;
             }

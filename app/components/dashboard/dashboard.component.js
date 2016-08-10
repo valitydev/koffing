@@ -1,8 +1,6 @@
-var dashboard = angular.module('dashboard', ['infoPanel', 'revenue', 'conversion', 'geolocation']);
-
 dashboard.component('dashboard', {
     templateUrl: 'components/dashboard/dashboard.html',
-    controller: function (appConfig, Stats) {
+    controller: function (appConfig, Stats, ChartDataConversion) {
         this.toTime = moment().format(appConfig.capiDatetimeFormat);
 
         this.fromTime = moment(this.toTime)
@@ -19,22 +17,8 @@ dashboard.component('dashboard', {
             splitUnit: 'day',
             splitSize: 2
         }, conversionStat => {
-            this.conversionChartData = _.map(conversionStat, item => {
-                return {
-                    conversion: item.conversion,
-                    offset: item.offset
-                }
-            });
-
-            const paymentCountInfo = _.reduce(conversionStat, (acc, item) => {
-                return {
-                    successfulCount: acc.successfulCount + item.successfulCount,
-                    unfinishedCount: acc.unfinishedCount + (item.totalCount - item.successfulCount)
-                };
-            }, {
-                successfulCount: 0,
-                unfinishedCount: 0
-            });
+            this.conversionChartData = ChartDataConversion.toConversionChartData(conversionStat);
+            const paymentCountInfo = ChartDataConversion.toPaymentCountInfo(conversionStat);
             this.successfulCount = paymentCountInfo.successfulCount;
             this.unfinishedCount = paymentCountInfo.unfinishedCount;
         });
@@ -45,14 +29,8 @@ dashboard.component('dashboard', {
             splitUnit: 'day',
             splitSize: 1
         }, revenueStat => {
-            this.revenueChartData = _.map(revenueStat, item => {
-                return {
-                    profit: item.profit,
-                    offset: item.offset
-                }
-            });
-
-            this.profit = _.reduce(revenueStat, (acc, item) => acc + item.profit / 100, 0);
+            this.revenueChartData = ChartDataConversion.toRevenueChartData(revenueStat);
+            this.profit = ChartDataConversion.toTotalProfit(revenueStat);
         });
 
         Stats.geo({
@@ -61,12 +39,7 @@ dashboard.component('dashboard', {
             splitUnit: 'day',
             splitSize: 1
         }, geoStat => {
-            this.geoChartData = _.map(geoStat, item => {
-                return {
-                    cityName: item.cityName,
-                    profit: item.profit
-                }
-            });
+            this.geoChartData = ChartDataConversion.toGeoChartData(geoStat);
         });
 
         Stats.rate({

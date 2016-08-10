@@ -1,6 +1,4 @@
-function random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+var random = require('./utils/random');
 
 function getCity(id) {
     var cities = ['Москва', 'Санкт-Петербург', 'Самара', 'Краснодар', 'Пенза'];

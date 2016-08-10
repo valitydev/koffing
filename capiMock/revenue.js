@@ -1,6 +1,4 @@
-function random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+var random = require('./utils/random');
 
 function createRevenues(count) {
     var result = [];
