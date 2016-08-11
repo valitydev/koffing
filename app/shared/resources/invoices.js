@@ -1,5 +1,5 @@
-resources.factory('Invoices', function ($resource, URL) {
-    return $resource(URL.capiUrl + 'analytics/shops/:shopID/invoices', {
+resources.factory('Invoices', function ($resource, appConfig) {
+    return $resource(appConfig.capiUrl + 'analytics/shops/:shopID/invoices', {
         shopID: 1
     }, {
         /**
@@ -13,8 +13,8 @@ resources.factory('Invoices', function ($resource, URL) {
          */
 
         /**
-         * @returns {Array.<Invoices>}
+         * @returns {Invoices}
          */
-        search: {method: 'GET', isArray: true}
+        search: {method: 'GET'}
     });
 });

@@ -1,4 +1,4 @@
-datepicker.directive('daterangepicker', function () {
+datepicker.directive('daterangepicker', function (appConfig) {
     const libConfig = {
         singleDatePicker: true,
         calender_style: 'picker_2',
@@ -9,11 +9,6 @@ datepicker.directive('daterangepicker', function () {
         autoUpdateInput: false
     };
 
-    const formatConfig = {
-        displayFormat: 'DD.MM.YYYY',
-        modelFormat: 'YYYY-MM-DDTHH:mm:ssZ'
-    };
-
     return {
         restrict: 'A',
         require: 'ngModel',
@@ -21,7 +16,7 @@ datepicker.directive('daterangepicker', function () {
             element.daterangepicker(libConfig);
 
             element.on('apply.daterangepicker', (ev, picker) => {
-                let formatted = moment(picker.startDate).format(formatConfig.modelFormat);
+                let formatted = moment(picker.startDate).format(appConfig.capiDatetimeFormat);
                 ngModel.$setViewValue(formatted);
                 ngModel.$render();
             });
@@ -30,7 +25,7 @@ datepicker.directive('daterangepicker', function () {
 
             ngModel.$render = function () {
                 let value = ngModel.$viewValue;
-                let formatted = value ? moment(value).format(formatConfig.displayFormat) : '';
+                let formatted = value ? moment(value).format('DD.MM.YYYY') : '';
                 element.val(formatted);
             };
         }

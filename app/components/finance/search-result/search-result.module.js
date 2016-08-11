@@ -1,1 +1,1 @@
-var searchResult = angular.module('searchResult', []);
+var searchResult = angular.module('searchResult', ['currency']);
