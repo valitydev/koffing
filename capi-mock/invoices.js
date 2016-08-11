@@ -18,6 +18,6 @@ function createInvoices(count) {
 }
 
 module.exports = {
-    length: 1456,
+    total: 1456,
     invoices: createInvoices(20)
 };

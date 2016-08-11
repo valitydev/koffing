@@ -111,7 +111,7 @@ gulp.task('watch', () => {
 gulp.task('capiMock', () => {
     var started = false;
     return nodemon({
-        script: 'capiMock/capi.js'
+        script: 'capi-mock/capi.js'
     }).on('start', () => {
         if (!started) {
             cb();

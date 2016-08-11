@@ -12,4 +12,4 @@
                 loading(is-loading="$ctrl.isLoading")
                     search-result(searched-invoices="$ctrl.searchedInvoices")
                     paginate(limit="$ctrl.searchParams.limit" offset="$ctrl.searchParams.offset"
-                        size="$ctrl.searchedInvoicesLength" on-change="$ctrl.search(offset)" pages-on-screen="15")
+                        size="$ctrl.totalInvoices" on-change="$ctrl.search(offset)" pages-on-screen="15")

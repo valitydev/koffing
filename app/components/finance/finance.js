@@ -25,7 +25,7 @@ finance.component('finance', {
             console.log(this.searchParams);
             Invoices.search(this.searchParams, result => {
                 this.searchedInvoices = result.invoices;
-                this.searchedInvoicesLength = result.length;
+                this.totalInvoices = result.total;
                 this.isLoading = false;
             });
         };
