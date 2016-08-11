@@ -17,4 +17,7 @@ function createInvoices(count) {
     return result;
 }
 
-module.exports = createInvoices(255);
+module.exports = {
+    length: 1456,
+    invoices: createInvoices(20)
+};

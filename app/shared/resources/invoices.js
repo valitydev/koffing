@@ -13,8 +13,8 @@ resources.factory('Invoices', function ($resource, appConfig) {
          */
 
         /**
-         * @returns {Array.<Invoices>}
+         * @returns {Invoices}
          */
-        search: {method: 'GET', isArray: true}
+        search: {method: 'GET'}
     });
 });

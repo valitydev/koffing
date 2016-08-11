@@ -9,7 +9,7 @@ table.table.table-hover.table-striped
             th Продукт
             th Описание
     tbody
-        tr(ng-repeat="result in $ctrl.searchedInvoices | limitTo: $ctrl.limit : $ctrl.offset")
+        tr(ng-repeat="result in $ctrl.searchedInvoices")
             td {{result.id}}
             td {{result.amount | roubleCurrency}}
             td {{result.currency}}

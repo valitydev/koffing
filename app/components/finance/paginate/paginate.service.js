@@ -1,5 +1,5 @@
 paginate.factory('Paginate', function () {
-    return function (size, limit, offset) {
+    return function (size, limit, offset, pagesOnScreen, onChange) {
         function calcPages(size, limit) {
             if (limit === 0 || size < limit) {
                 return 0;
@@ -38,6 +38,7 @@ paginate.factory('Paginate', function () {
         this.activatePage = activated => {
             getActive(this.pages).active = false;
             activated.active = true;
+            onChange({offset: activated.offset});
             return activated;
         };
 
@@ -53,6 +54,11 @@ paginate.factory('Paginate', function () {
             if (index >= 0) {
                 return this.activatePage(this.pages[index]);
             }
-        }
+        };
+
+        this.calcPageOffset = () => {
+            const currentPage = (offset / limit) + 1;
+            return currentPage > pagesOnScreen ? currentPage - pagesOnScreen : 0;
+        };
     }
 });

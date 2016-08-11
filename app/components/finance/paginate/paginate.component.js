@@ -4,25 +4,23 @@ paginate.component('paginate', {
         limit: '<',
         size: '<',
         offset: '<',
-        onChange: '&'
+        onChange: '&',
+        pagesOnScreen: '<'
     },
     controller: function (Paginate) {
         this.$onChanges = () => {
             if (this.size) {
-                const paginate = new Paginate(this.size, this.limit, this.offset);
+                const paginate = new Paginate(this.size, this.limit, this.offset, this.pagesOnScreen, this.onChange);
 
                 this.pages = paginate.pages;
 
-                function change(onChange, func, args) {
-                    var res = args ? func(args) : func();
-                    onChange({offset: res ? res.offset : 0});
-                }
+                this.pageOffset = paginate.calcPageOffset();
 
-                this.select = page => change(this.onChange, paginate.activatePage, page);
+                this.select = paginate.activatePage;
 
-                this.forward = () => change(this.onChange, paginate.forward);
+                this.forward = paginate.forward;
 
-                this.back = () => change(this.onChange, paginate.back);
+                this.back = paginate.back;
             }
         };
     }
