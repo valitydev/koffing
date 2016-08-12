@@ -1,1 +1,1 @@
-var datepicker = angular.module('datepicker', []);
+const datepicker = angular.module('datepicker', []);

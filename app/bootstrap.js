@@ -2,7 +2,7 @@ angular.element(document).ready(function () {
     var keycloakAuth = new Keycloak('keycloak.json');
 
     keycloakAuth.init({onLoad: 'login-required'}).success(function () {
-        koffing.factory('Auth', function () {
+        app.factory('Auth', function () {
             return {
                 profileName: keycloakAuth.tokenParsed.name,
                 logout: keycloakAuth.logout,
@@ -10,6 +10,6 @@ angular.element(document).ready(function () {
                 updateToken: keycloakAuth.updateToken
             };
         });
-        angular.bootstrap(document, ['koffing']);
+        angular.bootstrap(document, ['app']);
     });
 });

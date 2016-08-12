@@ -1,1 +1,1 @@
-var customSelect = angular.module('customSelect', []);
+const customSelect = angular.module('customSelect', []);

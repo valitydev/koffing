@@ -1,4 +1,4 @@
-var infoPanel = angular.module('infoPanel', ['currency']);
+const infoPanel = angular.module('infoPanel', ['currency']);
 
 infoPanel.component('infoPanel', {
     templateUrl: 'components/dashboard/info-panel/info-panel.html',

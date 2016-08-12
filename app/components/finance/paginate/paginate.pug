@@ -1,4 +1,4 @@
-.dataTables_paginate.paging_simple_numbers
+.dataTables_paginate.paging_simple_numbers(ng-if="$ctrl.size > $ctrl.limit")
     ul.pagination.custom_pagination
         li.paginate_button.previous(ng-click="$ctrl.back()")
             a.fa.fa-chevron-left(href="")
