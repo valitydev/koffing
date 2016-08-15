@@ -1,21 +1,27 @@
 dashboard.component('dashboard', {
     templateUrl: 'components/dashboard/dashboard.html',
-    controller: function (appConfig, Stats, ChartDataConversion) {
-        this.toTime = moment().format(appConfig.capiDatetimeFormat);
+    controller: function (Payments, ChartDataConversion, Customers) {
+        this.toTime = moment().format();
 
-        this.fromTime = moment(this.toTime)
-            .subtract(1, 'M')
+        // this.fromTime = moment(this.toTime)
+        //     .subtract(1, 'M')
+        //     .hours(0)
+        //     .minutes(0)
+        //     .seconds(0)
+        //     .milliseconds(0)
+        //     .format();
+
+        this.fromTime = moment()
             .hours(0)
             .minutes(0)
             .seconds(0)
-            .milliseconds(0)
-            .format(appConfig.capiDatetimeFormat);
+            .format();
 
-        Stats.conversion({
+        Payments.conversion({
             fromTime: this.fromTime,
             toTime: this.toTime,
-            splitUnit: 'day',
-            splitSize: 2
+            splitUnit: 'minute',
+            splitSize: 1
         }, conversionStat => {
             this.conversionChartData = ChartDataConversion.toConversionChartData(conversionStat);
             const paymentCountInfo = ChartDataConversion.toPaymentCountInfo(conversionStat);
@@ -23,17 +29,17 @@ dashboard.component('dashboard', {
             this.unfinishedCount = paymentCountInfo.unfinishedCount;
         });
 
-        Stats.revenue({
+        Payments.revenue({
             fromTime: this.fromTime,
             toTime: this.toTime,
-            splitUnit: 'day',
+            splitUnit: 'minute',
             splitSize: 1
         }, revenueStat => {
             this.revenueChartData = ChartDataConversion.toRevenueChartData(revenueStat);
             this.profit = ChartDataConversion.toTotalProfit(revenueStat);
         });
 
-        Stats.geo({
+        Payments.geo({
             fromTime: this.fromTime,
             toTime: this.toTime,
             splitUnit: 'day',
@@ -42,11 +48,11 @@ dashboard.component('dashboard', {
             this.geoChartData = ChartDataConversion.toGeoChartData(geoStat);
         });
 
-        Stats.rate({
+        Customers.rate({
             fromTime: this.fromTime,
             toTime: this.toTime
         }, rateStat => {
-            this.uniqueCount = rateStat.uniqueCount;
+            this.uniqueCount = rateStat[0] ? rateStat[0].uniqueCount : 0;
         });
     }
 });

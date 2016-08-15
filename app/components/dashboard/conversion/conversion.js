@@ -15,7 +15,7 @@ conversion.component('conversion', {
         this.$onChanges = () => {
             if (this.chartData) {
                 this.isLoading = false;
-                this.labels = _.map(this.chartData, item => moment(this.fromTime).add(item.offset, 's').format('DD.MM'));
+                this.labels = _.map(this.chartData, item => moment(this.fromTime).add(item.offset, 's').format('DD.MM.YYYY HH:mm'));
                 this.data = _.chain(this.chartData)
                     .map(item => _.round(item.conversion * 100, 0))
                     .chunk(this.chartData.length)

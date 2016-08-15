@@ -1,4 +1,4 @@
-datepicker.directive('daterangepicker', function (appConfig) {
+datepicker.directive('daterangepicker', function () {
     const libConfig = {
         singleDatePicker: true,
         calender_style: 'picker_2',
@@ -16,7 +16,7 @@ datepicker.directive('daterangepicker', function (appConfig) {
             element.daterangepicker(libConfig);
 
             element.on('apply.daterangepicker', (ev, picker) => {
-                let formatted = moment(picker.startDate).format(appConfig.capiDatetimeFormat);
+                let formatted = moment(picker.startDate).format();
                 ngModel.$setViewValue(formatted);
                 ngModel.$render();
             });

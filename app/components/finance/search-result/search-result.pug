@@ -7,7 +7,6 @@ table.table.table-hover.table-striped
             th Дата окончания
             th Статус
             th Продукт
-            th Описание
     tbody
         tr(ng-repeat="result in $ctrl.searchedInvoices")
             td {{result.id}}
@@ -16,4 +15,3 @@ table.table.table-hover.table-striped
             td {{result.dueDate | date : 'dd.MM.yyyy'}}
             td {{result.status | paymentStatus}}
             td {{result.product}}
-            td {{result.description}}

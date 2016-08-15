@@ -1,7 +1,7 @@
 {
-  "realm" : "rbkmoney",
-  "realm-public-key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAycJPsUPuWqv0XQuZYG/lM96RJwfIKPq0aKClbb60eyog72k0gJYtq0aXAIovch5FeIdjfQdKUgp2q5Bwb/Td+H6eDRrpFDLpP4eWWIL9YaMm4NgJ1fKoRqhN9RZpBYdgiVvhrLIkiwaDOezNQFw5o1a2Ok4HwshflFi8VXwkNShCpJa2MoKbug5F8mVh7kH3RuXsHawYPoH/8rNiVY8xMseDMqHPkhwzAUiLY0/vp7LxtCE00OcF+jgP61SMlmSVwkQswC2KPHD+nc2MA4T6IHd84084agMM/SXbct5r05Jwj9KIE8++VfYIB3q7vYBGnX8+aBMQvwRY5eLxykB4IQIDAQAB",
-  "auth-server-url" : "http://localhost:31235/auth",
+  "realm" : "external",
+  "realm-public-key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2KZPnAJs0SS6/w39mDTrWYRjM86IFteU/dPGpGQdOPwNe85Ep2leVN3/FBKVUMHsFTtFkVsg/VcCEfYBj22B0mZ8zV2hQUCNq1NV2b2LnYYrDmThmFOOTnpbBhEOMS8Wrzj3Yk7mcDtKlMzoBNIQ/Z54ffymkyiKX8XOw45K9Cx1Bp/SVjOnJlm0Qu/+zE40/XVpzgjbaqSc9+8B3tur2E03EVemOa6EFhu7ocKsbSR7/fG1nYOGKjACS1Z+VYQTMcRqxZlLw7kv3fxUaMDcK5p/16YWpWggflVy5w26IIJeDcsXG+X3LV6f6dyo9ZfOEvGqQZmPCohaSOgi+IRwAQIDAQAB",
+  "auth-server-url" : "http://macroserver1.msk1.rbkmoney.net:81/auth/",
   "ssl-required" : "external",
   "resource" : "koffing",
   "public-client" : true
