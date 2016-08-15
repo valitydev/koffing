@@ -3,19 +3,25 @@ dashboard.component('dashboard', {
     controller: function (Payments, ChartDataConversion, Customers) {
         this.toTime = moment().format();
 
-        this.fromTime = moment(this.toTime)
-            .subtract(1, 'M')
+        // this.fromTime = moment(this.toTime)
+        //     .subtract(1, 'M')
+        //     .hours(0)
+        //     .minutes(0)
+        //     .seconds(0)
+        //     .milliseconds(0)
+        //     .format();
+
+        this.fromTime = moment()
             .hours(0)
             .minutes(0)
             .seconds(0)
-            .milliseconds(0)
             .format();
 
         Payments.conversion({
             fromTime: this.fromTime,
             toTime: this.toTime,
-            splitUnit: 'day',
-            splitSize: 2
+            splitUnit: 'minute',
+            splitSize: 1
         }, conversionStat => {
             this.conversionChartData = ChartDataConversion.toConversionChartData(conversionStat);
             const paymentCountInfo = ChartDataConversion.toPaymentCountInfo(conversionStat);
@@ -26,7 +32,7 @@ dashboard.component('dashboard', {
         Payments.revenue({
             fromTime: this.fromTime,
             toTime: this.toTime,
-            splitUnit: 'day',
+            splitUnit: 'minute',
             splitSize: 1
         }, revenueStat => {
             this.revenueChartData = ChartDataConversion.toRevenueChartData(revenueStat);
@@ -46,7 +52,7 @@ dashboard.component('dashboard', {
             fromTime: this.fromTime,
             toTime: this.toTime
         }, rateStat => {
-            this.uniqueCount = rateStat[0].uniqueCount;
+            this.uniqueCount = rateStat[0] ? rateStat[0].uniqueCount : 0;
         });
     }
 });

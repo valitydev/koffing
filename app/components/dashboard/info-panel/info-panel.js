@@ -14,16 +14,16 @@ infoPanel.component('infoPanel', {
         this.unfinishedCountLoading = true;
         this.uniqueCountLoading = true;
         this.$onChanges = () => {
-            if (this.profit) {
+            if (_.isNumber(this.profit)) {
                 this.profitLoading = false;
             }
-            if (this.successfulCount) {
+            if (_.isNumber(this.successfulCount)) {
                 this.successfulCountLoading = false;
             }
-            if (this.unfinishedCount) {
+            if (_.isNumber(this.unfinishedCount)) {
                 this.unfinishedCountLoading = false;
             }
-            if(this.uniqueCount) {
+            if(_.isNumber(this.uniqueCount)) {
                 this.uniqueCountLoading = false;
             }
         };
