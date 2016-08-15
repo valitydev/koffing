@@ -1,13 +1,13 @@
-resources.factory('dateInterceptor', function ($q, appConfig) {
+resources.factory('dateInterceptor', function ($q) {
     return {
         request: function (config) {
             var deferred = $q.defer();
             if (config.params) {
                 if (config.params.fromTime) {
-                    config.params.fromTime = moment(config.params.fromTime).format(appConfig.capiDatetimeFormat) + 'Z';
+                    config.params.fromTime = moment(config.params.fromTime).utc().format();
                 }
                 if (config.params.toTime) {
-                    config.params.toTime = moment(config.params.toTime).format(appConfig.capiDatetimeFormat) + 'Z';
+                    config.params.toTime = moment(config.params.toTime).utc().format();
                 }
             }
             deferred.resolve(config);
