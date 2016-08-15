@@ -1,6 +1,6 @@
-resources.factory('Stats', function ($resource, appConfig) {
+resources.factory('Payments', function ($resource, appConfig) {
     return $resource(appConfig.capiUrl + 'analytics/shops/:shopID/payments/stats/:statsType', {
-        shopID: 1
+        shopID: appConfig.shopID
     }, {
         /**
          * @typedef {Object} Parameters
@@ -43,16 +43,5 @@ resources.factory('Stats', function ($resource, appConfig) {
          * @returns {Array.<PaymentGeoStat>}
          */
         geo: {method: 'GET', isArray: true, params: {statsType: 'geo'}},
-
-        /**
-         * @typedef {Object} Parameters
-         * @property {dateTime} fromTime
-         * @property {dateTime} toTime
-         */
-
-        /**
-         * @returns {PaymentRateStat}
-         */
-        rate: {method: 'GET', params: {statsType: 'rate'}}
     });
 });

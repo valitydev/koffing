@@ -1,6 +1,6 @@
 resources.factory('Invoices', function ($resource, appConfig) {
     return $resource(appConfig.capiUrl + 'analytics/shops/:shopID/invoices', {
-        shopID: 1
+        shopID: appConfig.shopID
     }, {
         /**
          * @typedef {Object} Parameters

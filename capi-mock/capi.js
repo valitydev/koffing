@@ -12,7 +12,7 @@ const rate = require('./rate');
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Request-ID');
     next();
 });
 
@@ -24,8 +24,8 @@ router.route('/payments/stats/conversion').get((req, res) => setTimeout(() => re
 
 router.route('/payments/stats/geo').get((req, res) => setTimeout(() => res.json(geo), 0));
 
-router.route('/payments/stats/rate').get((req, res) => setTimeout(() => res.json(rate), 0));
+router.route('/customers/stats/rate').get((req, res) => setTimeout(() => res.json(rate), 0));
 
-app.use('/v1/analytics/shops/1', router);
+app.use('/v1/analytics/shops/THRIFT-SHOP', router);
 
 app.listen(9000);

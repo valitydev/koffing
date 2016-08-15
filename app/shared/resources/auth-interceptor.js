@@ -6,6 +6,7 @@ resources.factory('authInterceptor', function ($q, Auth) {
                 Auth.updateToken(5).success(function () {
                     config.headers = config.headers || {};
                     config.headers.Authorization = 'Bearer ' + Auth.token;
+                    config.headers['X-Request-ID'] = 'KEK';
                     deferred.resolve(config);
                 }).error(function () {
                     deferred.reject('Failed to refresh token');
