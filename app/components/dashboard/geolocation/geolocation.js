@@ -1,4 +1,4 @@
-var geolocation = angular.module('geolocation', []);
+const geolocation = angular.module('geolocation', []);
 
 geolocation.component('geolocation', {
     template: `<loading is-loading="$ctrl.isLoading">

@@ -1,1 +1,1 @@
-var searchResult = angular.module('searchResult', ['currency']);
+const searchResult = angular.module('searchResult', ['currency']);

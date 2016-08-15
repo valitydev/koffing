@@ -1,4 +1,4 @@
-var sidebar = angular.module('sidebar', []);
+const sidebar = angular.module('sidebar', []);
 
 sidebar.component('sidebar', {
     templateUrl: 'components/sidebar/sidebar.html',

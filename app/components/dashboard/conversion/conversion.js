@@ -1,4 +1,4 @@
-var conversion = angular.module('conversion', []);
+const conversion = angular.module('conversion', []);
 
 conversion.component('conversion', {
     template: `<loading is-loading="$ctrl.isLoading">

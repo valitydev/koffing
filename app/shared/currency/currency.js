@@ -1,4 +1,4 @@
-var currency = angular.module('currency', []);
+const currency = angular.module('currency', []);
 
 /**
  * @param {int} val: format value

@@ -11,6 +11,7 @@ const cleanCSS = require('gulp-clean-css');
 const less = require('gulp-less');
 const babel = require('gulp-babel');
 const nodemon = require('gulp-nodemon');
+const header = require('gulp-header');
 
 function prepareTemplates() {
     return gulp.src('app/**/*.pug')
@@ -29,11 +30,14 @@ gulp.task('sources', () => {
     ])
         .pipe(addStream.obj(prepareTemplates()))
         .pipe(sourcemaps.init())
+        .pipe(concat('source.js'))
         .pipe(babel({
             presets: ['es2015']
         }))
-        .pipe(concat('source.js'))
         .pipe(sourcemaps.write())
+        .pipe(header('/* Build time: ${datetime} */ \n', {
+            datetime: new Date()
+        }))
         .pipe(gulp.dest('dist'))
         .pipe(livereload());
 });

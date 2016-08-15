@@ -1,4 +1,4 @@
-var revenue = angular.module('revenue', ['chart.js']);
+const revenue = angular.module('revenue', ['chart.js']);
 
 revenue.component('revenue', {
     template: `<loading is-loading="$ctrl.isLoading">

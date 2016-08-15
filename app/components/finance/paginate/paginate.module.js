@@ -1,1 +1,1 @@
-var paginate = angular.module('paginate', []);
+const paginate = angular.module('paginate', []);

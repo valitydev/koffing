@@ -1,4 +1,4 @@
-var resources = angular.module('resources', ['ngResource']);
+const resources = angular.module('resources', ['ngResource']);
 
 resources.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
