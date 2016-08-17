@@ -24,6 +24,11 @@ conversion.component('conversion', {
         };
 
         this.options = {
+            elements: {
+                line: {
+                    tension: 0
+                }
+            },
             scales: {
                 yAxes: [{
                     stacked: true
