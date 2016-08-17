@@ -14,7 +14,7 @@ revenue.component('revenue', {
         this.$onChanges = () => {
             if (this.chartData) {
                 this.isLoading = false;
-                this.labels = _.map(this.chartData, item => moment(this.fromTime).add(item.offset, 's').format('DD.MM.YYYY HH:mm'));
+                this.labels = _.map(this.chartData, item => moment(this.fromTime).add(item.offset, 's').format('DD.MM HH:mm'));
                 this.data = _.chain(this.chartData)
                     .map(item => _.round(item.profit / 100, 2))
                     .chunk(this.chartData.length)
@@ -23,6 +23,11 @@ revenue.component('revenue', {
         };
 
         this.options = {
+            elements: {
+                line: {
+                    tension: 0
+                }
+            },
             scales: {
                 yAxes: [{
                     stacked: true

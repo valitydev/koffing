@@ -10,6 +10,6 @@
         .x_panel.tile
             .x_content
                 loading(is-loading="$ctrl.isLoading")
-                    search-result(searched-invoices="$ctrl.searchedInvoices")
-                    paginate(limit="$ctrl.searchParams.limit" offset="$ctrl.searchParams.offset"
+                    search-result(searched-invoices="$ctrl.searchedInvoices" offset="$ctrl.searchParams.offset")
+                    paginate(limit="15" offset="$ctrl.searchParams.offset"
                         size="$ctrl.totalCount" on-change="$ctrl.search(offset)" pages-on-screen="15")

@@ -16,6 +16,6 @@ function format(val, decimalLength, wholeLength, delimiter, decimalDelimiter) {
 currency.filter('roubleCurrency', function () {
     return function (input) {
         const val = _.chain(input).toNumber().divide(100).round(2).value();
-        return val ? format(val, 0, 3, ' ', '.') : input;
+        return val ? format(val, 2, 3, ' ', '.') : input;
     };
 });
