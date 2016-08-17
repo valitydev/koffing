@@ -14,6 +14,9 @@ finance.component('finance', {
             this.isLoading = true;
             this.isSearched = true;
             this.searchParams.offset = offset ? offset : 0;
+            if (_.isEmpty(this.searchParams.invoiceID)) {
+                this.searchParams.invoiceID = null;
+            }
             Invoices.search(this.searchParams, result => {
                 this.searchedInvoices = result.invoices;
                 this.totalCount = result.totalCount;

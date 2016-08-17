@@ -6,7 +6,6 @@ table.table.table-hover.table-striped
             th Валюта
             th Дата
             th Статус
-            th Продукт
             th Описание
     tbody
         tr(ng-repeat="result in $ctrl.searchedInvoices")
@@ -15,5 +14,4 @@ table.table.table-hover.table-striped
             td {{result.currency}}
             td {{result.dueDate | date : 'dd.MM.yyyy HH:mm:ss'}}
             td {{result.status | paymentStatus}}
-            td {{result.product}}
             td {{result.description}}
