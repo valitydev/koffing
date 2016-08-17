@@ -15,7 +15,7 @@ finance.component('finance', {
             this.isSearched = true;
             this.searchParams.offset = offset ? offset : 0;
             Invoices.search(this.searchParams, result => {
-                this.searchedInvoices = _.reverse(result.invoices);
+                this.searchedInvoices = result.invoices;
                 this.totalCount = result.totalCount;
                 this.isLoading = false;
             });
