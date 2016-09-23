@@ -1,0 +1,32 @@
+.row
+    .col-md-12
+        .x_panel.tile
+            .x_title
+                h4 Аналитика
+            .x_content
+                .row
+                    .col-md-5
+                        form.form-horizontal
+                            .form-group
+                                label.control-label.col-md-2 Магазин:
+                                .col-md-8
+                                    shop-select(options="$ctrl.shopsDetails" selected="$ctrl.selectedShopId" on-select="$ctrl.onShopSelect()")
+                    .col-md-3
+                        button.btn.btn-default(ng-click="$ctrl.showStatistic()") Показать статистику
+
+ng-outlet
+//.row
+    //.col-md-12
+    //    .x_panel.tile
+    //        .x_content
+                //div(role="tabpanel" data-example-id="togglable-tabs")
+                //    ul#myTab.nav.nav-tabs.bar_tabs(role="tablist")
+                //        li.active(role="presentation")
+                //            a#statistic-tab(href="#tab_content_statistic" role="tab" data-toggle="tab" aria-expanded="true") Статистика
+                //        li(role="presentation")
+                //            a#finance-tab(href="#tab_content_finance" role="tab" data-toggle="tab" aria-expanded="false") Финансы
+                //    div#myTabContent.tab-content
+                //        div#tab_content_statistic.tab-pane.fade.active.in(role="tabpanel" aria-labelledby="finance-tab")
+                //            p Хуй
+                //        div#tab_content_finance.tab-pane.fade.in(role="tabpanel" aria-labelledby="profile-tab")
+                //            p Хуй2

@@ -15,3 +15,7 @@
                         a(ng-link="[\'Finance\']")
                             i.fa.fa-bar-chart-o
                             | Финансы
+                    li(ng-class="{active: $ctrl.isActive('/analytics')}")
+                        a(ng-link="['\Analytics\']")
+                            i.fa.fa-bar-chart-o
+                            | Аналитика

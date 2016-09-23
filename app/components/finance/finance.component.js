@@ -10,10 +10,10 @@ finance.component('finance', {
         this.isLoading = false;
         this.isSearched = false;
 
-        this.search = offset => {
+        this.search = (offset = 0) => {
             this.isLoading = true;
             this.isSearched = true;
-            this.searchParams.offset = offset ? offset : 0;
+            this.searchParams.offset = offset;
             if (_.isEmpty(this.searchParams.invoiceID)) {
                 this.searchParams.invoiceID = null;
             }
