@@ -2,9 +2,7 @@ app.component('app', {
     templateUrl: 'components/app/app.html',
     $routeConfig: [
         {path: '/analytics', name: 'Analytics', component: 'analytics', useAsDefault: true},
-        {path: '/analytics/...', component: 'analytics'},
-        {path: '/dashboard', name: 'Dashboard', component: 'dashboard'},
-        {path: '/finance', name: 'Finance', component: 'finance'}
+        {path: '/analytics/...', component: 'analytics'}
     ]
 });
 

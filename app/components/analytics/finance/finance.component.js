@@ -1,5 +1,5 @@
 finance.component('finance', {
-    templateUrl: 'components/finance/finance.html',
+    templateUrl: 'components/analytics/finance/finance.html',
     controller: function (Invoices) {
         this.searchParams = {
             fromTime: moment().hours(0).minutes(0).seconds(0).format(),

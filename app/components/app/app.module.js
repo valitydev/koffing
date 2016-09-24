@@ -1,7 +1,7 @@
 const app = angular.module('app', [
     'ngComponentRouter',
     'analytics',
-    'dashboard',
+    // 'dashboard',
     'finance',
     'sidebar',
     'topPanel',

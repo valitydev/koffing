@@ -1,7 +1,7 @@
 const infoPanel = angular.module('infoPanel', ['currency']);
 
 infoPanel.component('infoPanel', {
-    templateUrl: 'components/dashboard/info-panel/info-panel.html',
+    templateUrl: 'components/analytics/dashboard/info-panel/info-panel.template.html',
     bindings: {
         uniqueCount: '<',
         successfulCount: '<',

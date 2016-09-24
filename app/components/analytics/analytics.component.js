@@ -1,13 +1,15 @@
 dashboard.component('analytics', {
     templateUrl: 'components/analytics/analytics.template.html',
     $routeConfig: [
-        {path: '/:shopId/statistic', name: 'Statistic', component: 'statistic'}
+        {path: '/:shopId/statistic', name: 'Dashboard', component: 'dashboard'},
+        {path: '/:shopId/finance', name: 'Finance', component: 'finance'}
     ],
     bindings: {
         $router: '<'
     },
     controller: function (Parties) {
-        this.$routerOnActivate = () => {
+        this.$routerOnActivate = route => {
+            console.log(route);
             Parties.get(party => {
                 this.party = party;
                 this.shopsDetails = _.map(this.party.shops, shop => ({
@@ -22,7 +24,9 @@ dashboard.component('analytics', {
         };
 
         this.showStatistic = () => {
-            this.$router.navigate(['Statistic', {shopId: this.selectedShopId}]);
-        }
+            this.$router.navigate(['Dashboard', {shopId: this.selectedShopId}]);
+        };
+
+        this.isRouteActive = route => this.$router.isRouteActive(this.$router.generate(route));
     }
 });

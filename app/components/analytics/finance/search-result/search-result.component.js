@@ -1,5 +1,5 @@
 searchResult.component('searchResult', {
-    templateUrl: 'components/finance/search-result/search-result.html',
+    templateUrl: 'components/analytics/finance/search-result/search-result.html',
     bindings: {
         searchedInvoices: '<'
     }

@@ -1,6 +1,10 @@
 dashboard.component('dashboard', {
-    templateUrl: 'components/dashboard/dashboard.html',
+    templateUrl: 'components/analytics/dashboard/dashboard.template.html',
     controller: function (Payments, ChartDataConversion, Customers) {
+        this.$routerOnActivate = route => {
+            console.log(route);
+        };
+
         this.toTime = moment().format();
 
         // this.fromTime = moment(this.toTime)

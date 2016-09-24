@@ -14,19 +14,14 @@
                     .col-md-3
                         button.btn.btn-default(ng-click="$ctrl.showStatistic()") Показать статистику
 
-ng-outlet
-//.row
-    //.col-md-12
-    //    .x_panel.tile
-    //        .x_content
-                //div(role="tabpanel" data-example-id="togglable-tabs")
-                //    ul#myTab.nav.nav-tabs.bar_tabs(role="tablist")
-                //        li.active(role="presentation")
-                //            a#statistic-tab(href="#tab_content_statistic" role="tab" data-toggle="tab" aria-expanded="true") Статистика
-                //        li(role="presentation")
-                //            a#finance-tab(href="#tab_content_finance" role="tab" data-toggle="tab" aria-expanded="false") Финансы
-                //    div#myTabContent.tab-content
-                //        div#tab_content_statistic.tab-pane.fade.active.in(role="tabpanel" aria-labelledby="finance-tab")
-                //            p Хуй
-                //        div#tab_content_finance.tab-pane.fade.in(role="tabpanel" aria-labelledby="profile-tab")
-                //            p Хуй2
+.row(ng-show="$ctrl.selectedShopId")
+    .col-md-12
+        .x_panel.tile
+            .x_content
+                ul.nav.nav-tabs.bar_tabs
+                    li(ng-class="{active: $ctrl.isRouteActive(['\Dashboard\', {shopId: $ctrl.selectedShopId}])}")
+                        a(ng-link="['\Dashboard\', {shopId: $ctrl.selectedShopId}]") Статистика
+                    li(ng-class="{active: $ctrl.isRouteActive(['\Finance\', {shopId: $ctrl.selectedShopId}])}")
+                        a(ng-link="['\Finance\', {shopId: $ctrl.selectedShopId}]") Финансы
+                .tab-content
+                    ng-outlet

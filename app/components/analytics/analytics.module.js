@@ -1,1 +1,1 @@
-const analytics = angular.module('analytics', ['statistic']);
+const analytics = angular.module('analytics', ['dashboard']);

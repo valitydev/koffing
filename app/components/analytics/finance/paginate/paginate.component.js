@@ -1,5 +1,5 @@
 paginate.component('paginate', {
-    templateUrl: 'components/finance/paginate/paginate.html',
+    templateUrl: 'components/analytics/finance/paginate/paginate.html',
     bindings: {
         limit: '<',
         size: '<',
