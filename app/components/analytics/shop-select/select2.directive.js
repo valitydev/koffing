@@ -1,4 +1,4 @@
-customSelect.directive('select2', function () {
+analytics.directive('select2', function () {
     return {
         restrict: 'A',
         link: function (scope, element) {

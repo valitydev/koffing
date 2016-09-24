@@ -7,21 +7,25 @@ dashboard.component('analytics', {
     bindings: {
         $router: '<'
     },
-    controller: function (Parties) {
-        this.$routerOnActivate = route => {
-            console.log(route);
+    controller: function (Parties, $location) {
+        this.$routerOnActivate = () => {
+            const path = $location.path();
+            this.selectedShopId = findParam(path, 'analytics');
             Parties.get(party => {
-                this.party = party;
-                this.shopsDetails = _.map(this.party.shops, shop => ({
+                this.shopsDetails = _.map(party.shops, shop => ({
                     name: shop.shopDetails.name,
                     key: shop.shopID
                 }));
             });
         };
 
-        this.onShopSelect = () => {
-            console.log(this.selectedShopId);
-        };
+        function findParam(path, marker) {
+            const res = _.chain(path)
+                .split('/')
+                .reduce((a, c) => ((c === marker || a === marker) ? c : a), '')
+                .value();
+            return res !== marker ? res : null;
+        }
 
         this.showStatistic = () => {
             this.$router.navigate(['Dashboard', {shopId: this.selectedShopId}]);
