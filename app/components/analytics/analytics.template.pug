@@ -5,14 +5,14 @@
                 h4 Аналитика
             .x_content
                 .row
-                    .col-md-5
+                    .col-md-6
                         form.form-horizontal
                             .form-group
                                 label.control-label.col-md-2 Магазин:
                                 .col-md-8
-                                    shop-select(options="$ctrl.shopsDetails" selected="$ctrl.selectedShopId")
-                    .col-md-3
-                        button.btn.btn-default(ng-click="$ctrl.showStatistic()") Показать статистику
+                                    select.select2_multiple.form-control.custom_select(
+                                        select2 ng-options="detail.key as detail.name for detail in $ctrl.shopsDetails"
+                                        ng-model="$ctrl.selectedShopId" ng-change="$ctrl.onSelect()")
 
 .row(ng-show="$ctrl.selectedShopId")
     .col-md-12

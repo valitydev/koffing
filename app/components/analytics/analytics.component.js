@@ -27,7 +27,7 @@ dashboard.component('analytics', {
             return res !== marker ? res : null;
         }
 
-        this.showStatistic = () => {
+        this.onSelect = () => {
             this.$router.navigate(['Dashboard', {shopId: this.selectedShopId}]);
         };
 

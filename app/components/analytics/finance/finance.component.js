@@ -10,20 +10,25 @@ finance.component('finance', {
         this.isLoading = false;
         this.isSearched = false;
 
-        this.search = (offset = 0) => {
-            this.isLoading = true;
-            this.isSearched = true;
-            this.searchParams.offset = offset;
-            if (_.isEmpty(this.searchParams.invoiceID)) {
-                this.searchParams.invoiceID = null;
-            }
-            Invoices.search(this.searchParams, result => {
-                this.searchedInvoices = result.invoices;
-                this.totalCount = result.totalCount;
-                this.isLoading = false;
-            });
-        };
+        this.$routerOnActivate = route => {
+            const shopID = route.params.shopId;
 
-        this.search();
+            this.search = (offset = 0) => {
+                this.isLoading = true;
+                this.isSearched = true;
+                this.searchParams.offset = offset;
+                if (_.isEmpty(this.searchParams.invoiceID)) {
+                    this.searchParams.invoiceID = null;
+                }
+                const invoices = new Invoices(shopID);
+                invoices.search(this.searchParams, result => {
+                    this.searchedInvoices = result.invoices;
+                    this.totalCount = result.totalCount;
+                    this.isLoading = false;
+                });
+            };
+
+            this.search();
+        };
     }
 });
