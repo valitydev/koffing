@@ -2,20 +2,20 @@ form.form-horizontal.form-label-left
     .row
         .col-md-6
             .form-group
-                label.control-label.col-md-4 Дата с:
+                label.control-label.col-md-4 Дата с
                 .col-md-6
                     datepicker(date="$ctrl.searchParams.fromTime")
             .form-group
-                label.control-label.col-md-4 Дата по:
+                label.control-label.col-md-4 Дата по
                 .col-md-6
                     datepicker(date="$ctrl.searchParams.toTime")
         .col-md-6
             .form-group
-                label.control-label.col-md-4 Статус платежа:
+                label.control-label.col-md-4 Статус платежа
                 .col-md-6
                     custom-select(options="$ctrl.statuses" selected="$ctrl.searchParams.status")
             .form-group
-                label.control-label.col-md-4 Номер:
+                label.control-label.col-md-4 Номер
                 .col-md-6
                     input.form-control(type="text" ng-model="$ctrl.searchParams.invoiceID")
             .form-group

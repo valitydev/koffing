@@ -7,6 +7,14 @@
         #sidebar-menu.main_menu_side.hidden-print.main_menu
             .menu_section
                 ul.nav.side-menu
+                    li(ng-class="{active: $ctrl.isActive('/shops')}")
+                        a(ng-link="['\Shops\']")
+                            i.fa.fa-shopping-cart
+                            | Мои магазины
+                            span.fa.fa-chevron-down
+                        ul.nav.child_menu(style="display: block")
+                            li(ng-class="{active: $ctrl.isActive('/shops/add')}")
+                                a(ng-link="['\AddShop\']") Создать магазин
                     li(ng-class="{active: $ctrl.isActive('/analytics')}")
                         a(ng-link="['\Analytics\']")
                             i.fa.fa-bar-chart-o

@@ -19,6 +19,8 @@ app.use((req, res, next) => {
 
 router.route('/processing/me').get((req, res) => res.json(me));
 
+router.route('/processing/shops').post((req, res) => setTimeout(() => res.json("1"), 600));
+
 router.route('/analytics/shops/THRIFT-SHOP/invoices').get((req, res) => setTimeout(() => res.json(invoices), 300));
 
 router.route('/analytics/shops/THRIFT-SHOP/payments/stats/revenue').get((req, res) => setTimeout(() => res.json(revenue), 0));
