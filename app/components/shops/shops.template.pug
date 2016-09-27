@@ -4,4 +4,22 @@
             .x_title
                 h4 Магазины
             .x_content
+                .row
+                    .col-md-12
+                        table.table.table-hover.table-striped
+                            thead
+                                tr
+                                    th Название магазина
+                                    th Описание
+                                    th Месторасположение
+                                    th registeredName
+                                    th
+                            tbody
+                                tr(ng-repeat="shop in $ctrl.shops")
+                                    td {{shop.shopDetails.name}}
+                                    td {{shop.shopDetails.description}}
+                                    td {{shop.shopDetails.location}}
+                                    td {{shop.contractor.registeredName}}
+                                    td
+                                        a.btn.btn-default.btn-xs(ng-link="['\EditShop\', {shopId: shop.shopID}]") Изменить данные
                 a.btn.btn-primary(ng-link="['\AddShop\']") Добавить новый магазин

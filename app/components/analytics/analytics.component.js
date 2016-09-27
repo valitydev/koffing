@@ -9,13 +9,13 @@ dashboard.component('analytics', {
     },
     controller: function (Parties, $location) {
         this.$routerOnActivate = () => {
-            const path = $location.path();
-            this.selectedShopId = findParam(path, 'analytics');
             Parties.get(party => {
                 this.shopsDetails = _.map(party.shops, shop => ({
                     name: shop.shopDetails.name,
                     key: shop.shopID
                 }));
+                this.selectedShopId = resolveShopId(party.shops);
+                this.onSelect();
             });
         };
 
@@ -25,6 +25,11 @@ dashboard.component('analytics', {
                 .reduce((a, c) => ((c === marker || a === marker) ? c : a), '')
                 .value();
             return res !== marker ? res : null;
+        }
+
+        function resolveShopId(shops) {
+            const path = $location.path();
+            return shops.length > 0 ? shops[0].shopID : findParam(path, 'analytics');
         }
 
         this.onSelect = () => {
