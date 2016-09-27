@@ -1,0 +1,9 @@
+.accordion#accordion(role="tablist" aria-multiselectable="true")
+    .panel
+        a.panel-heading.collapsed#headingOne(role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne")
+            .panel-title {{$ctrl.status.status}}
+        .panel-collapse.collapse.in#collapseOne(role="tabpanel" aria-labelledby="headingOne")
+            .panel-body
+                .row
+                    .col-md-12
+                        button.btn.btn-danger(ng-click="$ctrl.revoke()") Отменить заявку

@@ -10,6 +10,7 @@ const conversion = require('./conversion');
 const geo = require('./geo');
 const rate = require('./rate');
 const me = require('./me');
+const claims = require('./claims');
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -17,11 +18,15 @@ app.use((req, res, next) => {
     next();
 });
 
-router.route('/processing/me').get((req, res) => res.json(me));
+router.route('/processing/me').get((req, res) => setTimeout(() => res.json(me), 600));
 
 router.route('/processing/shops').post((req, res) => setTimeout(() => res.json("1"), 600));
 
 router.route('/processing/shops/THRIFT-SHOP').post((req, res) => setTimeout(() => res.json("2"), 600));
+
+router.route('/processing/claims').get((req, res) => setTimeout(() => res.json(claims), 0));
+
+router.route('/processing/claims/1/revoke').post((req, res) => setTimeout(() => res.json(), 0));
 
 router.route('/analytics/shops/THRIFT-SHOP/invoices').get((req, res) => setTimeout(() => res.json(invoices), 300));
 

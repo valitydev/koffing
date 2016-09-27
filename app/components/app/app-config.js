@@ -4,6 +4,5 @@
 // });
 
 app.constant('appConfig', {
-    capiUrl: 'http://localhost:9000/v1/',
-    shopID: 'THRIFT-SHOP'
+    capiUrl: 'http://localhost:9000/v1/'
 });

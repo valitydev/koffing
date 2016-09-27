@@ -10,8 +10,10 @@ shops.component('claimForm', {
         this.$routerOnActivate = route => {
             this.mode = route.params.shopId ? 'edit' : 'add';
             if (this.mode === 'edit') {
+                this.isLoading = true;
                 this.shopID = route.params.shopId;
                 Parties.get(party => {
+                    this.isLoading = false;
                     const shop = _.find(party.shops, shop => shop.shopID === this.shopID);
                     this.args.shopDetails = shop.shopDetails;
                     this.args.contractor = shop.contractor;
