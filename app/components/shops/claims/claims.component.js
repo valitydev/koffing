@@ -1,14 +1,19 @@
 shops.component('claims', {
     templateUrl: 'components/shops/claims/claims.template.html',
     controller: function (Claims) {
+        this.showClaimInfo = false;
+
         Claims.get({claimStatus: 'pending'}, claim => {
             this.claimID = claim.id;
-            this.status = claim.status;
+            this.showClaimInfo = true;
+            this.changeset = claim.changeset;
         });
 
         this.revoke = () => {
             const claims = new Claims();
-            claims.$revoke({claimID: this.claimID});
+            claims.$revoke({claimID: this.claimID}, () => {
+                this.showClaimInfo = false;
+            });
         };
     }
 });

@@ -1,10 +1,6 @@
 .row
     .col-md-12
-        .x_panel.tile
-            .x_title
-                h4 Заявки
-            .x_content
-                claims
+        claims
 .row
     .col-md-12
         .x_panel.tile
@@ -20,14 +16,12 @@
                                         th Название магазина
                                         th Описание
                                         th Месторасположение
-                                        th registeredName
                                         th
                                 tbody
                                     tr(ng-repeat="shop in $ctrl.shops")
                                         td {{shop.shopDetails.name}}
                                         td {{shop.shopDetails.description}}
                                         td {{shop.shopDetails.location}}
-                                        td {{shop.contractor.registeredName}}
                                         td
-                                            a.btn.btn-default.btn-xs(ng-link="['\EditShop\', {shopId: shop.shopID}]") Изменить данные
-                a.btn.btn-primary(ng-link="['\AddShop\']") Добавить новый магазин
+                                            a.btn.btn-default.btn-xs.pull-right(ng-link="['\EditShop\', {shopId: shop.shopID}]") Изменить данные
+                a.btn.btn-primary.pull-right(ng-link="['\AddShop\']") Добавить новый магазин

@@ -30,15 +30,11 @@ shops.component('claimForm', {
         this.createClaim = form => {
             if (form.$valid) {
                 this.isLoading = true;
+                const shops = new Shops(this.args);
                 if (this.mode === 'add') {
-                    Shops.save(this.args, () => {
-                        back();
-                    });
+                    shops.$save(() => back());
                 } else if (this.mode === 'edit') {
-                    const shops = new Shops(this.args);
-                    shops.$save({shopID: this.shopID}, () => {
-                        back();
-                    });
+                    shops.$save({shopID: this.shopID}, () => back());
                 }
             }
         };

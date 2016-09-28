@@ -26,6 +26,8 @@ router.route('/processing/shops/THRIFT-SHOP').post((req, res) => setTimeout(() =
 
 router.route('/processing/claims').get((req, res) => setTimeout(() => res.json(claims), 0));
 
+// router.route('/processing/claims').get((req, res) => res.status(404).send('Not found'));
+
 router.route('/processing/claims/1/revoke').post((req, res) => setTimeout(() => res.json(), 0));
 
 router.route('/analytics/shops/THRIFT-SHOP/invoices').get((req, res) => setTimeout(() => res.json(invoices), 300));
