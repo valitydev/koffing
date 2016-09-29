@@ -13,6 +13,7 @@ const me = require('./me');
 const claims = require('./claims');
 
 app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Methods', 'PUT');
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Request-ID');
     next();
@@ -23,6 +24,8 @@ router.route('/processing/me').get((req, res) => setTimeout(() => res.json(me), 
 router.route('/processing/shops').post((req, res) => setTimeout(() => res.json("1"), 600));
 
 router.route('/processing/shops/THRIFT-SHOP').post((req, res) => setTimeout(() => res.json("2"), 600));
+
+router.route('/processing/shops/THRIFT-SHOP2/activate').put((req, res) => setTimeout(() => res.json("1"), 600));
 
 router.route('/processing/claims').get((req, res) => setTimeout(() => res.json(claims), 0));
 

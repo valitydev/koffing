@@ -23,7 +23,7 @@ module.exports = [{
 }, {
     shopID: 'THRIFT-SHOP2',
     isBlocked: false,
-    isSuspended: false,
+    isSuspended: true,
     categoryRef: 1,
     shopDetails: {
         name: 'Shop 2',
@@ -37,6 +37,28 @@ module.exports = [{
     contract: {
         number: '4532',
         systemContractorRef: '33422',
+        concludedAt: 'concludedAt',
+        validSince: 'validSince',
+        validUntil: 'validUntil',
+        terminatedAt: 'terminatedAt'
+    }
+}, {
+    shopID: 'THRIFT-SHOP3',
+    isBlocked: true,
+    isSuspended: true,
+    categoryRef: 1,
+    shopDetails: {
+        name: 'Shop 3',
+        description: 'shop 3 description',
+        location: 'Moscow'
+    },
+    contractor: {
+        registeredName: 'Registered name',
+        legalEntity: 'legalEntity'
+    },
+    contract: {
+        number: '2345',
+        systemContractorRef: '23435',
         concludedAt: 'concludedAt',
         validSince: 'validSince',
         validUntil: 'validUntil',
