@@ -1,0 +1,35 @@
+.row
+    .col-md-12
+        .x_panel.tile
+            .x_title
+                h4 Изменение данных магазина
+            .x_content
+                loading(is-loading="$ctrl.isLoading")
+                    form.form-horizontal.form-label-left.css-form(novalidate name="form")
+
+                        .form-group
+                            label.control-label.col-md-3 Название магазина *
+                            .col-md-6
+                                input.form-control(type="text" ng-model="$ctrl.shopDetails.name" name="shopDetailsName")
+                        .form-group
+                            label.control-label.col-md-3 Описание магазина
+                            .col-md-6
+                                input.form-control(type="text" ng-model="$ctrl.shopDetails.description" name="shopDetailsDescription")
+                        .form-group
+                            label.control-label.col-md-3 Месторасположение
+                            .col-md-6
+                                input.form-control(type="text" ng-model="$ctrl.shopDetails.location" name="shopDetailsLocation")
+
+                        .form-group
+                            label.control-label.col-md-3 Наименование организации *
+                            .col-md-6
+                                input.form-control(type="text" ng-model="$ctrl.contractor.registeredName" name="contractorRegisteredName")
+                        .form-group
+                            label.control-label.col-md-3 Тип юридического лица
+                            .col-md-6
+                                input.form-control(type="text" ng-model="$ctrl.contractor.legalEntity" name="contractorLegalEntity")
+                        .ln_solid
+                        .form-group
+                            .col-md-6.col-md-offset-3
+                                button.btn.btn-primary(type="submit" ng-click="$ctrl.createClaim(form)" ng-disabled="form.$pristine") Создать заявку
+                                a.btn.btn-default.pull-right(type="reset" ng-link="['\Shops\']") Отмена
