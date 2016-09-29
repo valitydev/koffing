@@ -1,0 +1,15 @@
+.row
+    .col-md-12.col-sm-12.col-xs-12
+        .x_panel.tile
+            .x_title
+                h4 Поиск
+            .x_content
+                search-form(search-params="$ctrl.searchParams" on-search="$ctrl.search()")
+.row
+    .col-md-12.col-sm-12.col-xs-12(ng-show="$ctrl.isSearched")
+        .x_panel.tile
+            .x_content
+                loading(is-loading="$ctrl.isLoading")
+                    search-result(searched-invoices="$ctrl.searchedInvoices" offset="$ctrl.searchParams.offset")
+                    paginate(limit="15" offset="$ctrl.searchParams.offset"
+                        size="$ctrl.totalCount" on-change="$ctrl.search(offset)" pages-on-screen="15")

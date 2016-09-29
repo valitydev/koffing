@@ -1,0 +1,34 @@
+.row
+    .col-md-12
+        form.form-inline.pull-right
+            .form-group
+                label.control-label Статистика с
+                datepicker(date="$ctrl.fromTime")
+            .form-group
+                label.control-label по
+                datepicker(date="$ctrl.toTime")
+            button.btn.btn-default(style="margin-bottom: 0; margin-right: 0" ng-click="$ctrl.loadData()") Показать
+.row
+    info-panel(unique-count="$ctrl.uniqueCount" successful-count="$ctrl.successfulCount"
+    unfinished-count="$ctrl.unfinishedCount" profit="$ctrl.profit" account="$ctrl.account")
+.row
+    .col-md-12
+        .x_panel.tile
+            .x_title
+                h4 Оборот
+            .x_content
+                revenue(from-time="$ctrl.chartFromTime" chart-data="$ctrl.revenueChartData")
+.row
+    .col-md-6
+        .x_panel.tile
+            .x_title
+                h4 Конверсия оплат
+            .x_content
+                conversion(from-time="$ctrl.chartFromTime" chart-data="$ctrl.conversionChartData")
+    .col-md-6
+        .x_panel.tile
+            .x_title
+                h4 Геолокация
+            .x_content
+                geolocation(chart-data="$ctrl.geoChartData")
+

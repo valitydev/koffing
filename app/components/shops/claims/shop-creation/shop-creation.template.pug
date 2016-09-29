@@ -1,0 +1,12 @@
+.panel.panel-default
+    .panel-heading(ng-click="$ctrl.show()")
+        a(href="#") Создание магазина: {{$ctrl.shop.shopDetails.name}}
+        i.fa.pull-right.custom-chevron(ng-class="{'fa-chevron-down': $ctrl.showPanel, 'fa-chevron-right': !$ctrl.showPanel}")
+    .panel-body(ng-show="$ctrl.showPanel")
+        div(ng-show="$ctrl.shop.shopDetails")
+            modification-detail(display-name="'Название магазина'" value="$ctrl.shop.shopDetails.name")
+            modification-detail(display-name="'Описание'" value="$ctrl.shop.shopDetails.description")
+            modification-detail(display-name="'Месторасположение'" value="$ctrl.shop.shopDetails.location")
+        div(ng-show="$ctrl.shop.contractor")
+            modification-detail(display-name="'Наименование организации'" value="$ctrl.shop.contractor.registeredName")
+            modification-detail(display-name="'Тип юридического лица'" value="$ctrl.shop.contractor.legalEntity")

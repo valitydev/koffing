@@ -1,8 +1,11 @@
 app.component('app', {
     templateUrl: 'components/app/app.html',
     $routeConfig: [
-        {path: '/dashboard', name: 'Dashboard', component: 'dashboard', useAsDefault: true},
-        {path: '/finance', name: 'Finance', component: 'finance'}
+        {path: '/shops', name: 'Shops', component: 'shops'},
+        {path: '/shops/add', name: 'AddShop', component: 'addShop'},
+        {path: '/shops/edit/:shopId', name: 'EditShop', component: 'editShop'},
+        {path: '/analytics', name: 'Analytics', component: 'analytics', useAsDefault: true},
+        {path: '/analytics/...', component: 'analytics'}
     ]
 });
 
