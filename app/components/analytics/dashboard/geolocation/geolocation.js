@@ -27,6 +27,7 @@ geolocation.component('geolocation', {
         };
 
         this.options = {
+            animation: false,
             legend: {
                 display: true,
                 position: 'left'

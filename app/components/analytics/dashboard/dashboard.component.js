@@ -16,6 +16,16 @@ dashboard.component('dashboard', {
                 this.uniqueCount = rateStat[0] ? rateStat[0].uniqueCount : 0;
             });
 
+            customers.paymentMethod({
+                fromTime: this.fromTime,
+                toTime: this.toTime,
+                splitUnit: 'minute',
+                splitSize: 1,
+                paymentMethod: 'bank_card'
+            }, paymentMethodStat => {
+                this.paymentMethodChartData = ChartDataConversion.toPaymentMethodChartData(paymentMethodStat);
+            });
+
             const payments = new Payments(this.shopID);
             payments.conversion({
                 fromTime: this.fromTime,

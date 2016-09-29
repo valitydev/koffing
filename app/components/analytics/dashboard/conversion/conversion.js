@@ -3,7 +3,7 @@ const conversion = angular.module('conversion', []);
 conversion.component('conversion', {
     template: `<loading is-loading="$ctrl.isLoading">
         <canvas class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels" 
-        chart-series="['Конверсия']" chart-options="$ctrl.options" height="150"></canvas>
+            chart-series="['Конверсия']" chart-options="$ctrl.options" height="80"></canvas>
     </loading>`,
     bindings: {
         fromTime: '<',
@@ -24,6 +24,7 @@ conversion.component('conversion', {
         };
 
         this.options = {
+            animation: false,
             elements: {
                 line: {
                     tension: 0
