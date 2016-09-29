@@ -10,12 +10,14 @@ claims
                         th Название магазина
                         th Описание
                         th Месторасположение
+                        th Категория
                         th
                 tbody
                     tr(ng-repeat="shop in $ctrl.shops" ng-class="{'success': shop.isSuspended, 'danger': shop.isBlocked}")
                         td {{shop.shopDetails.name}}
                         td {{shop.shopDetails.description}}
                         td {{shop.shopDetails.location}}
+                        td {{$ctrl.getCategory(shop.categoryRef).name}}
                         td(ng-if="shop.isSuspended && !shop.isBlocked")
                             button.btn.btn-success.btn-xs.pull-right(ng-click="$ctrl.activate(shop)") Активировать
                         td(ng-if="!shop.isSuspended && !shop.isBlocked")

@@ -11,6 +11,7 @@ const geo = require('./geo');
 const rate = require('./rate');
 const me = require('./me');
 const claims = require('./claims');
+const categories = require('./categories');
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'PUT');
@@ -27,11 +28,15 @@ router.route('/processing/shops/THRIFT-SHOP').post((req, res) => setTimeout(() =
 
 router.route('/processing/shops/THRIFT-SHOP2/activate').put((req, res) => setTimeout(() => res.json("1"), 600));
 
-router.route('/processing/claims').get((req, res) => setTimeout(() => res.json(claims), 0));
+router.route('/processing/claims').get((req, res) => setTimeout(() => res.json(claims), 600));
 
 // router.route('/processing/claims').get((req, res) => res.status(404).send('Not found'));
 
-router.route('/processing/claims/1/revoke').post((req, res) => setTimeout(() => res.json(), 0));
+router.route('/processing/claims/1/revoke').post((req, res) => setTimeout(() => res.json(), 600));
+
+router.route('/processing/categories').get((req, res) => setTimeout(() => res.json(categories), 300));
+
+router.route('/processing/categories/1').get((req, res) => setTimeout(() => res.json(categories[0]), 300));
 
 router.route('/analytics/shops/THRIFT-SHOP/invoices').get((req, res) => setTimeout(() => res.json(invoices), 300));
 

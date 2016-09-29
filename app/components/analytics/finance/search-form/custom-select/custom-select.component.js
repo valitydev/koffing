@@ -10,8 +10,5 @@ customSelect.component('customSelect', {
         this.options = _.map(PAYMENT_STATUSES, (name, key) => {
             return {name, key}
         });
-        // jQuery(".select2_multiple").select2({
-        //     placeholder: ''
-        // });
     }
 });

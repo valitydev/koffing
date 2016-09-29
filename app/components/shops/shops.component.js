@@ -1,6 +1,10 @@
 shops.component('shops', {
     templateUrl: 'components/shops/shops.template.html',
-    controller: function (Parties, Shops) {
+    controller: function (Parties, Shops, Categories) {
+
+        this.categories = Categories.query();
+
+        this.getCategory = ref => _.find(this.categories, category => category.categoryRef === ref);
 
         const getParty = () => {
             this.isLoading = true;

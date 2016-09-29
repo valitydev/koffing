@@ -3,9 +3,11 @@ shops.component('addShop', {
     bindings: {
         $router: '<'
     },
-    controller: function (Shops) {
+    controller: function (Shops, Categories) {
         this.args = {};
         this.isLoading = false;
+
+        this.categories = Categories.query();
 
         const back = () => {
             this.args = {};

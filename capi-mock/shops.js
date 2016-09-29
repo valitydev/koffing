@@ -24,7 +24,7 @@ module.exports = [{
     shopID: 'THRIFT-SHOP2',
     isBlocked: false,
     isSuspended: true,
-    categoryRef: 1,
+    categoryRef: 2,
     shopDetails: {
         name: 'Shop 2',
         description: 'shop 2 description',
@@ -46,7 +46,7 @@ module.exports = [{
     shopID: 'THRIFT-SHOP3',
     isBlocked: true,
     isSuspended: true,
-    categoryRef: 1,
+    categoryRef: 3,
     shopDetails: {
         name: 'Shop 3',
         description: 'shop 3 description',

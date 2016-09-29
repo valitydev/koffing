@@ -3,9 +3,11 @@ shops.component('editShop', {
     bindings: {
         $router: '<'
     },
-    controller: function (Shops, Parties) {
+    controller: function (Shops, Parties, Categories) {
         this.args = {};
         this.isLoading = false;
+
+        this.categories = Categories.query();
 
         this.$routerOnActivate = route => {
             this.isLoading = true;
@@ -15,6 +17,7 @@ shops.component('editShop', {
                 const shop = _.find(party.shops, shop => shop.shopID === this.shopID);
                 this.shopDetails = shop.shopDetails;
                 this.contractor = shop.contractor;
+                this.categoryRef = shop.categoryRef;
             });
         };
 
@@ -36,6 +39,9 @@ shops.component('editShop', {
 
         function getArgs(form) {
             const args = {};
+            if (form.category.$dirty) {
+                args.categoryRef = form.category.$modelValue;
+            }
             if (form.shopDetailsName.$dirty) {
                 if (!args.shopDetails) {
                     args.shopDetails = {};
