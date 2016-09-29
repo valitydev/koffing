@@ -1,16 +1,11 @@
 dashboard.component('dashboard', {
     templateUrl: 'components/analytics/dashboard/dashboard.template.html',
-    controller: function (Payments, ChartDataConversion, Customers) {
+    controller: function (Payments, ChartDataConversion, Customers, Accounts) {
         // this.fromTime = moment(this.toTime).subtract(1, 'M').hours(0).minutes(0).seconds(0).milliseconds(0).format();
         this.toTime = moment().format();
         this.fromTime = moment().hours(0).minutes(0).seconds(0).format();
 
-        this.$routerOnActivate = route => {
-            this.shopID = route.params.shopId;
-            this.show();
-        };
-
-        this.show = () => {
+        this.loadData = () => {
             this.chartFromTime = this.fromTime;
 
             const customers = new Customers(this.shopID);
@@ -52,6 +47,34 @@ dashboard.component('dashboard', {
             }, geoStat => {
                 this.geoChartData = ChartDataConversion.toGeoChartData(geoStat);
             });
+
+            Accounts.query({shopID: this.shopID}, shopAccounts => {
+                if (shopAccounts.length > 1) {
+                    console.warn('shop accounts size > 1');
+                }
+                _.forEach(shopAccounts, item => {
+                    const account = {};
+                    Accounts.get({
+                        shopID: this.shopID,
+                        accountID: item.generalID
+                    }, generalAccount => {
+                        account.general = generalAccount;
+                    });
+
+                    Accounts.get({
+                        shopID: this.shopID,
+                        accountID: item.guaranteeID
+                    }, guaranteeAccount => {
+                        account.guarantee = guaranteeAccount;
+                    });
+                    this.account = account;
+                });
+            });
+        };
+
+        this.$routerOnActivate = route => {
+            this.shopID = route.params.shopId;
+            this.loadData();
         };
     }
 });

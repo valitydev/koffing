@@ -12,6 +12,8 @@ const rate = require('./rate');
 const me = require('./me');
 const claims = require('./claims');
 const categories = require('./categories');
+const shopAccounts = require('./shopAccounts');
+const accounts = require('./accounts');
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'PUT');
@@ -28,15 +30,11 @@ router.route('/processing/shops/THRIFT-SHOP').post((req, res) => setTimeout(() =
 
 router.route('/processing/shops/THRIFT-SHOP2/activate').put((req, res) => setTimeout(() => res.json("1"), 600));
 
-router.route('/processing/claims').get((req, res) => setTimeout(() => res.json(claims), 600));
+router.route('/processing/shops/THRIFT-SHOP/accounts').get((req, res) => setTimeout(() => res.json(shopAccounts), 300));
 
-// router.route('/processing/claims').get((req, res) => res.status(404).send('Not found'));
+router.route('/processing/shops/THRIFT-SHOP/accounts/1').get((req, res) => setTimeout(() => res.json(accounts[0]), 600));
 
-router.route('/processing/claims/1/revoke').post((req, res) => setTimeout(() => res.json(), 600));
-
-router.route('/processing/categories').get((req, res) => setTimeout(() => res.json(categories), 300));
-
-router.route('/processing/categories/1').get((req, res) => setTimeout(() => res.json(categories[0]), 300));
+router.route('/processing/shops/THRIFT-SHOP/accounts/2').get((req, res) => setTimeout(() => res.json(accounts[1]), 300));
 
 router.route('/analytics/shops/THRIFT-SHOP/invoices').get((req, res) => setTimeout(() => res.json(invoices), 300));
 
@@ -47,6 +45,18 @@ router.route('/analytics/shops/THRIFT-SHOP/payments/stats/conversion').get((req,
 router.route('/analytics/shops/THRIFT-SHOP/payments/stats/geo').get((req, res) => setTimeout(() => res.json(geo), 0));
 
 router.route('/analytics/shops/THRIFT-SHOP/customers/stats/rate').get((req, res) => setTimeout(() => res.json(rate), 0));
+
+router.route('/processing/claims').get((req, res) => setTimeout(() => res.json(claims), 600));
+
+// router.route('/processing/claims').get((req, res) => res.status(404).send('Not found'));
+
+router.route('/processing/claims/1/revoke').post((req, res) => setTimeout(() => res.json(), 600));
+
+router.route('/processing/categories').get((req, res) => setTimeout(() => res.json(categories), 300));
+
+router.route('/processing/categories/1').get((req, res) => setTimeout(() => res.json(categories[0]), 300));
+
+router.route('/processing/categories/1').get((req, res) => setTimeout(() => res.json(categories[0]), 300));
 
 app.use('/v1', router);
 

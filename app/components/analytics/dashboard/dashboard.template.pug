@@ -7,10 +7,10 @@
             .form-group
                 label.control-label по
                 datepicker(date="$ctrl.toTime")
-            button.btn.btn-default(style="margin-bottom: 0; margin-right: 0" ng-click="$ctrl.show()") Показать
+            button.btn.btn-default(style="margin-bottom: 0; margin-right: 0" ng-click="$ctrl.loadData()") Показать
 .row
     info-panel(unique-count="$ctrl.uniqueCount" successful-count="$ctrl.successfulCount"
-        unfinished-count="$ctrl.unfinishedCount" profit="$ctrl.profit")
+    unfinished-count="$ctrl.unfinishedCount" profit="$ctrl.profit" account="$ctrl.account")
 .row
     .col-md-12
         .x_panel.tile

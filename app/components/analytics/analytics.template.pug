@@ -1,23 +1,14 @@
-.row
-    .col-md-12
-        .x_panel.tile
-            .x_title
-                h4 Аналитика
-            .x_content
-                .row
-                    .col-md-6
-                        form.form-horizontal
-                            .form-group
-                                label.control-label.col-md-2 Магазин
-                                .col-md-8
-                                    select.select2_multiple.form-control.custom_select(
-                                        select2 ng-options="detail.key as detail.name for detail in $ctrl.shopsDetails"
-                                        ng-model="$ctrl.selectedShopId" ng-change="$ctrl.onSelect()")
-
 .row(ng-show="$ctrl.selectedShopId")
     .col-md-12
         .x_panel.tile
             .x_content
+                form.form-horizontal
+                    .form-group
+                        label.control-label.col-md-1 Магазин
+                        .col-md-5
+                            select.select2_multiple.form-control.custom_select(
+                            select2 ng-options="detail.key as detail.name for detail in $ctrl.shopsDetails"
+                            ng-model="$ctrl.selectedShopId" ng-change="$ctrl.onSelect()")
                 ul.nav.nav-tabs.bar_tabs
                     li(ng-class="{active: $ctrl.isRouteActive(['\Dashboard\', {shopId: $ctrl.selectedShopId}])}")
                         a(ng-link="['\Dashboard\', {shopId: $ctrl.selectedShopId}]") Статистика

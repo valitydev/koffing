@@ -6,13 +6,15 @@ infoPanel.component('infoPanel', {
         uniqueCount: '<',
         successfulCount: '<',
         unfinishedCount: '<',
-        profit: '<'
+        profit: '<',
+        account: '<'
     },
     controller: function () {
         this.profitLoading = true;
         this.successfulCountLoading = true;
         this.unfinishedCountLoading = true;
         this.uniqueCountLoading = true;
+        this.accountsLoading = true;
         this.$onChanges = () => {
             if (_.isNumber(this.profit)) {
                 this.profitLoading = false;
@@ -25,6 +27,9 @@ infoPanel.component('infoPanel', {
             }
             if(_.isNumber(this.uniqueCount)) {
                 this.uniqueCountLoading = false;
+            }
+            if (this.account) {
+                this.accountsLoading = false;
             }
         };
     }
