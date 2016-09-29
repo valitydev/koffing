@@ -19,16 +19,22 @@
             .x_content
                 revenue(from-time="$ctrl.chartFromTime" chart-data="$ctrl.revenueChartData")
 .row
-    .col-md-6
+    .col-md-12
         .x_panel.tile
             .x_title
                 h4 Конверсия оплат
             .x_content
                 conversion(from-time="$ctrl.chartFromTime" chart-data="$ctrl.conversionChartData")
+.row
+    .col-md-6
+        .x_panel.tile
+            .x_title
+                h4 Способы оплаты
+            .x_content
+                payment-method(chart-data="$ctrl.paymentMethodChartData")
     .col-md-6
         .x_panel.tile
             .x_title
                 h4 Геолокация
             .x_content
                 geolocation(chart-data="$ctrl.geoChartData")
-

@@ -32,4 +32,11 @@ dashboard.service('ChartDataConversion', function () {
             profit: item.profit
         }
     });
+
+    this.toPaymentMethodChartData = paymentMethodStat => _.map(paymentMethodStat, item => {
+        return {
+            totalCount: item.totalCount,
+            paymentSystem: item.paymentSystem
+        }
+    })
 });
