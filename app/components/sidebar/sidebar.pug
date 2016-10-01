@@ -15,3 +15,7 @@
                         a(ng-link="['\Shops\']")
                             i.fa.fa-shopping-cart
                             | Мои магазины
+                    li(ng-class="{active: $ctrl.isActive('/tokenization')}")
+                        a(ng-click="$ctrl.getToken()")
+                            i.fa.fa-key
+                            | Токенизация
