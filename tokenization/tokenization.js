@@ -9,7 +9,7 @@ tokenizer.component('tokenizer', {
                 <div class="x_content">
                     <form>
                         <div class="form-group">
-                            <label><h4>Ваш токен для инициализации платежной формы</h4></label>
+                            <label><h4>Ваш публичный ключ:</h4></label>
                             <textarea rows="15" type="text" class="form-control" ng-model="$ctrl.token"></textarea>
                         </div>
                         <button type="button" class="btn btn-primary" ng-click="$ctrl.back()">Назад</button>
@@ -20,9 +20,7 @@ tokenizer.component('tokenizer', {
     </div>`,
     controller: function ($window, Tokenizer) {
         this.token = Tokenizer.refreshToken;
-        this.back = () => {
-            $window.location.href = '/';
-        };
+        this.back = () => $window.location.href = '/';
     }
 });
 
@@ -37,12 +35,13 @@ angular.element(document).ready(function () {
             keycloak.login({
                 scope: 'offline_access'
             });
+        } else {
+            tokenizer.factory('Tokenizer', () => {
+                return {
+                    refreshToken: keycloak.refreshToken,
+                };
+            });
+            angular.bootstrap(document, ['tokenizer']);
         }
-        tokenizer.factory('Tokenizer', () => {
-            return {
-                refreshToken: keycloak.refreshToken,
-            };
-        });
-        angular.bootstrap(document, ['tokenizer']);
     });
 });
