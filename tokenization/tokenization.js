@@ -19,7 +19,7 @@ tokenizer.component('tokenizer', {
         </div>
     </div>`,
     controller: function ($window, Tokenizer) {
-        this.token = Tokenizer.auth.token;
+        this.token = Tokenizer.refreshToken;
         this.back = () => {
             $window.location.href = '/';
         };
@@ -29,14 +29,18 @@ tokenizer.component('tokenizer', {
 angular.element(document).ready(function () {
     const keycloak = new Keycloak({
         url: 'http://localhost:31245/auth',
-        realmAccess: 'offline_access',
         realm: 'external',
         clientId: 'tokenizer'
     });
-    keycloak.init({onLoad: 'login-required'}).success(function () {
-        tokenizer.factory('Tokenizer', function () {
+    keycloak.init().success(authenticated => {
+        if (!authenticated) {
+            keycloak.login({
+                scope: 'offline_access'
+            });
+        }
+        tokenizer.factory('Tokenizer', () => {
             return {
-                auth: keycloak,
+                refreshToken: keycloak.refreshToken,
             };
         });
         angular.bootstrap(document, ['tokenizer']);
