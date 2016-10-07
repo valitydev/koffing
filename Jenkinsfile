@@ -1,24 +1,39 @@
-build('build_utils', 'docker-host') {
+#!groovy
+
+build('koffing', 'docker-host') {
   checkoutRepo()
+  loadBuildUtils()
 
   def pipeDefault
   runStage('load pipeline') {
-    env.JENKINS_LIB = "./jenkins_lib"
+    env.JENKINS_LIB = "build_utils/jenkins_lib"
     pipeDefault = load("${env.JENKINS_LIB}/pipeDefault.groovy")
   }
 
   pipeDefault() {
-    runStage('dummy') {
-        echo 'OK'
+    //ToDo: npm stuff should be in a cache, when caching is implemented!
+    runStage('init') {
+        sh 'make wc_init'
+      }
     }
-    //if (env.BRANCH_NAME == 'master') {
-    //  runStage('build image') {
-    //    sh "make build_image"
-    //  }
+    runStage('build') {
+      sh 'make wc_build'
+    }
+    runStage('build image') {
+      sh 'make build_image'
+    }
 
-    //  runStage('push image') {
-    //    sh "make push_image"
-    //  }
-    // }
+    try {
+      if (env.BRANCH_NAME == 'master') {
+        runStage('push image') {
+          sh 'make push_image'
+        }
+      }
+    } finally {
+      runStage('rm local image') {
+        sh 'make rm_local_image'
+      }
+    }
   }
 }
+

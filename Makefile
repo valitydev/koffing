@@ -17,7 +17,7 @@ BASE_IMAGE_TAG := a58a828755e9d342ecbd7071e7dc224ffe546378
 
 BUILD_IMAGE_TAG := 6fb209e428feaa0ef6cec07d3909d8a3c4013537
 
-CALL_W_CONTAINER := build clean submodules
+CALL_W_CONTAINER := init build clean submodules
 
 .PHONY: $(CALL_W_CONTAINER)
 
@@ -31,6 +31,9 @@ $(SUBTARGETS): %/.git: %
 	touch $@
 
 submodules: $(SUBTARGETS)
+
+init:
+	npm install
 
 build:
 	npm run build
