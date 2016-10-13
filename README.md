@@ -1,14 +1,12 @@
-# Koffing
+# Koffing 
+[![Build Status](http://ci.rbkmoney.com/buildStatus/icon?job=rbkmoney_private/koffing/master)](http://ci.rbkmoney.com/job/rbkmoney_private/view/Frontend/job/koffing/job/master/)
+
 Личный кабинет мерчанта
 
 ## Установка
 
     npm install
-    gulp build
+    npm run build
 
 ## Интеграция с Keycloak
 Настройка происходит с помощью файла [keycloak.json](/app/keycloak.json)
-
-## Пример Docker развертки
-    
-    docker run --rm --name koffing -it -p 80:80 dr.rbkmoney.com/rbkmoney/koffing:koffing_test
