@@ -42,6 +42,20 @@ gulp.task('sources', () => {
         .pipe(livereload());
 });
 
+gulp.task('tokenizationSources', () => {
+    return gulp.src([
+        'tokenization/tokenization.js'
+    ])
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(header('/* Build time: ${datetime} */ \n', {
+            datetime: new Date()
+        }))
+        .pipe(gulp.dest('dist'))
+        .pipe(livereload());
+});
+
 gulp.task('styles', () => {
     return gulp.src('app/assets/styles.less')
         .pipe(less())
@@ -90,6 +104,15 @@ gulp.task('index', () => {
         .pipe(livereload());
 });
 
+gulp.task('tokenization', () => {
+    return gulp.src('tokenization/tokenization.pug')
+        .pipe(pug({
+            pretty: true
+        }))
+        .pipe(gulp.dest('dist'))
+        .pipe(livereload());
+});
+
 gulp.task('keycloak', () => {
     return gulp.src('app/keycloak.json')
         .pipe(gulp.dest('dist'));
@@ -108,7 +131,9 @@ gulp.task('connect', () => {
 gulp.task('watch', () => {
     livereload.listen();
     gulp.watch(['app/**/*.js', 'app/**/*.pug'], ['sources']);
+    gulp.watch('tokenization/tokenization.js', ['tokenizationSources']);
     gulp.watch('app/index.pug', ['index']);
+    gulp.watch('tokenization/tokenization.pug', ['tokenization']);
     gulp.watch('app/assets/**/*.less', ['styles']);
 });
 
@@ -124,5 +149,5 @@ gulp.task('capiMock', () => {
     });
 });
 
-gulp.task('build', ['index', 'sources', 'styles', 'vendorScripts', 'vendorStyles', 'keycloak']);
+gulp.task('build', ['index', 'tokenization', 'sources', 'tokenizationSources', 'styles', 'vendorScripts', 'vendorStyles', 'keycloak']);
 gulp.task('default', ['connect', 'watch', 'build']);
