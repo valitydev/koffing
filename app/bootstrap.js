@@ -1,5 +1,5 @@
 angular.element(document).ready(function () {
-    var keycloakAuth = new Keycloak('keycloak.json');
+    var keycloakAuth = new Keycloak('koffingKeycloakConfig.json');
 
     keycloakAuth.init({onLoad: 'login-required'}).success(function () {
         app.factory('Auth', function () {
@@ -10,7 +10,9 @@ angular.element(document).ready(function () {
                 updateToken: keycloakAuth.updateToken
             };
         });
-        angular.bootstrap(document, ['app']);
+        jQuery.get('appConfig.json').then(result => { //TODO write wrapper
+            app.constant('appConfig', result);
+            angular.bootstrap(document, ['app']);
+        });
     });
-
 });

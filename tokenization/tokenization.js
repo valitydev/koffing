@@ -25,11 +25,7 @@ tokenizer.component('tokenizer', {
 });
 
 angular.element(document).ready(function () {
-    const keycloak = new Keycloak({
-        url: 'http://localhost:31245/auth',
-        realm: 'external',
-        clientId: 'tokenizer'
-    });
+    var keycloak = new Keycloak('tokenizationKeycloakConfig.json');
     keycloak.init().success(authenticated => {
         if (!authenticated) {
             keycloak.login({

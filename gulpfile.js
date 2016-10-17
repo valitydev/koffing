@@ -113,8 +113,12 @@ gulp.task('tokenization', () => {
         .pipe(livereload());
 });
 
-gulp.task('keycloak', () => {
-    return gulp.src('app/keycloak.json')
+gulp.task('config', () => {
+    return gulp.src([
+        'app/appConfig.json',
+        'app/koffingKeycloakConfig.json',
+        'tokenization/tokenizationKeycloakConfig.json'
+    ])
         .pipe(gulp.dest('dist'));
 });
 
@@ -149,5 +153,5 @@ gulp.task('capiMock', () => {
     });
 });
 
-gulp.task('build', ['index', 'tokenization', 'sources', 'tokenizationSources', 'styles', 'vendorScripts', 'vendorStyles', 'keycloak']);
+gulp.task('build', ['index', 'tokenization', 'sources', 'tokenizationSources', 'styles', 'vendorScripts', 'vendorStyles', 'config']);
 gulp.task('default', ['connect', 'watch', 'build']);
