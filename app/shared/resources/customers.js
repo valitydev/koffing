@@ -1,6 +1,6 @@
 resources.factory('Customers', function ($resource, appConfig) {
     return function (shopID) {
-        return $resource(`${appConfig.capiUrl}analytics/shops/:shopID/customers/stats/:statsType`, {
+        return $resource(`${appConfig.capiUrl}/analytics/shops/:shopID/customers/stats/:statsType`, {
             shopID: shopID
         }, {
             /**
