@@ -1,4 +1,4 @@
-.row(ng-show="$ctrl.selectedShopId")
+.row(ng-if="$ctrl.isShopsExists")
     .col-md-12
         .x_panel.tile
             .x_content
@@ -16,3 +16,8 @@
                         a(ng-link="['\Finance\', {shopId: $ctrl.selectedShopId}]") Финансы
                 .tab-content
                     ng-outlet
+.row(ng-if="!$ctrl.isShopsExists")
+    .col-md-12
+        .jumbotron
+            h1 Список магазинов пуст
+            p Создайте новый магазин во вкладке "Мои магазины"

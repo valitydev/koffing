@@ -10,6 +10,10 @@ dashboard.component('analytics', {
     controller: function (Parties, $location) {
         this.$routerOnActivate = () => {
             Parties.get(party => {
+                this.isShopsExists = !!party.shops.length;
+                if (!this.isShopsExists) {
+                    return;
+                }
                 this.shopsDetails = _.map(party.shops, shop => ({
                     name: shop.shopDetails.name,
                     key: shop.shopID
