@@ -24,4 +24,5 @@ claims
                             a.btn.btn-default.btn-xs.pull-right(ng-link="['\EditShop\', {shopId: shop.shopID}]") Изменить данные
                         td(ng-if="shop.isBlocked")
                             span.pull-right Заблокирован
+        span(ng-if="!$ctrl.shops.length") Список магазинов пуст
         a.btn.btn-primary.pull-right(ng-link="['\AddShop\']") Добавить новый магазин
