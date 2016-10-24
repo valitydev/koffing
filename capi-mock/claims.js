@@ -1,7 +1,7 @@
 const shops = require('./shops');
 
 var claimStatus = {
-    status: 'pending'
+    status: 'ClaimPending'
 };
 
 var shopCreation = {

@@ -10,3 +10,6 @@
         div(ng-show="$ctrl.details.contractor")
             modification-detail(display-name="'Наименование организации'" value="$ctrl.details.contractor.registeredName")
             modification-detail(display-name="'Тип юридического лица'" value="$ctrl.details.contractor.legalEntity")
+        //div(ng-if="$ctrl.details.account")
+        //    modification-detail(ng-if="$ctrl.details.account.modificationType === 'ShopAccountCreated'",
+        //        display-name="'Наименование организации'" value="$ctrl.details.contractor.registeredName")

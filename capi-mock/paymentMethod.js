@@ -10,7 +10,7 @@ function createPayment(count) {
     for (var i = 0; i <= count; i++) {
         var profit = random(1000, 7000) * 100;
         result.push({
-            statType: 'bank_card',
+            statType: 'PaymentMethodBankCardStat',
             offset: i * 86400,
             profit: profit,
             revenue: profit * 0.3,

@@ -10,7 +10,9 @@ shops.component('claims', {
         });
 
         this.revoke = () => {
-            const claims = new Claims();
+            const claims = new Claims({
+                reason: 'test' //TODO fix it
+            });
             claims.$revoke({claimID: this.claimID}, () => {
                 this.showClaimInfo = false;
             });

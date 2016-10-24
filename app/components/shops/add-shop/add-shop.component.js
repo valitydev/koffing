@@ -18,6 +18,7 @@ shops.component('addShop', {
         this.createClaim = form => {
             if (form.$valid) {
                 this.isLoading = true;
+                this.args.contractor.legalEntity = '';
                 Shops.save(this.args, () => back());
             }
         };
