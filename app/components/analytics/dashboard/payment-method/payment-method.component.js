@@ -24,8 +24,10 @@ paymentMethod.component('paymentMethod', {
                     let result = system;
                     if (system === 'visa') {
                         result = 'Visa';
-                    } else if (system === 'master_card') {
+                    } else if (system === 'mastercard') {
                         result = 'Master Card';
+                    } else if (system === 'nspkmir') {
+                        result = 'Mir'
                     }
                     return result;
                 });
