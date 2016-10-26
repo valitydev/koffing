@@ -8,9 +8,9 @@
                     form.form-horizontal.form-label-left.css-form(novalidate name="form")
 
                         .form-group
-                            label.control-label.col-md-3 Название магазина *
+                            label.control-label.col-md-3 Название магазина
                             .col-md-6
-                                input.form-control(type="text" ng-model="$ctrl.shopDetails.name" name="shopDetailsName" required)
+                                input.form-control(type="text" ng-model="$ctrl.shopDetails.name" name="shopDetailsName")
                         .form-group
                             label.control-label.col-md-3 Описание магазина
                             .col-md-6
@@ -21,18 +21,18 @@
                                 input.form-control(type="text" ng-model="$ctrl.shopDetails.location" name="shopDetailsLocation")
 
                         .form-group
-                            label.control-label.col-md-3 Наименование организации *
+                            label.control-label.col-md-3 Наименование организации
                             .col-md-6
-                                input.form-control(type="text" ng-model="$ctrl.contractor.registeredName" name="contractorRegisteredName" required)
+                                input.form-control(type="text" ng-model="$ctrl.contractor.registeredName" name="contractorRegisteredName")
                         //.form-group
                         //    label.control-label.col-md-3 Тип юридического лица
                         //    .col-md-6
                         //        input.form-control(type="text" ng-model="$ctrl.contractor.legalEntity" name="contractorLegalEntity")
 
                         .form-group
-                            label.control-label.col-md-3 Категория *
+                            label.control-label.col-md-3 Категория
                             .col-md-6
-                                select.select2_multiple.form-control.custom_select(select2 ng-model="$ctrl.categoryRef" required name="category"
+                                select.select2_multiple.form-control.custom_select(select2 ng-model="$ctrl.categoryRef" name="category"
                                 ng-options="category.categoryRef as category.name for category in $ctrl.categories")
                         .ln_solid
                         .form-group

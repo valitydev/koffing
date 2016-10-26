@@ -42,35 +42,16 @@ shops.component('editShop', {
             if (form.category.$dirty) {
                 args.categoryRef = form.category.$modelValue;
             }
-            if (form.shopDetailsName.$dirty) {
-                if (!args.shopDetails) {
-                    args.shopDetails = {};
-                }
+            if (form.shopDetailsName.$dirty || form.shopDetailsDescription.$dirty || form.shopDetailsLocation.$dirty) {
+                args.shopDetails = {};
                 args.shopDetails.name = form.shopDetailsName.$modelValue;
-            }
-            if (form.shopDetailsDescription.$dirty) {
-                if (!args.shopDetails) {
-                    args.shopDetails = {};
-                }
                 args.shopDetails.description = form.shopDetailsDescription.$modelValue;
-            }
-            if (form.shopDetailsLocation.$dirty) {
-                if (!args.shopDetails) {
-                    args.shopDetails = {};
-                }
                 args.shopDetails.location = form.shopDetailsLocation.$modelValue;
             }
             if (form.contractorRegisteredName.$dirty) {
-                if (!args.contractor) {
-                    args.contractor = {};
-                }
+                args.contractor = {};
                 args.contractor.registeredName = form.contractorRegisteredName.$modelValue;
-            }
-            if (form.contractorLegalEntity.$dirty) {
-                if (!args.contractor) {
-                    args.contractor = {};
-                }
-                args.contractor.legalEntity = form.contractorLegalEntity.$modelValue;
+                args.contractor.legalEntity = '';
             }
             return args;
         }
