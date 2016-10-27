@@ -10,10 +10,10 @@ form.form-horizontal.form-label-left
                 .col-md-6
                     datepicker(date="$ctrl.searchParams.toTime")
         .col-md-6
-            //.form-group
-            //    label.control-label.col-md-4 Статус платежа
-            //    .col-md-6
-            //        custom-select(options="$ctrl.statuses" selected="$ctrl.searchParams.status")
+            .form-group
+                label.control-label.col-md-4 Статус платежа
+                .col-md-6
+                    custom-select(options="$ctrl.statuses" selected="$ctrl.searchParams.status")
             .form-group
                 label.control-label.col-md-4 Номер
                 .col-md-6

@@ -5,5 +5,8 @@ searchForm.component('searchForm', {
     bindings: {
         searchParams: '=',
         onSearch: '&'
+    },
+    controller: function () {
+        this.searchParams.fromTime = moment(this.toTime).subtract(1, 'M').hours(0).minutes(0).seconds(0).milliseconds(0).format();
     }
 });

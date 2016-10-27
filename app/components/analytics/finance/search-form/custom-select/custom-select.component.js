@@ -1,5 +1,5 @@
 customSelect.component('customSelect', {
-    template: `<select class="select2_multiple form-control custom_select" select2 multiple="multiple" ng-model="$ctrl.selected">
+    template: `<select class="select2_multiple form-control custom_select" select2 ng-model="$ctrl.selected">
                     <option value=""></option>
                     <option ng-repeat="option in $ctrl.options" value="{{option.key}}">{{option.name}}</option>
                 </select>`,

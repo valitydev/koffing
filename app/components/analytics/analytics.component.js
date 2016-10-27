@@ -1,4 +1,4 @@
-dashboard.component('analytics', {
+analytics.component('analytics', {
     templateUrl: 'components/analytics/analytics.template.html',
     $routeConfig: [
         {path: '/:shopId/statistic', name: 'Dashboard', component: 'dashboard'},
@@ -7,7 +7,9 @@ dashboard.component('analytics', {
     bindings: {
         $router: '<'
     },
-    controller: function (Parties, $location) {
+    controller: function (Parties, $location, ActiveShopService) {
+        const activeShopService = new ActiveShopService();
+
         this.$routerOnActivate = () => {
             Parties.get(party => {
                 this.isShopsExists = !!party.shops.length;
@@ -18,7 +20,12 @@ dashboard.component('analytics', {
                     name: shop.shopDetails.name,
                     key: shop.shopID
                 }));
-                this.selectedShopId = resolveShopId(party.shops);
+                const activeShopId = activeShopService.getActive();
+                if (activeShopId) {
+                    this.selectedShopId = activeShopId;
+                } else {
+                    this.selectedShopId = resolveShopId(party.shops);
+                }
                 this.onSelect();
             });
         };
@@ -33,11 +40,18 @@ dashboard.component('analytics', {
 
         function resolveShopId(shops) {
             const path = $location.path();
-            return shops.length > 0 ? shops[0].shopID : findParam(path, 'analytics');
+            const shopId = findParam(path, 'analytics');
+            return shopId ? shopId : shops[0].shopID;
         }
 
         this.onSelect = () => {
-            this.$router.navigate(['Dashboard', {shopId: this.selectedShopId}]);
+            activeShopService.setActive(this.selectedShopId);
+            const section = findParam($location.path(), this.selectedShopId);
+            if (section === 'finance') {
+                this.$router.navigate(['Finance', {shopId: this.selectedShopId}]);
+            } else {
+                this.$router.navigate(['Dashboard', {shopId: this.selectedShopId}]);
+            }
         };
 
         this.isRouteActive = route => this.$router.isRouteActive(this.$router.generate(route));
