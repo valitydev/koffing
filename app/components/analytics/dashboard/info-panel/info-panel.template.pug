@@ -9,13 +9,13 @@
         span.count_top Основной счет
             .dashboard_stats_count
                 loading(is-loading="$ctrl.accountsLoading")
-                    div {{$ctrl.account.general.availableAmount | roubleCurrency}}
+                    div {{$ctrl.account.general.ownAmount | roubleCurrency}}
         span.count_bottom Рублей
     .col-md-2.tile_stats_count
         span.count_top Гарантийный счет
             .dashboard_stats_count
                 loading(is-loading="$ctrl.accountsLoading")
-                    div {{$ctrl.account.guarantee.availableAmount | roubleCurrency}}
+                    div {{$ctrl.account.guarantee.ownAmount | roubleCurrency}}
         span.count_bottom Рублей
     .col-md-2.tile_stats_count
         span.count_top Успешных платежей
