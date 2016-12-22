@@ -1,0 +1,17 @@
+table.table.table-hover.table-striped
+    thead
+        tr
+            th Номер
+            th Сумма
+            th.hidden-xs Валюта
+            th Дата
+            th Статус
+            th.hidden-xs Описание
+    tbody
+        tr(*ngFor="let invoice of invoices")
+            td {{invoice.id}}
+            td {{invoice.amount | kofRoubleCurrency}}
+            td.hidden-xs {{invoice.currency}}
+            td {{invoice.dueDate | date: "dd.MM.yyyy HH:mm:ss"}}
+            td {{invoice.status | kofPaymentStatus}}
+            td.hidden-xs {{invoice.description}}

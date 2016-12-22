@@ -1,0 +1,5 @@
+{
+  "realm": "external",
+  "auth-server-url": "http://localhost:8080/auth/",
+  "resource": "tokenizer"
+}

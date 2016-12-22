@@ -1,0 +1,29 @@
+form.form-horizontal.form-search-invoices
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                .col-xs-12.col-sm-4
+                    label.control-label Дата с
+                .col-xs-12.col-sm-6
+                    .ui-calendar.search-form
+                        p-calendar.ui-inputtext.search-form(name="searchFromTime", [(ngModel)]="searchFromTime", dateFormat = "dd.mm.yy", required)
+            .form-group
+                .col-xs-12.col-sm-4
+                    label.control-label Дата по
+                .col-xs-12.col-sm-6
+                    .ui-calendar.search-form
+                        p-calendar.ui-inputtext.search-form(name="searchToTime", [(ngModel)]="searchToTime", dateFormat = "dd.mm.yy", required)
+        .col-xs-12.col-sm-6
+            .form-group
+                .col-xs-12.col-sm-4
+                    label.control-label Статус платежа
+                .col-xs-12.col-sm-6
+                    kof-select([(ngModel)]="searchParams.status", [items]="statuses", [placeholder]="'Любой статус'", [modelOptions]="{standalone: true}", name='status')
+            .form-group
+                .col-xs-12.col-sm-4
+                    label.control-label Номер
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", [(ngModel)]="searchParams.invoiceID", name="invoiceID")
+            .form-group
+                .col-xs-12.col-sm-10
+                    button.btn.btn-primary.pull-right.btn-search-invoices((click)="search()") Найти

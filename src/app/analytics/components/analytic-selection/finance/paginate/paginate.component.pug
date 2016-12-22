@@ -1,0 +1,8 @@
+.dataTables_paginate.paging_simple_numbers(*ngIf="size > limit")
+    ul.pagination.custom_pagination
+        li.paginate_button.previous((click)="back($event)")
+            a.fa.fa-chevron-left(href="")
+        li.paginate_button(*ngFor="let page of pages | kofPagination : pagesOnScreen : pageOffset()", (click)="select($event, page)", [ngClass]="{'active': page.active}")
+            a(href="") {{page.label}}
+        li.paginate_button.next((click)="forward($event)")
+            a.fa.fa-chevron-right(href="")

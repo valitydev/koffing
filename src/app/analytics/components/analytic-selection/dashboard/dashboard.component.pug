@@ -1,0 +1,44 @@
+.row
+    .col-xs-12
+        form.form-inline.form-label-right
+            .form-group
+                label.control-label Статистика с&nbsp;
+                .ui-calendar
+                    p-calendar.ui-inputtext.statistics(name="fromTime", [(ngModel)]="fromTimeDate", dateFormat="dd.mm.yy")
+            .form-group
+                label.control-label &nbsp;&nbsp;по&nbsp;
+                .ui-calendar
+                    p-calendar.ui-inputtext.statistics(name="toTime", [(ngModel)]="toTimeDate", dateFormat = "dd.mm.yy")
+            span &nbsp;
+            button.btn.btn-default(style="margin-bottom: 0; margin-right: 0; margin-left: 5px;", (click)="loadData()") Показать
+.row
+    .col-xs-12
+        kof-info-panel([uniqueCount]="uniqueCount", [successfulCount]="successfulCount",
+            [unfinishedCount]="unfinishedCount", [profit]="profit", [account]="account", [isLoading]="isInfoPanelLoading")
+.row
+    .col-xs-12
+        .x_panel.tile
+            .x_title
+                h4 Оборот
+            .x_content
+                kof-revenue([fromTime]="chartFromTime", [chartData]="revenueChartData")
+.row
+    .col-xs-12
+        .x_panel.tile
+            .x_title
+                h4 Конверсия оплат
+            .x_content
+                kof-conversion([fromTime]="chartFromTime", [chartData]="conversionChartData")
+.row
+    .col-xs-12.col-sm-6
+        .x_panel.tile
+            .x_title
+                h4 Способы оплаты
+            .x_content
+                kof-payment-method([chartData]="paymentMethodChartData")
+    .col-xs-12.col-sm-6
+        .x_panel.tile
+            .x_title
+                h4 Геолокация
+            .x_content
+                kof-geolocation([chartData]="geoChartData")

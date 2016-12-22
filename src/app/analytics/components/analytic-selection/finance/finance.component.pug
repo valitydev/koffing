@@ -1,0 +1,14 @@
+.row
+    .col-xs-12
+        .x_panel
+            .x_title
+                h4 Поиск
+            .x_content
+                kof-search-form([searchParams]="searchParams", (onSearch)="search()")
+.row
+    .col-xs-12
+        .x_panel.tile
+            .x_content
+                kof-loading([isLoading]="isLoading")
+                    kof-search-result([invoices]="invoices")
+                    kof-paginate([size]="totalCount", [limit]="searchParams.limit", [offset]="searchParams.offset", [pagesOnScreen]="10", (onChange)="onChangePage($event)")

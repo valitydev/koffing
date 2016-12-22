@@ -1,0 +1,41 @@
+.row
+    .col-xs-12
+        .x_panel.tile
+            .x_title
+                h4 Изменение данных магазина
+            .x_content
+                kof-loading([isLoading]="isLoading")
+                    form.form-horizontal.form-label-left.css-form(novalidate, (ngSubmit)="updateShop(form)", name="form", #form="ngForm")
+                        .form-group([ngClass]="{'has-error': hasError(shop_details_name)}")
+                            .col-xs-12.col-sm-3
+                                label.control-label Название магазина *
+                            .col-xs-12.col-sm-6
+                                input.form-control(type="text", required, name="shop_details_name",
+                                                    [(ngModel)]="args.shopDetails.name", #shop_details_name="ngModel")
+                        .form-group
+                            .col-xs-12.col-sm-3
+                                label.control-label Описание магазина
+                            .col-xs-12.col-sm-6
+                                input.form-control(type="text", name="shop_details_description", [(ngModel)]="args.shopDetails.description")
+                        .form-group
+                            .col-xs-12.col-sm-3
+                                label.control-label Месторасположение
+                            .col-xs-12.col-sm-6
+                                input.form-control(type="text", name="shop_details_location", [(ngModel)]="args.shopDetails.location")
+
+                        .form-group([ngClass]="{'has-error': hasError(contractor_registeredName)}")
+                            .col-xs-12.col-sm-3
+                                label.control-label Наименование организации *
+                            .col-xs-12.col-sm-6
+                                input.form-control(type="text", name="contractor_registeredName", required,
+                                                    [(ngModel)]="args.contractor.registeredName", #contractor_registeredName="ngModel")
+                        .form-group
+                            .col-xs-12.col-sm-3
+                                label.control-label Категория *
+                            .col-xs-12.col-sm-6
+                                kof-select([(ngModel)]="args.categoryRef", [items]="categories", [modelOptions]="{standalone: true}", name='category')
+                        .ln_solid
+                        .form-group
+                            .col-xs-12.col-sm-6.col-sm-offset-3
+                                button.btn.btn-primary(type="submit", [disabled]="form.invalid || form.pristine") Создать заявку
+                                a.btn.btn-default.pull-right(type="reset", routerLink="/shops") Назад

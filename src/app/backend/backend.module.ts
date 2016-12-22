@@ -1,0 +1,48 @@
+import { NgModule } from '@angular/core';
+
+import { AccountService } from './services/accounts.service';
+import { CategoryService } from './services/category.service';
+import { ClaimService } from './services/claim.service';
+import { CustomerService } from './services/customer.service';
+import { InvoiceService } from './services/invoice.service';
+import { PaymentsService } from './services/payments.service';
+import { ShopService } from './services/shop.service';
+import { ConfigService } from './services/config.service';
+
+@NgModule({
+    providers: [
+        AccountService,
+        CategoryService,
+        ClaimService,
+        CustomerService,
+        InvoiceService,
+        PaymentsService,
+        ShopService,
+        ConfigService
+    ]
+})
+export class BackendModule { }
+
+export * from './services/accounts.service';
+export * from './services/category.service';
+export * from './services/claim.service';
+export * from './services/config.service';
+export * from './services/customer.service';
+export * from './services/invoice.service';
+export * from './services/payments.service';
+export * from './services/shop.service';
+
+export * from './classes/category.class';
+export * from './classes/claim.class';
+export * from './classes/contract.class';
+export * from './classes/contractor.class';
+export * from './classes/conversion.class';
+export * from './classes/geodata.class';
+export * from './classes/invoice.class';
+export * from './classes/request-params.class';
+export * from './classes/revenue.class';
+export * from './classes/shop.class';
+export * from './classes/shop-creation.class';
+export * from './classes/shop-detail.class';
+export * from './classes/shop-item.class';
+export * from './classes/shop-modification.class';

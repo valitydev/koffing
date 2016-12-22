@@ -1,0 +1,4 @@
+.kof-select
+    select.form-control([(ngModel)]="selectedValue", [ngModelOptions]="modelOptions")
+        option(*ngIf="placeholder" ,[value]="''") {{placeholder}}
+        option(*ngFor="let item of items", [value]="item.value") {{item.label}}
