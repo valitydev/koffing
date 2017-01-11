@@ -1,6 +1,7 @@
+import { BankAccount } from './bank-account.class';
+import { Entity } from './entity.class';
+
 export class Contractor {
-
-    public registeredName: string;
-
-    public legalEntity: string;
+    public bankAccount: BankAccount;
+    public entity: Entity;
 }

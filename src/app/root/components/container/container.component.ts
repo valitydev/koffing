@@ -12,9 +12,7 @@ export class ContainerComponent implements OnInit {
 
     public isSidebarOpened: boolean;
 
-    constructor(
-        private toggleMenuBroadcaster: ToggleMenuBroadcaster
-    ) { }
+    constructor(private toggleMenuBroadcaster: ToggleMenuBroadcaster) {}
 
     public ngOnInit() {
         this.isSidebarOpened = SidebarStateService.isOpened();

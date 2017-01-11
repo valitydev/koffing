@@ -1,14 +1,8 @@
+import { Contractor } from './contractor.class';
+
 export class Contract {
-
-    public number: string;
-
-    public systemContractorRef: string;
-
+    public id: number;
+    public contractor: Contractor;
     public concludedAt: string;
-
-    public validSince: string;
-
-    public validUntil: string;
-
     public terminatedAt: string;
 }
