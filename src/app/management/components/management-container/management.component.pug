@@ -1,0 +1,10 @@
+kof-claims
+.x_panel.tile
+    .x_content
+        ul.nav.nav-tabs.bar_tabs
+            li.hand-cursor([routerLink]="['shops']", [routerLinkActive]="['active']")
+                a Магазины
+            li.hand-cursor([routerLink]="['contracts']", [routerLinkActive]="['active']")
+                a Контракты
+        .tab-content
+            router-outlet

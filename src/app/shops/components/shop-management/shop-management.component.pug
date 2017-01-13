@@ -27,4 +27,4 @@ kof-claims
                         td(*ngIf="shop.isBlocked")
                             span.pull-right Заблокирован
         span(*ngIf="!shops.length") Список магазинов пуст
-        a.btn.btn-primary.pull-right(routerLink="/shops/add") Добавить новый магазин
+        a.btn.btn-primary.pull-right([routerLink]="['add']") Добавить новый магазин

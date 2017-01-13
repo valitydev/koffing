@@ -1,7 +1,5 @@
 export class ShopItem {
-
     public value: string;
-
     public label: string;
 
     constructor(value: string, label: string) {

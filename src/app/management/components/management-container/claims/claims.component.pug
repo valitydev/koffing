@@ -1,0 +1,23 @@
+.x_panel.tile(*ngIf="showClaimInfo")
+    .x_title
+        h4 Активная заявка
+    .x_content
+        .row(*ngFor="let set of changeset")
+            kof-shop-creation(*ngIf="set.modificationType == 'ShopCreation'", [changeset]="set")
+            kof-shop-modification(*ngIf="set.modificationType == 'ShopModificationUnit' && set.details.modificationType !== 'ShopAccountCreated'", [changeset]="set")
+        button.btn.btn-danger.pull-right(data-toggle="modal" data-target=".revoke-modal" data-backdrop="false") Отмена заявки
+
+.modal.fade.revoke-modal(tabindex="-1" role="dialog")
+    .modal-dialog.modal-sm
+        .modal-content
+            .modal-header
+                h5.modal-title Подтверждение отмены заявки
+            .modal-body Введите причину отмены
+                textarea.form-control(required, [(ngModel)]="revokeReason", #reason="ngModel")
+            .modal-footer
+                .btn-toolbar.pull-left
+                    .btn-group.btn-group-sm
+                        button.btn.btn-default(type="button", data-dismiss="modal") Назад
+                .btn-toolbar.pull-right
+                    .btn-group.btn-group-sm
+                        button.btn.btn-danger(*ngIf="reason.valid", type="button", data-dismiss="modal",(click)="revoke(reason)") Отменить заявку

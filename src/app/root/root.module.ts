@@ -2,25 +2,27 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { GrowlModule } from 'primeng/primeng';
 
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { TopPanelComponent } from './components/top-panel/top-panel.component';
 import { RootRoutingModule } from './root-routing.module';
-import { ContainerComponent } from './components/container/container.component';
+import { BroadcasterModule } from '../broadcaster/broadcaster.module';
 import { TokenizationModule } from '../tokenization/tokenization.module';
 import { AnalyticsModule } from '../analytics/analytics.module';
 import { ShopsModule } from '../shops/shops.module';
-import { BroadcasterModule } from '../broadcaster/broadcaster.module';
+import { ManagementModule } from '../management/management.module';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TopPanelComponent } from './components/top-panel/top-panel.component';
+import { ContainerComponent } from './components/container/container.component';
 import { HttpErrorHandleComponent } from './components/http-error-handle/http-error-handle.component';
 
 @NgModule({
     imports: [
+        BrowserModule,
+        GrowlModule,
         RootRoutingModule,
+        BroadcasterModule,
+        TokenizationModule,
         AnalyticsModule,
         ShopsModule,
-        TokenizationModule,
-        BrowserModule,
-        BroadcasterModule,
-        GrowlModule
+        ManagementModule
     ],
     declarations: [
         ContainerComponent,

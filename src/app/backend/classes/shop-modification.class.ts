@@ -1,7 +1,5 @@
 export class ShopModification {
-
     public modificationType: string;
-
     public shopID: string;
 
     public details: {

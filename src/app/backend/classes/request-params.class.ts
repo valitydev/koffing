@@ -1,13 +1,8 @@
 export class RequestParams {
-
     public fromTime: string;
-
     public toTime: string;
-
     public splitUnit: string = 'minute';
-
     public splitSize: string = '1';
-
     public paymentMethod: string = 'bank_card';
 
     constructor(fromTime: string, toTime: string, splitUnit?: string, splitSize?: string, paymentMethod?: string) {

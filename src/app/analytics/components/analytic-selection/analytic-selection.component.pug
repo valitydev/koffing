@@ -1,17 +1,15 @@
-.row
-    .col-xs-12
-        .x_panel.tile
-            .x_content
-                form.form-horizontal
-                    .form-group
-                        .col-xs-12.col-sm-1
-                            label.control-label Магазин
-                        .col-xs-12.col-sm-6
-                            kof-select(*ngIf="selectItems.length", [(ngModel)]="selectedShopID", [items]="selectItems", (onChange)="navigateToShop()", [modelOptions]="{standalone: true}", name='shopId')
-                ul.nav.nav-tabs.bar_tabs(*ngIf="selectedShopID")
-                    li.hand-cursor([routerLink]="['dashboard']", [routerLinkActive]="['active']")
-                        a Статистика
-                    li.hand-cursor([routerLink]="['finance']", [routerLinkActive]="['active']")
-                        a Финансы
-                .tab-content
-                    router-outlet
+.x_panel.tile
+    .x_content
+        form.form-horizontal
+            .form-group
+                .col-xs-12.col-sm-1
+                    label.control-label Магазин
+                .col-xs-12.col-sm-6
+                    kof-select(*ngIf="selectItems.length", [(ngModel)]="selectedShopID", [items]="selectItems", (onChange)="navigateToShop()", [modelOptions]="{standalone: true}", name='shopId')
+        ul.nav.nav-tabs.bar_tabs(*ngIf="selectedShopID")
+            li.hand-cursor([routerLink]="['dashboard']", [routerLinkActive]="['active']")
+                a Статистика
+            li.hand-cursor([routerLink]="['finance']", [routerLinkActive]="['active']")
+                a Финансы
+        .tab-content
+            router-outlet

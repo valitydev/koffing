@@ -6,6 +6,7 @@ import { CategoryService } from 'koffing/backend/backend.module';
 import { ShopService } from 'koffing/backend/backend.module';
 import { SelectItem } from 'koffing/common/common.module';
 import { ShopArgs } from 'koffing/shops/shops.module';
+import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
     selector: 'kof-edit-shop',
@@ -14,7 +15,7 @@ import { ShopArgs } from 'koffing/shops/shops.module';
 export class EditShopComponent implements OnInit {
 
     public categories: SelectItem[] = [];
-    public currentShopId: string;
+    public currentShopId: number = Number(this.route.snapshot.params['shopID']);
     public args: ShopArgs = {
         shopDetails: {},
         contractor: {},
@@ -31,10 +32,10 @@ export class EditShopComponent implements OnInit {
     public loadShops() {
         return new Promise((resolve) => {
             this.shopService.getShops().then((shops: any) => {
-                const found: any = _.find(shops, (shop: any) => shop.shopID === this.currentShopId);
-                this.args.shopDetails = found.shopDetails ? found.shopDetails : {};
-                this.args.contractor = found.contractor ? found.contractor : {};
-                this.args.categoryRef = found.categoryRef;
+                const currentShop: Shop = _.find(shops, (shop: any) => shop.shopID === this.currentShopId);
+                this.args.shopDetails = currentShop.shopDetails ? currentShop.shopDetails : {};
+                // this.args.contractor = currentShop.contractor ? currentShop.contractor : {};
+                this.args.categoryRef = currentShop.categoryRef;
 
                 resolve();
             });
@@ -72,8 +73,6 @@ export class EditShopComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.currentShopId = this.route.snapshot.params['shopID'];
-
         this.isLoading = true;
         Promise.all([
             this.loadShops(),
