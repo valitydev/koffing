@@ -6,6 +6,6 @@ import { Component, OnInit } from '@angular/core';
 export class ContractsComponent implements OnInit {
 
     public ngOnInit() {
-        console.log('ContractsComponent');
+        // console.log('ContractsComponent');
     }
 }

@@ -6,7 +6,6 @@ import { RootRoutingModule } from './root-routing.module';
 import { BroadcasterModule } from '../broadcaster/broadcaster.module';
 import { TokenizationModule } from '../tokenization/tokenization.module';
 import { AnalyticsModule } from '../analytics/analytics.module';
-import { ShopsModule } from '../shops/shops.module';
 import { ManagementModule } from '../management/management.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopPanelComponent } from './components/top-panel/top-panel.component';
@@ -21,7 +20,6 @@ import { HttpErrorHandleComponent } from './components/http-error-handle/http-er
         BroadcasterModule,
         TokenizationModule,
         AnalyticsModule,
-        ShopsModule,
         ManagementModule
     ],
     declarations: [

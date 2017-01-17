@@ -5,12 +5,12 @@ import * as _ from 'lodash';
 import { CategoryService } from 'koffing/backend/backend.module';
 import { ShopService } from 'koffing/backend/backend.module';
 import { SelectItem } from 'koffing/common/common.module';
-import { ShopArgs } from 'koffing/shops/shops.module';
+import { ShopArgs } from 'koffing/management/management.module';
 import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
     selector: 'kof-edit-shop',
-    templateUrl: './edit-shop.component.pug',
+    templateUrl: 'edit-shop.component.pug',
 })
 export class EditShopComponent implements OnInit {
 

@@ -1,0 +1,44 @@
+.x_panel.tile
+    .x_title
+        h4 Выбор существующего счета
+    .x_content
+        form.form-horizontal.form-label-left.css-form(novalidate, (ngSubmit)="createClaim(form)", name="form", #form="ngForm")
+            h5 Валюта
+            .ln_solid
+            .form-group([ngClass]="{'has-error': hasError(selected_currency)}")
+                .col-xs-12.col-sm-3
+                    label.control-label Валюта
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="selected_currency",
+                    [(ngModel)]="currency", #selected_currency="ngModel")
+            .ln_solid
+            h5 Банковские реквизиты
+            .ln_solid
+            .form-group([ngClass]="{'has-error': hasError(bank_account)}")
+                .col-xs-12.col-sm-3
+                    label.control-label Расчетный счет
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bank_account",
+                    [(ngModel)]="bankAccountArgs.account", #bank_account="ngModel")
+            .form-group([ngClass]="{'has-error': hasError(bank_name)}")
+                .col-xs-12.col-sm-3
+                    label.control-label Наименование банка
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bank_name",
+                    [(ngModel)]="bankAccountArgs.bankName", #bank_name="ngModel")
+            .form-group([ngClass]="{'has-error': hasError(bank_post_account)}")
+                .col-xs-12.col-sm-3
+                    label.control-label Корреспондентский счет
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bank_post_account",
+                    [(ngModel)]="bankAccountArgs.bankPostAccount", #bank_post_account="ngModel")
+            .form-group([ngClass]="{'has-error': hasError(bank_bik)}")
+                .col-xs-12.col-sm-3
+                    label.control-label БИК
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bank_bik",
+                    [(ngModel)]="bankAccountArgs.bankBik", #bank_bik="ngModel")
+            .ln_solid
+            .form-group
+                .col-xs-12.col-sm-6.col-sm-offset-3
+                    button.btn.btn-primary(type="submit", [disabled]="form.invalid") Создать заявку
