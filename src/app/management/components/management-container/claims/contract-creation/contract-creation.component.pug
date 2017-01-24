@@ -1,0 +1,18 @@
+.panel.panel-default
+    .panel-heading((click)="show()")
+        a Создание договора
+        i.fa.pull-right.custom-chevron([ngClass]="{'fa-chevron-down': showPanel, 'fa-chevron-right': !showPanel}")
+    .panel-body(*ngIf="showPanel")
+        kof-modification-detail([displayName]="'Банк'", [value]="contract.contractor.bankAccount.bankName")
+        kof-modification-detail([displayName]="'Расчетный счет'", [value]="contract.contractor.bankAccount.account")
+        kof-modification-detail([displayName]="'Корреспондентский счет'", [value]="contract.contractor.bankAccount.bankPostAccount")
+        kof-modification-detail([displayName]="'БИК'", [value]="contract.contractor.bankAccount.bankBik")
+        kof-modification-detail([displayName]="'Наименование юр. лица'", [value]="contract.contractor.entity.registeredName")
+        kof-modification-detail([displayName]="'Номер юр. лица'", [value]="contract.contractor.entity.registeredNumber")
+        kof-modification-detail([displayName]="'ИНН'", [value]="contract.contractor.entity.inn")
+        kof-modification-detail([displayName]="'Фактический адрес'", [value]="contract.contractor.entity.actualAddress")
+        kof-modification-detail([displayName]="'Почтовый адрес'", [value]="contract.contractor.entity.postAddress")
+        kof-modification-detail([displayName]="'Позиция представителя'", [value]="contract.contractor.entity.representativePosition")
+        kof-modification-detail([displayName]="'ФИО представителя'", [value]="contract.contractor.entity.representativeFullName")
+        kof-modification-detail([displayName]="'Документ представителя'", [value]="contract.contractor.entity.representativeDocument")
+

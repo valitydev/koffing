@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { CategoryService } from 'koffing/backend/backend.module';
 import { ShopService } from 'koffing/backend/backend.module';
 import { SelectItem } from 'koffing/common/common.module';
-import { ShopArgs } from 'koffing/management/management.module';
+import { ShopArgs } from 'koffing/management/classes/shop-args.class';
 
 @Component({
     selector: 'kof-add-shop',

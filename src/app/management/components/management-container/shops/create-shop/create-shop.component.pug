@@ -8,7 +8,7 @@
                             span.step_no 1
                             span.step_descr Шаг 1
                                 br
-                                small Выбор контракта
+                                small Выбор договора
                     li
                         a([ngClass]="{'disabled': stepTwoVisited === false, 'done': stepTwoVisited === true && currentWizardStep !== 2, 'selected': currentWizardStep === 2}")
                             span.step_no 2
@@ -21,11 +21,6 @@
                             span.step_descr Шаг 3
                                 br
                                 small Данные магазина
-            .actionBar(*ngIf="currentStrategy !== 'no'")
-                .text-center
-                    a.buttonPrevious.btn.btn-default((click)="stepBack()") Назад
-                    a.buttonNext.btn.btn-default((click)="stepForward()") Вперёд
-                    a.buttonFinish.btn.btn-default.buttonDisabled Завершить
             .ln_solid
             .tile(*ngIf="currentWizardStep !== 3 && !(currentWizardStep === 2 && isNewContractCreated === true)")
                 .text-center
@@ -40,7 +35,7 @@
                     br
                     br
             .tile
-                kof-create-contract(*ngIf="currentWizardStep === 1 && currentStrategy === 'new'")
+                kof-contract-create(*ngIf="currentWizardStep === 1 && currentStrategy === 'new'")
                 kof-select-contract(*ngIf="currentWizardStep === 1 && currentStrategy === 'existing'")
                 kof-create-payout-account(*ngIf="currentWizardStep === 2 && currentStrategy === 'new'")
                 kof-select-payout-account(*ngIf="currentWizardStep === 2 && currentStrategy === 'existing'")

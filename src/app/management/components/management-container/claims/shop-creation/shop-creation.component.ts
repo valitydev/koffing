@@ -1,23 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ShopCreation } from 'koffing/backend/backend.module';
+import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
     selector: 'kof-shop-creation',
     templateUrl: 'shop-creation.component.pug'
 })
-export class ShopCreationComponent implements OnInit {
+export class ShopCreationComponent {
 
     @Input()
-    public changeset: ShopCreation;
+    public shop: Shop;
 
     public showPanel: boolean = false;
-
-    public shop: any;
-
-    public ngOnInit() {
-        this.shop = this.changeset.shop;
-    }
 
     public show() {
         this.showPanel = !this.showPanel;

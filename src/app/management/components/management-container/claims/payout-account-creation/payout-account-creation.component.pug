@@ -1,0 +1,11 @@
+.panel.panel-default
+    .panel-heading((click)="show()")
+        a Создание счета
+        i.fa.pull-right.custom-chevron([ngClass]="{'fa-chevron-down': showPanel, 'fa-chevron-right': !showPanel}")
+    .panel-body(*ngIf="showPanel")
+        kof-modification-detail([displayName]="'Валюта'", [value]="payoutAccount.currency")
+        kof-modification-detail([displayName]="'Банк'", [value]="payoutAccount.tool.bankAccount.bankName")
+        kof-modification-detail([displayName]="'Расчетный счет'", [value]="payoutAccount.tool.bankAccount.account")
+        kof-modification-detail([displayName]="'Корреспондентский счет'", [value]="payoutAccount.tool.bankAccount.bankPostAccount")
+        kof-modification-detail([displayName]="'БИК'", [value]="payoutAccount.tool.bankAccount.bankBik")
+

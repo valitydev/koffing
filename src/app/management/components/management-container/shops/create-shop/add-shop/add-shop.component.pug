@@ -33,8 +33,5 @@
                     kof-select([(ngModel)]="args.categoryRef", [items]="categories", [modelOptions]="{standalone: true}", name="category")
             .form-group
                 .col-xs-12.col-sm-6.col-sm-offset-3
-                    button.btn.btn-primary.pull-right(
-                        type="submit",
-                        [disabled]="form.invalid"
-                    ) Создать заявку
+                    button.btn.btn-primary.pull-right(type="submit", [disabled]="form.invalid") Создать заявку
                     a.btn.btn-default(type="reset", routerLink="/shops") Назад

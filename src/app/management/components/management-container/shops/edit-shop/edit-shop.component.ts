@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { CategoryService } from 'koffing/backend/backend.module';
 import { ShopService } from 'koffing/backend/backend.module';
 import { SelectItem } from 'koffing/common/common.module';
-import { ShopArgs } from 'koffing/management/management.module';
+import { ShopArgs } from 'koffing/management/classes/shop-args.class';
 import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
@@ -24,10 +24,12 @@ export class EditShopComponent implements OnInit {
 
     private isLoading: boolean;
 
-    constructor(private categoryService: CategoryService,
-                private shopService: ShopService,
-                private router: Router,
-                private route: ActivatedRoute) { }
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private categoryService: CategoryService,
+        private shopService: ShopService,
+    ) {}
 
     public loadShops() {
         return new Promise((resolve) => {

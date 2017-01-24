@@ -54,7 +54,5 @@ export * from './classes/request-params.class';
 export * from './classes/revenue.class';
 export * from './classes/russian-legal-entity.class';
 export * from './classes/shop.class';
-export * from './classes/shop-creation.class';
 export * from './classes/shop-detail.class';
 export * from './classes/shop-item.class';
-export * from './classes/shop-modification.class';

@@ -3,10 +3,6 @@
         a Создание магазина: {{shop.shopDetails.name}}
         i.fa.pull-right.custom-chevron([ngClass]="{'fa-chevron-down': showPanel, 'fa-chevron-right': !showPanel}")
     .panel-body(*ngIf="showPanel")
-        div(*ngIf="shop.shopDetails")
-            kof-modification-detail([displayName]="'Название магазина'", [value]="shop.shopDetails.name")
-            kof-modification-detail([displayName]="'Описание'", [value]="shop.shopDetails.description")
-            kof-modification-detail([displayName]="'Месторасположение'", [value]="shop.shopDetails.location")
-        div(*ngIf="shop.contractor")
-            kof-modification-detail([displayName]="'Наименование организации'", [value]="shop.contractor.registeredName")
-            kof-modification-detail([displayName]="'Тип юридического лица'", [value]="shop.contractor.legalEntity")
+        kof-modification-detail([displayName]="'Название магазина'", [value]="shop.shopDetails.name")
+        kof-modification-detail([displayName]="'Описание'", [value]="shop.shopDetails.description")
+        kof-modification-detail([displayName]="'Месторасположение'", [value]="shop.shopDetails.location")

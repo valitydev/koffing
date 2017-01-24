@@ -6,5 +6,5 @@ export class Contract {
     public contractor: Contractor;
     public concludedAt: string;
     public terminatedAt: string;
-    public payoutAccouts: PayoutAccount[];
+    public payoutAccounts: PayoutAccount[];
 }

@@ -1,26 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ShopModification } from 'koffing/backend/backend.module';
+import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
     selector: 'kof-shop-modification',
     templateUrl: 'shop-modification.component.pug'
 })
-export class ShopModificationComponent implements OnInit {
+export class ShopModificationComponent {
 
     @Input()
-    public changeset: ShopModification;
+    public shop: Shop;
 
     public showPanel: boolean = false;
-
-    public isModification: boolean = false;
-
-    public details: any;
-
-    public ngOnInit() {
-        this.details = this.changeset.details.details;
-        this.isModification = this.changeset.details.modificationType === 'ShopModification';
-    }
 
     public show() {
         this.showPanel = !this.showPanel;
