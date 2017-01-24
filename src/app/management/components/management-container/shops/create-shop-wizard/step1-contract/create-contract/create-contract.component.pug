@@ -1,8 +1,8 @@
 .x_panel.tile
     .x_title
-        h4 Выбор существующего контракта
+        h4 Добавление нового контракта
     .x_content
-        form.form-horizontal.form-label-left.css-form(novalidate, (ngSubmit)="createClaim(form)", name="form", #form="ngForm")
+        form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
             h5 Банковские реквизиты
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(bank_account)}")
@@ -10,25 +10,29 @@
                     label.control-label Расчетный счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_account",
-                    [(ngModel)]="bankAccountArgs.account", #bank_account="ngModel")
+                    [(ngModel)]="newContract.contractor.bankAccount.account", #bank_account="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_name)}")
                 .col-xs-12.col-sm-3
                     label.control-label Наименование банка
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_name",
-                    [(ngModel)]="bankAccountArgs.bankName", #bank_name="ngModel")
+                    [(ngModel)]="newContract.contractor.bankAccount.bankName", #bank_name="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_post_account)}")
                 .col-xs-12.col-sm-3
                     label.control-label Корреспондентский счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_post_account",
-                    [(ngModel)]="bankAccountArgs.bankPostAccount", #bank_post_account="ngModel")
+                    [(ngModel)]="newContract.contractor.bankAccount.bankPostAccount", #bank_post_account="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_bik)}")
                 .col-xs-12.col-sm-3
                     label.control-label БИК
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_bik",
-                    [(ngModel)]="bankAccountArgs.bankBik", #bank_bik="ngModel")
+                    [(ngModel)]="newContract.contractor.bankAccount.bankBik", #bank_bik="ngModel",
+                    (keyup)="checkForm(form)")
             .ln_solid
             h5 Реквизиты юр. лица
             .ln_solid
@@ -37,50 +41,55 @@
                     label.control-label Наименование юр. лица
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_registered_name", required,
-                    [(ngModel)]="entityArgs.registeredName", #entity_registered_name="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.registeredName", #entity_registered_name="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_registered_number)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Номер юр. лица
+                    label.control-label ОГРН
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_registered_number", required,
-                    [(ngModel)]="entityArgs.registeredNumber", #entity_registered_number="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.registeredNumber", #entity_registered_number="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_inn)}")
                 .col-xs-12.col-sm-3
                     label.control-label ИНН
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_inn", required,
-                    [(ngModel)]="entityArgs.inn", #entity_inn="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.inn", #entity_inn="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_actual_address)}")
                 .col-xs-12.col-sm-3
                     label.control-label Фактический адрес
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_actual_address", required,
-                    [(ngModel)]="entityArgs.actualAddress", #entity_actual_address="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.actualAddress", #entity_actual_address="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_post_address)}")
                 .col-xs-12.col-sm-3
                     label.control-label Почтовый адрес
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_post_address", required,
-                    [(ngModel)]="entityArgs.postAddress", #entity_post_address="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.postAddress", #entity_post_address="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_representative_position)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Позиция представителя
+                    label.control-label Должность ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_representative_position", required,
-                    [(ngModel)]="entityArgs.representativePosition", #entity_representative_position="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.representativePosition", #entity_representative_position="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_representative_fullname)}")
                 .col-xs-12.col-sm-3
-                    label.control-label ФИО представителя
+                    label.control-label ФИО ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_representative_fullname", required,
-                    [(ngModel)]="entityArgs.representativeFullName", #entity_representative_fullname="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.representativeFullName", #entity_representative_fullname="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_representative_document)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Документ представителя
+                    label.control-label Документ ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_representative_document", required,
-                    [(ngModel)]="entityArgs.representativeDocument", #entity_representative_document="ngModel")
+                    [(ngModel)]="newContract.contractor.entity.representativeDocument", #entity_representative_document="ngModel",
+                    (keyup)="checkForm(form)")
             .ln_solid
-            .form-group
-                .col-xs-12.col-sm-6.col-sm-offset-3
-                    button.btn.btn-primary(type="submit", [disabled]="form.invalid") Создать заявку

@@ -5,7 +5,6 @@ import * as _ from 'lodash';
 import { CategoryService } from 'koffing/backend/backend.module';
 import { ShopService } from 'koffing/backend/backend.module';
 import { SelectItem } from 'koffing/common/common.module';
-import { ShopArgs } from 'koffing/management/classes/shop-args.class';
 import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
@@ -16,7 +15,7 @@ export class EditShopComponent implements OnInit {
 
     public categories: SelectItem[] = [];
     public currentShopId: number = Number(this.route.snapshot.params['shopID']);
-    public args: ShopArgs = {
+    public args: any = {
         shopDetails: {},
         contractor: {},
         categoryRef: null

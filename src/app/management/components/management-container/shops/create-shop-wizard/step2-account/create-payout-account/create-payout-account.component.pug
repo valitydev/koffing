@@ -2,7 +2,7 @@
     .x_title
         h4 Добавление нового счета
     .x_content
-        form.form-horizontal.form-label-left.css-form(novalidate, (ngSubmit)="createClaim(form)", name="form", #form="ngForm")
+        form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
             h5 Валюта
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(selected_currency)}")
@@ -10,7 +10,8 @@
                     label.control-label Валюта
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="selected_currency",
-                    [(ngModel)]="currency", #selected_currency="ngModel")
+                    [(ngModel)]="newPayoutAccount.currency", #selected_currency="ngModel",
+                    (keyup)="checkForm(form)")
             .ln_solid
             h5 Банковские реквизиты
             .ln_solid
@@ -19,26 +20,26 @@
                     label.control-label Расчетный счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_account",
-                    [(ngModel)]="bankAccountArgs.account", #bank_account="ngModel")
+                    [(ngModel)]="newPayoutAccount.tool.bankAccount.account", #bank_account="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_name)}")
                 .col-xs-12.col-sm-3
                     label.control-label Наименование банка
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_name",
-                    [(ngModel)]="bankAccountArgs.bankName", #bank_name="ngModel")
+                    [(ngModel)]="newPayoutAccount.tool.bankAccount.bankName", #bank_name="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_post_account)}")
                 .col-xs-12.col-sm-3
                     label.control-label Корреспондентский счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_post_account",
-                    [(ngModel)]="bankAccountArgs.bankPostAccount", #bank_post_account="ngModel")
+                    [(ngModel)]="newPayoutAccount.tool.bankAccount.bankPostAccount", #bank_post_account="ngModel",
+                    (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_bik)}")
                 .col-xs-12.col-sm-3
                     label.control-label БИК
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_bik",
-                    [(ngModel)]="bankAccountArgs.bankBik", #bank_bik="ngModel")
-            .ln_solid
-            .form-group
-                .col-xs-12.col-sm-6.col-sm-offset-3
-                    button.btn.btn-primary(type="submit", [disabled]="form.invalid") Создать заявку
+                    [(ngModel)]="newPayoutAccount.tool.bankAccount.bankBik", #bank_bik="ngModel",
+                    (keyup)="checkForm(form)")

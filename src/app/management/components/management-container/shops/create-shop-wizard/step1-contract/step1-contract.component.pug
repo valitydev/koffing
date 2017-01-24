@@ -1,0 +1,30 @@
+.tile
+    .text-center
+        h4 Выберите
+        .btn-group(data-toggle="buttons")
+            label.btn.btn-default((click)="selectOptionNew()")
+                input(type="radio", name="way", value="new")
+                span Новый
+            label.btn.btn-default((click)="selectOptionExisting()")
+                input(type="radio", name="way", value="existing")
+                span Существующий
+        br
+        br
+.tile
+    kof-create-contract(
+        *ngIf="selectedOption === optionNew",
+        [newContract]="wizardArgs.contract",
+        (readyStateChange)="newContractReady($event)"
+    )
+    kof-select-contract(
+        *ngIf="selectedOption === optionExisting",
+        [contracts]="wizardArgs.contracts",
+        (contractSelected)="contractSelected($event)"
+    )
+.actionBar
+    .text-center
+        a.btn.btn-primary((click)="stepBackward()") Отмена
+        a.btn.btn-success(
+            (click)="stepForward()",
+            [ngClass]="{'buttonDisabled': isContractReady === false}"
+        ) Вперёд

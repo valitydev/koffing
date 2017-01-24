@@ -1,0 +1,38 @@
+.x_title
+    h4 Добавление нового магазина
+.x_content
+    kof-loading([isLoading]="isLoading")
+        form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
+            .form-group([ngClass]="{'has-error': hasError(shop_details_name)}")
+                .col-xs-12.col-sm-3
+                    label.control-label Название магазина *
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="shop_details_name",
+                    [(ngModel)]="shopFields.shopDetails.name", #shop_details_name="ngModel",
+                    (keyup)="checkForm(form)")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label Описание магазина
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", name="shop_details_description",
+                    [(ngModel)]="shopFields.shopDetails.description",
+                    (keyup)="checkForm(form)")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label Месторасположение
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", name="shop_details_location",
+                    [(ngModel)]="shopFields.shopDetails.location",
+                    (keyup)="checkForm(form)")
+
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label Категория *
+                .col-xs-12.col-sm-6
+                    kof-select(
+                        [(ngModel)]="shopFields.categoryRef",
+                        [items]="categories",
+                        (onChange)="selectCategory()",
+                        [modelOptions]="{standalone: true}",
+                        name="category"
+                    )

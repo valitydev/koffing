@@ -22,7 +22,8 @@ export class ShopService {
         const params = {
             categoryRef: Number(args.categoryRef),
             shopDetails: args.shopDetails,
-            contractor: args.contractor
+            contractID: Number(args.contractID),
+            payoutAccountID: Number(args.payoutAccountID)
         };
         return this.http.post(this.shopsUrl, params)
             .toPromise()

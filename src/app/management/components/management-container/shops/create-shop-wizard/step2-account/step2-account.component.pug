@@ -1,0 +1,30 @@
+.tile(*ngIf="!wizardArgs.isNewContract")
+    .text-center
+        h4 Выберите
+        .btn-group(data-toggle="buttons")
+            label.btn.btn-default((click)="selectOptionNew()")
+                input(type="radio", name="way", value="new")
+                span Новый
+            label.btn.btn-default((click)="selectOptionExisting()")
+                input(type="radio", name="way", value="existing")
+                span Существующий
+        br
+        br
+.tile
+    kof-create-payout-account(
+        *ngIf="selectedOption === optionNew",
+        [newPayoutAccount]="wizardArgs.payoutAccount",
+        (readyStateChange)="newPayoutAccountReady($event)"
+    )
+    kof-select-payout-account(
+        *ngIf="selectedOption === optionExisting",
+        [payoutAccounts]="wizardArgs.contract.payoutAccounts",
+        (payoutAccountSelected)="payoutAccountSelected($event)"
+    )
+.actionBar
+    .text-center
+        a.btn.btn-primary((click)="stepBackward()") Отмена
+        a.btn.btn-success(
+            (click)="stepForward()",
+            [ngClass]="{'buttonDisabled': isPayoutAccountReady === false}"
+        ) Вперёд

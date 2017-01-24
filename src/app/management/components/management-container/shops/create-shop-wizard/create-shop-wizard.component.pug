@@ -1,0 +1,36 @@
+.row
+    .col-xs-12
+        .x_panel.tile
+            .form_wizard.wizard_horizontal
+                ul.wizard_steps.anchor
+                    li
+                        a([ngClass]="{'done': currentStep > contractStep, 'selected': currentStep === contractStep}")
+                            span.step_no 1
+                            span.step_descr Контракт
+                    li
+                        a([ngClass]="{'disabled': currentStep < accountStep, 'done': currentStep > accountStep, 'selected': currentStep === accountStep}")
+                            span.step_no 2
+                            span.step_descr Счет
+                    li
+                        a([ngClass]="{'disabled': currentStep < shopDetailsStep, 'done': currentStep > shopDetailsStep, 'selected': currentStep === shopDetailsStep}")
+                            span.step_no 3
+                            span.step_descr Магазин
+            kof-loading([isLoading]="wizardArgs.isLoading")
+                kof-step1-contract(
+                    *ngIf="currentStep === contractStep",
+                    (steppedBackward)="returnToManagement()",
+                    (steppedForward)="goToStep(accountStep)",
+                    [wizardArgs]="wizardArgs"
+                )
+                kof-step2-account(
+                    *ngIf="currentStep === accountStep",
+                    (steppedBackward)="returnToManagement()",
+                    (steppedForward)="goToStep(shopDetailsStep)",
+                    [wizardArgs]="wizardArgs"
+                )
+                kof-step3-shop(
+                    *ngIf="currentStep === shopDetailsStep",
+                    (steppedBackward)="returnToManagement()",
+                    (steppedForward)="finishWizard()",
+                    [wizardArgs]="wizardArgs"
+                )

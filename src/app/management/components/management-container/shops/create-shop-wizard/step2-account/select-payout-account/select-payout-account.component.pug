@@ -1,0 +1,43 @@
+.x_panel.tile
+    .x_title
+        h4 Выбор существующего счета
+    .x_content
+        .tile
+            kof-select.col-xs-6(*ngIf="selectableItems.length", [(ngModel)]="selectedPayoutAccountId", [items]="selectableItems", (onChange)="selectPayoutAccount()", [modelOptions]="{standalone: true}", name='selectedPayoutAccount')
+        .ln_solid
+        form.form-horizontal.form-label-left.css-form(*ngIf="selectedPayoutAccountId !== undefined", novalidate, (ngSubmit)="createShop(form)", name="form", #form="ngForm")
+            h5 Валюта
+            .ln_solid
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label Валюта
+                .col-xs-12.col-sm-6
+                    input.form-control(disabled, type="text", required, name="selected_currency",
+                    [(ngModel)]="selectedPayoutAccount.currency", #selected_currency="ngModel")
+            .ln_solid
+            h5 Банковские реквизиты
+            .ln_solid
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label Расчетный счет
+                .col-xs-12.col-sm-6
+                    input.form-control(disabled, type="text", required, name="bank_account",
+                    [(ngModel)]="selectedPayoutAccount.tool.bankAccount.account", #bank_account="ngModel")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label Наименование банка
+                .col-xs-12.col-sm-6
+                    input.form-control(disabled, type="text", required, name="bank_name",
+                    [(ngModel)]="selectedPayoutAccount.tool.bankAccount.bankName", #bank_name="ngModel")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label Корреспондентский счет
+                .col-xs-12.col-sm-6
+                    input.form-control(disabled, type="text", required, name="bank_post_account",
+                    [(ngModel)]="selectedPayoutAccount.tool.bankAccount.bankPostAccount", #bank_post_account="ngModel")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.control-label БИК
+                .col-xs-12.col-sm-6
+                    input.form-control(disabled, type="text", required, name="bank_bik",
+                    [(ngModel)]="selectedPayoutAccount.tool.bankAccount.bankBik", #bank_bik="ngModel")

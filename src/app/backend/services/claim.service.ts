@@ -32,4 +32,11 @@ export class ClaimService {
             .toPromise()
             .then(response => response.statusText);
     }
+
+    public getClaimById(claimID: any): Promise<any> {
+        const url = `${this.config.capiUrl}/processing/claims/${claimID}`;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json());
+    }
 }
