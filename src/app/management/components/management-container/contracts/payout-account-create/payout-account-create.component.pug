@@ -5,31 +5,31 @@
         form.form-horizontal.form-label-left.css-form(novalidate, (ngSubmit)="createPayoutAccount(form)", name="form", #form="ngForm")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Валюта
+                    label.text-left Валюта
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="currency", #currency="ngModel",
                     [(ngModel)]="newPayoutAccount.currency")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Банк
+                    label.text-left Банк
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankName", #bankName="ngModel",
                     [(ngModel)]="newPayoutAccount.tool.bankAccount.bankName")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Расчетный счет
+                    label.text-left Расчетный счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankAccount", #bankAccount="ngModel",
                     [(ngModel)]="newPayoutAccount.tool.bankAccount.account")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Корреспондентский счет
+                    label.text-left Корреспондентский счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankPostAccount", #bankPostAccount="ngModel",
                     [(ngModel)]="newPayoutAccount.tool.bankAccount.bankPostAccount")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label БИК
+                    label.text-left БИК
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankBik", #bankBik="ngModel",
                     [(ngModel)]="newPayoutAccount.tool.bankAccount.bankBik")

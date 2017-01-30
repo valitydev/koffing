@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
 import { ContractService } from 'koffing/backend/services/contract.service';
-import { WizardArgs } from 'koffing/management/management.module';
+import { ShopModificationArgs } from 'koffing/management/management.module';
 import { ShopService } from 'koffing/backend/services/shop.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class CreateShopWizardComponent implements OnInit {
     public contractStep: number = 1;
     public accountStep: number = 2;
     public shopDetailsStep: number = 3;
-    public wizardArgs: WizardArgs = new WizardArgs();
+    public wizardArgs: ShopModificationArgs = new ShopModificationArgs();
 
     constructor(
         private router: Router,

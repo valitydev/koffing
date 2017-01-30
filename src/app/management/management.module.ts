@@ -16,20 +16,22 @@ import { ShopAccountCreationComponent } from './components/management-container/
 import { ShopSuspensionComponent } from './components/management-container/claims/shop-suspension/shop-suspension.component';
 import { ContractCreationComponent } from './components/management-container/claims/contract-creation/contract-creation.component';
 import { PayoutAccountCreationComponent } from './components/management-container/claims/payout-account-creation/payout-account-creation.component';
-import { CreateContractComponent } from './components/management-container/shops/create-shop-wizard/step1-contract/create-contract/create-contract.component';
-import { CreatePayoutAccountComponent } from './components/management-container/shops/create-shop-wizard/step2-account/create-payout-account/create-payout-account.component';
-import { SelectContractComponent } from './components/management-container/shops/create-shop-wizard/step1-contract/select-contract/select-contract.component';
-import { SelectPayoutAccountComponent } from './components/management-container/shops/create-shop-wizard/step2-account/select-payout-account/select-payout-account.component';
-import { AddShopComponent } from './components/management-container/shops/create-shop-wizard/step3-shop/add-shop/add-shop.component';
+import { CreateContractComponent } from './components/management-container/shops/selection-contract/create-contract/create-contract.component';
+import { CreatePayoutAccountComponent } from './components/management-container/shops/selection-account/create-payout-account/create-payout-account.component';
+import { SelectContractComponent } from './components/management-container/shops/selection-contract/select-contract/select-contract.component';
+import { SelectPayoutAccountComponent } from './components/management-container/shops/selection-account/select-payout-account/select-payout-account.component';
+import { AddShopComponent } from './components/management-container/shops/selection-shop-fields/add-shop/add-shop.component';
 import { EditShopComponent } from './components/management-container/shops/edit-shop/edit-shop.component';
 import { ContractViewComponent } from './components/management-container/contracts/contract-view/contract-view.component';
 import { ContractCreateComponent } from './components/management-container/contracts/contract-create/contract-create.component';
 import { PayoutAccountViewComponent } from './components/management-container/contracts/payout-account-view/payout-account-view.component';
 import { PayoutAccountCreateComponent } from './components/management-container/contracts/payout-account-create/payout-account-create.component';
 import { CreateShopWizardComponent } from './components/management-container/shops/create-shop-wizard/create-shop-wizard.component';
-import { Step1ContractComponent } from './components/management-container/shops/create-shop-wizard/step1-contract/step1-contract.component';
-import { Step2AccountComponent } from './components/management-container/shops/create-shop-wizard/step2-account/step2-account.component';
-import { Step3ShopComponent } from './components/management-container/shops/create-shop-wizard/step3-shop/step3-shop.component';
+import { SelectionContractComponent } from './components/management-container/shops/selection-contract/selection-contract.component';
+import { SelectionAccountComponent } from './components/management-container/shops/selection-account/selection-account.component';
+import { SelectionShopComponent } from './components/management-container/shops/selection-shop-fields/selection-shop-fields.component';
+import { EditShopContractComponent } from 'koffing/management/components/management-container/shops/edit-shop/edit-shop-contract/edit-shop-contract.component';
+import { EditShopPayoutAccountComponent } from 'koffing/management/components/management-container/shops/edit-shop/edit-shop-payout-account/edit-shop-payout-account.component';
 
 @NgModule({
     imports: [
@@ -66,13 +68,17 @@ import { Step3ShopComponent } from './components/management-container/shops/crea
         PayoutAccountCreateComponent,
         CreatePayoutAccountComponent,
         CreateShopWizardComponent,
-        Step1ContractComponent,
-        Step2AccountComponent,
-        Step3ShopComponent
+        SelectionContractComponent,
+        SelectionAccountComponent,
+        SelectionShopComponent,
+        EditShopContractComponent,
+        EditShopPayoutAccountComponent
     ]
 })
 export class ManagementModule { }
 
-export * from './classes/wizard-args.class';
+export * from './classes/shop-modification-args.class';
 export * from './components/management-container/shops/edit-shop/edit-shop.component';
 export * from './components/management-container/shops/create-shop-wizard/create-shop-wizard.component';
+export * from './components/management-container/shops/edit-shop/edit-shop-contract/edit-shop-contract.component';
+export * from './components/management-container/shops/edit-shop/edit-shop-payout-account/edit-shop-payout-account.component';

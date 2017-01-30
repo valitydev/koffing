@@ -34,7 +34,8 @@ export class ShopService {
         const params = {
             categoryRef: Number(args.categoryRef),
             shopDetails: args.shopDetails,
-            contractor: args.contractor
+            contractID: Number(args.contractID),
+            payoutAccountID: Number(args.payoutAccountID)
         };
         return this.http.post(`${this.shopsUrl}/${shopID}`, params)
             .toPromise()
@@ -43,6 +44,12 @@ export class ShopService {
 
     public activateShop(shopID: any): Promise<string> {
         return this.http.put(`${this.shopsUrl}/${shopID}/activate`, {})
+            .toPromise()
+            .then(response => response.json());
+    }
+
+    public suspendShop(shopID: any): Promise<string> {
+        return this.http.put(`${this.shopsUrl}/${shopID}/suspend`, {})
             .toPromise()
             .then(response => response.json());
     }

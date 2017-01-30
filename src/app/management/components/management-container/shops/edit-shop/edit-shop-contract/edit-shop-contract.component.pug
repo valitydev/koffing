@@ -2,7 +2,7 @@
     .col-xs-12
         .x_panel.tile
             .x_title
-                h4 Создание нового магазина
+                h4 Изменение контракта магазина {{currentShopId}}
             .x_content
                 .form_wizard.wizard_horizontal
                     ul.wizard_steps.anchor
@@ -11,30 +11,20 @@
                                 span.step_no 1
                                 span.step_descr Выбор контракта
                         li
-                            a([ngClass]="{'disabled': currentStep < accountStep, 'done': currentStep > accountStep, 'selected': currentStep === accountStep}")
+                            a([ngClass]="{'disabled': currentStep < accountStep, 'selected': currentStep === accountStep}")
                                 span.step_no 2
                                 span.step_descr Выбор счета
-                        li
-                            a([ngClass]="{'disabled': currentStep < shopDetailsStep, 'done': currentStep > shopDetailsStep, 'selected': currentStep === shopDetailsStep}")
-                                span.step_no 3
-                                span.step_descr Данные магазина
                 kof-loading([isLoading]="wizardArgs.isLoading")
                     kof-selection-contract(
                         *ngIf="currentStep === contractStep",
-                        (steppedBackward)="returnToManagement()",
+                        (steppedBackward)="returnToShopEditing()",
                         (steppedForward)="goToStep(accountStep)",
                         [args]="wizardArgs"
                     )
                     kof-selection-account(
                         *ngIf="currentStep === accountStep",
-                        (steppedBackward)="returnToManagement()",
-                        (steppedForward)="goToStep(shopDetailsStep)",
-                        [args]="wizardArgs"
-                    )
-                    kof-selection-shop-fields(
-                        *ngIf="currentStep === shopDetailsStep",
-                        (steppedBackward)="returnToManagement()",
-                        (steppedForward)="finishWizard()",
+                        (steppedBackward)="returnToShopEditing()",
+                        (steppedForward)="finish()",
                         [args]="wizardArgs",
                         [showFinishButton]="true"
                     )

@@ -5,21 +5,21 @@
         form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
             .form-group([ngClass]="{'has-error': hasError(shop_details_name)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Название магазина *
+                    label.text-left Название магазина *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="shop_details_name",
                     [(ngModel)]="shopFields.shopDetails.name", #shop_details_name="ngModel",
                     (keyup)="checkForm(form)")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Описание магазина
+                    label.text-left Описание магазина
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="shop_details_description",
                     [(ngModel)]="shopFields.shopDetails.description",
                     (keyup)="checkForm(form)")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Месторасположение
+                    label.text-left Месторасположение
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="shop_details_location",
                     [(ngModel)]="shopFields.shopDetails.location",
@@ -27,7 +27,7 @@
 
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Категория *
+                    label.text-left Категория *
                 .col-xs-12.col-sm-6
                     kof-select(
                         [(ngModel)]="shopFields.categoryRef",

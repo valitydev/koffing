@@ -3,13 +3,13 @@
         form.form-horizontal.form-label-left.css-form
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Дата заключения
+                    label.text-left Дата заключения
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="concludedAt", #concludedAt="ngModel",
                     [ngModel]="contract.concludedAt | date:'dd.MM.yy'", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Дата завершения
+                    label.text-left Дата завершения
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="terminatedAt", #terminatedAt="ngModel",
                     [ngModel]="contract.terminatedAt | date:'dd.MM.yy'", [disabled]="true")
@@ -18,25 +18,25 @@
             .ln_solid
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Банк
+                    label.text-left Наименование банка
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankName", #bankName="ngModel",
                     [ngModel]="contract.contractor.bankAccount.bankName", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Расчетный счет
+                    label.text-left Расчетный счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankAccount", #bankAccount="ngModel",
                     [ngModel]="contract.contractor.bankAccount.account", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Корреспондентский счет
+                    label.text-left Корреспондентский счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankPostAccount", #bankPostAccount="ngModel",
                     [ngModel]="contract.contractor.bankAccount.bankPostAccount", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label БИК
+                    label.text-left БИК
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankBik", #bankBik="ngModel",
                     [ngModel]="contract.contractor.bankAccount.bankBik", [disabled]="true")
@@ -45,70 +45,71 @@
             .ln_solid
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Наименование юр. лица
+                    label.text-left Наименование юр. лица
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="registeredName", #registeredName="ngModel",
                     [ngModel]="contract.contractor.entity.registeredName", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Номер юр. лица
+                    label.text-left ОГРН
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="registeredNumber", #registeredNumber="ngModel",
                     [ngModel]="contract.contractor.entity.registeredNumber", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label ИНН
+                    label.text-left ИНН
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="inn", #inn="ngModel",
                     [ngModel]="contract.contractor.entity.inn", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Фактический адрес
+                    label.text-left Фактический адрес
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="actualAddress", #actualAddress="ngModel",
                     [ngModel]="contract.contractor.entity.actualAddress", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Почтовый адрес
+                    label.text-left Почтовый адрес
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="postAddress", #postAddress="ngModel",
                     [ngModel]="contract.contractor.entity.postAddress", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Позиция представителя
+                    label.text-left Должность ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="representativePosition", #representativePosition="ngModel",
                     [ngModel]="contract.contractor.entity.representativePosition", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label ФИО представителя
+                    label.text-left ФИО ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="representativeFullname", #representativeFullname="ngModel",
                     [ngModel]="contract.contractor.entity.representativeFullName", [disabled]="true")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.control-label Документ представителя
+                    label.text-left Документ ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="representativeDocument", #representativeDocument="ngModel",
                     [ngModel]="contract.contractor.entity.representativeDocument", [disabled]="true")
-            .ln_solid
-            h5 Счета
-            .ln_solid
-            table.table.table-striped(*ngIf="contract.payoutAccounts.length")
-                thead
-                    tr
-                        th ID счета
-                        th Валюта
-                        th Банк
-                        th Расчетный счет
-                tbody(*ngFor="let payoutAccount of contract.payoutAccounts; let index = index")
-                    tr((click)="selectedIndex = index")
-                        td {{payoutAccount.id}}
-                        td {{payoutAccount.currency}}
-                        td {{payoutAccount.tool.bankAccount.bankName}}
-                        td {{payoutAccount.tool.bankAccount.account}}
-                    tr(*ngIf="index === selectedIndex")
-                        td(colspan=4)
-                            kof-payout-account-view([payoutAccount]="payoutAccount")
-            span(*ngIf="!contract.payoutAccounts.length") Нет привязанных счетов
-            a.btn.btn-primary.pull-right([routerLink]="['/management/contracts', contract.id, 'payout-account', 'create']") Добавить счет
+            .container(*ngIf="showAccounts === true")
+                .ln_solid
+                h5 Счета
+                .ln_solid
+                table.table.table-striped(*ngIf="contract.payoutAccounts.length")
+                    thead
+                        tr
+                            th ID счета
+                            th Валюта
+                            th Банк
+                            th Расчетный счет
+                    tbody(*ngFor="let payoutAccount of contract.payoutAccounts; let index = index")
+                        tr((click)="selectedIndex = index")
+                            td {{payoutAccount.id}}
+                            td {{payoutAccount.currency}}
+                            td {{payoutAccount.tool.bankAccount.bankName}}
+                            td {{payoutAccount.tool.bankAccount.account}}
+                        tr(*ngIf="index === selectedIndex")
+                            td(colspan=4)
+                                kof-payout-account-view([payoutAccount]="payoutAccount")
+                span(*ngIf="!contract.payoutAccounts.length") Нет привязанных счетов
+                a.btn.btn-primary.pull-right([routerLink]="['/management/contracts', contract.id, 'payout-account', 'create']") Добавить счет

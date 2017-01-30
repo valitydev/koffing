@@ -7,28 +7,28 @@
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(bank_account)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Расчетный счет
+                    label.text-left Расчетный счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_account",
                     [(ngModel)]="newContract.contractor.bankAccount.account", #bank_account="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_name)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Наименование банка
+                    label.text-left Наименование банка
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_name",
                     [(ngModel)]="newContract.contractor.bankAccount.bankName", #bank_name="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_post_account)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Корреспондентский счет
+                    label.text-left Корреспондентский счет
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_post_account",
                     [(ngModel)]="newContract.contractor.bankAccount.bankPostAccount", #bank_post_account="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(bank_bik)}")
                 .col-xs-12.col-sm-3
-                    label.control-label БИК
+                    label.text-left БИК
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bank_bik",
                     [(ngModel)]="newContract.contractor.bankAccount.bankBik", #bank_bik="ngModel",
@@ -38,56 +38,56 @@
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(entity_registered_name)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Наименование юр. лица
+                    label.text-left Наименование юр. лица
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_registered_name", required,
                     [(ngModel)]="newContract.contractor.entity.registeredName", #entity_registered_name="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_registered_number)}")
                 .col-xs-12.col-sm-3
-                    label.control-label ОГРН
+                    label.text-left ОГРН
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_registered_number", required,
                     [(ngModel)]="newContract.contractor.entity.registeredNumber", #entity_registered_number="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_inn)}")
                 .col-xs-12.col-sm-3
-                    label.control-label ИНН
+                    label.text-left ИНН
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_inn", required,
                     [(ngModel)]="newContract.contractor.entity.inn", #entity_inn="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_actual_address)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Фактический адрес
+                    label.text-left Фактический адрес
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_actual_address", required,
                     [(ngModel)]="newContract.contractor.entity.actualAddress", #entity_actual_address="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_post_address)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Почтовый адрес
+                    label.text-left Почтовый адрес
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_post_address", required,
                     [(ngModel)]="newContract.contractor.entity.postAddress", #entity_post_address="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_representative_position)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Должность ЕИО/представителя
+                    label.text-left Должность ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_representative_position", required,
                     [(ngModel)]="newContract.contractor.entity.representativePosition", #entity_representative_position="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_representative_fullname)}")
                 .col-xs-12.col-sm-3
-                    label.control-label ФИО ЕИО/представителя
+                    label.text-left ФИО ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_representative_fullname", required,
                     [(ngModel)]="newContract.contractor.entity.representativeFullName", #entity_representative_fullname="ngModel",
                     (keyup)="checkForm(form)")
             .form-group([ngClass]="{'has-error': hasError(entity_representative_document)}")
                 .col-xs-12.col-sm-3
-                    label.control-label Документ ЕИО/представителя
+                    label.text-left Документ ЕИО/представителя
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="entity_representative_document", required,
                     [(ngModel)]="newContract.contractor.entity.representativeDocument", #entity_representative_document="ngModel",

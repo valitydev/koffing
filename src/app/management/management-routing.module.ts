@@ -25,10 +25,6 @@ import { PayoutAccountCreateComponent } from './components/management-container/
                         component: ShopsComponent
                     },
                     {
-                        path: 'shops/edit/:shopID',
-                        component: EditShopComponent
-                    },
-                    {
                         path: 'contracts',
                         component: ContractsComponent
                     },

@@ -1,15 +1,17 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 
-import { WizardArgs } from 'koffing/management/management.module';
+import { ShopModificationArgs } from 'koffing/management/management.module';
 import { Shop } from 'koffing/backend/backend.module';
 import { ShopDetail } from 'koffing/backend/backend.module';
 
 @Component({
-    selector: 'kof-step3-shop',
-    templateUrl: 'step3-shop.component.pug'
+    selector: 'kof-selection-shop-fields',
+    templateUrl: 'selection-shop-fields.component.pug'
 })
-export class Step3ShopComponent implements OnInit {
+export class SelectionShopComponent implements OnInit {
 
+    @Input()
+    public showFinishButton: boolean = false;
     @Output()
     public steppedForward = new EventEmitter();
     @Output()
@@ -17,16 +19,16 @@ export class Step3ShopComponent implements OnInit {
     public isShopFieldsReady: boolean = false;
 
     @Input()
-    private wizardArgs: WizardArgs;
+    private args: ShopModificationArgs;
 
     public createNewShopFieldsInstance() {
-        this.wizardArgs.shopFields = new Shop();
-        this.wizardArgs.shopFields.shopDetails = new ShopDetail();
-        this.wizardArgs.shopFields.categoryRef = null;
+        this.args.shopFields = new Shop();
+        this.args.shopFields.shopDetails = new ShopDetail();
+        this.args.shopFields.categoryRef = null;
     }
 
     public removeShopFieldsInstance() {
-        delete this.wizardArgs.shopFields;
+        delete this.args.shopFields;
         this.isShopFieldsReady = false;
     }
 
@@ -39,7 +41,7 @@ export class Step3ShopComponent implements OnInit {
         this.isShopFieldsReady = params.valid;
     }
 
-    public finalizeWizard() {
+    public stepForward() {
         this.steppedForward.emit();
     }
 

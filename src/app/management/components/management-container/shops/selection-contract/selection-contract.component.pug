@@ -13,18 +13,22 @@
 .tile
     kof-create-contract(
         *ngIf="selectedOption === optionNew",
-        [newContract]="wizardArgs.contract",
+        [newContract]="args.contract",
         (readyStateChange)="newContractReady($event)"
     )
     kof-select-contract(
         *ngIf="selectedOption === optionExisting",
-        [contracts]="wizardArgs.contracts",
+        [contracts]="args.contracts",
         (contractSelected)="contractSelected($event)"
     )
 .actionBar
     .text-center
         a.btn.btn-primary((click)="stepBackward()") Отмена
-        a.btn.btn-success(
+        a.btn(
             (click)="stepForward()",
-            [ngClass]="{'buttonDisabled': isContractReady === false}"
-        ) Вперёд
+            [ngClass]="{'buttonDisabled': isContractReady === false, " +
+            "'btn-default': showFinishButton === true," +
+            "'btn-success': showFinishButton === false}"
+        )
+            span(*ngIf="showFinishButton === true") Завершить
+            span(*ngIf="showFinishButton === false") Вперед

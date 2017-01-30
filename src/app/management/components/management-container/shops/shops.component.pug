@@ -21,7 +21,7 @@
                     td(*ngIf="shop.isSuspended && !shop.isBlocked")
                         button.btn.btn-success.btn-xs.pull-right((click)="activateShop(shop)") Активировать
                     td(*ngIf="!shop.isSuspended && !shop.isBlocked")
-                        a.btn.btn-default.btn-xs.pull-right([routerLink]="['/management/shops/edit', shop.shopID]") Изменить данные
+                        a.btn.btn-default.btn-xs.pull-right([routerLink]="['/shops/edit', shop.shopID]") Изменить данные
                     td(*ngIf="shop.isBlocked")
                         span.pull-right Заблокирован
     span(*ngIf="!shops.length") Список магазинов пуст

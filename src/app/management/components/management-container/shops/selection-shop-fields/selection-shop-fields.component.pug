@@ -1,0 +1,16 @@
+.tile
+    kof-add-shop(
+        [shopFields]="args.shopFields",
+        (readyStateChange)="shopFieldsReady($event)"
+    )
+.actionBar
+    .text-center
+        a.btn.btn-primary((click)="stepBackward()") Отмена
+        a.btn(
+            (click)="stepForward()",
+            [ngClass]="{'buttonDisabled': isShopFieldsReady === false, " +
+            "'btn-default': showFinishButton === true," +
+            "'btn-success': showFinishButton === false}"
+        )
+            span(*ngIf="showFinishButton === true") Завершить
+            span(*ngIf="showFinishButton === false") Вперед
