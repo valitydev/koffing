@@ -6,9 +6,6 @@
             .x_content
                 kof-loading([isLoading]="isLoading")
                     form.form-horizontal.form-label-left.css-form(novalidate, (ngSubmit)="updateShop(form)", name="form", #form="ngForm")
-                        .form-group
-                            .col-xs-12.col-sm-6.col-sm-offset-3
-                                a.btn.btn-danger.pull-right((click)="suspendShop()") Заморозить магазин
                         .form-group([ngClass]="{'has-error': hasError(shop_details_name)}")
                             .col-xs-12.col-sm-3
                                 label.text-left Название магазина *
@@ -60,6 +57,11 @@
                                 label.text-left Категория *
                             .col-xs-12.col-sm-6
                                 kof-select([(ngModel)]="args.categoryRef", [items]="categories", [modelOptions]="{standalone: true}", name='category')
+                        .form-group
+                            .col-xs-12.col-sm-3
+                                label.text-left URL для CallbackHandler
+                            .col-xs-12.col-sm-6
+                                input.form-control(type="text", name="callback_handler_url", [(ngModel)]="args.callbackHandlerUrl")
                         .ln_solid
                         .form-group
                             .col-xs-12.col-sm-6.col-sm-offset-3

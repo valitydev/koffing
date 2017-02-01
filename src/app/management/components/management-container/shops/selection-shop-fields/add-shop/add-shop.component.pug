@@ -24,6 +24,13 @@
                     input.form-control(type="text", name="shop_details_location",
                     [(ngModel)]="shopFields.shopDetails.location",
                     (keyup)="checkForm(form)")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.text-left URL для CallbackHandler
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", name="callback_handler_url",
+                    [(ngModel)]="shopFields.callbackHandler.url",
+                    (keyup)="checkForm(form)")
 
             .form-group
                 .col-xs-12.col-sm-3

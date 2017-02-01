@@ -32,6 +32,7 @@ import { SelectionAccountComponent } from './components/management-container/sho
 import { SelectionShopComponent } from './components/management-container/shops/selection-shop-fields/selection-shop-fields.component';
 import { EditShopContractComponent } from 'koffing/management/components/management-container/shops/edit-shop/edit-shop-contract/edit-shop-contract.component';
 import { EditShopPayoutAccountComponent } from 'koffing/management/components/management-container/shops/edit-shop/edit-shop-payout-account/edit-shop-payout-account.component';
+import { ShopDetailsPanelComponent } from 'koffing/management/components/management-container/shops/shop-details-panel/shop-details-panel.component';
 
 @NgModule({
     imports: [
@@ -72,7 +73,8 @@ import { EditShopPayoutAccountComponent } from 'koffing/management/components/ma
         SelectionAccountComponent,
         SelectionShopComponent,
         EditShopContractComponent,
-        EditShopPayoutAccountComponent
+        EditShopPayoutAccountComponent,
+        ShopDetailsPanelComponent
     ]
 })
 export class ManagementModule { }

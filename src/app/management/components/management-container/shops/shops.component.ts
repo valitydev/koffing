@@ -3,11 +3,12 @@ import * as _ from 'lodash';
 
 import { Category } from 'koffing/backend/backend.module';
 import { CategoryService } from 'koffing/backend/backend.module';
-import { Shop } from 'koffing/backend/backend.module';
 import { ShopService } from 'koffing/backend/backend.module';
+import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
-    templateUrl: 'shops.component.pug'
+    templateUrl: 'shops.component.pug',
+    styleUrls: ['./shops.component.less']
 })
 export class ShopsComponent implements OnInit {
 
@@ -15,6 +16,7 @@ export class ShopsComponent implements OnInit {
     public categories: Category[] = [];
 
     private isLoading: boolean;
+    private panelsVisibilities: {[key: number]: boolean} = {};
 
     constructor(
         private shopService: ShopService,
@@ -31,7 +33,17 @@ export class ShopsComponent implements OnInit {
         });
     }
 
+    public handleShopSuspended() {
+        this.isLoading = true;
+
+        this.loadShops().then(() => {
+            this.isLoading = false;
+        });
+    }
+
     public loadShops() {
+        this.resetPanelsVisibilities();
+
         return new Promise((resolve) => {
             this.shopService.getShops().then(aShops => {
                 this.shops = aShops;
@@ -51,6 +63,17 @@ export class ShopsComponent implements OnInit {
         });
     }
 
+    public isDetailsPanelVisible(panelIndex: number) {
+        if (!this.panelsVisibilities.hasOwnProperty(panelIndex)) {
+            this.initPanelVisibility(panelIndex);
+        }
+        return this.panelsVisibilities[panelIndex];
+    }
+
+    public showDetailsPanel(panelIndex: number) {
+        this.panelsVisibilities[panelIndex] = !this.panelsVisibilities[panelIndex];
+    }
+
     public getCategory(categoryRef: number): Category {
         let result = new Category();
         if (this.categories.length > 0) {
@@ -67,5 +90,13 @@ export class ShopsComponent implements OnInit {
         ]).then(() => {
             this.isLoading = false;
         });
+    }
+
+    private initPanelVisibility(panelIndex: number) {
+        this.panelsVisibilities[panelIndex] = false;
+    }
+
+    private resetPanelsVisibilities() {
+        this.panelsVisibilities = {};
     }
 }

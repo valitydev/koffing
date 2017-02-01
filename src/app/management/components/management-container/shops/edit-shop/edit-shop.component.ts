@@ -22,7 +22,8 @@ export class EditShopComponent implements OnInit {
         shopDetails: {},
         categoryRef: 0,
         contractId: 0,
-        payoutAccountId: 0
+        payoutAccountId: 0,
+        callbackHandlerUrl: ''
     };
     public shopContract: Contract;
     public shopPayoutAccount: PayoutAccount;
@@ -66,6 +67,7 @@ export class EditShopComponent implements OnInit {
                 this.args.categoryRef = currentShop.categoryRef;
                 this.args.contractId = currentShop.contractID;
                 this.args.payoutAccountId = currentShop.payoutAccountID;
+                this.args.callbackHandlerUrl = currentShop.callbackHandler.url;
 
                 this.loadDetails(currentShop.contractID, currentShop.payoutAccountID).then(() => {
                     resolve();
@@ -98,16 +100,6 @@ export class EditShopComponent implements OnInit {
                 this.returnToManagement();
             });
         }
-    }
-
-    public suspendShop() {
-        this.isLoading = true;
-
-        this.shopService.suspendShop(this.currentShopId).then(() => {
-            this.isLoading = false;
-
-            this.returnToManagement();
-        });
     }
 
     public ngOnInit() {
