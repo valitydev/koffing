@@ -2,8 +2,8 @@ kof-loading([isLoading]="isLoading")
     div
         canvas(
             baseChart,
-            [data]="data",
-            [labels]="labels",
+            [data]="chartData.data",
+            [labels]="chartData.cityNames",
             [chartType]="type",
             [options]="options",
             [colors]="chartColors",

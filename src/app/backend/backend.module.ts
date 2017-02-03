@@ -10,6 +10,7 @@ import { PaymentsService } from './services/payments.service';
 import { PayoutAccountService } from './services/payout-account.service';
 import { ShopService } from './services/shop.service';
 import { ConfigService } from './services/config.service';
+import { GeolocationService } from './services/geolocation.service';
 
 @NgModule({
     providers: [
@@ -22,7 +23,8 @@ import { ConfigService } from './services/config.service';
         PaymentsService,
         PayoutAccountService,
         ShopService,
-        ConfigService
+        ConfigService,
+        GeolocationService
     ]
 })
 export class BackendModule { }
@@ -37,6 +39,7 @@ export * from './services/invoice.service';
 export * from './services/payments.service';
 export * from './services/payout-account.service';
 export * from './services/shop.service';
+export * from './services/geolocation.service';
 
 export * from './classes/bank-account.class';
 export * from './classes/category.class';
@@ -56,3 +59,4 @@ export * from './classes/russian-legal-entity.class';
 export * from './classes/shop.class';
 export * from './classes/shop-detail.class';
 export * from './classes/shop-item.class';
+export * from './classes/location-name.class';
