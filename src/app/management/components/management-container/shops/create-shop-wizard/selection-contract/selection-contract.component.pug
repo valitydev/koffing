@@ -1,0 +1,31 @@
+.tile
+    .text-center
+        .btn-group(data-toggle="buttons")
+            label.btn.btn-default((click)="selectOptionNew()")
+                input(type="radio", name="way", value="new")
+                span Создать новый контракт
+            label.btn.btn-default((click)="selectOptionExisting()")
+                input(type="radio", name="way", value="existing")
+                span Выбрать существующий контракт
+        br
+        br
+.tile
+    kof-create-contract(
+        *ngIf="selectedOption === optionNew",
+        (onContractorReady)="onContractorReady($event)"
+    )
+    kof-select-contract(
+        *ngIf="selectedOption === optionExisting",
+        (onContractSelected)="onContractSelected($event)"
+    )
+.actionBar
+    .text-center
+        a.btn.btn-primary((click)="stepBackward()") Отмена
+        a.btn(
+            (click)="stepForward()",
+            [ngClass]="{'buttonDisabled': isContractorReady === false, " +
+            "'btn-default': showFinishButton === true," +
+            "'btn-success': showFinishButton === false}"
+        )
+            span(*ngIf="showFinishButton === true") Завершить
+            span(*ngIf="showFinishButton === false") Вперед

@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Shop } from '../classes/shop.class';
 import { ConfigService } from './config.service';
+import { CreateShopArgs } from 'koffing/backend/classes/create-shop-args.class';
 
 @Injectable()
 export class ShopService {
@@ -18,28 +19,20 @@ export class ShopService {
             .then(response => response.json() as Shop[]);
     }
 
-    public createShop(args: any): Promise<string> {
-        const params = {
-            categoryRef: Number(args.categoryRef),
-            shopDetails: args.shopDetails,
-            contractID: Number(args.contractID),
-            payoutAccountID: Number(args.payoutAccountID),
-            callbackUrl: args.callbackHandler.url
-        };
-        return this.http.post(this.shopsUrl, params)
+    public getShop(shopID: number): Promise<Shop> {
+        return this.http.get(`${this.shopsUrl}/${shopID}`)
+            .toPromise()
+            .then(response => response.json() as Shop);
+    }
+
+    public createShop(args: CreateShopArgs): Promise<string> {
+        return this.http.post(this.shopsUrl, args)
             .toPromise()
             .then(response => response.json());
     }
 
-    public updateShop(shopID: any, args: any): Promise<string> {
-        const params = {
-            categoryRef: Number(args.categoryRef),
-            shopDetails: args.shopDetails,
-            contractID: Number(args.contractId),
-            payoutAccountID: Number(args.payoutAccountId),
-            callbackUrl: args.callbackHandlerUrl
-        };
-        return this.http.post(`${this.shopsUrl}/${shopID}`, params)
+    public updateShop(shopID: number, args: CreateShopArgs): Promise<string> {
+        return this.http.post(`${this.shopsUrl}/${shopID}`, args)
             .toPromise()
             .then(response => response.json());
     }

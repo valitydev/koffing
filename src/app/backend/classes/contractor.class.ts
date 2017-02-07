@@ -1,7 +1,12 @@
 import { BankAccount } from './bank-account.class';
-import { Entity } from './entity.class';
+import { LegalEntity } from './legal-entity.class';
 
 export class Contractor {
     public bankAccount: BankAccount;
-    public entity: Entity;
+    public legalEntity: LegalEntity;
+
+    constructor() {
+        this.bankAccount = new BankAccount();
+        this.legalEntity = new LegalEntity();
+    }
 }

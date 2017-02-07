@@ -11,7 +11,7 @@ export class CustomerService {
 
     constructor(private http: Http, private config: ConfigService) { }
 
-    public getPaymentMethod(shopID: string, requestParams: RequestParams): Promise<any> {
+    public getPaymentMethod(shopID: number, requestParams: RequestParams): Promise<any> {
         let params = new URLSearchParams();
 
         let fromTime = moment(requestParams.fromTime).utc().format();
@@ -27,14 +27,10 @@ export class CustomerService {
             search: params
         })
             .toPromise()
-            .then(
-                response => {
-                    return response.json();
-                }
-            );
+            .then((response) => response.json());
     }
 
-    public getRate(shopID: string, requestParams: RequestParams): Promise<any> {
+    public getRate(shopID: number, requestParams: RequestParams): Promise<any> {
         let params = new URLSearchParams();
 
         let fromTime = moment(requestParams.fromTime).utc().format();
@@ -47,10 +43,6 @@ export class CustomerService {
             search: params
         })
             .toPromise()
-            .then(
-                response => {
-                    return response.json();
-                }
-            );
+            .then((response) => response.json());
     }
 }

@@ -12,9 +12,8 @@ import { SelectItem } from 'koffing/common/common.module';
 })
 export class AnalyticSelectionComponent implements OnInit {
 
-    public selectedShopID: string;
-
-    public selectItems: SelectItem[] = [];
+    public currentShopID: number;
+    public shopItems: SelectItem[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -24,9 +23,9 @@ export class AnalyticSelectionComponent implements OnInit {
 
     public ngOnInit() {
         this.shopService.getShops().then((shops: Shop[]) => {
-            const routeShopID = this.route.snapshot.params['shopID'];
-            this.selectItems = _.map(shops, (shop: Shop) => new SelectItem(shop.shopID, shop.shopDetails.name));
-            this.selectedShopID = routeShopID ? routeShopID : this.selectItems[0].value;
+            const routeShopID = Number(this.route.snapshot.params['shopID']);
+            this.shopItems = _.map(shops, (shop: Shop) => new SelectItem(shop.id, shop.details.name));
+            this.currentShopID = routeShopID ? routeShopID : this.shopItems[0].value;
             this.navigateToShop();
         });
     }
@@ -34,6 +33,6 @@ export class AnalyticSelectionComponent implements OnInit {
     public navigateToShop() {
         const hasChildren = this.route.children.length > 0;
         const childComponent = hasChildren ? this.route.children[0].routeConfig.path : 'dashboard';
-        this.router.navigate(['analytics', this.selectedShopID, childComponent]);
+        this.router.navigate(['analytics', this.currentShopID, childComponent]);
     }
 }

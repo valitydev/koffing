@@ -1,0 +1,19 @@
+kof-loading([isLoading]="isLoading")
+    table.table.table-striped(*ngIf="payoutTools.length")
+        thead
+            tr
+                th ID счета
+                th Валюта
+                th Банк
+                th Расчетный счет
+        tbody(*ngFor="let payoutTool of payoutTools")
+            tr((click)="selectPayoutTool(payoutTool)")
+                td {{payoutTool.id}}
+                td {{payoutTool.params.currency}}
+                td {{payoutTool.params.bankAccount.bankName}}
+                td {{payoutTool.params.bankAccount.account}}
+            tr(*ngIf="payoutTool === selectedPayoutTool")
+                td(colspan=4)
+                    kof-payout-tool-view([payoutTool]="payoutTool")
+    span(*ngIf="!payoutTools.length") Нет привязанных счетов
+a.btn.btn-primary.pull-right([routerLink]="['/management/contracts', contractID, 'payout-tool', 'create']") Добавить счет

@@ -13,22 +13,54 @@
             button.btn.btn-default(style="margin-bottom: 0; margin-right: 0; margin-left: 5px;", (click)="loadData()") Показать
 .row
     .col-xs-12
-        kof-info-panel([uniqueCount]="uniqueCount", [successfulCount]="successfulCount",
-            [unfinishedCount]="unfinishedCount", [profit]="profit", [account]="account", [isLoading]="isInfoPanelLoading")
+        .row.tile_count
+            .col-xs-6.col-sm-4.col-md-2.tile_stats_count
+                span.count_top Оборот
+                    .dashboard_stats_count
+                        kof-loading([isLoading]="profit === undefined")
+                            div {{profit | kofRoubleCurrency}}
+                span.count_bottom Рублей
+            .col-xs-6.col-sm-4.col-md-2.tile_stats_count
+                span.count_top Основной счет
+                    .dashboard_stats_count
+                        kof-loading([isLoading]="settlementBalance === undefined")
+                            div {{settlementBalance | kofRoubleCurrency}}
+                span.count_bottom Рублей
+            .col-xs-6.col-sm-4.col-md-2.tile_stats_count
+                span.count_top Гарантийный счет
+                    .dashboard_stats_count
+                        kof-loading([isLoading]="guaranteeBalance === undefined")
+                            div {{guaranteeBalance | kofRoubleCurrency}}
+                span.count_bottom Рублей
+            .col-xs-6.col-sm-4.col-md-2.tile_stats_count
+                span.count_top Успешных платежей
+                .dashboard_stats_count
+                    kof-loading([isLoading]="successfulCount === undefined")
+                        div {{successfulCount}}
+            .col-xs-6.col-sm-4.col-md-2.tile_stats_count
+                span.count_top Незавершенных платежей
+                .dashboard_stats_count
+                    kof-loading([isLoading]="unfinishedCount === undefined")
+                        div {{unfinishedCount}}
+            .col-xs-6.col-sm-4.col-md-2.tile_stats_count
+                span.count_top Уникальных плательщиков
+                .dashboard_stats_count
+                    kof-loading([isLoading]="uniqueCount === undefined")
+                        div {{uniqueCount}}
 .row
     .col-xs-12
         .x_panel.tile
             .x_title
                 h4 Оборот
             .x_content
-                kof-revenue([fromTime]="chartFromTime", [chartData]="revenueChartData")
+                kof-revenue([fromTime]="fromTime", [chartData]="revenueChartData")
 .row
     .col-xs-12
         .x_panel.tile
             .x_title
                 h4 Конверсия оплат
             .x_content
-                kof-conversion([fromTime]="chartFromTime", [chartData]="conversionChartData")
+                kof-conversion([fromTime]="fromTime", [chartData]="conversionChartData")
 .row
     .col-xs-12.col-sm-6
         .x_panel.tile

@@ -1,9 +1,9 @@
 export class SelectItem {
 
     public value: any;
-    public label: string;
+    public label: any;
 
-    constructor(value: any, label: string) {
+    constructor(value: any, label: any) {
         this.value = value;
         this.label = label;
     }

@@ -7,16 +7,13 @@ import { ConfigService } from './config.service';
 @Injectable()
 export class AccountService {
 
-    constructor(private http: Http, private config: ConfigService) { }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) {}
 
-    public getShopAccounts(shopID: string): Promise<any> {
-        return this.http.get(`${this.config.capiUrl}/processing/shops/${shopID}/accounts`)
-            .toPromise()
-            .then(response => response.json());
-    }
-
-    public getShopAccountDetails(shopID: string, accountID: string): Promise<any> {
-        return this.http.get(`${this.config.capiUrl}/processing/shops/${shopID}/accounts/${accountID}`)
+    public getAccount(id: string): Promise<any> {
+        return this.http.get(`${this.config.capiUrl}/processing/accounts/${id}`)
             .toPromise()
             .then(response => response.json());
     }

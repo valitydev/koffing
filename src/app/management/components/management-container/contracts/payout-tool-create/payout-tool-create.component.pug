@@ -1,0 +1,40 @@
+.x_panel.tile
+    .x_title
+        h3 Создание нового счета
+    .x_content
+        form.form-horizontal.form-label-left.css-form(novalidate, (ngSubmit)="createPayoutTool(form)", name="form", #form="ngForm")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.text-left Валюта
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="currency", #currency="ngModel",
+                    [(ngModel)]="payoutTool.currency")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.text-left Банк
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bankName", #bankName="ngModel",
+                    [(ngModel)]="payoutTool.bankAccount.bankName")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.text-left Расчетный счет
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bankAccount", #bankAccount="ngModel",
+                    [(ngModel)]="payoutTool.bankAccount.account")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.text-left Корреспондентский счет
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bankPostAccount", #bankPostAccount="ngModel",
+                    [(ngModel)]="payoutTool.bankAccount.bankPostAccount")
+            .form-group
+                .col-xs-12.col-sm-3
+                    label.text-left БИК
+                .col-xs-12.col-sm-6
+                    input.form-control(type="text", required, name="bankBik", #bankBik="ngModel",
+                    [(ngModel)]="payoutTool.bankAccount.bankBik")
+            .ln_solid
+            .form-group
+                .col-xs-12.col-sm-6.col-sm-offset-3
+                    button.btn.btn-primary.pull-right(type="submit", [disabled]="form.invalid || form.pristine || isLoading") Добавить счет
+                    a.btn.btn-default(type="reset", (click)="navigateBack()") Назад

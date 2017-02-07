@@ -5,19 +5,19 @@
                 tr
                     th ID договора
                     th Дата заключения
-                    th.hidden-xs Дата завершения
+                    th.hidden-xs Дата истечения
                     th.hidden-xs Название организации
                     th ИНН организации
                     th Статус
-            tbody(*ngFor="let contract of contracts; let index = index")
-                tr((click)="selectedIndex = index")
+            tbody(*ngFor="let contract of contracts")
+                tr((click)="selectContract(contract)")
                     td {{contract.id}}
-                    td {{contract.concludedAt | date:"dd.MM.yyyy"}}
-                    td.hidden-xs {{contract.terminatedAt | date:"dd.MM.yyyy"}}
-                    td.hidden-xs {{contract.contractor.entity.registeredName}}
-                    td {{contract.contractor.entity.inn}}
-                    td {{!!contract.terminatedAt ? 'завершен' : !contract.concludedAt ? 'в&nbsp;обработке' : 'активен'}}
-                tr(*ngIf="index === selectedIndex")
+                    td {{contract.validSince | date:"dd.MM.yyyy"}}
+                    td.hidden-xs {{contract.validUntil | date:"dd.MM.yyyy"}}
+                    td.hidden-xs {{(contract.contractor && contract.contractor.legalEntity) ? contract.contractor.legalEntity.registeredName : null}}
+                    td {{(contract.contractor && contract.contractor.legalEntity) ? contract.contractor.legalEntity.inn : null}}
+                    td {{!!contract.terminatedAt ? 'завершен' : !contract.validSince ? 'в&nbsp;обработке' : 'активен'}}
+                tr(*ngIf="contract === selectedContract")
                     td(colspan=6)
                         kof-contract-view([contract]="contract")
         span(*ngIf="!contracts.length") Список договоров пуст

@@ -3,7 +3,7 @@ export class RequestParams {
     public toTime: string;
     public splitUnit: string = 'minute';
     public splitSize: string = '1';
-    public paymentMethod: string = 'bank_card';
+    public paymentMethod: string = 'bankCard';
 
     constructor(fromTime: string, toTime: string, splitUnit?: string, splitSize?: string, paymentMethod?: string) {
         this.fromTime = fromTime;

@@ -3,8 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import { EditShopComponent } from 'koffing/management/management.module';
 import { CreateShopWizardComponent } from 'koffing/management/management.module';
-import { EditShopContractComponent } from 'koffing/management/management.module';
-import { EditShopPayoutAccountComponent } from 'koffing/management/management.module';
+import { ContractCreateComponent } from 'koffing/management/components/management-container/contracts/contract-create/contract-create.component';
+import { PayoutToolCreateComponent } from 'koffing/management/components/management-container/contracts/payout-tool-create/payout-tool-create.component';
 
 @NgModule({
     imports: [
@@ -19,16 +19,16 @@ import { EditShopPayoutAccountComponent } from 'koffing/management/management.mo
                 component: CreateShopWizardComponent
             },
             {
-                path: 'shops/edit/:shopID',
+                path: 'shops/:shopID/edit',
                 component: EditShopComponent
             },
             {
-                path: 'shops/edit/:shopID/contract',
-                component: EditShopContractComponent
+                path: 'shops/:shopID/edit/contract/create',
+                component: ContractCreateComponent
             },
             {
-                path: 'shops/edit/:shopID/contract/:contractID/account',
-                component: EditShopPayoutAccountComponent
+                path: 'shops/:shopID/edit/contract/:contractID/payoutTool/create',
+                component: PayoutToolCreateComponent
             }
         ])
     ],

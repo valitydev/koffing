@@ -10,7 +10,7 @@ export class ClaimService {
 
     constructor(private http: Http, private config: ConfigService) { }
 
-    public getClaim(queryParams: any): Promise<Claim> {
+    public getClaim(queryParams: any): Promise<Claim[]> {
         let params = new URLSearchParams();
 
         params.set('claimStatus', queryParams.status);
@@ -28,7 +28,7 @@ export class ClaimService {
         const params = {
             reason: revokeDetails.reason
         };
-        return this.http.post(url, params)
+        return this.http.put(url, params)
             .toPromise()
             .then(response => response.statusText);
     }

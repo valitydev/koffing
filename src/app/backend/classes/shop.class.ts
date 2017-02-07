@@ -1,13 +1,21 @@
 import { ShopDetail } from './shop-detail.class';
-import { CallbackHandler } from './callback-handler';
+import { Account } from './account.class';
+import { CallbackHandler } from './callback-handler.class';
 
 export class Shop {
-    public shopID: number;
+    public id: number;
     public isBlocked: boolean;
     public isSuspended: boolean;
-    public categoryRef: number;
-    public shopDetails: ShopDetail;
+    public categoryID: number;
     public contractID: number;
-    public payoutAccountID: number;
+    public payoutToolID: number;
+    public details: ShopDetail;
+    public account: Account;
     public callbackHandler: CallbackHandler;
+
+    constructor() {
+        this.details = new ShopDetail();
+        this.account = new Account();
+        this.callbackHandler = new CallbackHandler();
+    }
 }

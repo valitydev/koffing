@@ -13,7 +13,7 @@ export class PaymentsService {
 
     constructor(private http: Http, private config: ConfigService) { }
 
-    public getRevenueStat(shopID: string, requestParams: RequestParams): Promise<Revenue[]> {
+    public getRevenueStat(shopID: number, requestParams: RequestParams): Promise<Revenue[]> {
         const params = new URLSearchParams();
 
         const fromTime = moment(requestParams.fromTime).utc().format();
@@ -31,7 +31,7 @@ export class PaymentsService {
             .then(response => response.json());
     }
 
-    public getConversionStat(shopID: string, requestParams: RequestParams): Promise<Conversion[]> {
+    public getConversionStat(shopID: number, requestParams: RequestParams): Promise<Conversion[]> {
         const params = new URLSearchParams();
 
         const fromTime = moment(requestParams.fromTime).utc().format();

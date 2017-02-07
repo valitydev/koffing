@@ -1,40 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ContractService } from 'koffing/backend/services/contract.service';
-import { Contract } from 'koffing/backend/classes/contract.class';
 import { Contractor } from 'koffing/backend/classes/contractor.class';
-import { BankAccount } from 'koffing/backend/classes/bank-account.class';
-import { RussianLegalEntity } from 'koffing/backend/classes/russian-legal-entity.class';
+import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
+import { ContractParams } from 'koffing/backend/classes/contract-params.class';
 
 @Component({
     selector: 'kof-contract-create',
     templateUrl: 'contract-create.component.pug'
 })
-export class ContractCreateComponent implements OnInit {
+export class ContractCreateComponent {
 
-    public newContract: Contract;
     public isLoading: boolean = false;
-    
+    public isContractorReady: boolean = false;
+    public contractor: Contractor;
+    public isPayoutToolReady: boolean = false;
+    public payoutTool: PayoutToolBankAccount;
+
     constructor(
         private router: Router,
         private contractService: ContractService
     ) {}
 
-    public ngOnInit() {
-        this.newContract = new Contract();
-        this.newContract.contractor = new Contractor();
-        this.newContract.contractor.bankAccount = new BankAccount();
-        this.newContract.contractor.entity = new RussianLegalEntity();
+    public onContractorReady(contractor: Contractor) {
+        this.isContractorReady = true;
+        this.contractor = contractor;
     }
 
-    public createContract(form: any) {
-        if (form.valid) {
+    public onPayoutToolReady(payoutTool: PayoutToolBankAccount) {
+        this.isPayoutToolReady = true;
+        this.payoutTool = payoutTool;
+    }
+
+    public createContract() {
+        if (this.isContractorReady && this.isContractorReady) {
             this.isLoading = true;
-            this.contractService.createContract(this.newContract.contractor).then(() => {
-                this.router.navigate(['/management/contracts']);
+            const contractParams = new ContractParams();
+            contractParams.contractor = this.contractor;
+            contractParams.payoutToolParams = this.payoutTool;
+            this.contractService.createContract(contractParams).then(() => {
                 this.isLoading = false;
+                this.navigateBack();
             });
         }
+    }
+
+    public navigateBack() {
+        this.router.navigate(['/management/contracts']);
     }
 }

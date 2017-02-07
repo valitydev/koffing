@@ -8,32 +8,27 @@
                     th ID магазина
                     th Название магазина
                     th.hidden-xs Описание
-                    th.hidden-xs Месторасположение
+                    th.hidden-xs Адрес
                     th Категория
                     th
             tbody(*ngFor="let shop of shops; let i = index")
                 tr([ngClass]="{'success': shop.isSuspended, 'danger': shop.isBlocked}", (click)="!shop.isBlocked && showDetailsPanel(i)")
-                    td {{shop.shopID}}
-                    td {{shop.shopDetails.name}}
-                    td.hidden-xs {{shop.shopDetails.description}}
-                    td.hidden-xs {{shop.shopDetails.location}}
-                    td {{getCategory(shop.categoryRef).name}}
+                    td {{shop.id}}
+                    td {{shop.details.name}}
+                    td.hidden-xs {{shop.details.description}}
+                    td.hidden-xs {{shop.details.location ? shop.details.location.url : ''}}
+                    td {{getCategoryName(shop.categoryID)}}
                     td(*ngIf="shop.isSuspended && !shop.isBlocked")
                         div.pull-right.small-container
-                            i.fa.custom-chevron(
-                                [ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}"
-                            )
+                            i.fa.custom-chevron([ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}")
                         button.btn.btn-success.btn-xs.pull-right((click)="activateShop(shop)") Активировать
                     td(*ngIf="!shop.isSuspended && !shop.isBlocked")
                         div.pull-right.small-container
-                            i.fa.custom-chevron(
-                                [ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}"
-                            )
-                        a.btn.btn-default.btn-xs.pull-right([routerLink]="['/shops/edit', shop.shopID]") Изменить данные
+                            i.fa.custom-chevron([ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}")
                     td(*ngIf="shop.isBlocked")
                         span.pull-right Заблокирован
                 tr(*ngIf="isDetailsPanelVisible(i)")
                     td(colspan=6)
-                        kof-shop-details-panel([shop]="shop", (shopSuspended)="handleShopSuspended()")
+                        kof-shop-details-panel([shop]="shop", (shopSuspended)="loadData()")
     span(*ngIf="!shops.length") Список магазинов пуст
     a.btn.btn-primary.pull-right([routerLink]="['/shops/create']") Добавить новый магазин

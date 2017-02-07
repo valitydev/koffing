@@ -1,11 +1,13 @@
 div(*ngIf="!shop.isSuspended && !shop.isBlocked")
     a.btn.btn-xs.btn-danger.pull-right(data-toggle="modal", data-target=".suspend-modal", data-backdrop="false") Заморозить магазин
-dl
-    dt URL для CallbackHandler
-    dd {{shop.callbackHandler.url}}
-dl
-    dt PublicKey от CallbackHandler
-    input.form-control(readonly, type="text", name="callbackHandlerPublicKey", value="{{shop.callbackHandler.publicKey}}")
+a.btn.btn-default.btn-xs.pull-right([routerLink]="['/', 'shops', shop.id, 'edit']") Изменить данные
+div(*ngIf="shop.callbackHandler")
+    dl
+        dt CallbackHandler url
+        dd {{shop.callbackHandler.url}}
+    dl
+        dt CallbackHandler public key
+        dd.public-key-container {{shop.callbackHandler.publicKey}}
 
 .modal.fade.suspend-modal(tabindex="-1" role="dialog")
     .modal-dialog.modal-sm

@@ -37,7 +37,7 @@ export class SelectComponent {
         if (value !== this.innerSelectedValue) {
             this.innerSelectedValue = value;
             this.onChangeCallback(value);
-            this.onChange.emit();
+            this.onChange.emit(value);
         }
     }
 

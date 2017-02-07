@@ -1,6 +1,6 @@
-import { Entity } from './entity.class';
+import { LegalEntity } from './legal-entity.class';
 
-export class RussianLegalEntity extends Entity {
+export class RussianLegalEntity extends LegalEntity {
     public registeredName: string;
     public registeredNumber: string;
     public inn: string;
@@ -9,4 +9,9 @@ export class RussianLegalEntity extends Entity {
     public representativePosition: string;
     public representativeFullName: string;
     public representativeDocument: string;
+
+    constructor() {
+        super();
+        this.entityType = 'RussianLegalEntity';
+    }
 }

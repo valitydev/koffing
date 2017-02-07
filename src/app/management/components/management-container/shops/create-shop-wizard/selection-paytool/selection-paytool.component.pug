@@ -1,0 +1,34 @@
+kof-loading([isLoading]="isLoading")
+    .tile(*ngIf="contractDecision.contractID !== undefined")
+        .text-center
+            h4 Выберите
+            .btn-group(data-toggle="buttons")
+                label.btn.btn-default((click)="selectOptionNew()")
+                    input(type="radio", name="way", value="new")
+                    span Добавить новое средство вывода
+                label.btn.btn-default((click)="selectOptionExisting()")
+                    input(type="radio", name="way", value="existing")
+                    span Выбрать существующее
+            br
+            br
+    .tile
+        kof-create-paytool(
+            *ngIf="selectedOption === optionNew",
+            (onPayoutToolReady)="onPayoutToolReady($event)"
+        )
+        kof-select-paytool(
+            *ngIf="selectedOption === optionExisting",
+            [contractID]="contractDecision.contractID",
+            (onPayoutToolSelected)="onPayoutToolSelected($event)"
+        )
+    .actionBar
+        .text-center
+            a.btn.btn-primary((click)="stepBackward()") Отмена
+            a.btn.btn-success(
+                (click)="stepForward()",
+                [ngClass]="{'buttonDisabled': isPayoutAccountReady === false, " +
+                "'btn-default': showFinishButton === true," +
+                "'btn-success': showFinishButton === false}"
+            )
+                span(*ngIf="showFinishButton === true") Завершить
+                span(*ngIf="showFinishButton === false") Вперед

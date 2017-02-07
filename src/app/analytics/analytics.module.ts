@@ -13,7 +13,6 @@ import { PaymentMethodComponent } from './components/analytic-selection/dashboar
 import { ConversionComponent } from './components/analytic-selection/dashboard/conversion/conversion.component';
 import { RevenueComponent } from './components/analytic-selection/dashboard/revenue/revenue.component';
 import { GeolocationComponent } from './components/analytic-selection/dashboard/geolocation/geolocation.component';
-import { InfoPanelComponent } from './components/analytic-selection/dashboard/info-panel/info-panel.component';
 import { AnalyticSelectionComponent } from './components/analytic-selection/analytic-selection.component';
 import { PaginationPipe } from './components/analytic-selection/finance/paginate/pagination.pipe';
 import { PaymentStatusPipe } from './components/analytic-selection/finance/search-result/payment-statuses.pipe';
@@ -43,7 +42,6 @@ import { BackendModule } from 'koffing/backend/backend.module';
         ConversionComponent,
         RevenueComponent,
         GeolocationComponent,
-        InfoPanelComponent,
         PaymentStatusPipe,
         RoubleCurrencyPipe,
         PaginationPipe

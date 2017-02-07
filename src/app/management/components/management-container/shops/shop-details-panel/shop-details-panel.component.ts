@@ -6,7 +6,11 @@ import { ShopService } from 'koffing/backend/services/shop.service';
 @Component({
     selector: 'kof-shop-details-panel',
     templateUrl: 'shop-details-panel.component.pug',
-    styleUrls: ['./shop-details-panel.component.less']
+    styleUrls: [`
+        .public-key-container {
+            max-width: 900px;
+            word-wrap: break-word;
+        }`]
 })
 export class ShopDetailsPanelComponent {
     
@@ -21,9 +25,8 @@ export class ShopDetailsPanelComponent {
     ) { }
     
     public suspendShop() {
-        this.shopService.suspendShop(this.shop.shopID).then(() => {
+        this.shopService.suspendShop(this.shop.id).then(() => {
             this.shopSuspended.emit();
         });
     }
-
 }

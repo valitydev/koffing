@@ -35,9 +35,9 @@ export class ClaimsComponent implements OnInit {
     }
 
     private getClaim() {
-        this.claimService.getClaim({status: 'pending'}).then((claim: Claim) => {
-            this.claim = claim;
-            this.changeset = claim.changeset;
+        this.claimService.getClaim({status: 'pending'}).then((claims: Claim[]) => {
+            this.claim = claims[0];
+            this.changeset = this.claim.changeset;
             this.showClaimInfo = true;
         });
     }

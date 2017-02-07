@@ -4,8 +4,9 @@ import 'rxjs/add/operator/toPromise';
 
 import { ConfigService } from './config.service';
 import { Contract } from '../classes/contract.class';
-import { Contractor } from '../classes/contractor.class';
-import { PayoutAccount } from '../classes/payout-account.class';
+import { PayoutTool } from '../classes/payout-tool.class';
+import { ContractParams } from 'koffing/backend/classes/contract-params.class';
+import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
 
 @Injectable()
 export class ContractService {
@@ -26,18 +27,20 @@ export class ContractService {
             .then(response => response.json() as Contract);
     }
 
-    public createContract(contractor: Contractor): Promise<any> {
-        return this.http.post(this.contractsUrl, {contractor})
+    public createContract(request: ContractParams): Promise<any> {
+        return this.http.post(this.contractsUrl, request)
             .toPromise()
             .then(response => response.json());
     }
 
-    public createPayoutAccount(contractID: number, payoutAccount: PayoutAccount): Promise<any> {
-        const params = {
-            currency: payoutAccount.currency,
-            tool: payoutAccount.tool
-        };
-        return this.http.post(`${this.contractsUrl}/${contractID}/accounts`, params)
+    public getPayoutTools(contractID: number): Promise<PayoutTool[]> {
+        return this.http.get(`${this.contractsUrl}/${contractID}/payout_tools`)
+            .toPromise()
+            .then(response => response.json() as PayoutTool[]);
+    }
+
+    public createPayoutTool(contractID: number, payoutTool: PayoutToolBankAccount): Promise<any> {
+        return this.http.post(`${this.contractsUrl}/${contractID}/payout_tools`, payoutTool)
             .toPromise()
             .then(response => response.json());
     }

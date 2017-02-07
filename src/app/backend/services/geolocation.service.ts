@@ -14,7 +14,7 @@ export class GeolocationService {
 
     constructor(private http: Http, private config: ConfigService) { }
 
-    public getGeoChartData(shopID: string, requestParams: RequestParams): Promise<PaymentGeoStat[]> {
+    public getGeoChartData(shopID: number, requestParams: RequestParams): Promise<PaymentGeoStat[]> {
         const params = new URLSearchParams();
 
         const fromTime = moment(requestParams.fromTime).utc().format();
