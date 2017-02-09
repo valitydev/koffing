@@ -7,6 +7,7 @@ import '@angular/router';
 import 'rxjs';
 
 import 'chart.js/src/chart.js';
+import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'primeng/resources/primeng.min.css';
 import 'primeng/resources/themes/omega/theme.css';

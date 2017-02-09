@@ -1,20 +1,20 @@
 kof-loading([isLoading]="isLoading")
     .tile(*ngIf="contractDecision.contractID !== undefined")
-        .text-center
-            h4 Выберите
-            .btn-group(data-toggle="buttons")
-                label.btn.btn-default((click)="selectOptionNew()")
-                    input(type="radio", name="way", value="new")
-                    span Добавить новое средство вывода
-                label.btn.btn-default((click)="selectOptionExisting()")
-                    input(type="radio", name="way", value="existing")
-                    span Выбрать существующее
-            br
-            br
+        .row
+            .col-md-12
+                .text-center
+                    .btn-group.btn-group-justified(data-toggle="buttons")
+                        label.btn.btn-default((click)="selectOptionNew()")
+                            input(type="radio", name="way", value="new")
+                            span Добавить новое средство вывода
+                        label.btn.btn-default((click)="selectOptionExisting()")
+                            input(type="radio", name="way", value="existing")
+                            span Выбрать существующее средство вывода
+    br
     .tile
         kof-create-paytool(
             *ngIf="selectedOption === optionNew",
-            (onPayoutToolReady)="onPayoutToolReady($event)"
+            (onChange)="onPayoutToolChange($event)"
         )
         kof-select-paytool(
             *ngIf="selectedOption === optionExisting",
@@ -26,7 +26,7 @@ kof-loading([isLoading]="isLoading")
             a.btn.btn-primary((click)="stepBackward()") Отмена
             a.btn.btn-success(
                 (click)="stepForward()",
-                [ngClass]="{'buttonDisabled': isPayoutAccountReady === false, " +
+                [ngClass]="{'buttonDisabled': isPayoutToolValid === false, " +
                 "'btn-default': showFinishButton === true," +
                 "'btn-success': showFinishButton === false}"
             )

@@ -5,6 +5,9 @@ import { ContractService } from 'koffing/backend/services/contract.service';
 import { Contractor } from 'koffing/backend/classes/contractor.class';
 import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
 import { ContractParams } from 'koffing/backend/classes/contract-params.class';
+import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
+import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
+import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
 
 @Component({
     selector: 'kof-contract-create',
@@ -20,17 +23,18 @@ export class ContractCreateComponent {
 
     constructor(
         private router: Router,
-        private contractService: ContractService
+        private contractService: ContractService,
+        private claimReceiveBroadcaster: ClaimReceiveBroadcaster
     ) {}
 
-    public onContractorReady(contractor: Contractor) {
-        this.isContractorReady = true;
-        this.contractor = contractor;
+    public onContractorChange(value: ContractorTransfer) {
+        this.isContractorReady = value.valid;
+        this.contractor = value.contractor;
     }
 
-    public onPayoutToolReady(payoutTool: PayoutToolBankAccount) {
-        this.isPayoutToolReady = true;
-        this.payoutTool = payoutTool;
+    public onPayoutToolChange(value: PaytoolTransfer) {
+        this.isPayoutToolReady = value.valid;
+        this.payoutTool = value.payoutTool;
     }
 
     public createContract() {
@@ -41,6 +45,7 @@ export class ContractCreateComponent {
             contractParams.payoutToolParams = this.payoutTool;
             this.contractService.createContract(contractParams).then(() => {
                 this.isLoading = false;
+                this.claimReceiveBroadcaster.fire();
                 this.navigateBack();
             });
         }

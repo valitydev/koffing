@@ -1,6 +1,6 @@
 .panel.panel-default
     .panel-heading((click)="show()")
-        a Создание договора
+        a Создание контракта
         i.fa.pull-right.custom-chevron([ngClass]="{'fa-chevron-down': showPanel, 'fa-chevron-right': !showPanel}")
     .panel-body(*ngIf="showPanel")
         kof-modification-detail([displayName]="'Банк'", [value]="contract.contractor.bankAccount.bankName")

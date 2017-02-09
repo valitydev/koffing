@@ -12,7 +12,6 @@ import { Category } from 'koffing/backend/classes/category.class';
 import { SelectItem } from 'koffing/common/common.module';
 import { CreateShopArgs } from 'koffing/backend/classes/create-shop-args.class';
 import { ShopDetail } from 'koffing/backend/classes/shop-detail.class';
-import { ShopLocationUrl } from 'koffing/backend/classes/shop-location-url.class';
 
 @Component({
     selector: 'kof-edit-shop',
@@ -23,8 +22,8 @@ export class EditShopComponent implements OnInit {
     public shopID: number = Number(this.route.snapshot.params['shopID']);
     public shopEditing: CreateShopArgs;
     public shop: Shop;
-    public shopContract: Contract = new Contract();
-    public shopPayoutTool: PayoutTool = new PayoutTool();
+    public shopContract: Contract;
+    public shopPayoutTool: PayoutTool;
     public contracts: Contract[] = [];
     public payoutTools: PayoutTool[] = [];
 
@@ -32,7 +31,6 @@ export class EditShopComponent implements OnInit {
     public payoutToolItems: SelectItem[] = [];
     public categoryItems: SelectItem[] = [];
 
-    public isShowContractDetails: boolean = false;
     public isShowPayoutAccountDetails: boolean = false;
     public isLoading: boolean = false;
 
@@ -55,12 +53,10 @@ export class EditShopComponent implements OnInit {
     }
 
     public onFieldChange(path: string, value: any) {
-        _.set(this.shopEditing, path, value);
-        if (path === 'details.location.url') { // TODO fix it
-            const location = new ShopLocationUrl();
-            location.url = value;
-            this.shopEditing.details.location = location;
+        if (_.startsWith(path, 'details')) {
+            this.shopEditing.details = this.shop.details;
         }
+        _.set(this.shopEditing, path, value);
     }
 
     public loadCategories(): Promise<Category[]> {
@@ -75,11 +71,11 @@ export class EditShopComponent implements OnInit {
     public loadShop(): Promise<Shop> {
         return new Promise((resolve) => {
             this.shopService.getShop(this.shopID).then((shop: Shop) => {
+                this.shop = shop;
                 Promise.all([
                     this.loadShopContracts(),
-                    this.loadShopPayoutTools()
+                    this.loadShopPayoutTools(shop.contractID)
                 ]).then(() => {
-                    this.shop = shop;
                     resolve(shop);
                 });
             });
@@ -90,41 +86,35 @@ export class EditShopComponent implements OnInit {
         return new Promise((resolve) => {
             this.contractService.getContracts().then((contracts: Contract[]) => {
                 this.contracts = contracts;
-                this.shopContract = _.find(contracts, (contract) => contract.id === this.shopEditing.contractID);
+                this.shopContract = this.findContract(this.shop.contractID);
                 this.contractItems = _.map(contracts, (contract) => new SelectItem(contract.id, contract.id));
                 resolve(contracts);
             });
         });
     }
 
-    public loadShopPayoutTools(): Promise<PayoutTool[]> {
+    public loadShopPayoutTools(contractID: number): Promise<PayoutTool[]> {
         return new Promise((resolve) => {
-            if (this.shopEditing.contractID) {
-                this.contractService.getPayoutTools(this.shopEditing.contractID).then((payoutTools: PayoutTool[]) => {
-                    this.payoutTools = payoutTools;
-                    this.shopPayoutTool = _.find(payoutTools, (payoutTool) => payoutTool.id === this.shopEditing.payoutToolID);
-                    if (!this.shopPayoutTool) {
-                        this.shopPayoutTool = payoutTools[0];
-                        this.shopEditing.payoutToolID = this.shopPayoutTool.id;
-                    }
-                    this.payoutToolItems = _.map(payoutTools, (payoutTool) => new SelectItem(payoutTool.id, payoutTool.id));
-                    resolve(payoutTools);
-                });
-            } else {
-                resolve();
-            }
+            this.contractService.getPayoutTools(contractID).then((payoutTools: PayoutTool[]) => {
+                this.payoutTools = payoutTools;
+                this.payoutToolItems = _.map(payoutTools, (payoutTool) => new SelectItem(payoutTool.id, payoutTool.id));
+                this.shopPayoutTool = payoutTools[0];
+                resolve(payoutTools);
+            });
         });
     }
 
     public selectContract(contractID: string) {
-        this.shopEditing.contractID = Number(contractID);
-        // this.shopContract = _.find(this.contracts, (contract) => contract.id === this.shopEditing.contractID);
-        // this.loadShopPayoutTools();
+        const id = Number(contractID);
+        this.shopEditing.contractID = id;
+        this.shopContract = this.findContract(id);
+        this.loadShopPayoutTools(id);
     }
 
     public selectPayoutTool(payoutToolID: string) {
-        this.shopEditing.payoutToolID = Number(payoutToolID);
-        this.shopPayoutTool = _.find(this.payoutTools, (payoutTool) => payoutTool.id === this.shopEditing.payoutToolID);
+        const id = Number(payoutToolID);
+        this.shopEditing.payoutToolID = Number(id);
+        this.shopPayoutTool = this.findPayoutTool(id);
     }
 
     public hasError(field: any): boolean {
@@ -134,11 +124,7 @@ export class EditShopComponent implements OnInit {
     public updateShop(form: any) {
         if (form.valid) {
             this.isLoading = true;
-            const detailsName = this.shopEditing.details.name;
-            this.shopEditing.details.name = detailsName ? detailsName : this.shop.details.name; // TODO fix it
-            if (this.shopEditing.categoryID) { // TODO fix it
-                this.shopEditing.categoryID = _.toNumber(this.shopEditing.categoryID);
-            }
+            this.shopEditing.details.name = this.fillShopName();
             this.shopService.updateShop(this.shopID, this.shopEditing).then(() => {
                 this.isLoading = false;
                 this.router.navigate(['/management']);
@@ -148,6 +134,19 @@ export class EditShopComponent implements OnInit {
 
     public onSelectCategory(categoryID: string) {
         this.shopEditing.categoryID = _.toNumber(categoryID);
+    }
+
+    private fillShopName() {
+        const detailsName = this.shopEditing.details.name;
+        return detailsName ? detailsName : this.shop.details.name;
+    }
+
+    private findPayoutTool(payoutToolID: number) {
+        return _.find(this.payoutTools, (payoutTool) => payoutTool.id === payoutToolID);
+    }
+
+    private findContract(contractID: number): Contract {
+        return _.find(this.contracts, (contract) => contract.id === contractID);
     }
 
     private getInstance(): CreateShopArgs {

@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
+import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
 
 @Component({
     selector: 'kof-create-paytool',
@@ -10,7 +11,7 @@ import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 export class CreatePayoutToolComponent implements OnInit {
 
     @Output()
-    public onPayoutToolReady = new EventEmitter();
+    public onChange = new EventEmitter();
 
     public payoutTool: PayoutToolBankAccount;
 
@@ -19,9 +20,7 @@ export class CreatePayoutToolComponent implements OnInit {
     }
 
     public checkForm(form: any) {
-        if (form.valid) {
-            this.onPayoutToolReady.emit(this.payoutTool);
-        }
+        this.onChange.emit(new PaytoolTransfer(this.payoutTool, form.valid));
     }
 
     public hasError(field: any): boolean {

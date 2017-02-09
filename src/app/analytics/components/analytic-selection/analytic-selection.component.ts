@@ -14,17 +14,18 @@ export class AnalyticSelectionComponent implements OnInit {
 
     public currentShopID: number;
     public shopItems: SelectItem[] = [];
+    public isLoading: boolean = true;
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private shopService: ShopService
-    ) { }
+    constructor(private route: ActivatedRoute,
+                private router: Router,
+                private shopService: ShopService) {
+    }
 
     public ngOnInit() {
         this.shopService.getShops().then((shops: Shop[]) => {
+            this.isLoading = false;
             const routeShopID = Number(this.route.snapshot.params['shopID']);
-            this.shopItems = _.map(shops, (shop: Shop) => new SelectItem(shop.id, shop.details.name));
+            this.shopItems = _.chain(shops).reverse().map((shop) => new SelectItem(shop.id, shop.details.name)).value();
             this.currentShopID = routeShopID ? routeShopID : this.shopItems[0].value;
             this.navigateToShop();
         });

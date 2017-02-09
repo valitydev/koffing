@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ContractService } from 'koffing/backend/services/contract.service';
 import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
+import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
 
 @Component({
     selector: 'kof-payout-tool-create',
@@ -19,7 +20,8 @@ export class PayoutToolCreateComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private contractService: ContractService
+        private contractService: ContractService,
+        private claimReceiveBroadcaster: ClaimReceiveBroadcaster
     ) {}
 
     public ngOnInit() {
@@ -31,9 +33,14 @@ export class PayoutToolCreateComponent implements OnInit {
             this.isLoading = true;
             this.contractService.createPayoutTool(this.contractID, this.payoutTool).then(() => {
                 this.isLoading = false;
-                this.router.navigate(['/management/contracts']);
+                this.claimReceiveBroadcaster.fire();
+                this.navigateBack();
             });
         }
+    }
+
+    public navigateBack() {
+        this.router.navigate(['/management/contracts']);
     }
 
     private getInstance() {

@@ -3,6 +3,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Contractor } from 'koffing/backend/classes/contractor.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 import { RussianLegalEntity } from 'koffing/backend/classes/russian-legal-entity.class';
+import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
 
 @Component({
     selector: 'kof-create-contract',
@@ -11,7 +12,7 @@ import { RussianLegalEntity } from 'koffing/backend/classes/russian-legal-entity
 export class CreateContractComponent implements OnInit {
 
     @Output()
-    public onContractorReady = new EventEmitter();
+    public onChange = new EventEmitter();
 
     public contractor: Contractor;
 
@@ -19,10 +20,8 @@ export class CreateContractComponent implements OnInit {
         this.contractor = this.createInstance();
     }
 
-    public checkForm(form: any) {
-        if (form.valid) {
-            this.onContractorReady.emit(this.contractor);
-        }
+    public keyup(form: any) {
+        this.onChange.emit(new ContractorTransfer(this.contractor, form.valid));
     }
 
     public hasError(field: any): boolean {

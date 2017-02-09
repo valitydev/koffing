@@ -1,33 +1,24 @@
-.x_panel.tile
+.x_panel.tile(*ngIf="payoutTool && payoutTool.params")
     .x_content
         form.form-horizontal.form-label-left.css-form
             .form-group
                 .col-xs-12.col-sm-4
                     label.text-left Валюта
-                .col-xs-12.col-sm-8
-                    input.form-control(type="text", required, name="currency", #currency="ngModel",
-                    [(ngModel)]="payoutTool.params.currency", [disabled]="true")
-            .form-group
-                .col-xs-12.col-sm-4
-                    label.text-left Наименование банка
-                .col-xs-12.col-sm-8
-                    input.form-control(type="text", required, name="bankName", #bankName="ngModel",
-                    [(ngModel)]="payoutTool.params.bankAccount.bankName", [disabled]="true")
-            .form-group
-                .col-xs-12.col-sm-4
-                    label.text-left Расчетный счет
-                .col-xs-12.col-sm-8
-                    input.form-control(type="text", required, name="bankAccount", #bankAccount="ngModel",
-                    [(ngModel)]="payoutTool.params.bankAccount.account", [disabled]="true")
-            .form-group
-                .col-xs-12.col-sm-4
-                    label.text-left Корреспондентский счет
-                .col-xs-12.col-sm-8
-                    input.form-control(type="text", required, name="bankPostAccount", #bankPostAccount="ngModel",
-                    [(ngModel)]="payoutTool.params.bankAccount.bankPostAccount", [disabled]="true")
-            .form-group
-                .col-xs-12.col-sm-4
-                    label.text-left БИК
-                .col-xs-12.col-sm-8
-                    input.form-control(type="text", required, name="bankBik", #bankBik="ngModel",
-                    [(ngModel)]="payoutTool.params.bankAccount.bankBik", [disabled]="true")
+                .col-xs-12.col-sm-8 {{payoutTool.params.currency}}
+            div(*ngIf="payoutTool.params.bankAccount")
+                .form-group
+                    .col-xs-12.col-sm-4
+                        label.text-left Наименование банка
+                    .col-xs-12.col-sm-8 {{payoutTool.params.bankAccount.bankName}}
+                .form-group
+                    .col-xs-12.col-sm-4
+                        label.text-left Расчетный счет
+                    .col-xs-12.col-sm-8 {{payoutTool.params.bankAccount.account}}
+                .form-group
+                    .col-xs-12.col-sm-4
+                        label.text-left Корреспондентский счет
+                    .col-xs-12.col-sm-8 {{payoutTool.params.bankAccount.bankPostAccount}}
+                .form-group
+                    .col-xs-12.col-sm-4
+                        label.text-left БИК
+                    .col-xs-12.col-sm-8 {{payoutTool.params.bankAccount.bankBik}}

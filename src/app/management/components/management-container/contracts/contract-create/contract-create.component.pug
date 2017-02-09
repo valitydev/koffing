@@ -1,8 +1,8 @@
 .x_panel.tile
     .x_content
-        kof-create-contract((onContractorReady)="onContractorReady($event)")
-        kof-create-paytool((onPayoutToolReady)="onPayoutToolReady($event)")
+        kof-create-contract((onChange)="onContractorChange($event)")
+        kof-create-paytool((onChange)="onPayoutToolChange($event)")
         .form-group
             .col-xs-12.col-sm-6.col-sm-offset-3
-                button.btn.btn-primary.pull-right(type="button", [disabled]="!isContractorReady || !isPayoutToolReady", (click)="createContract()") Создать договор
+                button.btn.btn-primary.pull-right(type="button", [disabled]="!isContractorReady || !isPayoutToolReady", (click)="createContract()") Создать контракт
                 a.btn.btn-default(type="reset", (click)="navigateBack()") Назад

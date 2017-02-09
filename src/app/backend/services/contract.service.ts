@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import * as _ from 'lodash';
 
 import { ConfigService } from './config.service';
 import { Contract } from '../classes/contract.class';
@@ -13,12 +14,19 @@ export class ContractService {
 
     private contractsUrl: string = `${this.config.capiUrl}/processing/contracts`;
 
-    constructor(private http: Http, private config: ConfigService) {}
+    constructor(private http: Http, private config: ConfigService) {
+    }
 
     public getContracts(): Promise<Contract[]> {
-        return this.http.get(this.contractsUrl)
-            .toPromise()
-            .then(response => response.json() as Contract[]);
+        return new Promise((resolve) => {
+            this.http.get(this.contractsUrl)
+                .toPromise()
+                .then(response => response.json())
+                .then((contracts) => {
+                    const result = _.filter(contracts, (contract: Contract) => contract.id !== 1);
+                    resolve(result);
+                });
+        });
     }
 
     public getContract(contractID: number): Promise<Contract> {

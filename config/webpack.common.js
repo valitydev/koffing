@@ -1,8 +1,8 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var helpers = require('./helpers');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const helpers = require('./helpers');
 
 module.exports = {
     entry: {
@@ -53,9 +53,10 @@ module.exports = {
                 loader: 'pug-html-loader'
             },
             {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+                test: /\.(png|jpe?g|gif|svg|ico)$/,
                 loader: 'file?name=assets/[name].[hash].[ext]'
             },
+
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
@@ -70,6 +71,26 @@ module.exports = {
                 test: /\.less$/,
                 include: helpers.root('src', 'app'),
                 loader: 'raw!less'
+            },
+            {
+                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/font-woff"
+            },
+            {
+                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/font-woff"
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=application/octet-stream"
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "file"
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: "url?limit=10000&mimetype=image/svg+xml"
             }
         ]
     },

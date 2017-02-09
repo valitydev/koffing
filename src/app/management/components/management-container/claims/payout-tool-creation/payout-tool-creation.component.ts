@@ -4,7 +4,8 @@ import { PayoutTool } from 'koffing/backend/classes/payout-tool.class';
 
 @Component({
     selector: 'kof-payout-tool-creation',
-    templateUrl: 'payout-tool-creation.component.pug'
+    templateUrl: 'payout-tool-creation.component.pug',
+    styleUrls: [`:host { cursor: pointer; }`]
 })
 export class PayoutToolCreationComponent {
 

@@ -1,86 +1,12 @@
-.x_panel.tile
-    .x_title
-        h4 Выбор существующего контракта
-    kof-loading([isLoading]="isLoading")
-        .x_content
-            .tile
-                kof-select.col-xs-6(*ngIf="selectableItems.length", [(ngModel)]="selectedContractId", [items]="selectableItems", (onChange)="selectContract()", [modelOptions]="{standalone: true}", name='selectedContract')
-            .ln_solid
-            form.form-horizontal.form-label-left.css-form(*ngIf="selectedContractId !== undefined", novalidate, name="form", #form="ngForm")
-                h5 Банковские реквизиты
+kof-loading([isLoading]="isLoading")
+    .text-center(*ngIf="contracts && contracts.length === 0")
+        h4 Контракты отсутствуют
+    .x_panel.tile(*ngIf="contracts && contracts.length > 0")
+        .x_title
+            h4 Выбор существующего контракта
+            .x_content
+                .tile
+                    br
+                    kof-select(*ngIf="selectableItems.length", [(ngModel)]="selectedContractId", [items]="selectableItems", (onChange)="selectContract()", [modelOptions]="{standalone: true}", name='selectedContract')
                 .ln_solid
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Расчетный счет
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_account",
-                        [(ngModel)]="selectedContract.contractor.bankAccount.account", #bank_account="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Наименование банка
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_name",
-                        [(ngModel)]="selectedContract.contractor.bankAccount.bankName", #bank_name="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Корреспондентский счет
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_post_account",
-                        [(ngModel)]="selectedContract.contractor.bankAccount.bankPostAccount", #bank_post_account="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left БИК
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_bik",
-                        [(ngModel)]="selectedContract.contractor.bankAccount.bankBik", #bank_bik="ngModel")
-                .ln_solid
-                h5 Реквизиты юр. лица
-                .ln_solid
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Наименование юр. лица
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_registered_name", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.registeredName", #entity_registered_name="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left ОГРН
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_registered_number", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.registeredNumber", #entity_registered_number="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left ИНН
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_inn", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.inn", #entity_inn="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Фактический адрес
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_actual_address", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.actualAddress", #entity_actual_address="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Почтовый адрес
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_post_address", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.postAddress", #entity_post_address="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Должность ЕИО/представителя
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_representative_position", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.representativePosition", #entity_representative_position="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left ФИО ЕИО/представителя
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_representative_fullname", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.representativeFullName", #entity_representative_fullname="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Документ ЕИО/представителя
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", name="entity_representative_document", required,
-                        [(ngModel)]="selectedContract.contractor.legalEntity.representativeDocument", #entity_representative_document="ngModel")
+                kof-contract-view([contract]="selectedContract")

@@ -20,5 +20,8 @@
                 tr(*ngIf="contract === selectedContract")
                     td(colspan=6)
                         kof-contract-view([contract]="contract")
-        span(*ngIf="!contracts.length") Список договоров пуст
-    a.btn.btn-primary.pull-right([routerLink]="['/management/contracts/create']") Составить новый договор
+                        .x_panel.tile
+                            label Средства вывода
+                            .x_content
+                                kof-payout-tools([contractID]="contract.id")
+    a.btn.btn-primary.pull-right([routerLink]="['/management/contracts/create']") Создать контракт

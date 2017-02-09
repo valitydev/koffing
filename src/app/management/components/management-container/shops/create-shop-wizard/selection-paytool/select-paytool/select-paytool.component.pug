@@ -4,41 +4,6 @@
     kof-loading([isLoading]="isLoading")
         .x_content
             .tile
-                kof-select.col-xs-6(*ngIf="selectableItems.length", [(ngModel)]="selectedPayoutToolId", [items]="selectableItems", (onChange)="selectPayoutAccount()", [modelOptions]="{standalone: true}", name='selectedPayoutTool')
+                kof-select(*ngIf="selectableItems.length", [(ngModel)]="selectedPayoutToolId", [items]="selectableItems", (onChange)="selectPayoutAccount()", [modelOptions]="{standalone: true}", name='selectedPayoutTool')
             .ln_solid
-            form.form-horizontal.form-label-left.css-form(*ngIf="selectedPayoutToolId !== undefined", novalidate, (ngSubmit)="createShop(form)", name="form", #form="ngForm")
-                h5 Валюта
-                .ln_solid
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Валюта
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="selected_currency",
-                        [(ngModel)]="selectedPayoutTool.params.currency", #selected_currency="ngModel")
-                .ln_solid
-                h5 Банковские реквизиты
-                .ln_solid
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Расчетный счет
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_account",
-                        [(ngModel)]="selectedPayoutTool.params.bankAccount.account", #bank_account="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Наименование банка
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_name",
-                        [(ngModel)]="selectedPayoutTool.params.bankAccount.bankName", #bank_name="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Корреспондентский счет
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_post_account",
-                        [(ngModel)]="selectedPayoutTool.params.bankAccount.bankPostAccount", #bank_post_account="ngModel")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left БИК
-                    .col-xs-12.col-sm-6
-                        input.form-control(disabled, type="text", required, name="bank_bik",
-                        [(ngModel)]="selectedPayoutTool.params.bankAccount.bankBik", #bank_bik="ngModel")
+            kof-payout-tool-view([payoutTool]="selectedPayoutTool")

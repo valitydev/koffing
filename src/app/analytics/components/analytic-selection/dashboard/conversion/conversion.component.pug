@@ -1,5 +1,5 @@
 kof-loading([isLoading]="isLoading")
-    div
+    div(*ngIf="data.length > 0")
         canvas(
             baseChart,
             [data]="data",
@@ -9,3 +9,4 @@ kof-loading([isLoading]="isLoading")
             [colors]="chartColors",
             height="80"
         )
+    div(*ngIf="data.length === 0") Данные отсутствуют

@@ -16,4 +16,4 @@ kof-loading([isLoading]="isLoading")
                 td(colspan=4)
                     kof-payout-tool-view([payoutTool]="payoutTool")
     span(*ngIf="!payoutTools.length") Нет привязанных счетов
-a.btn.btn-primary.pull-right([routerLink]="['/management/contracts', contractID, 'payout-tool', 'create']") Добавить счет
+a.btn.btn-primary.pull-right([routerLink]="['/management/contracts', contractID, 'payout-tool', 'create']") Создать средство вывода

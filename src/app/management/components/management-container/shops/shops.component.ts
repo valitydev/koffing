@@ -80,4 +80,8 @@ export class ShopsComponent implements OnInit {
             return (_.find(this.categories, (category: Category) => category.categoryID === categoryID)).name;
         }
     }
+
+    public isDetailsAvailable(shop: Shop): boolean {
+        return !shop.isBlocked && shop.id !== 1;
+    }
 }

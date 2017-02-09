@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 import { SelectionOptions } from '../selection-options.class';
-import { Contractor } from 'koffing/backend/classes/contractor.class';
 import { ContractDecision } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/contract-decision.class';
+import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
 
 @Component({
     selector: 'kof-selection-contract',
@@ -15,7 +15,7 @@ export class SelectionContractComponent {
     public selectedOption: SelectionOptions;
     public optionNew: number = SelectionOptions.New;
     public optionExisting: number = SelectionOptions.Existing;
-    public isContractorReady: boolean = false;
+    public isContractorValid: boolean = false;
     public decision: ContractDecision = new ContractDecision();
     
     @Output()
@@ -23,18 +23,18 @@ export class SelectionContractComponent {
     @Output()
     public steppedBackward = new EventEmitter();
 
-    public onContractorReady(contractor: Contractor) {
-        this.isContractorReady = true;
-        this.decision.contractor = contractor;
+    public onChangeContractor(value: ContractorTransfer) {
+        this.isContractorValid = value.valid;
+        this.decision.contractor = value.contractor;
     }
 
     public onContractSelected(contractID: number) {
-        this.isContractorReady = true;
+        this.isContractorValid = true;
         this.decision.contractID = contractID;
     }
 
     public newContractReady(params: any) {
-        this.isContractorReady = params.valid;
+        this.isContractorValid = params.valid;
     }
 
     public selectOptionNew() {
@@ -43,11 +43,10 @@ export class SelectionContractComponent {
 
     public selectOptionExisting() {
         this.selectedOption = this.optionExisting;
-        this.isContractorReady = false;
     }
 
     public stepForward() {
-        if (this.isContractorReady) {
+        if (this.isContractorValid) {
             this.steppedForward.emit(this.decision);
         }
     }

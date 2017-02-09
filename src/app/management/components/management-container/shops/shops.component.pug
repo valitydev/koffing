@@ -1,5 +1,3 @@
-.x_title
-    h4 Магазины
 .x_content
     kof-loading([isLoading]="isLoading")
         table(*ngIf="shops.length").table.table-hover.table-striped
@@ -7,28 +5,26 @@
                 tr
                     th ID магазина
                     th Название магазина
-                    th.hidden-xs Описание
                     th.hidden-xs Адрес
                     th Категория
                     th
             tbody(*ngFor="let shop of shops; let i = index")
-                tr([ngClass]="{'success': shop.isSuspended, 'danger': shop.isBlocked}", (click)="!shop.isBlocked && showDetailsPanel(i)")
+                tr([ngClass]="{'success': shop.isSuspended, 'danger': shop.isBlocked}", (click)="isDetailsAvailable(shop) && showDetailsPanel(i)")
                     td {{shop.id}}
                     td {{shop.details.name}}
-                    td.hidden-xs {{shop.details.description}}
                     td.hidden-xs {{shop.details.location ? shop.details.location.url : ''}}
                     td {{getCategoryName(shop.categoryID)}}
                     td(*ngIf="shop.isSuspended && !shop.isBlocked")
                         div.pull-right.small-container
                             i.fa.custom-chevron([ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}")
                         button.btn.btn-success.btn-xs.pull-right((click)="activateShop(shop)") Активировать
-                    td(*ngIf="!shop.isSuspended && !shop.isBlocked")
+                    td(*ngIf="!shop.isSuspended && isDetailsAvailable(shop)")
                         div.pull-right.small-container
                             i.fa.custom-chevron([ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}")
                     td(*ngIf="shop.isBlocked")
                         span.pull-right Заблокирован
+                    td(*ngIf="!isDetailsAvailable(shop)")
                 tr(*ngIf="isDetailsPanelVisible(i)")
                     td(colspan=6)
                         kof-shop-details-panel([shop]="shop", (shopSuspended)="loadData()")
-    span(*ngIf="!shops.length") Список магазинов пуст
-    a.btn.btn-primary.pull-right([routerLink]="['/shops/create']") Добавить новый магазин
+    a.btn.btn-primary.pull-right([routerLink]="['/shops/create']") Создать магазин

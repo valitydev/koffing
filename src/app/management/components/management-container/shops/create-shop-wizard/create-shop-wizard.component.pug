@@ -5,8 +5,8 @@
                 h4 Создание нового магазина
             .x_content
                 .form_wizard.wizard_horizontal
-                    ul.wizard_steps.anchor
-                        li
+                    ul.wizard_steps
+                        li.first_step
                             a([ngClass]="{'done': currentStep > contractStep, 'selected': currentStep === contractStep}")
                                 span.step_no 1
                                 span.step_descr Контракт
@@ -18,20 +18,24 @@
                             a([ngClass]="{'disabled': currentStep < shopDetailsStep, 'done': currentStep > shopDetailsStep, 'selected': currentStep === shopDetailsStep}")
                                 span.step_no 3
                                 span.step_descr Данные магазина
-                kof-selection-contract(
-                    *ngIf="currentStep === contractStep",
-                    (steppedBackward)="returnToManagement()",
-                    (steppedForward)="goToPaytoolStep($event)"
-                )
-                kof-selection-paytool(
-                    *ngIf="currentStep === paytoolStep",
-                    (steppedBackward)="returnToManagement()",
-                    (steppedForward)="goToShopDetailsStep($event)",
-                    [contractDecision]="contractDecision"
-                )
-                kof-selection-shop-fields(
-                    *ngIf="currentStep === shopDetailsStep",
-                    (steppedBackward)="returnToManagement()",
-                    (onCreated)="finishWizard()",
-                    [payoutToolDecision]="payoutToolDecision",
-                )
+
+                .row
+                    .col-md-1
+                    .col-md-10
+                        kof-selection-contract(
+                            *ngIf="currentStep === contractStep",
+                            (steppedBackward)="returnToManagement()",
+                            (steppedForward)="goToPaytoolStep($event)"
+                        )
+                        kof-selection-paytool(
+                            *ngIf="currentStep === paytoolStep",
+                            (steppedBackward)="returnToManagement()",
+                            (steppedForward)="goToShopDetailsStep($event)",
+                            [contractDecision]="contractDecision"
+                        )
+                        kof-selection-shop-fields(
+                            *ngIf="currentStep === shopDetailsStep",
+                            (steppedBackward)="returnToManagement()",
+                            (onCreated)="finishWizard()",
+                            [payoutToolDecision]="payoutToolDecision",
+                        )

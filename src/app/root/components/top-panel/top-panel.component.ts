@@ -5,7 +5,8 @@ import { ToggleMenuBroadcaster } from 'koffing/broadcaster/broadcaster.module';
 
 @Component({
     selector: 'kof-top-panel',
-    templateUrl: './top-panel.component.pug'
+    templateUrl: './top-panel.component.pug',
+    styleUrls: [`.dropdown-toggle { cursor: pointer; }`]
 })
 export class TopPanelComponent {
 

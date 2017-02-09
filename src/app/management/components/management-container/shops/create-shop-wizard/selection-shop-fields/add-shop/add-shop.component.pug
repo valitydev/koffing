@@ -18,25 +18,24 @@
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="shop_details_name",
                     [(ngModel)]="shopDetail.name", #shop_details_name="ngModel",
-                    (keyup)="checkForm(form)")
+                    (keyup)="keyup(form)")
             .form-group
                 .col-xs-12.col-sm-3
                     label.text-left Описание магазина
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="shop_details_description",
                     [(ngModel)]="shopDetail.description",
-                    (keyup)="checkForm(form)")
+                    (keyup)="keyup(form)")
             .form-group
                 .col-xs-12.col-sm-3
-                    label.text-left Сайт
+                    label.text-left Адрес
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="shop_details_location",
-                    [(ngModel)]="shopDetail.location.url",
-                    (keyup)="checkForm(form)")
+                    [ngModel]="url", (ngModelChange)="setLocation($event, form)")
             .form-group
                 .col-xs-12.col-sm-3
                     label.text-left CallbackHandler URL
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="callback_handler_url",
                     [(ngModel)]="callbackUrl",
-                    (keyup)="checkForm(form)")
+                    (keyup)="keyup(form)")

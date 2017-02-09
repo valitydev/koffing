@@ -4,12 +4,16 @@ import { Shop } from 'koffing/backend/classes/shop.class';
 
 @Component({
     selector: 'kof-shop-modification',
-    templateUrl: 'shop-modification.component.pug'
+    templateUrl: 'shop-modification.component.pug',
+    styleUrls: [`:host { cursor: pointer; }`]
 })
 export class ShopModificationComponent {
 
     @Input()
     public shop: Shop;
+
+    @Input()
+    public title: string;
 
     public showPanel: boolean = false;
 

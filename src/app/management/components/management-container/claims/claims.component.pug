@@ -1,13 +1,14 @@
 .x_panel.tile(*ngIf="showClaimInfo")
     .x_title
-        h4 Активная заявка
+        h5 Активная заявка
     .x_content
-        div(*ngFor="let set of changeset")
-            kof-shop-modification(*ngIf="set.partyModificationType === 'ShopModification' && set.shopModificationType === 'ShopUpdate'", [shop]="set.details")
-            kof-shop-account-creation(*ngIf="set.partyModificationType === 'ShopModification' && set.shopModificationType === 'ShopAccountCreation'")
-            kof-shop-creation(*ngIf="set.partyModificationType === 'ShopCreation'", [shop]="set.shop")
-            kof-contract-creation(*ngIf="set.partyModificationType === 'ContractCreation'", [contract]="set.contract")
-            kof-payout-tool-creation(*ngIf="set.partyModificationType === 'ContractModification' && set.contractModificationType === 'ContractPayoutToolCreation'", [payoutTool]="set.payoutTool")
+        label Детали:
+        div(*ngFor="let item of changeset")
+            kof-shop-modification(*ngIf="item.partyModificationType === 'ShopModification' && item.shopModificationType === 'ShopUpdate'", [shop]="item.details", title="Изменение магазина")
+            kof-shop-modification(*ngIf="item.partyModificationType === 'ShopCreation'", [shop]="item.shop", title="Создание магазина")
+            kof-contract-creation(*ngIf="item.partyModificationType === 'ContractCreation'", [contract]="item.contract")
+            kof-payout-tool-creation(*ngIf="item.partyModificationType === 'ContractModification' && item.contractModificationType === 'ContractPayoutToolCreation'", [payoutTool]="item.payoutTool")
+            kof-shop-account-creation(*ngIf="item.partyModificationType === 'ShopModification' && item.shopModificationType === 'ShopAccountCreation'")
         button.btn.btn-danger.pull-right(data-toggle="modal" data-target=".revoke-modal" data-backdrop="false") Отмена заявки
 
 .modal.fade.revoke-modal(tabindex="-1" role="dialog")

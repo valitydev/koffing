@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Claim } from 'koffing/backend/backend.module';
 import { ClaimService } from 'koffing/backend/backend.module';
+import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
 
 @Component({
     selector: 'kof-claims',
@@ -14,7 +15,8 @@ export class ClaimsComponent implements OnInit {
     public showClaimInfo: boolean = false;
     public revokeReason: string;
 
-    constructor(private claimService: ClaimService) { }
+    constructor(private claimService: ClaimService,
+                private claimReceiveBroadcaster: ClaimReceiveBroadcaster) { }
 
     public revoke(reasonControl: any) {
         if (!reasonControl.valid) {
@@ -31,14 +33,19 @@ export class ClaimsComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.claimReceiveBroadcaster.on().subscribe(() => {
+            this.getClaim();
+        });
         this.getClaim();
     }
 
     private getClaim() {
         this.claimService.getClaim({status: 'pending'}).then((claims: Claim[]) => {
-            this.claim = claims[0];
-            this.changeset = this.claim.changeset;
-            this.showClaimInfo = true;
+            if (claims.length > 0) {
+                this.claim = claims[0];
+                this.changeset = this.claim.changeset;
+                this.showClaimInfo = true;
+            }
         });
     }
 }

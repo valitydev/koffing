@@ -1,6 +1,6 @@
 kof-loading([isLoading]="isLoading")
     .tile
-        kof-add-shop((onShopReady)="shopFieldsReady($event)")
+        kof-add-shop((onChange)="onShopFieldsChange($event)")
     .actionBar
         .text-center
             a.btn.btn-primary((click)="stepBackward()") Отмена

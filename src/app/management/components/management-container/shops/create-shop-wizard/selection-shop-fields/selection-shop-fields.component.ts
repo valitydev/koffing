@@ -3,6 +3,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CreateShopArgs } from 'koffing/backend/classes/create-shop-args.class';
 import { PaytoolDecision } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/paytool-decision.class';
 import { ShopService } from 'koffing/backend/services/shop.service';
+import { ShopDetailTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-shop-fields/add-shop/shop-detail-transfer.class';
 
 @Component({
     selector: 'kof-selection-shop-fields',
@@ -27,14 +28,14 @@ export class SelectionShopComponent {
 
     constructor(private shopService: ShopService) { }
 
-    public shopFieldsReady(params: any) {
-        this.isShopFieldsReady = true;
+    public onShopFieldsChange(value: ShopDetailTransfer) {
+        this.isShopFieldsReady = value.valid;
         this.createShopArgs = new CreateShopArgs();
         this.createShopArgs.contractID = this.payoutToolDecision.contractID;
         this.createShopArgs.payoutToolID = this.payoutToolDecision.payoutToolID;
-        this.createShopArgs.categoryID = params.categoryId;
-        this.createShopArgs.callbackUrl = params.callbackUrl;
-        this.createShopArgs.details = params.shopDetail;
+        this.createShopArgs.categoryID = value.categoryID;
+        this.createShopArgs.callbackUrl = value.callbackUrl;
+        this.createShopArgs.details = value.shopDetail;
     }
 
     public createShop() {

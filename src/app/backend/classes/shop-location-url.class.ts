@@ -4,8 +4,9 @@ export class ShopLocationUrl extends ShopLocation {
 
     public url: string;
 
-    constructor() {
+    constructor(url?: string) {
         super();
         this.locationType = 'ShopLocationUrl';
+        this.url = url;
     }
 }
