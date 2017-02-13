@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ContractService } from 'koffing/backend/services/contract.service';
 import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
-import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
+import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
 
 @Component({
     selector: 'kof-payout-tool-create',
     templateUrl: 'payout-tool-create.component.pug'
 })
-export class PayoutToolCreateComponent implements OnInit {
+export class PayoutToolCreateComponent {
 
     public contractID: number = Number(this.route.snapshot.params['contractID']);
     public shopEditID: number = Number(this.route.snapshot.params['shopID']);
-    public payoutTool: PayoutToolBankAccount;
+    public payoutToolsParams: PayoutToolBankAccount;
+    public isPayoutToolValid: boolean = false;
     public isLoading: boolean = false;
 
     constructor(
@@ -24,14 +25,15 @@ export class PayoutToolCreateComponent implements OnInit {
         private claimReceiveBroadcaster: ClaimReceiveBroadcaster
     ) {}
 
-    public ngOnInit() {
-        this.payoutTool = this.getInstance();
+    public onPayoutToolChange(value: PaytoolTransfer) {
+        this.isPayoutToolValid = value.valid;
+        this.payoutToolsParams = value.payoutTool;
     }
 
-    public createPayoutTool(form: any) {
-        if (form.valid) {
+    public createPayoutTool() {
+        if (this.isPayoutToolValid) {
             this.isLoading = true;
-            this.contractService.createPayoutTool(this.contractID, this.payoutTool).then(() => {
+            this.contractService.createPayoutTool(this.contractID, this.payoutToolsParams).then(() => {
                 this.isLoading = false;
                 this.claimReceiveBroadcaster.fire();
                 this.navigateBack();
@@ -41,12 +43,5 @@ export class PayoutToolCreateComponent implements OnInit {
 
     public navigateBack() {
         this.router.navigate(['/management/contracts']);
-    }
-
-    private getInstance() {
-        const bankAccount = new BankAccount();
-        const instance = new PayoutToolBankAccount();
-        instance.bankAccount = bankAccount;
-        return instance;
     }
 }

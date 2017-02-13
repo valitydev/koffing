@@ -2,44 +2,44 @@
     .x_title
         h4 Добавление нового средства вывода
     .x_content
-        form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
+        form.form-horizontal.form-label-left.css-form(novalidate, name="createPaytoolForm", #createPaytoolForm="ngForm")
             h5 Валюта
             .ln_solid
-            .form-group([ngClass]="{'has-error': hasError(selected_currency)}")
+            .form-group([ngClass]="{'has-error': hasError(currencySelected)}")
                 .col-xs-12.col-sm-3
                     label.text-left Валюта
                 .col-xs-12.col-sm-6
-                    input.form-control(type="text", required, name="selected_currency",
-                    [(ngModel)]="payoutTool.currency", #selected_currency="ngModel",
-                    (keyup)="checkForm(form)")
+                    input.form-control(type="text", required, name="currencySelected",
+                    [(ngModel)]="payoutTool.currency", #currencySelected="ngModel",
+                    (keyup)="emitData()")
             .ln_solid
             h5 Банковские реквизиты
             .ln_solid
-            .form-group([ngClass]="{'has-error': hasError(bank_account)}")
+            .form-group([ngClass]="{'has-error': hasError(bankAccount)}")
                 .col-xs-12.col-sm-3
                     label.text-left Расчетный счет
                 .col-xs-12.col-sm-6
-                    input.form-control(type="text", required, name="bank_account",
-                    [(ngModel)]="payoutTool.bankAccount.account", #bank_account="ngModel",
-                    (keyup)="checkForm(form)")
-            .form-group([ngClass]="{'has-error': hasError(bank_name)}")
+                    input.form-control(type="text", required, name="bankAccount",
+                    [(ngModel)]="payoutTool.bankAccount.account", #bankAccount="ngModel",
+                    (keyup)="emitData()")
+            .form-group([ngClass]="{'has-error': hasError(bankName)}")
                 .col-xs-12.col-sm-3
                     label.text-left Наименование банка
                 .col-xs-12.col-sm-6
-                    input.form-control(type="text", required, name="bank_name",
-                    [(ngModel)]="payoutTool.bankAccount.bankName", #bank_name="ngModel",
-                    (keyup)="checkForm(form)")
-            .form-group([ngClass]="{'has-error': hasError(bank_post_account)}")
+                    input.form-control.paytool-bank-suggestions(type="text", required, name="bankName",
+                    [(ngModel)]="payoutTool.bankAccount.bankName", #bankName="ngModel",
+                    (keyup)="emitData()")
+            .form-group([ngClass]="{'has-error': hasError(bankPostAccount)}")
                 .col-xs-12.col-sm-3
                     label.text-left Корреспондентский счет
                 .col-xs-12.col-sm-6
-                    input.form-control(type="text", required, name="bank_post_account",
-                    [(ngModel)]="payoutTool.bankAccount.bankPostAccount", #bank_post_account="ngModel",
-                    (keyup)="checkForm(form)")
-            .form-group([ngClass]="{'has-error': hasError(bank_bik)}")
+                    input.form-control(type="text", required, name="bankPostAccount",
+                    [(ngModel)]="payoutTool.bankAccount.bankPostAccount", #bankPostAccount="ngModel",
+                    (keyup)="emitData()")
+            .form-group([ngClass]="{'has-error': hasError(bankBik)}")
                 .col-xs-12.col-sm-3
                     label.text-left БИК
                 .col-xs-12.col-sm-6
-                    input.form-control(type="text", required, name="bank_bik",
-                    [(ngModel)]="payoutTool.bankAccount.bankBik", #bank_bik="ngModel",
-                    (keyup)="checkForm(form)")
+                    input.form-control.paytool-bank-suggestions(type="text", required, name="bankBik",
+                    [(ngModel)]="payoutTool.bankAccount.bankBik", #bankBik="ngModel",
+                    (keyup)="emitData()")

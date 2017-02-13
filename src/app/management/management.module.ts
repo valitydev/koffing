@@ -31,6 +31,7 @@ import { SelectionPaytoolComponent } from './components/management-container/sho
 import { SelectionShopComponent } from './components/management-container/shops/create-shop-wizard/selection-shop-fields/selection-shop-fields.component';
 import { ShopDetailsPanelComponent } from 'koffing/management/components/management-container/shops/shop-details-panel/shop-details-panel.component';
 import { PaytoolDecisionService } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/paytool-decision.service';
+import { SuggestionsModule } from 'koffing/suggestions/suggestions.module';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { PaytoolDecisionService } from 'koffing/management/components/management
         BrowserModule,
         FormsModule,
         CommonModule,
-        BackendModule
+        BackendModule,
+        SuggestionsModule
     ],
     declarations: [
         ManagementComponent,
@@ -75,6 +77,7 @@ import { PaytoolDecisionService } from 'koffing/management/components/management
 })
 export class ManagementModule { }
 
+export * from '../suggestions/classes/suggestion-settings.const';
 export * from './components/management-container/shops/edit-shop/edit-shop.component';
 export * from './components/management-container/shops/create-shop-wizard/create-shop-wizard.component';
 export * from './components/management-container/contracts/contract-create/contract-create.component';

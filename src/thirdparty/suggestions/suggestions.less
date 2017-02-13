@@ -1,0 +1,139 @@
+/* DaData suggestion jQuery plugin css */
+
+.suggestions-nowrap {
+  white-space: nowrap;
+}
+.suggestions-input {
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+.suggestions-input::-ms-clear {
+  display: none;
+}
+.suggestions-wrapper {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+  -webkit-text-size-adjust: 100%;
+}
+
+.suggestions-suggestions {
+  background: #fff;
+  border: 1px solid #999;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: default;
+  z-index: 9999;
+  -webkit-text-size-adjust: 100%;
+}
+.suggestions-suggestions strong {
+  font-weight: normal;
+  color: #3399FF;
+}
+.suggestions-suggestions.suggestions-mobile {
+  left: 0 !important;
+  top: 0 !important;
+}
+.suggestions-suggestions.suggestions-mobile .suggestions-suggestion {
+  padding-left: 5px !important;
+}
+.suggestions-suggestion {
+  padding: 4px 4px;
+  overflow: hidden;
+}
+.suggestions-suggestion:hover {
+  background: #f7f7f7;
+}
+.suggestions-selected {
+  background: #f0f0f0;
+}
+.suggestions-selected:hover {
+  background: #f0f0f0;
+}
+.suggestions-hint {
+  padding: 4px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #777;
+  font-size: 85%;
+}
+.suggestions-constraints {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+}
+.suggestions-constraints:empty {
+  display: none !important;
+}
+.suggestions-constraints li {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  cursor: default;
+  display: inline-block;
+  margin: 0 4px 0 0;
+  padding: 0 0.5em;
+}
+.suggestions-constraints li .suggestions-remove {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  margin: 0 0 0 0.25em;
+  background: transparent url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz48Zz48cGF0aCBkPSdtMjAsMjBtMTAsMGwyMCwyMGwyMCwtMjBsMTAsMTBsLTIwLDIwbDIwLDIwbC0xMCwxMGwtMjAsLTIwbC0yMCwyMGwtMTAsLTEwbDIwLC0yMGwtMjAsLTIwbDEwLC0xMCcgZmlsbD0nIzk5OScvPjwvZz48L3N2Zz4=") 50% 50% no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.suggestions-constraints li .suggestions-remove:hover {
+  opacity: 1;
+}
+.suggestions-constraints li span {
+  vertical-align: middle;
+}
+.suggestions-subtext {
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.suggestions-subtext_inline {
+  display: inline-block;
+  min-width: 6em;
+  vertical-align: bottom;
+  margin: 0 0.5em 0 0;
+}
+.suggestions-subtext-delimiter {
+  display: inline-block;
+  width: 2px;
+}
+.suggestions-subtext_label {
+  margin: 0 0 0 0.25em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 0 3px;
+  background: #f5f5f5;
+  font-size: 85%;
+}
+.suggestions-value[data-suggestion-status="LIQUIDATED"] {
+  position: relative;
+}
+.suggestions-value[data-suggestion-status="LIQUIDATED"]:after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  content: '';
+}

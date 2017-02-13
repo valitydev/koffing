@@ -40,10 +40,10 @@ export class SelectContractComponent implements OnInit {
     }
 
     private prepareSelectableItems(contracts: Contract[]) {
-        return _.map(contracts, (contract) => new SelectItem(contract.id, String(contract.id)));
+        return _.map(contracts, (contract: Contract) => new SelectItem(contract.id, String(contract.id)));
     }
 
     private findSelectedContract(contracts: Contract[], contractId: number) {
-        return _.find(contracts, (contract) => contract.id === Number(contractId));
+        return _.find(contracts, (contract: Contract) => contract.id === Number(contractId));
     }
 }

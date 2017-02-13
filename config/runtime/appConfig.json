@@ -1,3 +1,4 @@
 {
-  "capiUrl": "http://api.rbk.money:8080/v1"
+  "capiUrl": "http://api.rbk.money:8080/v1",
+  "suggestionsToken": "6abd2a4ecb51b2063471e32c1445d3987ff4b11a"
 }
