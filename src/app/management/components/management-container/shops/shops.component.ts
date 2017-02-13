@@ -82,6 +82,6 @@ export class ShopsComponent implements OnInit {
     }
 
     public isDetailsAvailable(shop: Shop): boolean {
-        return !shop.isBlocked && shop.id !== 1;
+        return !shop.isBlocked;
     }
 }

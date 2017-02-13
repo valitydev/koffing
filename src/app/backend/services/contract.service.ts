@@ -18,15 +18,9 @@ export class ContractService {
     }
 
     public getContracts(): Promise<Contract[]> {
-        return new Promise((resolve) => {
-            this.http.get(this.contractsUrl)
-                .toPromise()
-                .then(response => response.json())
-                .then((contracts) => {
-                    const result = _.filter(contracts, (contract: Contract) => contract.id !== 1);
-                    resolve(result);
-                });
-        });
+        return this.http.get(this.contractsUrl)
+            .toPromise()
+            .then(response => response.json());
     }
 
     public getContract(contractID: number): Promise<Contract> {

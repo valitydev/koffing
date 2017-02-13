@@ -16,8 +16,8 @@
                     label.text-left Дата завершения
                 .col-xs-12.col-sm-8
                     div {{contract.terminatedAt | date:'dd.MM.yy'}}
-            .ln_solid
             div(*ngIf="contract.contractor")
+                .ln_solid
                 div(*ngIf="contract.contractor.bankAccount")
                     h5 Банковские реквизиты
                     .ln_solid
@@ -37,8 +37,8 @@
                         .col-xs-12.col-sm-4
                             label.text-left БИК
                         .col-xs-12.col-sm-8 {{contract.contractor.bankAccount.bankBik}}
-                    .ln_solid
                 div(*ngIf="contract.contractor.legalEntity")
+                    .ln_solid
                     h5 Реквизиты юр. лица
                     .ln_solid
                     .form-group
