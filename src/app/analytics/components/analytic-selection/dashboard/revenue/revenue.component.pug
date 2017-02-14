@@ -1,12 +1,11 @@
-kof-loading([isLoading]="isLoading")
-    div(*ngIf="data.length > 0")
-        canvas.revenueChart(
-            baseChart,
-            [data]="data",
-            [labels]="labels",
-            [chartType]="type",
-            [options]="options",
-            [colors]="chartColors",
-            height="80"
-        )
-    div(*ngIf="data.length === 0") Данные отсутствуют
+div(*ngIf="datasets.length > 0")
+    canvas.revenueChart(
+        baseChart,
+        chartType="line",
+        [datasets]="datasets",
+        [labels]="labels",
+        [options]="options",
+        [colors]="chartColors",
+        height="80"
+    )
+div(*ngIf="datasets.length === 0") Данные отсутствуют

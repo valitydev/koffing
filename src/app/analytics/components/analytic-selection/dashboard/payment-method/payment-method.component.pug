@@ -1,12 +1,11 @@
-kof-loading([isLoading]="isLoading")
-    div(*ngIf="data.length > 0")
-        canvas(
-            baseChart,
-            [data]="data",
-            [labels]="labels",
-            [chartType]="type",
-            [options]="options",
-            [colors]="chartColors",
-            height=180
-        )
-    div(*ngIf="data.length === 0") Данные отсутствуют
+div(*ngIf="data.length > 0")
+    canvas(
+        baseChart,
+        [data]="data",
+        [labels]="labels",
+        [chartType]="type",
+        [options]="options",
+        [colors]="chartColors",
+        height=180
+    )
+div(*ngIf="data.length === 0") Данные отсутствуют

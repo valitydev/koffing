@@ -1,23 +1,25 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import * as _ from 'lodash';
-import * as moment from 'moment';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { CHART_OPTIONS } from './../chart-options.const';
+import { RevenueDataService } from 'koffing/analytics/components/analytic-selection/dashboard/revenue/revenue-data.service';
 
 @Component({
     selector: 'kof-revenue',
     templateUrl: './revenue.component.pug'
 })
 
-export class RevenueComponent implements OnInit, OnChanges {
+export class RevenueComponent implements OnChanges {
 
     @Input()
     public fromTime: any;
+
     @Input()
     public chartData: any;
+
     public labels: string[];
-    public data: number[] | any[] = [];
-    public type: string = 'line';
+
+    public datasets: any[] = [];
+
     public options: any = {
         elements: {
             line: {
@@ -38,27 +40,16 @@ export class RevenueComponent implements OnInit, OnChanges {
             display: false
         }
     };
+
     public chartColors = [CHART_OPTIONS.LINE.COLORS];
-
-    private isLoading: boolean;
-
-    public ngOnInit() {
-        this.isLoading = true;
-    }
 
     public ngOnChanges() {
         if (this.chartData) {
-            this.isLoading = false;
-
-            this.labels = _.map(this.chartData,
-                (item: any) => moment(this.fromTime).add(item.offset, 's').format('DD.MM HH:mm')
-            );
-            this.data = _.chain(this.chartData)
-                .map(
-                    (item: any) => _.round(item.profit / 100, 2)
-                ).chunk(this.chartData.length)
-                .value();
-
+            this.labels = RevenueDataService.toLabels(this.fromTime, this.chartData);
+            this.datasets = [{
+                data: RevenueDataService.toData(this.chartData),
+                label: 'Оборот'
+            }];
         }
     }
 }

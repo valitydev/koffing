@@ -23,13 +23,10 @@ export class GeolocationComponent implements OnChanges {
     };
     public chartColors = [CHART_OPTIONS.DOUGHNUT.COLORS];
 
-    private isLoading: boolean = true;
-
     public ngOnChanges() {
         if (this.chartData) {
             this.data = this.chartData.data;
             this.labels = this.chartData.cityNames;
-            this.isLoading = false;
         }
     }
 }
