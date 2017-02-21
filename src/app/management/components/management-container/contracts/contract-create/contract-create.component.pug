@@ -1,7 +1,7 @@
 .x_panel.tile
     .x_content
         kof-create-contract((onChange)="onContractorChange($event)")
-        kof-create-paytool((onChange)="onPayoutToolChange($event)")
+        kof-create-paytool((onChange)="onPayoutToolChange($event)", [contractBankAccount]="contractorBankAccount")
         .form-group
             .col-xs-12.col-sm-6.col-sm-offset-3
                 button.btn.btn-primary.pull-right(type="button", [disabled]="!isContractorReady || !isPayoutToolReady", (click)="createContract()") Создать контракт

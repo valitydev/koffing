@@ -36,7 +36,7 @@ export class SelectContractComponent implements OnInit {
 
     public selectContract() {
         this.selectedContract = this.findSelectedContract(this.contracts, this.selectedContractId);
-        this.onContractSelected.emit(_.toNumber(this.selectedContractId));
+        this.onContractSelected.emit(this.selectedContract);
     }
 
     private prepareSelectableItems(contracts: Contract[]) {

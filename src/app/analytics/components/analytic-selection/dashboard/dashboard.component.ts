@@ -23,6 +23,7 @@ import { GeoChartData } from './geo-chart-data.class';
 })
 export class DashboardComponent implements OnInit {
 
+    public shopID: number;
     public fromTime: any;
     public toTime: any;
     public fromTimeDate: Date;
@@ -70,18 +71,18 @@ export class DashboardComponent implements OnInit {
             this.geoLoading = true;
             this.guaranteeLoading = true;
             this.settlementLoading = true;
-            const shopID = Number(params['shopID']);
-            this.loadData(shopID);
+            this.shopID = Number(params['shopID']);
+            this.loadData();
         });
     }
 
-    private loadData(shopID: number) {
-        this.loadPaymentMethod(shopID);
-        this.loadGeoChartData(shopID);
-        this.loadRate(shopID);
-        this.loadConversionStat(shopID);
-        this.loadRevenueStat(shopID);
-        this.loadAccounts(shopID);
+    private loadData() {
+        this.loadPaymentMethod(this.shopID);
+        this.loadGeoChartData(this.shopID);
+        this.loadRate(this.shopID);
+        this.loadConversionStat(this.shopID);
+        this.loadRevenueStat(this.shopID);
+        this.loadAccounts(this.shopID);
     }
 
     private loadPaymentMethod(shopID: number) {

@@ -3,6 +3,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { SelectionOptions } from '../selection-options.class';
 import { ContractDecision } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/contract-decision.class';
 import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
+import { Contract } from 'koffing/backend/classes/contract.class';
 
 @Component({
     selector: 'kof-selection-contract',
@@ -20,17 +21,15 @@ export class SelectionContractComponent {
     
     @Output()
     public steppedForward = new EventEmitter();
-    @Output()
-    public steppedBackward = new EventEmitter();
 
     public onChangeContractor(value: ContractorTransfer) {
         this.isContractorValid = value.valid;
         this.decision.contractor = value.contractor;
     }
 
-    public onContractSelected(contractID: number) {
+    public onContractSelected(contract: Contract) {
         this.isContractorValid = true;
-        this.decision.contractID = contractID;
+        this.decision.contract = contract;
     }
 
     public newContractReady(params: any) {
@@ -38,10 +37,12 @@ export class SelectionContractComponent {
     }
 
     public selectOptionNew() {
+        this.isContractorValid = false;
         this.selectedOption = this.optionNew;
     }
 
     public selectOptionExisting() {
+        this.isContractorValid = false;
         this.selectedOption = this.optionExisting;
     }
 
@@ -49,9 +50,5 @@ export class SelectionContractComponent {
         if (this.isContractorValid) {
             this.steppedForward.emit(this.decision);
         }
-    }
-
-    public stepBackward() {
-        this.steppedBackward.emit();
     }
 }

@@ -8,6 +8,7 @@ import { ContractParams } from 'koffing/backend/classes/contract-params.class';
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
 import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
 import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
+import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 
 @Component({
     selector: 'kof-contract-create',
@@ -18,6 +19,7 @@ export class ContractCreateComponent {
     public isLoading: boolean = false;
     public isContractorReady: boolean = false;
     public contractor: Contractor;
+    public contractorBankAccount: BankAccount;
     public isPayoutToolReady: boolean = false;
     public payoutTool: PayoutToolBankAccount;
 
@@ -30,6 +32,7 @@ export class ContractCreateComponent {
     public onContractorChange(value: ContractorTransfer) {
         this.isContractorReady = value.valid;
         this.contractor = value.contractor;
+        this.contractorBankAccount = value.contractor.bankAccount;
     }
 
     public onPayoutToolChange(value: PaytoolTransfer) {

@@ -19,9 +19,6 @@ export class SelectionShopComponent {
     public payoutToolDecision: PaytoolDecision;
 
     @Output()
-    public steppedBackward = new EventEmitter();
-
-    @Output()
     public onCreated = new EventEmitter();
 
     private createShopArgs: CreateShopArgs;
@@ -46,9 +43,5 @@ export class SelectionShopComponent {
                 this.onCreated.emit();
             });
         }
-    }
-
-    public stepBackward() {
-        this.steppedBackward.emit();
     }
 }

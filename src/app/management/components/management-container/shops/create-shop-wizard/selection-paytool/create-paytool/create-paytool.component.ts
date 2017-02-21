@@ -1,18 +1,26 @@
-import { Component, Output, EventEmitter, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as _ from 'lodash';
 
 import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
-import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
+import { PaytoolTransfer } from './paytool-transfer.class';
 import { SuggestionsService } from 'koffing/suggestions/services/suggestions.service';
 import { SuggestionConverterService } from 'koffing/suggestions/services/suggestion-converter.service';
+import { BankAccountComparator } from './payout-tool-comparator.service';
 
 @Component({
     selector: 'kof-create-paytool',
-    templateUrl: 'create-paytool.component.pug'
+    templateUrl: 'create-paytool.component.pug',
+    styleUrls: [`.title-label { padding-top: 5px; }`]
 })
 export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
+
+    @Input()
+    public contractBankAccount: BankAccount;
+
+    @Input()
+    public isCopyBankAccountAvailable: boolean = true;
 
     @Output()
     public onChange = new EventEmitter();
@@ -20,7 +28,9 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
     public payoutTool: PayoutToolBankAccount;
 
     @ViewChild('createPaytoolForm')
-    private form: NgForm;
+    public form: NgForm;
+
+    public sameBankAccountChecked: boolean;
 
     constructor(
         private suggestionsService: SuggestionsService
@@ -35,33 +45,56 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
     }
 
     public emitData() {
-        this.onChange.emit(new PaytoolTransfer(this.payoutTool, this.form.valid));
+        this.compare();
+        const transfer = new PaytoolTransfer(this.payoutTool, this.form.valid);
+        this.onChange.emit(transfer);
     }
 
     public hasError(field: any): boolean {
         return field.dirty && field.invalid;
     }
 
+    public copyContractBankAccount() {
+        if (!this.sameBankAccountChecked) {
+            this.setFormControls(this.contractBankAccount);
+            this.emitData();
+        }
+    }
+
+    private compare() {
+        if (this.payoutTool) {
+            this.sameBankAccountChecked = BankAccountComparator.isEqual(this.payoutTool.bankAccount, this.contractBankAccount);
+        }
+    }
+
     private getInstance() {
         const bankAccount = new BankAccount();
         const instance = new PayoutToolBankAccount();
+        instance.currency = 'rub';
         instance.bankAccount = bankAccount;
         return instance;
     }
 
     private handleBankSuggestion(suggestion: BankSuggestion) {
         const suggestionAccount = SuggestionConverterService.toBankAccount(suggestion);
-        _.assign(this.payoutTool.bankAccount, suggestionAccount);
-        _.delay(() => {
-            this.emitData();
-        }, 0);
+        this.setFormControls(suggestionAccount);
+        this.emitData();
+    }
+
+    private setFormControls(object: BankAccount) {
+        if (_.isNil(object)) {
+            return;
+        }
+        _.forEach(object, (value, fieldName) => {
+            const control = this.form.controls[fieldName];
+            if (control) {
+                control.setValue(value);
+            }
+        });
     }
 
     private initBankSuggestions() {
-        this.suggestionsService.initBankSuggestions(
-            'input.paytool-bank-suggestions',
-            this.handleBankSuggestion.bind(this)
-        );
+        const selector = '.paytool-bank-suggestions';
+        this.suggestionsService.initBankSuggestions(selector, this.handleBankSuggestion.bind(this));
     }
-
 }

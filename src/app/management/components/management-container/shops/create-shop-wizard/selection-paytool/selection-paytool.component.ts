@@ -7,6 +7,7 @@ import { ContractDecision } from '../selection-contract/contract-decision.class'
 import { PaytoolDecision } from './paytool-decision.class';
 import { PaytoolTransfer } from './create-paytool/paytool-transfer.class';
 import { PaytoolDecisionService } from './paytool-decision.service';
+import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 
 @Component({
     selector: 'kof-selection-paytool',
@@ -30,8 +31,6 @@ export class SelectionPaytoolComponent implements AfterViewInit {
 
     @Output()
     public steppedForward = new EventEmitter();
-    @Output()
-    public steppedBackward = new EventEmitter();
 
     constructor(private paytoolDecisionService: PaytoolDecisionService,
                 private changeDetector: ChangeDetectorRef) {
@@ -55,11 +54,28 @@ export class SelectionPaytoolComponent implements AfterViewInit {
     }
 
     public selectOptionExisting() {
+        this.isPayoutToolValid = false;
         this.selectedOption = this.optionExisting;
     }
 
     public selectOptionNew() {
+        this.isPayoutToolValid = false;
         this.selectedOption = this.optionNew;
+    }
+
+    // TODO need separate decision classes
+    public getContractBankAccount(): BankAccount {
+        let result;
+        if (this.contractDecision.contract) {
+            result = this.contractDecision.contract.contractor.bankAccount;
+        } else {
+            result = this.contractDecision.contractor.bankAccount;
+        }
+        return result;
+    }
+
+    public isCopyBankAccountAvailable(): boolean {
+        return !!this.contractDecision.contractor;
     }
 
     public stepForward() {
@@ -74,19 +90,15 @@ export class SelectionPaytoolComponent implements AfterViewInit {
                 this.steppedForward.emit(decision);
             });
             // selected contract and new payout tools
-        } else if (!_.isUndefined(this.contractDecision.contractID) && !_.isUndefined(this.payoutToolsParams)) {
+        } else if (!_.isUndefined(this.contractDecision.contract) && !_.isUndefined(this.payoutToolsParams)) {
             this.isLoading = true;
-            this.paytoolDecisionService.createPayoutTool(this.contractDecision.contractID, this.payoutToolsParams).then((decision: PaytoolDecision) => {
+            this.paytoolDecisionService.createPayoutTool(this.contractDecision.contract.id, this.payoutToolsParams).then((decision: PaytoolDecision) => {
                 this.isLoading = false;
                 this.steppedForward.emit(decision);
             });
             // selected contract and selected payout tools
-        } else if (!_.isUndefined(this.contractDecision.contractID) && !_.isUndefined(this.payoutToolID)) {
-            this.steppedForward.emit(new PaytoolDecision(this.contractDecision.contractID, this.payoutToolID));
+        } else if (!_.isUndefined(this.contractDecision.contract) && !_.isUndefined(this.payoutToolID)) {
+            this.steppedForward.emit(new PaytoolDecision(this.contractDecision.contract.id, this.payoutToolID));
         }
-    }
-
-    public stepBackward() {
-        this.steppedBackward.emit();
     }
 }

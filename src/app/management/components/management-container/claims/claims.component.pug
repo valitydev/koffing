@@ -4,8 +4,8 @@
     .x_content
         label Детали:
         div(*ngFor="let item of changeset")
-            kof-shop-modification(*ngIf="item.partyModificationType === 'ShopModification' && item.shopModificationType === 'ShopUpdate'", [shop]="item.details", title="Изменение магазина")
-            kof-shop-modification(*ngIf="item.partyModificationType === 'ShopCreation'", [shop]="item.shop", title="Создание магазина")
+            kof-shop-modification(*ngIf="item.partyModificationType === 'ShopModification' && item.shopModificationType === 'ShopUpdate'", [shop]="item.details", title="Изменен магазин")
+            kof-shop-modification(*ngIf="item.partyModificationType === 'ShopCreation'", [shop]="item.shop", title="Создан магазин")
             kof-contract-creation(*ngIf="item.partyModificationType === 'ContractCreation'", [contract]="item.contract")
             kof-payout-tool-creation(*ngIf="item.partyModificationType === 'ContractModification' && item.contractModificationType === 'ContractPayoutToolCreation'", [payoutTool]="item.payoutTool")
             kof-shop-account-creation(*ngIf="item.partyModificationType === 'ShopModification' && item.shopModificationType === 'ShopAccountCreation'")

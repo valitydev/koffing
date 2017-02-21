@@ -12,6 +12,7 @@ import { Category } from 'koffing/backend/classes/category.class';
 import { SelectItem } from 'koffing/common/common.module';
 import { CreateShopArgs } from 'koffing/backend/classes/create-shop-args.class';
 import { ShopDetail } from 'koffing/backend/classes/shop-detail.class';
+import { ShopLocationUrl } from 'koffing/backend/classes/shop-location-url.class';
 
 @Component({
     selector: 'kof-edit-shop',
@@ -42,19 +43,22 @@ export class EditShopComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.shopEditing = this.getInstance();
         this.isLoading = true;
         Promise.all([
             this.loadCategories(),
             this.loadShop()
         ]).then(() => {
             this.isLoading = false;
+            this.shopEditing = this.getInstance(this.shop.details);
         });
     }
 
     public onFieldChange(path: string, value: any) {
         if (_.startsWith(path, 'details')) {
             this.shopEditing.details = this.shop.details;
+        }
+        if (_.startsWith(path, 'details.location')) {
+            this.shopEditing.details.location = new ShopLocationUrl();
         }
         _.set(this.shopEditing, path, value);
     }
@@ -104,14 +108,15 @@ export class EditShopComponent implements OnInit {
         });
     }
 
-    public selectContract(contractID: string) {
+    public onSelectContract(contractID: string) {
         const id = Number(contractID);
         this.shopEditing.contractID = id;
+        this.shopEditing.payoutToolID = this.payoutTools[0].id;
         this.shopContract = this.findContract(id);
         this.loadShopPayoutTools(id);
     }
 
-    public selectPayoutTool(payoutToolID: string) {
+    public onSelectPayoutTool(payoutToolID: string) {
         const id = Number(payoutToolID);
         this.shopEditing.payoutToolID = Number(id);
         this.shopPayoutTool = this.findPayoutTool(id);
@@ -124,7 +129,6 @@ export class EditShopComponent implements OnInit {
     public updateShop(form: any) {
         if (form.valid) {
             this.isLoading = true;
-            this.shopEditing.details.name = this.fillShopName();
             this.shopService.updateShop(this.shopID, this.shopEditing).then(() => {
                 this.isLoading = false;
                 this.router.navigate(['/management']);
@@ -136,11 +140,6 @@ export class EditShopComponent implements OnInit {
         this.shopEditing.categoryID = _.toNumber(categoryID);
     }
 
-    private fillShopName() {
-        const detailsName = this.shopEditing.details.name;
-        return detailsName ? detailsName : this.shop.details.name;
-    }
-
     private findPayoutTool(payoutToolID: number) {
         return _.find(this.payoutTools, (payoutTool) => payoutTool.id === payoutToolID);
     }
@@ -149,10 +148,9 @@ export class EditShopComponent implements OnInit {
         return _.find(this.contracts, (contract) => contract.id === contractID);
     }
 
-    private getInstance(): CreateShopArgs {
-        const shopDetail = new ShopDetail();
+    private getInstance(details: ShopDetail): CreateShopArgs {
         const instance = new CreateShopArgs();
-        instance.details = shopDetail;
+        instance.details = details;
         return instance;
     }
 }

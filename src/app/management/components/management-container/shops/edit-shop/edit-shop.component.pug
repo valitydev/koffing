@@ -20,12 +20,12 @@
                             .col-xs-12.col-sm-3
                                 label.text-left Адрес
                             .col-xs-12.col-sm-6
-                                input.form-control(type="text", [ngModel]="shop.details.location ? shop.details.location.url : null", (ngModelChange)="onFieldChange('details.location.url', $event)", name="shopLocation")
+                                input.form-control(type="text", [ngModel]="shop.details.location ? shop.details.location.url : null", placeholder="https://example.com", (ngModelChange)="onFieldChange('details.location.url', $event)", name="shopLocation")
                         .form-group
                             .col-xs-12.col-sm-3
                                 label.text-left Callback handler URL
                             .col-xs-12.col-sm-6
-                                input.form-control(type="text", [ngModel]="shop.callbackHandler ? shop.callbackHandler.url : null", (ngModelChange)="onFieldChange('callbackUrl', $event)", name="callbackHandlerUrl")
+                                input.form-control(type="text", [ngModel]="shop.callbackHandler ? shop.callbackHandler.url : null", placeholder="https://example.com", (ngModelChange)="onFieldChange('callbackUrl', $event)", name="callbackHandlerUrl")
                         .form-group
                             .col-xs-12.col-sm-3
                                 label.text-left Категория
@@ -35,7 +35,7 @@
                             .col-xs-12.col-sm-3
                                 label.text-left Контракт
                             .col-xs-12.col-sm-6
-                                kof-select([ngModel]="shop.contractID", [items]="contractItems", (onChange)="selectContract($event)", name='contractID')
+                                kof-select([ngModel]="shop.contractID", [items]="contractItems", (onChange)="onSelectContract($event)", name='contractID')
                         .form-group
                             .col-xs-12.col-sm-3
                             .col-xs-12.col-sm-6
@@ -44,7 +44,7 @@
                             .col-xs-12.col-sm-3
                                 label.text-left Средство вывода
                             .col-xs-12.col-sm-6
-                                kof-select([ngModel]="shop.payoutToolID", (onChange)="selectPayoutTool($event)", [items]="payoutToolItems", name='payoutToolID')
+                                kof-select([ngModel]="shop.payoutToolID", (onChange)="onSelectPayoutTool($event)", [items]="payoutToolItems", name='payoutToolID')
                         .form-group
                             .col-xs-12.col-sm-3
                             .col-xs-12.col-sm-6
@@ -52,5 +52,5 @@
                         .ln_solid
                         .form-group
                             .col-xs-12.col-sm-6.col-sm-offset-3
-                                button.btn.btn-primary(type="submit", [disabled]="form.invalid || form.pristine") Создать заявку
-                                a.btn.btn-default.pull-right(type="reset", [routerLink]=["/management"]) Назад
+                                a.btn.btn-default(type="reset", [routerLink]=["/management"]) Назад
+                                button.btn.btn-primary.pull-right(type="submit", [disabled]="form.invalid || form.pristine") Создать заявку

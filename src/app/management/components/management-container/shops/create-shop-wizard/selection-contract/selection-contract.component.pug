@@ -20,7 +20,7 @@ br
     )
 .actionBar
     .text-center
-        a.btn.btn-primary((click)="stepBackward()") Отмена
+        a.btn.btn-danger(data-toggle="modal", data-target=".cancel-create-shop-modal", data-backdrop="false") Отмена
         a.btn(
             (click)="stepForward()",
             [ngClass]="{'buttonDisabled': isContractorValid === false, " +

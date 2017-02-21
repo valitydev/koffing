@@ -6,7 +6,7 @@ kof-loading([isLoading]="isLoading")
                     .col-xs-12.col-sm-1
                         label.control-label Магазин
                     .col-xs-12.col-sm-6
-                        kof-select(*ngIf="shopItems.length", [(ngModel)]="currentShopID", [items]="shopItems", (onChange)="navigateToShop()", [modelOptions]="{standalone: true}", name='shopId')
+                        kof-select(*ngIf="shopItems.length", [(ngModel)]="currentShopID", [items]="shopItems", (onChange)="navigate()", [modelOptions]="{standalone: true}", name='shopId')
             ul.nav.nav-tabs.bar_tabs(*ngIf="currentShopID")
                 li.hand-cursor([routerLink]="['dashboard']", [routerLinkActive]="['active']")
                     a Статистика

@@ -45,10 +45,13 @@ export class ConversionComponent implements OnChanges {
     public ngOnChanges() {
         if (this.chartData) {
             this.labels = ConversionDataService.toLabels(this.fromTime, this.chartData);
-            this.datasets = [{
-                data: ConversionDataService.toData(this.chartData),
-                label: 'Конверсия'
-            }];
+            const data = ConversionDataService.toData(this.chartData);
+            if (data.length > 0) {
+                this.datasets = [{
+                    data,
+                    label: 'Конверсия'
+                }];
+            }
         }
     }
 }

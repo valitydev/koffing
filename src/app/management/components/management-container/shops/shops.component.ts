@@ -36,15 +36,6 @@ export class ShopsComponent implements OnInit {
         });
     }
 
-    public activateShop(shop: any) {
-        this.isLoading = true;
-        this.shopService.activateShop(shop.id).then(() => {
-            this.loadShops().then(() => {
-                this.isLoading = false;
-            });
-        });
-    }
-
     public loadShops(): Promise<Shop[]> {
         this.panelsVisibilities = {};
         return new Promise((resolve) => {
@@ -79,9 +70,5 @@ export class ShopsComponent implements OnInit {
         if (this.categories.length > 0) {
             return (_.find(this.categories, (category: Category) => category.categoryID === categoryID)).name;
         }
-    }
-
-    public isDetailsAvailable(shop: Shop): boolean {
-        return !shop.isBlocked;
     }
 }

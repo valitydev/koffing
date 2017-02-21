@@ -46,10 +46,13 @@ export class RevenueComponent implements OnChanges {
     public ngOnChanges() {
         if (this.chartData) {
             this.labels = RevenueDataService.toLabels(this.fromTime, this.chartData);
-            this.datasets = [{
-                data: RevenueDataService.toData(this.chartData),
-                label: 'Оборот'
-            }];
+            const data = RevenueDataService.toData(this.chartData);
+            if (data.length > 0) {
+                this.datasets = [{
+                    data,
+                    label: 'Оборот'
+                }];
+            }
         }
     }
 }

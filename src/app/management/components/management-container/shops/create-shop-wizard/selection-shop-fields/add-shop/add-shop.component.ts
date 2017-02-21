@@ -5,8 +5,8 @@ import { CategoryService } from 'koffing/backend/backend.module';
 import { SelectItem } from 'koffing/common/common.module';
 import { ShopDetail } from 'koffing/backend/classes/shop-detail.class';
 import { ShopLocationUrl } from 'koffing/backend/classes/shop-location-url.class';
-import { ShopDetailTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-shop-fields/add-shop/shop-detail-transfer.class';
-import { ShopLocation } from 'koffing/backend/classes/shop-location.class';
+import { ShopDetailTransfer } from './shop-detail-transfer.class';
+import { Category } from 'koffing/backend/classes/category.class';
 
 @Component({
     selector: 'kof-add-shop',
@@ -43,9 +43,12 @@ export class AddShopComponent implements OnInit {
 
     public getCategories() {
         return new Promise((resolve) => {
-            this.categoryService.getCategories().then(categories => {
-                this.categories = _.map(categories, (category: any) => new SelectItem(category.categoryID, category.name));
-                this.categoryId = categories[0].categoryID;
+            this.categoryService.getCategories().then((categories: Category[]) => {
+                this.categories = _.chain(categories)
+                    .sortBy((category) => category.name)
+                    .map((category) => new SelectItem(category.categoryID, category.name))
+                    .value();
+                this.categoryId = this.categories[0].value;
                 resolve();
             });
         });
@@ -62,11 +65,5 @@ export class AddShopComponent implements OnInit {
     public setLocation(url: string, form: any) {
         this.shopDetail.location = new ShopLocationUrl(url);
         this.keyup(form);
-    }
-
-    private getInstance(): ShopDetail {
-        const instance = new ShopDetail();
-        instance.location = new ShopLocation();
-        return instance;
     }
 }

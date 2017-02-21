@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { Contractor } from 'koffing/backend/classes/contractor.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 import { RussianLegalEntity } from 'koffing/backend/classes/russian-legal-entity.class';
-import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
+import { ContractorTransfer } from './contractor-transfer.class';
 import { SuggestionsService } from 'koffing/suggestions/services/suggestions.service';
 import { SuggestionConverterService } from 'koffing/suggestions/services/suggestion-converter.service';
 
@@ -21,11 +21,11 @@ export class CreateContractComponent implements OnInit, AfterViewInit {
     public contractor: Contractor;
 
     @ViewChild('createContractForm')
-    private form: NgForm;
+    public form: NgForm;
 
-    constructor(
-        private suggestionsService: SuggestionsService
-    ) { }
+    public sameActualAddressChecked: boolean;
+
+    constructor(private suggestionsService: SuggestionsService) { }
 
     public ngOnInit() {
         this.contractor = this.createInstance();
@@ -36,18 +36,33 @@ export class CreateContractComponent implements OnInit, AfterViewInit {
         this.initContractorSuggestions();
     }
 
+    public emitAddress() {
+        const legalEntity = this.contractor.legalEntity as RussianLegalEntity;
+        this.sameActualAddressChecked = _.chain(legalEntity.actualAddress)
+            .trim().isEqual(_.trim(legalEntity.postAddress)).value();
+        this.emitData();
+    }
+
+    public isCopyPostAddressAvailable() {
+        const legalEntity = this.contractor.legalEntity as RussianLegalEntity;
+        return _.isUndefined(legalEntity.postAddress);
+    }
+
     public emitData() {
         this.onChange.emit(new ContractorTransfer(this.contractor, this.form.valid));
     }
 
-    public emitDataDelayed() {
-        _.delay(() => {
-            this.emitData();
-        }, 0);
-    }
-
     public hasError(field: any): boolean {
         return field.dirty && field.invalid;
+    }
+
+    public copyPostAddress() {
+        if (!this.sameActualAddressChecked) {
+            const legalEntity = this.contractor.legalEntity as RussianLegalEntity;
+            legalEntity.actualAddress = legalEntity.postAddress;
+            this.form.controls['actualAddress'].setValue(legalEntity.actualAddress);
+            this.emitData();
+        }
     }
 
     private createInstance() {
@@ -61,27 +76,32 @@ export class CreateContractComponent implements OnInit, AfterViewInit {
 
     private handleBankSuggestion(suggestion: BankSuggestion) {
         const suggestionAccount = SuggestionConverterService.toBankAccount(suggestion);
-        _.assign(this.contractor.bankAccount, suggestionAccount);
-        this.emitDataDelayed();
+        this.setFormControls(suggestionAccount);
+        this.emitData();
     }
 
     private handleContractorSuggestion(suggestion: OgranizationSuggestion) {
         const suggestionEntity = SuggestionConverterService.toRussianLegalEntity(suggestion);
-        _.assign(this.contractor.legalEntity, suggestionEntity);
-        this.emitDataDelayed();
+        this.setFormControls(suggestionEntity);
+        this.emitData();
+    }
+
+    private setFormControls(object: any) {
+        _.forEach(object, (value, fieldName) => {
+            const control = this.form.controls[fieldName];
+            if (control) {
+                control.setValue(value);
+            }
+        });
     }
 
     private initBankSuggestions() {
-        this.suggestionsService.initBankSuggestions(
-            'input.contract-bank-suggestions',
-            this.handleBankSuggestion.bind(this)
-        );
+        const selector = '.contract-bank-suggestions';
+        this.suggestionsService.initBankSuggestions(selector, this.handleBankSuggestion.bind(this));
     }
 
     private initContractorSuggestions() {
-        this.suggestionsService.initContractorSuggestions(
-            'input.contractor-suggestions',
-            this.handleContractorSuggestion.bind(this)
-        );
+        const selector = '.contractor-suggestions';
+        this.suggestionsService.initContractorSuggestions(selector, this.handleContractorSuggestion.bind(this));
     }
 }

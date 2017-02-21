@@ -1,5 +1,5 @@
 kof-loading([isLoading]="isLoading")
-    .tile(*ngIf="contractDecision.contractID !== undefined")
+    .tile(*ngIf="contractDecision.contract !== undefined")
         .row
             .col-md-12
                 .text-center
@@ -14,16 +14,18 @@ kof-loading([isLoading]="isLoading")
     .tile
         kof-create-paytool(
             *ngIf="selectedOption === optionNew",
+            [contractBankAccount]="getContractBankAccount()",
+            [isCopyBankAccountAvailable]="isCopyBankAccountAvailable()",
             (onChange)="onPayoutToolChange($event)"
         )
         kof-select-paytool(
             *ngIf="selectedOption === optionExisting",
-            [contractID]="contractDecision.contractID",
+            [contractID]="contractDecision.contract.id",
             (onPayoutToolSelected)="onPayoutToolSelected($event)"
         )
     .actionBar
         .text-center
-            a.btn.btn-primary((click)="stepBackward()") Отмена
+            a.btn.btn-danger(data-toggle="modal", data-target=".cancel-create-shop-modal", data-backdrop="false") Отмена
             a.btn.btn-success(
                 (click)="stepForward()",
                 [ngClass]="{'buttonDisabled': isPayoutToolValid === false, " +

@@ -13,7 +13,7 @@ module.exports = {
             './node_modules/bootstrap/dist/js/bootstrap.js',
             './node_modules/gentelella/build/js/custom.js',
             './node_modules/keycloak-js/dist/keycloak.js',
-            './src/thirdparty/suggestions/suggestions.js'
+            './node_modules/suggestions-jquery/dist/js/jquery.suggestions.js'
         ],
         'app': './src/main.ts'
     },
@@ -23,7 +23,7 @@ module.exports = {
         alias: {
             'Keycloak': 'keycloak-js/dist/keycloak.js',
             'jquery': 'jquery/dist/jquery',
-            'suggestions': __dirname + '/../src/thirdparty/suggestions/suggestions.js',
+            'suggestions': 'suggestions-jquery/dist/js/jquery.suggestions.js',
             'koffing': __dirname + '/../src/app'
         },
         extensions: ['', '.ts', '.js']

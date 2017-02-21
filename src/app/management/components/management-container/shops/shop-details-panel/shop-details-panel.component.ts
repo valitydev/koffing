@@ -18,15 +18,17 @@ export class ShopDetailsPanelComponent {
     public shop: Shop;
 
     @Output()
-    public shopSuspended = new EventEmitter();
+    public onChange = new EventEmitter();
     
     constructor(
         private shopService: ShopService
     ) { }
     
     public suspendShop() {
-        this.shopService.suspendShop(this.shop.id).then(() => {
-            this.shopSuspended.emit();
-        });
+        this.shopService.suspendShop(this.shop.id).then(() => this.onChange.emit());
+    }
+
+    public activateShop() {
+        this.shopService.activateShop(this.shop.id).then(() => this.onChange.emit());
     }
 }

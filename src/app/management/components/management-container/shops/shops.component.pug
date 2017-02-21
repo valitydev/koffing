@@ -3,28 +3,23 @@
         table(*ngIf="shops.length").table.table-hover.table-striped
             thead
                 tr
-                    th ID магазина
-                    th Название магазина
+                    th ID
+                    th Название
                     th.hidden-xs Адрес
                     th Категория
                     th
             tbody(*ngFor="let shop of shops; let i = index")
-                tr([ngClass]="{'success': shop.isSuspended, 'danger': shop.isBlocked}", (click)="isDetailsAvailable(shop) && showDetailsPanel(i)")
+                tr([ngClass]="{'success': shop.isSuspended, 'danger': shop.isBlocked}", (click)="showDetailsPanel(i)")
                     td {{shop.id}}
                     td {{shop.details.name}}
                     td.hidden-xs {{shop.details.location ? shop.details.location.url : ''}}
                     td {{getCategoryName(shop.categoryID)}}
-                    td(*ngIf="shop.isSuspended && !shop.isBlocked")
-                        div.pull-right.small-container
-                            i.fa.custom-chevron([ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}")
-                        button.btn.btn-success.btn-xs.pull-right((click)="activateShop(shop)") Активировать
-                    td(*ngIf="!shop.isSuspended && isDetailsAvailable(shop)")
+                    td(*ngIf="!shop.isBlocked")
                         div.pull-right.small-container
                             i.fa.custom-chevron([ngClass]="{'fa-chevron-down': isDetailsPanelVisible(i), 'fa-chevron-right': !isDetailsPanelVisible(i)}")
                     td(*ngIf="shop.isBlocked")
                         span.pull-right Заблокирован
-                    td(*ngIf="!isDetailsAvailable(shop)")
                 tr(*ngIf="isDetailsPanelVisible(i)")
                     td(colspan=6)
-                        kof-shop-details-panel([shop]="shop", (shopSuspended)="loadData()")
+                        kof-shop-details-panel([shop]="shop", (onChange)="loadData()")
     a.btn.btn-primary.pull-right([routerLink]="['/shops/create']") Создать магазин
