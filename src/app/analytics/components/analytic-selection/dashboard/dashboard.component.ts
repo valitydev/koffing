@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
             new RequestParams(this.fromTime, this.toTime)
         ).then((rateStat: any) => {
             this.rateLoading = false;
-            this.uniqueCount = rateStat[0] ? rateStat[0].uniqueCount : 0;
+            this.uniqueCount = rateStat ? rateStat.uniqueCount : 0;
         });
     }
 
