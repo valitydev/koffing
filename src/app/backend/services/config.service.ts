@@ -13,7 +13,7 @@ export class ConfigService {
         return new Promise(resolve => {
             this.http.get('appConfig.json').map(res => res.json())
                 .subscribe(data => {
-                    this.capiUrl = data.capiUrl;
+                    this.capiUrl = `${data.capiEndpoint}/v1`;
                     this.suggestionsToken = data.suggestionsToken;
                     resolve();
                 });

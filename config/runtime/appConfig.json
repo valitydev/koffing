@@ -1,4 +1,4 @@
 {
-  "capiUrl": "http://api.rbk.test:8080/v1",
+  "capiEndpoint": "http://api.rbk.test:8080",
   "suggestionsToken": "6abd2a4ecb51b2063471e32c1445d3987ff4b11a"
 }
