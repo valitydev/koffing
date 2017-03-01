@@ -19,10 +19,9 @@ export class SearchFormComponent implements OnInit {
     @Output()
     public onSearch: EventEmitter<any> = new EventEmitter<any>();
 
+    public isInvalidDate: boolean = false;
     private statuses: any;
-
     private fromTime: Date;
-
     private toTime: Date;
 
     get searchFromTime() {
@@ -51,6 +50,11 @@ export class SearchFormComponent implements OnInit {
     }
 
     public search() {
+        if (this.searchFromTime.getTime() >= this.searchToTime.getTime()) {
+            this.isInvalidDate = true;
+            return false;
+        }
+        this.isInvalidDate = false;
         this.onSearch.emit();
     }
 }

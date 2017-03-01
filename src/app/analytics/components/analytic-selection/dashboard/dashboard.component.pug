@@ -4,16 +4,16 @@
             .form-group
                 label.control-label Статистика с&nbsp;
                 .ui-calendar
-                    p-calendar.ui-inputtext.statistics(name="fromTime", [(ngModel)]="fromTimeDate", dateFormat="dd.mm.yy")
+                    p-calendar.ui-inputtext.statistics([(ngModel)]="fromTimeDate", name="fromTime", dateFormat="dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}")
             .form-group
                 label.control-label &nbsp;&nbsp;по&nbsp;
                 .ui-calendar
-                    p-calendar.ui-inputtext.statistics(name="toTime", [(ngModel)]="toTimeDate", dateFormat = "dd.mm.yy")
+                    p-calendar.ui-inputtext.statistics([(ngModel)]="toTimeDate", name="toTime", dateFormat = "dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}")
             span &nbsp;
             button.btn.btn-default(style="margin-bottom: 0; margin-right: 0; margin-left: 5px;", (click)="loadData()") Показать
 .row
     .col-xs-12
-        .row.tile_count
+        .tile_count
             .col-xs-6.col-sm-4.col-md-2.tile_stats_count
                 span.count_top Оборот
                     .dashboard_stats_count
