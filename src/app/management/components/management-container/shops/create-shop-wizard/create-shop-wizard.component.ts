@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { ClaimCreateBroadcaster } from 'koffing/broadcaster/services/claim-create.broadcaster.service';
 import { ContractDecision } from './selection-contract/contract-decision.class';
 import { PaytoolDecision } from './selection-paytool/paytool-decision.class';
 
@@ -26,7 +27,10 @@ export class CreateShopWizardComponent implements OnInit {
     public contractDecision: ContractDecision;
     public payoutToolDecision: PaytoolDecision;
 
-    constructor(private router: Router) { }
+    constructor(
+        private router: Router,
+        private claimCreateBroadcaster: ClaimCreateBroadcaster
+    ) {}
 
     public ngOnInit() {
         this.currentStep = this.contractStep;
@@ -47,6 +51,7 @@ export class CreateShopWizardComponent implements OnInit {
     }
 
     public finishWizard() {
+        this.claimCreateBroadcaster.fire();
         this.returnToManagement();
     }
 }

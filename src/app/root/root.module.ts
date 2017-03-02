@@ -11,6 +11,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopPanelComponent } from './components/top-panel/top-panel.component';
 import { ContainerComponent } from './components/container/container.component';
 import { HttpErrorHandleComponent } from './components/http-error-handle/http-error-handle.component';
+import { NotificationHandleComponent } from './components/notification-handle/notification-handle.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { HttpErrorHandleComponent } from './components/http-error-handle/http-er
         ContainerComponent,
         SidebarComponent,
         TopPanelComponent,
-        HttpErrorHandleComponent
+        HttpErrorHandleComponent,
+        NotificationHandleComponent
     ]
 })
 export class RootModule { }

@@ -6,6 +6,7 @@ import { Contractor } from 'koffing/backend/classes/contractor.class';
 import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
 import { ContractParams } from 'koffing/backend/classes/contract-params.class';
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
+import { ClaimCreateBroadcaster } from 'koffing/broadcaster/services/claim-create.broadcaster.service';
 import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
 import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
@@ -26,7 +27,8 @@ export class ContractCreateComponent {
     constructor(
         private router: Router,
         private contractService: ContractService,
-        private claimReceiveBroadcaster: ClaimReceiveBroadcaster
+        private claimReceiveBroadcaster: ClaimReceiveBroadcaster,
+        private claimCreateBroadcaster: ClaimCreateBroadcaster
     ) {}
 
     public onContractorChange(value: ContractorTransfer) {
@@ -49,6 +51,7 @@ export class ContractCreateComponent {
             this.contractService.createContract(contractParams).then(() => {
                 this.isLoading = false;
                 this.claimReceiveBroadcaster.fire();
+                this.claimCreateBroadcaster.fire();
                 this.navigateBack();
             });
         }

@@ -3,15 +3,15 @@ import { Observable } from 'rxjs/Observable';
 import { Broadcaster } from './broadcaster.service';
 
 @Injectable()
-export class HttpErrorBroadcaster {
+export class ClaimCreateBroadcaster {
 
     constructor(private broadcaster: Broadcaster) {}
 
-    public fire(status: number) {
-        this.broadcaster.broadcast(HttpErrorBroadcaster, status);
+    public fire() {
+        this.broadcaster.broadcast(ClaimCreateBroadcaster);
     }
 
     public on(): Observable<string> {
-        return this.broadcaster.on<string>(HttpErrorBroadcaster);
+        return this.broadcaster.on<string>(ClaimCreateBroadcaster);
     }
 }
