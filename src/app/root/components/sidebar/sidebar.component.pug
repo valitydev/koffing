@@ -8,14 +8,22 @@
             .menu_section
                 ul.nav.side-menu
                     li([routerLinkActive]="['active']")
-                        a(routerLink="/analytics")
+                        a([routerLink]=["/analytics"])
                             i.fa.fa-bar-chart-o
                             | Аналитика
                     li([routerLinkActive]="['active']")
-                        a(routerLink="/management")
+                        a([routerLink]=["/management"])
                             i.fa.fa-shopping-cart
                             | Управление магазинами
                     li([routerLinkActive]="['active']")
-                        a(routerLink="/tokenization")
+                        a([routerLink]=["/tokenization"])
                             i.fa.fa-key
                             | Токенизация
+                    li
+                        a(href="https://rbkmoney.github.io/docs", target="_blank")
+                            i.fa.fa-file
+                            | Документация
+                    li
+                        a(href="https://rbkmoney.github.io/api", target="_blank")
+                            i.fa.fa-share-alt
+                            | API
