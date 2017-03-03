@@ -25,6 +25,7 @@ export class AuthService {
         if (this.koffingInstance) {
             result.profileName = this.koffingInstance.tokenParsed.name;
             result.token = this.koffingInstance.token;
+            result.authUrl = this.koffingInstance.authServerUrl;
         }
         return result;
     }
