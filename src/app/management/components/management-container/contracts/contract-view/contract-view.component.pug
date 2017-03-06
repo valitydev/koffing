@@ -17,8 +17,8 @@
                 .col-xs-12.col-sm-8
                     div {{contract.terminatedAt | date:'dd.MM.yy'}}
             div(*ngIf="contract.contractor")
-                .ln_solid
                 div(*ngIf="contract.contractor.bankAccount")
+                    .ln_solid
                     h5 Банковские реквизиты
                     .ln_solid
                     .form-group

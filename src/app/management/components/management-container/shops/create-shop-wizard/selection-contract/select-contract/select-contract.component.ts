@@ -15,13 +15,9 @@ export class SelectContractComponent implements OnInit {
     public onContractSelected = new EventEmitter();
 
     public selectableItems: SelectItem[] = [];
-
     public selectedContractId: number;
-
     public contracts: Contract[];
-
     public selectedContract: Contract;
-
     public isLoading: boolean = true;
 
     constructor(private contractService: ContractService) { }

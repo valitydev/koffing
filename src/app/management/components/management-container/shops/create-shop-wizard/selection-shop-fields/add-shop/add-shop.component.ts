@@ -19,12 +19,8 @@ export class AddShopComponent implements OnInit {
     public onChange = new EventEmitter();
 
     public categories: SelectItem[] = [];
-
-    public isCategorySelected: boolean = false;
     public isLoading: boolean = false;
-    public latestFormState: any;
     public url: string;
-
     public shopDetail: ShopDetail;
     public categoryId: number;
     public callbackUrl: string;

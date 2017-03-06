@@ -1,36 +1,24 @@
 kof-loading([isLoading]="isLoading")
-    .tile(*ngIf="contractDecision.contract !== undefined")
-        .row
-            .col-md-12
-                .text-center
-                    .btn-group.btn-group-justified(data-toggle="buttons")
-                        label.btn.btn-default((click)="selectOptionNew()")
-                            input(type="radio", name="way", value="new")
-                            span Добавить новое средство вывода
-                        label.btn.btn-default((click)="selectOptionExisting()")
-                            input(type="radio", name="way", value="existing")
-                            span Выбрать существующее средство вывода
+    .btn-group.btn-group-justified.text-center(data-toggle="buttons", *ngIf="contractDecision.contract !== undefined")
+        label.btn.btn-default((click)="selectOptionNew()")
+            input(type="radio", name="way", value="new")
+            span Добавить новое средство вывода
+        label.btn.btn-default((click)="selectOptionExisting()")
+            input(type="radio", name="way", value="existing")
+            span Выбрать существующее средство вывода
     br
-    .tile
-        kof-create-paytool(
-            *ngIf="selectedOption === optionNew",
-            [contractBankAccount]="getContractBankAccount()",
-            [isCopyBankAccountAvailable]="isCopyBankAccountAvailable()",
-            (onChange)="onPayoutToolChange($event)"
-        )
-        kof-select-paytool(
-            *ngIf="selectedOption === optionExisting",
-            [contractID]="contractDecision.contract.id",
-            (onPayoutToolSelected)="onPayoutToolSelected($event)"
-        )
+    kof-create-paytool(
+        *ngIf="selectedOption === optionNew",
+        [contractBankAccount]="getContractBankAccount()",
+        [isCopyBankAccountAvailable]="isCopyBankAccountAvailable()",
+        (onChange)="onPayoutToolChange($event)"
+    )
+    kof-select-paytool(
+        *ngIf="selectedOption === optionExisting",
+        [contractID]="contractDecision.contract.id",
+        (onPayoutToolSelected)="onPayoutToolSelected($event)"
+    )
     .actionBar
         .text-center
             a.btn.btn-danger(data-toggle="modal", data-target=".cancel-create-shop-modal", data-backdrop="false") Отмена
-            a.btn.btn-success(
-                (click)="stepForward()",
-                [ngClass]="{'buttonDisabled': isPayoutToolValid === false, " +
-                "'btn-default': showFinishButton === true," +
-                "'btn-success': showFinishButton === false}"
-            )
-                span(*ngIf="showFinishButton === true") Завершить
-                span(*ngIf="showFinishButton === false") Вперед
+            a.btn.btn-success((click)="stepForward()", [ngClass]="{'buttonDisabled': isPayoutToolValid === false}") Вперед

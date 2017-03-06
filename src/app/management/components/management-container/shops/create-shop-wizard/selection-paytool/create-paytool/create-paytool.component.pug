@@ -6,7 +6,7 @@
         .row
             .col-xs-12.col-sm-12
                 span Поля с иконкой&nbsp;
-                span.fa.fa-magic
+                i.fa.fa-magic
                 span &nbsp;поддерживают автозаполнение
     .x_content
         form.form-horizontal.form-label-left.css-form(novalidate, name="createPaytoolForm", #createPaytoolForm="ngForm")
@@ -25,14 +25,14 @@
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.paytool-bank-suggestions(type="text", required, name="bankBik",
                         [(ngModel)]="payoutTool.bankAccount.bankBik", #bankBik="ngModel", (keyup)="emitData()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankName)}")
                 .col-xs-12.col-sm-3
                     label.text-left Наименование банка *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.paytool-bank-suggestions(type="text", required, name="bankName",
                         [(ngModel)]="payoutTool.bankAccount.bankName", #bankName="ngModel", (keyup)="emitData()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankPostAccount)}")
                 .col-xs-12.col-sm-3
                     label.text-left Корреспондентский счет *

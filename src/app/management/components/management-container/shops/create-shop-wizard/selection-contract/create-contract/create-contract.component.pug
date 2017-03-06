@@ -6,7 +6,7 @@
         .row
             .col-xs-12.col-sm-12
                 span Поля с иконкой&nbsp;
-                span.fa.fa-magic
+                i.fa.fa-magic
                 span &nbsp;поддерживают автозаполнение
     .x_content
         form.form-horizontal.form-label-left.css-form(novalidate, name="createContractForm", #createContractForm="ngForm")
@@ -18,28 +18,28 @@
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="registeredName", required,
                         [(ngModel)]="contractor.legalEntity.registeredName", #registeredName="ngModel", (keyup)="emitData()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(registeredNumber)}")
                 .col-xs-12.col-sm-3
                     label.text-left ОГРН *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="registeredNumber", required,
                         [(ngModel)]="contractor.legalEntity.registeredNumber", #registeredNumber="ngModel", (keyup)="emitData()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(inn)}")
                 .col-xs-12.col-sm-3
                     label.text-left ИНН *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="inn", required,
                         [(ngModel)]="contractor.legalEntity.inn", #inn="ngModel",(keyup)="emitData()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(postAddress)}")
                 .col-xs-12.col-sm-3
                     label.text-left Почтовый адрес *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="postAddress", required,
                         [(ngModel)]="contractor.legalEntity.postAddress", #postAddress="ngModel", (keyup)="emitAddress()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(actualAddress)}")
                 .col-xs-12.col-sm-3
                     label.text-left Фактический адрес *
@@ -82,14 +82,14 @@
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contract-bank-suggestions(type="text", required, name="bankBik",
                         [(ngModel)]="contractor.bankAccount.bankBik", #bankBik="ngModel", (keyup)="emitData()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankName)}")
                 .col-xs-12.col-sm-3
                     label.text-left Наименование банка *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contract-bank-suggestions(type="text", required, name="bankName",
                         [(ngModel)]="contractor.bankAccount.bankName", #bankName="ngModel", (keyup)="emitData()")
-                    span.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+                    i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankPostAccount)}")
                 .col-xs-12.col-sm-3
                     label.text-left Корреспондентский счет *

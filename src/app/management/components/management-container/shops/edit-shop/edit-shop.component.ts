@@ -27,20 +27,18 @@ export class EditShopComponent implements OnInit {
     public shopPayoutTool: PayoutTool;
     public contracts: Contract[] = [];
     public payoutTools: PayoutTool[] = [];
-
     public contractItems: SelectItem[] = [];
     public payoutToolItems: SelectItem[] = [];
     public categoryItems: SelectItem[] = [];
-
-    public isShowPayoutAccountDetails: boolean = false;
     public isLoading: boolean = false;
 
-    constructor(private route: ActivatedRoute,
-                private router: Router,
-                private categoryService: CategoryService,
-                private shopService: ShopService,
-                private contractService: ContractService) {
-    }
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private categoryService: CategoryService,
+        private shopService: ShopService,
+        private contractService: ContractService
+    ) {}
 
     public ngOnInit() {
         this.isLoading = true;
