@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { TokenizationRoutingModule } from './tokenization-routing.module';
-import { OfflineTokenComponent } from './components/offline-token/offline-token.component';
+import { TokenComponent } from 'koffing/tokenization/components/token/token.component';
 
 @NgModule({
     imports: [
@@ -10,9 +10,9 @@ import { OfflineTokenComponent } from './components/offline-token/offline-token.
         TokenizationRoutingModule
     ],
     declarations: [
-        OfflineTokenComponent
+        TokenComponent
     ]
 })
 export class TokenizationModule { }
 
-export * from './components/offline-token/offline-token.component';
+export * from './components/token/token.component';

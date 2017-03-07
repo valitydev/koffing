@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { OfflineTokenComponent } from './components/offline-token/offline-token.component';
+import { TokenComponent } from 'koffing/tokenization/components/token/token.component';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
                 path: 'tokenization',
-                component: OfflineTokenComponent
+                component: TokenComponent
             }
         ])
     ],

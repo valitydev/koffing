@@ -4,16 +4,13 @@ import { AuthService } from 'koffing/auth/auth.module';
 
 @Component({
     selector: 'kof-offline-token',
-    templateUrl: './offline-token.pug',
+    templateUrl: './token.component.pug',
 })
-export class OfflineTokenComponent implements OnInit {
-
-    public offlineToken: string;
+export class TokenComponent implements OnInit {
 
     public privateToken: string;
 
     public ngOnInit() {
-        this.offlineToken = AuthService.getOfflineToken();
         this.privateToken = AuthService.getAccountInfo().token;
     }
 }

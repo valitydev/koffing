@@ -1,5 +1,0 @@
-{
-  "realm": "external",
-  "auth-server-url": "http://auth.rbk.test:8080/auth/",
-  "resource": "tokenizer"
-}
