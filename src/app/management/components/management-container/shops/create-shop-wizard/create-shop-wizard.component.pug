@@ -17,7 +17,7 @@
                         span.step_no 3
                         span.step_descr Данные магазина
         .row
-            .col-xs-12.col-xs-offset-0.col-md-10.col-md-offset-1
+            .col-xs-12.col-md-10.col-md-offset-1
                 kof-selection-contract(
                     *ngIf="currentStep === contractStep",
                     (steppedForward)="goToPaytoolStep($event)"

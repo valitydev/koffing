@@ -5,5 +5,5 @@
         .x_content
             .tile
                 kof-select(*ngIf="selectableItems.length", [(ngModel)]="selectedPayoutToolId", [items]="selectableItems", (onChange)="selectPayoutAccount()", [modelOptions]="{standalone: true}", name='selectedPayoutTool')
-            .ln_solid
+            .ln_solid(*ngIf="selectedPayoutTool")
             kof-payout-tool-view([payoutTool]="selectedPayoutTool")

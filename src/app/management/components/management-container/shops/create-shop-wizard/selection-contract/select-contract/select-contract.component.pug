@@ -8,5 +8,5 @@ kof-loading([isLoading]="isLoading")
                 .tile
                     br
                     kof-select(*ngIf="selectableItems.length", [(ngModel)]="selectedContractId", [items]="selectableItems", (onChange)="selectContract()", [modelOptions]="{standalone: true}", name='selectedContract')
-                .ln_solid
+                .ln_solid(*ngIf="selectedContract")
                 kof-contract-view([contract]="selectedContract")

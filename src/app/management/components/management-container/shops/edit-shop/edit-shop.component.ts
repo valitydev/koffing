@@ -23,8 +23,8 @@ export class EditShopComponent implements OnInit {
     public shopID: number = Number(this.route.snapshot.params['shopID']);
     public shopEditing: CreateShopArgs;
     public shop: Shop;
-    public shopContract: Contract;
-    public shopPayoutTool: PayoutTool;
+    public selectedContract: Contract;
+    public selectedPayoutTool: PayoutTool;
     public contracts: Contract[] = [];
     public payoutTools: PayoutTool[] = [];
     public contractItems: SelectItem[] = [];
@@ -49,16 +49,6 @@ export class EditShopComponent implements OnInit {
             this.isLoading = false;
             this.shopEditing = this.getInstance(this.shop.details);
         });
-    }
-
-    public onFieldChange(path: string, value: any) {
-        if (_.startsWith(path, 'details')) {
-            this.shopEditing.details = this.shop.details;
-        }
-        if (_.startsWith(path, 'details.location')) {
-            this.shopEditing.details.location = new ShopLocationUrl();
-        }
-        _.set(this.shopEditing, path, value);
     }
 
     public loadCategories(): Promise<Category[]> {
@@ -88,7 +78,7 @@ export class EditShopComponent implements OnInit {
         return new Promise((resolve) => {
             this.contractService.getContracts().then((contracts: Contract[]) => {
                 this.contracts = contracts;
-                this.shopContract = this.findContract(this.shop.contractID);
+                this.selectedContract = this.findContract(this.shop.contractID);
                 this.contractItems = _.map(contracts, (contract) => new SelectItem(contract.id, contract.id));
                 resolve(contracts);
             });
@@ -100,7 +90,7 @@ export class EditShopComponent implements OnInit {
             this.contractService.getPayoutTools(contractID).then((payoutTools: PayoutTool[]) => {
                 this.payoutTools = payoutTools;
                 this.payoutToolItems = _.map(payoutTools, (payoutTool) => new SelectItem(payoutTool.id, payoutTool.id));
-                this.shopPayoutTool = payoutTools[0];
+                this.selectedPayoutTool = payoutTools[0];
                 resolve(payoutTools);
             });
         });
@@ -109,15 +99,29 @@ export class EditShopComponent implements OnInit {
     public onSelectContract(contractID: string) {
         const id = Number(contractID);
         this.shopEditing.contractID = id;
-        this.shopEditing.payoutToolID = this.payoutTools[0].id;
-        this.shopContract = this.findContract(id);
-        this.loadShopPayoutTools(id);
+        this.selectedContract = this.findContract(id);
+        this.shopEditing.payoutToolID = undefined;
+        this.loadShopPayoutTools(id).then(payoutTools => {
+            if (payoutTools.length) {
+                this.shopEditing.payoutToolID = payoutTools[0].id;
+            }
+        });
     }
 
     public onSelectPayoutTool(payoutToolID: string) {
         const id = Number(payoutToolID);
-        this.shopEditing.payoutToolID = Number(id);
-        this.shopPayoutTool = this.findPayoutTool(id);
+        this.shopEditing.payoutToolID = id;
+        this.selectedPayoutTool = this.findPayoutTool(id);
+    }
+
+    public onFieldChange(path: string, value: any) {
+        if (_.startsWith(path, 'details')) {
+            this.shopEditing.details = this.shop.details;
+        }
+        if (_.startsWith(path, 'details.location')) {
+            this.shopEditing.details.location = new ShopLocationUrl();
+        }
+        _.set(this.shopEditing, path, value);
     }
 
     public hasError(field: any): boolean {
