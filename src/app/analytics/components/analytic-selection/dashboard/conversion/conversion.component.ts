@@ -51,6 +51,8 @@ export class ConversionComponent implements OnChanges {
                     data,
                     label: 'Конверсия'
                 }];
+            } else {
+                this.datasets = [];
             }
         }
     }

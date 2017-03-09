@@ -52,6 +52,8 @@ export class RevenueComponent implements OnChanges {
                     data,
                     label: 'Оборот'
                 }];
+            } else {
+                this.datasets = [];
             }
         }
     }
