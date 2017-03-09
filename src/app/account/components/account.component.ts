@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import * as _ from 'lodash';
 
 import { AuthService } from 'koffing/auth/auth.module';
 
@@ -18,7 +19,7 @@ export class AccountComponent implements OnInit {
 
     public ngOnInit() {
         const keycloakUrl = AuthService.getAccountInfo().authUrl;
-        const accountFrameUrl = `${keycloakUrl}realms/external/account/`;
+        const accountFrameUrl = `${_.trimEnd(keycloakUrl, '/')}/realms/external/account/`;
         this.accountFrameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(accountFrameUrl);
     }
 
