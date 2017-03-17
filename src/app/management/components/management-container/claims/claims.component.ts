@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Claim } from 'koffing/backend/backend.module';
 import { ClaimService } from 'koffing/backend/backend.module';
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
+import { ClaimRevokeBroadcaster } from 'koffing/broadcaster/services/claim-revoke-broadcaster.service';
 
 @Component({
     selector: 'kof-claims',
@@ -16,7 +17,8 @@ export class ClaimsComponent implements OnInit {
     public revokeReason: string;
 
     constructor(private claimService: ClaimService,
-                private claimReceiveBroadcaster: ClaimReceiveBroadcaster) { }
+                private claimReceiveBroadcaster: ClaimReceiveBroadcaster,
+                private claimRevokeBroadcaster: ClaimRevokeBroadcaster) { }
 
     public revoke(reasonControl: any) {
         if (!reasonControl.valid) {
@@ -29,6 +31,7 @@ export class ClaimsComponent implements OnInit {
 
         this.claimService.revokeClaim(this.claim.id, revokeDetails).then(() => {
             this.showClaimInfo = false;
+            this.claimRevokeBroadcaster.fire();
         });
     }
 

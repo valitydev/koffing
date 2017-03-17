@@ -21,5 +21,12 @@
                         span.pull-right Заблокирован
                 tr(*ngIf="isDetailsPanelVisible(i)")
                     td(colspan=6)
-                        kof-shop-details-panel([shop]="shop", (onChange)="loadData()")
-    a.btn.btn-primary.pull-right([routerLink]="['/shops/create']") Создать магазин
+                        kof-shop-details-panel(
+                            [shop]="shop",
+                            [claimFound]="claimFound",
+                            (onChange)="loadData()"
+                        )
+        a.btn.btn-primary.pull-right(
+            *ngIf="!claimFound",
+            [routerLink]="['/shops/create']"
+        ) Создать магазин

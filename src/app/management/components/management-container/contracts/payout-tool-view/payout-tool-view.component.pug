@@ -1,4 +1,4 @@
-.x_panel.tile(*ngIf="payoutTool && payoutTool.params && payoutTool.params.bankAccount")
+.x_panel.tile(*ngIf="payoutTool?.params?.bankAccount")
     .x_content
         form.form-horizontal.form-label-left.css-form
             .form-group

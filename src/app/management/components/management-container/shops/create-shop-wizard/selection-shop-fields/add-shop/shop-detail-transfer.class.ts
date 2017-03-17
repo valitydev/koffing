@@ -1,12 +1,12 @@
-import { ShopDetail } from 'koffing/backend/classes/shop-detail.class';
+import { ShopDetails } from 'koffing/backend/backend.module';
 
 export class ShopDetailTransfer {
-    public shopDetail: ShopDetail;
+    public shopDetail: ShopDetails;
     public categoryID: number;
     public callbackUrl: string;
     public valid: boolean;
 
-    constructor(shopDetail: ShopDetail, categoryID: number, callbackUrl: string, valid: boolean) {
+    constructor(shopDetail: ShopDetails, categoryID: number, callbackUrl: string, valid: boolean) {
         this.shopDetail = shopDetail;
         this.categoryID = categoryID;
         this.callbackUrl = callbackUrl;

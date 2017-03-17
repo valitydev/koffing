@@ -7,17 +7,17 @@ kof-loading([isLoading]="isLoading")
             input(type="radio", name="way", value="existing")
             span Выбрать существующее средство вывода
     br
-    kof-create-paytool(
-        *ngIf="selectedOption === optionNew",
-        [contractBankAccount]="getContractBankAccount()",
-        [isCopyBankAccountAvailable]="isCopyBankAccountAvailable()",
-        (onChange)="onPayoutToolChange($event)"
-    )
-    kof-select-paytool(
-        *ngIf="selectedOption === optionExisting",
-        [contractID]="contractDecision.contract.id",
-        (onPayoutToolSelected)="onPayoutToolSelected($event)"
-    )
+    .tile
+        kof-create-paytool(
+            *ngIf="selectedOption === optionNew",
+            [contractBankAccount]="contractDecision?.contractor?.bankAccount",
+            (onChange)="onPayoutToolChange($event)"
+        )
+        kof-select-paytool(
+            *ngIf="selectedOption === optionExisting",
+            [contractID]="contractDecision.contract.id",
+            (onPayoutToolSelected)="onPayoutToolSelected($event)"
+        )
     .actionBar
         .text-center
             a.btn.btn-danger(data-toggle="modal", data-target=".cancel-create-shop-modal", data-backdrop="false") Отмена

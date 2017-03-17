@@ -19,25 +19,28 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
     @Input()
     public contractBankAccount: BankAccount;
 
-    @Input()
-    public isCopyBankAccountAvailable: boolean = true;
-
     @Output()
     public onChange = new EventEmitter();
 
-    public payoutTool: PayoutToolBankAccount;
+    public payoutToolParams: PayoutToolBankAccount;
 
     @ViewChild('createPaytoolForm')
     public form: NgForm;
 
     public sameBankAccountChecked: boolean;
 
+    @Input()
+    private defaultPayoutToolParams: PayoutToolBankAccount;
+
     constructor(
         private suggestionsService: SuggestionsService
     ) { }
 
     public ngOnInit() {
-        this.payoutTool = this.getInstance();
+        this.payoutToolParams = this.getInstance();
+        if (this.defaultPayoutToolParams) {
+            _.assign(this.payoutToolParams, this.defaultPayoutToolParams);
+        }
     }
 
     public ngAfterViewInit() {
@@ -45,8 +48,7 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
     }
 
     public emitData() {
-        this.compare();
-        const transfer = new PaytoolTransfer(this.payoutTool, this.form.valid);
+        const transfer = new PaytoolTransfer(this.payoutToolParams, this.form.valid);
         this.onChange.emit(transfer);
     }
 
@@ -54,16 +56,10 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
         return field.dirty && field.invalid;
     }
 
-    public copyContractBankAccount() {
-        if (!this.sameBankAccountChecked) {
+    public copyContractBankAccount(event: any) {
+        if (this.sameBankAccountChecked) {
             this.setFormControls(this.contractBankAccount);
             this.emitData();
-        }
-    }
-
-    private compare() {
-        if (this.payoutTool) {
-            this.sameBankAccountChecked = BankAccountComparator.isEqual(this.payoutTool.bankAccount, this.contractBankAccount);
         }
     }
 

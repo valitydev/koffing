@@ -1,7 +1,7 @@
 kof-loading([isLoading]="isLoading")
-    .text-center(*ngIf="contracts && contracts.length === 0")
+    .text-center(*ngIf="contracts?.length === 0")
         h4 Контракты отсутствуют
-    .x_panel.tile(*ngIf="contracts && contracts.length > 0")
+    .x_panel.tile(*ngIf="contracts?.length > 0")
         .x_title
             h4 Выбор существующего контракта
             .x_content

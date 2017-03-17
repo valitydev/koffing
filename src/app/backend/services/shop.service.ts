@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Shop } from '../classes/shop.class';
 import { ConfigService } from './config.service';
-import { CreateShopArgs } from 'koffing/backend/classes/create-shop-args.class';
+import { ShopParams } from 'koffing/backend/classes/shop-params.class';
 
 @Injectable()
 export class ShopService {
@@ -25,13 +25,13 @@ export class ShopService {
             .then(response => response.json() as Shop);
     }
 
-    public createShop(args: CreateShopArgs): Promise<string> {
+    public createShop(args: ShopParams): Promise<string> {
         return this.http.post(this.shopsUrl, args)
             .toPromise()
             .then(response => response.json());
     }
 
-    public updateShop(shopID: number, args: CreateShopArgs): Promise<string> {
+    public updateShop(shopID: number, args: ShopParams): Promise<string> {
         return this.http.post(`${this.shopsUrl}/${shopID}`, args)
             .toPromise()
             .then(response => response.json());

@@ -1,40 +1,42 @@
-.x_title
-    h4 Добавление нового магазина
-.x_content
-    kof-loading([isLoading]="isLoading")
-        form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
-            .form-group([ngClass]="{'has-error': hasError(shop_details_name)}")
-                .col-xs-12.col-sm-3
-                    label.text-left Название магазина в системе *
-                .col-xs-12.col-sm-9.col-md-6
-                    input.form-control(type="text", required, name="shop_details_name",
-                    [(ngModel)]="shopDetail.name", #shop_details_name="ngModel",
-                    (keyup)="keyup(form)")
-            .form-group
-                .col-xs-12.col-sm-3
-                    label.text-left Категория *
-                .col-xs-12.col-sm-9.col-md-6
-                    kof-select(
-                    [(ngModel)]="categoryId",
-                    [items]="categories",
-                    [modelOptions]="{standalone: true}",
-                    name="category")
-            .form-group
-                .col-xs-12.col-sm-3
-                    label.text-left Описание магазина
-                .col-xs-12.col-sm-9.col-md-6
-                    input.form-control(type="text", name="shop_details_description",
-                    [(ngModel)]="shopDetail.description",
-                    (keyup)="keyup(form)")
-            .form-group
-                .col-xs-12.col-sm-3
-                    label.text-left Адрес
-                .col-xs-12.col-sm-9.col-md-6
-                    input.form-control(type="text", name="shop_details_location", placeholder="https://example.com",
-                    [ngModel]="url", (ngModelChange)="setLocation($event, form)")
-            .form-group
-                .col-xs-12.col-sm-3
-                    label.text-left Callback handler URL
-                .col-xs-12.col-sm-9.col-md-6
-                    input.form-control(type="text", name="callback_handler_url", placeholder="https://example.com",
-                    [(ngModel)]="callbackUrl", (keyup)="keyup(form)")
+.x_panel.tile
+    .x_title
+        h4 Добавление нового магазина
+    .x_content
+        kof-loading([isLoading]="isLoading")
+            form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
+                .form-group([ngClass]="{'has-error': hasError(shop_details_name)}")
+                    .col-xs-12.col-sm-3
+                        label.text-left Название магазина в системе *
+                    .col-xs-12.col-sm-6
+                        input.form-control(type="text", required, name="shop_details_name",
+                        [(ngModel)]="shopDetail.name", #shop_details_name="ngModel",
+                        (keyup)="keyup(form)")
+                .form-group
+                    .col-xs-12.col-sm-3
+                        label.text-left Категория *
+                    .col-xs-12.col-sm-6
+                        kof-select(
+                        [(ngModel)]="categoryId",
+                        [items]="categories",
+                        [modelOptions]="{standalone: true}",
+                        name="category",
+                        (onChange)="onCategoryChange($event, form)")
+                .form-group
+                    .col-xs-12.col-sm-3
+                        label.text-left Описание магазина
+                    .col-xs-12.col-sm-6
+                        input.form-control(type="text", name="shop_details_description",
+                        [(ngModel)]="shopDetail.description",
+                        (keyup)="keyup(form)")
+                .form-group
+                    .col-xs-12.col-sm-3
+                        label.text-left Адрес
+                    .col-xs-12.col-sm-6
+                        input.form-control(type="text", name="shop_details_location", placeholder="https://example.com",
+                        [ngModel]="url", (ngModelChange)="setLocation($event, form)")
+                .form-group
+                    .col-xs-12.col-sm-3
+                        label.text-left CallbackHandler URL
+                    .col-xs-12.col-sm-6
+                        input.form-control(type="text", name="callback_handler_url", placeholder="https://example.com",
+                        [(ngModel)]="callbackUrl", (keyup)="keyup(form)")

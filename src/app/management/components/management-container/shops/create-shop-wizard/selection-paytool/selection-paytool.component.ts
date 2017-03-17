@@ -7,7 +7,6 @@ import { ContractDecision } from '../selection-contract/contract-decision.class'
 import { PaytoolDecision } from './paytool-decision.class';
 import { PaytoolTransfer } from './create-paytool/paytool-transfer.class';
 import { PaytoolDecisionService } from './paytool-decision.service';
-import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 
 @Component({
     selector: 'kof-selection-paytool',
@@ -43,7 +42,7 @@ export class SelectionPaytoolComponent implements AfterViewInit {
 
     public onPayoutToolChange(value: PaytoolTransfer) {
         this.isPayoutToolValid = value.valid;
-        this.payoutToolsParams = value.payoutTool;
+        this.payoutToolsParams = value.payoutToolParams;
     }
 
     public onPayoutToolSelected(payoutToolID: number) {
@@ -59,21 +58,6 @@ export class SelectionPaytoolComponent implements AfterViewInit {
     public selectOptionNew() {
         this.isPayoutToolValid = false;
         this.selectedOption = this.optionNew;
-    }
-
-    // TODO need separate decision classes
-    public getContractBankAccount(): BankAccount {
-        let result;
-        if (this.contractDecision.contract && this.contractDecision.contract.contractor) {
-            result = this.contractDecision.contract.contractor.bankAccount;
-        } else if (this.contractDecision.contractor) {
-            result = this.contractDecision.contractor.bankAccount;
-        }
-        return result;
-    }
-
-    public isCopyBankAccountAvailable(): boolean {
-        return !!this.contractDecision.contractor;
     }
 
     public stepForward() {

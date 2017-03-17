@@ -1,54 +1,85 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, AfterViewInit } from '@angular/core';
 import * as _ from 'lodash';
 
 import { CategoryService } from 'koffing/backend/backend.module';
-import { ShopService } from 'koffing/backend/backend.module';
 import { Shop } from 'koffing/backend/classes/shop.class';
 import { Contract } from 'koffing/backend/classes/contract.class';
 import { PayoutTool } from 'koffing/backend/classes/payout-tool.class';
 import { ContractService } from 'koffing/backend/services/contract.service';
 import { Category } from 'koffing/backend/classes/category.class';
 import { SelectItem } from 'koffing/common/common.module';
-import { CreateShopArgs } from 'koffing/backend/classes/create-shop-args.class';
-import { ShopDetail } from 'koffing/backend/classes/shop-detail.class';
+import { ShopParams } from 'koffing/backend/classes/shop-params.class';
+import { ShopDetails } from 'koffing/backend/backend.module';
 import { ShopLocationUrl } from 'koffing/backend/classes/shop-location-url.class';
+import { ShopEditingTransfer } from './shop-editing-transfer.class';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'kof-edit-shop',
     templateUrl: 'edit-shop.component.pug',
 })
-export class EditShopComponent implements OnInit {
+export class EditShopComponent implements OnInit, AfterViewInit {
 
-    public shopID: number = Number(this.route.snapshot.params['shopID']);
-    public shopEditing: CreateShopArgs;
+    @Input()
     public shop: Shop;
+    @Input()
+    public defaultShopChanges: ShopParams;
+    public shopEditing: ShopParams;
     public selectedContract: Contract;
     public selectedPayoutTool: PayoutTool;
     public contracts: Contract[] = [];
     public payoutTools: PayoutTool[] = [];
+    @Output()
+    public onChange = new EventEmitter();
+    @ViewChild('form')
+    public form: NgForm;
+
     public contractItems: SelectItem[] = [];
     public payoutToolItems: SelectItem[] = [];
     public categoryItems: SelectItem[] = [];
+
     public isLoading: boolean = false;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
         private categoryService: CategoryService,
-        private shopService: ShopService,
         private contractService: ContractService
-    ) {}
+    ) { }
 
     public ngOnInit() {
         this.isLoading = true;
         Promise.all([
             this.loadCategories(),
-            this.loadShop()
+            this.loadShopContracts(),
+            this.loadShopPayoutTools(this.shop.contractID)
         ]).then(() => {
             this.isLoading = false;
             this.shopEditing = this.getInstance(this.shop.details);
         });
+    }
+
+    public ngAfterViewInit() {
+        this.form.statusChanges.subscribe((data) => {
+            this.onFormStatusChanges(data);
+        });
+    }
+
+    public onFormStatusChanges(formStatus: string) {
+        this.emitData();
+    }
+
+    public emitData() {
+        const transfer = new ShopEditingTransfer(this.shopEditing, this.form.valid, this.form.dirty);
+        this.onChange.emit(transfer);
+    }
+
+    public onFieldChange(path: string, value: any) {
+        if (_.startsWith(path, 'details')) {
+            this.shopEditing.details = this.shop.details;
+        }
+        if (_.startsWith(path, 'details.location')) {
+            this.shopEditing.details.location = new ShopLocationUrl();
+        }
+        _.set(this.shopEditing, path, value);
     }
 
     public loadCategories(): Promise<Category[]> {
@@ -56,20 +87,6 @@ export class EditShopComponent implements OnInit {
             this.categoryService.getCategories().then((categories: Category[]) => {
                 this.categoryItems = _.map(categories, (category) => new SelectItem(category.categoryID, category.name));
                 resolve(categories);
-            });
-        });
-    }
-
-    public loadShop(): Promise<Shop> {
-        return new Promise((resolve) => {
-            this.shopService.getShop(this.shopID).then((shop: Shop) => {
-                this.shop = shop;
-                Promise.all([
-                    this.loadShopContracts(),
-                    this.loadShopPayoutTools(shop.contractID)
-                ]).then(() => {
-                    resolve(shop);
-                });
             });
         });
     }
@@ -114,28 +131,8 @@ export class EditShopComponent implements OnInit {
         this.selectedPayoutTool = this.findPayoutTool(id);
     }
 
-    public onFieldChange(path: string, value: any) {
-        if (_.startsWith(path, 'details')) {
-            this.shopEditing.details = this.shop.details;
-        }
-        if (_.startsWith(path, 'details.location')) {
-            this.shopEditing.details.location = new ShopLocationUrl();
-        }
-        _.set(this.shopEditing, path, value);
-    }
-
     public hasError(field: any): boolean {
         return field.dirty && field.invalid;
-    }
-
-    public updateShop(form: any) {
-        if (form.valid) {
-            this.isLoading = true;
-            this.shopService.updateShop(this.shopID, this.shopEditing).then(() => {
-                this.isLoading = false;
-                this.router.navigate(['/management']);
-            });
-        }
     }
 
     public onSelectCategory(categoryID: string) {
@@ -150,9 +147,12 @@ export class EditShopComponent implements OnInit {
         return _.find(this.contracts, (contract) => contract.id === contractID);
     }
 
-    private getInstance(details: ShopDetail): CreateShopArgs {
-        const instance = new CreateShopArgs();
+    private getInstance(details: ShopDetails): ShopParams {
+        const instance = new ShopParams();
         instance.details = details;
+        if (this.defaultShopChanges) {
+            instance.update(this.defaultShopChanges);
+        }
         return instance;
     }
 }

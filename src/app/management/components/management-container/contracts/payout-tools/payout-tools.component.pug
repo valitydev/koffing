@@ -14,4 +14,7 @@ kof-loading([isLoading]="isLoading")
                 td(colspan=4)
                     kof-payout-tool-view([payoutTool]="payoutTool")
     span(*ngIf="!payoutTools.length") Нет средств вывода
-a.btn.btn-primary.pull-right([routerLink]="['/management/contracts', contractID, 'payout-tool', 'create']") Создать средство вывода
+a.btn.btn-primary.pull-right(
+    *ngIf="!claimFound",
+    [routerLink]="['/management/contracts', contractID, 'payout-tool', 'create']"
+) Создать средство вывода

@@ -29,7 +29,7 @@ export class PayoutToolCreateComponent {
 
     public onPayoutToolChange(value: PaytoolTransfer) {
         this.isPayoutToolValid = value.valid;
-        this.payoutToolsParams = value.payoutTool;
+        this.payoutToolsParams = value.payoutToolParams;
     }
 
     public createPayoutTool() {

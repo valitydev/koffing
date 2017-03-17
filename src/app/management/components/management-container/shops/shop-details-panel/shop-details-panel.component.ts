@@ -17,6 +17,9 @@ export class ShopDetailsPanelComponent {
     @Input()
     public shop: Shop;
 
+    @Input()
+    public claimFound: boolean = false;
+
     @Output()
     public onChange = new EventEmitter();
     

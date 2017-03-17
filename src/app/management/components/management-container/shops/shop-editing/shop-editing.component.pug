@@ -1,0 +1,16 @@
+.x_panel.tile
+    .x_content
+        kof-loading([isLoading]="isLoading")
+            kof-edit-shop(
+                *ngIf="!isLoading",
+                [shop]="shop",
+                (onChange)="onShopEditingChange($event)"
+            )
+            .form-group
+                .col-xs-12.col-sm-6.col-sm-offset-3
+                    a.btn.btn-default(type="reset", [routerLink]=["/management"]) Назад
+                    button.btn.btn-primary.pull-right(
+                        type="submit",
+                        (click)="updateShop()",
+                        [disabled]="!shopEditingReady"
+                    ) Создать заявку

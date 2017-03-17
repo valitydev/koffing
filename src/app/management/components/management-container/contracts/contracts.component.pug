@@ -14,8 +14,8 @@
                     td {{contract.id}}
                     td {{contract.validSince | date:"dd.MM.yyyy"}}
                     td.hidden-xs {{contract.validUntil | date:"dd.MM.yyyy"}}
-                    td.hidden-xs {{(contract.contractor && contract.contractor.legalEntity) ? contract.contractor.legalEntity.registeredName : null}}
-                    td {{(contract.contractor && contract.contractor.legalEntity) ? contract.contractor.legalEntity.inn : null}}
+                    td.hidden-xs {{contract?.contractor?.legalEntity ? contract.contractor.legalEntity.registeredName : null}}
+                    td {{contract?.contractor?.legalEntity ? contract.contractor.legalEntity.inn : null}}
                     td {{!!contract.terminatedAt ? 'завершен' : !contract.validSince ? 'в&nbsp;обработке' : 'активен'}}
                 tr(*ngIf="contract === selectedContract")
                     td(colspan=6)
@@ -23,5 +23,8 @@
                         .x_panel.tile
                             label Средства вывода
                             .x_content
-                                kof-payout-tools([contractID]="contract.id")
-    a.btn.btn-primary.pull-right([routerLink]="['/management/contracts/create']") Создать контракт
+                                kof-payout-tools([contractID]="contract.id", [claimFound]="claimFound")
+        a.btn.btn-primary.pull-right(
+            *ngIf="!claimFound",
+            [routerLink]="['/management/contracts/create']"
+        ) Создать контракт

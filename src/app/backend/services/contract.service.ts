@@ -8,6 +8,7 @@ import { Contract } from '../classes/contract.class';
 import { PayoutTool } from '../classes/payout-tool.class';
 import { ContractParams } from 'koffing/backend/classes/contract-params.class';
 import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
+import { PayoutToolParams } from 'koffing/backend/classes/payout-tool-params.class';
 
 @Injectable()
 export class ContractService {
@@ -41,8 +42,8 @@ export class ContractService {
             .then(response => response.json() as PayoutTool[]);
     }
 
-    public createPayoutTool(contractID: number, payoutTool: PayoutToolBankAccount): Promise<any> {
-        return this.http.post(`${this.contractsUrl}/${contractID}/payout_tools`, payoutTool)
+    public createPayoutTool(contractID: number, payoutToolParams: PayoutToolParams): Promise<any> {
+        return this.http.post(`${this.contractsUrl}/${contractID}/payout_tools`, payoutToolParams)
             .toPromise()
             .then(response => response.json());
     }

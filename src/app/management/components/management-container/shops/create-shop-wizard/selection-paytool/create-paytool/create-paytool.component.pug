@@ -13,10 +13,10 @@
             .form-group
                 .col-xs-12.col-sm-3
                     label.text-left.title-label Банковские реквизиты
-                .col-xs-12.col-sm-6(*ngIf="isCopyBankAccountAvailable")
+                .col-xs-12.col-sm-6(*ngIf="contractBankAccount")
                     .checkbox
                         label
-                            input(type="checkbox", name="sameBankAccountChecked", [(ngModel)]="sameBankAccountChecked", (click)="copyContractBankAccount()")
+                            input(type="checkbox", name="sameBankAccountChecked", [(ngModel)]="sameBankAccountChecked", (change)="copyContractBankAccount($event)")
                             | Совпадают с банковскими реквизитами из контракта
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(bankBik)}")
@@ -24,24 +24,24 @@
                     label.text-left БИК *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.paytool-bank-suggestions(type="text", required, name="bankBik",
-                        [(ngModel)]="payoutTool.bankAccount.bankBik", #bankBik="ngModel", (keyup)="emitData()")
+                        [(ngModel)]="payoutToolParams.bankAccount.bankBik", #bankBik="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankName)}")
                 .col-xs-12.col-sm-3
                     label.text-left Наименование банка *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.paytool-bank-suggestions(type="text", required, name="bankName",
-                        [(ngModel)]="payoutTool.bankAccount.bankName", #bankName="ngModel", (keyup)="emitData()")
+                        [(ngModel)]="payoutToolParams.bankAccount.bankName", #bankName="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankPostAccount)}")
                 .col-xs-12.col-sm-3
                     label.text-left Корреспондентский счет *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankPostAccount",
-                        [(ngModel)]="payoutTool.bankAccount.bankPostAccount", #bankPostAccount="ngModel", (keyup)="emitData()")
+                        [(ngModel)]="payoutToolParams.bankAccount.bankPostAccount", #bankPostAccount="ngModel", (keyup)="emitData()")
             .form-group([ngClass]="{'has-error': hasError(bankAccount)}")
                 .col-xs-12.col-sm-3
                     label.text-left Расчетный счет *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="account",
-                        [(ngModel)]="payoutTool.bankAccount.account", #bankAccount="ngModel", (keyup)="emitData()")
+                        [(ngModel)]="payoutToolParams.bankAccount.account", #bankAccount="ngModel", (keyup)="emitData()")

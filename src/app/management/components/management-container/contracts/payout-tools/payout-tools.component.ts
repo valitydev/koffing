@@ -11,6 +11,8 @@ export class PayoutToolsComponent implements OnInit {
 
     @Input()
     public contractID: number;
+    @Input()
+    public claimFound: boolean = false;
 
     public payoutTools: PayoutTool[] = [];
     public isLoading: boolean = false;

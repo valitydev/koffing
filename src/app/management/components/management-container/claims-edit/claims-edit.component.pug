@@ -1,0 +1,29 @@
+.x_panel.tile
+    .x_content
+        kof-loading([isLoading]="isLoading")
+            kof-create-contract(
+                *ngIf="initIncludes && claimData?.contractor",
+                (onChange)="onContractorChange($event)",
+                [defaultContractor]="claimData.contractor"
+            )
+            kof-create-paytool(
+                *ngIf="initIncludes && claimData?.payoutToolParams",
+                (onChange)="onPayoutToolChange($event)",
+                [contractBankAccount]="claimData.contractor?.bankAccount",
+                [defaultPayoutToolParams]="claimData.payoutToolParams"
+            )
+            kof-add-shop(
+                *ngIf="initIncludes && claimData?.shop",
+                (onChange)="onShopFieldsChange($event)",
+                [defaultShop]="claimData.shop"
+            )
+            kof-edit-shop(
+                *ngIf="initIncludes && claimData?.shopEditingParams",
+                [shop]="claimData.shopEditingParams.shop",
+                [defaultShopChanges]="claimData.shopEditingParams.claimShopChanges",
+                (onChange)="onShopEditingChange($event)"
+            )
+            .form-group
+                .col-xs-12.col-sm-6.col-sm-offset-3
+                    button.btn.btn-primary.pull-right(type="button", [disabled]="!canSubmit()", (click)="saveChanges()") Сохранить изменения
+                    a.btn.btn-default(type="reset", (click)="returnToManagement()") Назад

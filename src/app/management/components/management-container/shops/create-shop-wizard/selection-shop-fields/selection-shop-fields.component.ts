@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
-import { CreateShopArgs } from 'koffing/backend/classes/create-shop-args.class';
+import { ShopParams } from 'koffing/backend/classes/shop-params.class';
 import { PaytoolDecision } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/paytool-decision.class';
 import { ShopService } from 'koffing/backend/services/shop.service';
 import { ShopDetailTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-shop-fields/add-shop/shop-detail-transfer.class';
@@ -21,13 +21,13 @@ export class SelectionShopComponent {
     @Output()
     public onCreated = new EventEmitter();
 
-    private createShopArgs: CreateShopArgs;
+    private createShopArgs: ShopParams;
 
     constructor(private shopService: ShopService) { }
 
     public onShopFieldsChange(value: ShopDetailTransfer) {
         this.isShopFieldsReady = value.valid;
-        this.createShopArgs = new CreateShopArgs();
+        this.createShopArgs = new ShopParams();
         this.createShopArgs.contractID = this.payoutToolDecision.contractID;
         this.createShopArgs.payoutToolID = this.payoutToolDecision.payoutToolID;
         this.createShopArgs.categoryID = value.categoryID;

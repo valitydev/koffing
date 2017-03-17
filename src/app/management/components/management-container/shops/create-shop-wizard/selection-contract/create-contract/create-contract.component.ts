@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -25,10 +25,16 @@ export class CreateContractComponent implements OnInit, AfterViewInit {
 
     public sameActualAddressChecked: boolean;
 
+    @Input()
+    private defaultContractor: Contractor;
+
     constructor(private suggestionsService: SuggestionsService) { }
 
     public ngOnInit() {
         this.contractor = this.createInstance();
+        if (this.defaultContractor) {
+            _.assign(this.contractor, this.defaultContractor);
+        }
     }
 
     public ngAfterViewInit() {
