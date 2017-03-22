@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
@@ -8,6 +8,7 @@ import { ShopDetailTransfer } from 'koffing/management/components/management-con
 import { ShopEditingTransfer } from 'koffing/management/components/management-container/shops/shop-editing/edit-shop/shop-editing-transfer.class';
 import { ClaimsEditService } from 'koffing/management/services/claims-edit.service';
 import { ClaimData } from 'koffing/management/classes/claim-data.class';
+import { CreatePayoutToolComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/create-paytool.component';
 
 @Component({
     selector: 'kof-claims-edit',
@@ -17,11 +18,13 @@ export class ClaimsEditComponent implements OnInit {
 
     public claimData: ClaimData;
     public isLoading: boolean = false;
-    public initIncludes: boolean = false;
+    public initComponents: boolean = false;
     private contractorReady: boolean;
     private paytoolReady: boolean;
     private shopReady: boolean;
     private formsTouched: boolean = false;
+    @ViewChild('createPaytool')
+    private createPaytoolComponent: CreatePayoutToolComponent;
 
     constructor(
         private claimsEditService: ClaimsEditService,
@@ -35,40 +38,35 @@ export class ClaimsEditComponent implements OnInit {
     public onContractorChange(value: ContractorTransfer) {
         this.formsTouched = true;
         this.contractorReady = value.valid;
-        if (value.valid) {
-            this.claimData.contractor = value.contractor;
+        this.claimData.contractor = value.contractor;
+        if (this.createPaytoolComponent) {
+            this.createPaytoolComponent.compareAccounts();
         }
     }
 
     public onPayoutToolChange(value: PaytoolTransfer) {
         this.formsTouched = true;
         this.paytoolReady = value.valid;
-        if (value.valid) {
-            this.claimData.payoutToolParams = value.payoutToolParams;
-        }
+        this.claimData.payoutToolParams = value.payoutToolParams;
     }
 
     public onShopFieldsChange(value: ShopDetailTransfer) {
         this.formsTouched = true;
         this.shopReady = value.valid;
-        if (value.valid) {
-            this.claimData.shop.details = value.shopDetail;
-            this.claimData.shop.categoryID = value.categoryID;
-            if (this.claimData.shop.callbackHandler) {
-                this.claimData.shop.callbackHandler.url = value.callbackUrl;
-            }
+        this.claimData.shop.details = value.shopDetail;
+        this.claimData.shop.categoryID = value.categoryID;
+        if (this.claimData.shop.callbackHandler) {
+            this.claimData.shop.callbackHandler.url = value.callbackUrl;
         }
     }
     
     public onShopEditingChange(value: ShopEditingTransfer) {
-        this.claimData.shopEditingParams.valid = value.valid;
-        this.claimData.shopEditingParams.dirty = value.dirty;
         if (value.dirty) {
             this.formsTouched = true;
         }
-        if (value.valid) {
-            this.claimData.shopEditingParams.updatedShopParams = value.shopEditing;
-        }
+        this.claimData.shopEditingParams.valid = value.valid;
+        this.claimData.shopEditingParams.dirty = value.dirty;
+        this.claimData.shopEditingParams.updatedShopParams = value.shopEditing;
     }
 
     public canSubmit(): boolean {
@@ -117,7 +115,7 @@ export class ClaimsEditComponent implements OnInit {
                 // TODO: здесь разрывается синхронное отображение компонентов после переключения флага isLoading,
                 // TODO: т.к. иначе не успевает отрендериться DOM в компонентах
                 // TODO: пока решение такое, но нужно найти более изящное/правильное
-                this.initIncludes = true;
+                this.initComponents = true;
             }, 0);
         });
     }

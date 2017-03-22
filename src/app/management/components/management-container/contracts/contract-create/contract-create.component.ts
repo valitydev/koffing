@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ContractService } from 'koffing/backend/services/contract.service';
@@ -10,6 +10,7 @@ import { ClaimCreateBroadcaster } from 'koffing/broadcaster/services/claim-creat
 import { ContractorTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
 import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
+import { CreatePayoutToolComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/create-paytool.component';
 
 @Component({
     selector: 'kof-contract-create',
@@ -23,6 +24,8 @@ export class ContractCreateComponent {
     public contractorBankAccount: BankAccount;
     public isPayoutToolReady: boolean = false;
     public payoutToolParams: PayoutToolBankAccount;
+    @ViewChild('createPaytool')
+    private createPaytoolComponent: CreatePayoutToolComponent;
 
     constructor(
         private router: Router,
@@ -35,6 +38,7 @@ export class ContractCreateComponent {
         this.isContractorReady = value.valid;
         this.contractor = value.contractor;
         this.contractorBankAccount = value.contractor.bankAccount;
+        this.createPaytoolComponent.compareAccounts();
     }
 
     public onPayoutToolChange(value: PaytoolTransfer) {

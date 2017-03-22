@@ -13,10 +13,10 @@
             .form-group
                 .col-xs-12.col-sm-3
                     label.text-left.title-label Банковские реквизиты
-                .col-xs-12.col-sm-6(*ngIf="contractBankAccount")
+                .col-xs-12.col-sm-6(*ngIf="contractBankAccountReady()")
                     .checkbox
                         label
-                            input(type="checkbox", name="sameBankAccountChecked", [(ngModel)]="sameBankAccountChecked", (change)="copyContractBankAccount($event)")
+                            input(type="checkbox", name="sameBankAccountChecked", [(ngModel)]="sameBankAccountChecked", (change)="copyContractBankAccount()")
                             | Совпадают с банковскими реквизитами из контракта
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(bankBik)}")

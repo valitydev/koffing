@@ -4,20 +4,20 @@ import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 
 export class BankAccountComparator {
 
-    public static isEqual(value: BankAccount, other: BankAccount): boolean {
-        if (_.isNil(value) || _.isNil(other)) {
+    public static isEqual(baseAccount: BankAccount, comparableAccount: BankAccount): boolean {
+        if (_.isNil(comparableAccount) ||
+            _.isNil(baseAccount) ||
+            _.isEmpty(comparableAccount) ||
+            _.isEmpty(baseAccount)) {
             return false;
         }
-        return _.isEqualWith(value, other, this.customizer);
-    }
-
-    private static customizer(value: BankAccount, other: BankAccount): boolean {
-        const key = _.findKey(value, (fieldValue: string, fieldName: string) => {
+        const unequalKey = _.findKey(comparableAccount, (fieldValue: string, fieldName: string) => {
             if (_.isObject(fieldValue)) {
-                console.error('unsupported compare type', value, fieldValue);
+                console.error('unsupported compare type', comparableAccount, fieldValue);
             }
-            return !_.chain(fieldValue).trim().isEqual(_.trim(other[fieldName])).value();
+            const isEqual = _.chain(fieldValue).trim().isEqual(_.trim(baseAccount[fieldName])).value();
+            return !isEqual;
         });
-        return _.isUndefined(key);
+        return _.isUndefined(unequalKey);
     }
 }

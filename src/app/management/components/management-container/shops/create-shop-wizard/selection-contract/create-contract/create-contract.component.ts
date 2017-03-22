@@ -63,10 +63,9 @@ export class CreateContractComponent implements OnInit, AfterViewInit {
     }
 
     public copyPostAddress() {
-        if (!this.sameActualAddressChecked) {
+        if (this.sameActualAddressChecked) {
             const legalEntity = this.contractor.legalEntity as RussianLegalEntity;
-            legalEntity.actualAddress = legalEntity.postAddress;
-            this.form.controls['actualAddress'].setValue(legalEntity.actualAddress);
+            this.form.controls['actualAddress'].setValue(legalEntity.postAddress);
             this.emitData();
         }
     }

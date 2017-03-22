@@ -41,6 +41,7 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
         if (this.defaultPayoutToolParams) {
             _.assign(this.payoutToolParams, this.defaultPayoutToolParams);
         }
+        this.compareAccounts();
     }
 
     public ngAfterViewInit() {
@@ -48,6 +49,7 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
     }
 
     public emitData() {
+        this.compareAccounts();
         const transfer = new PaytoolTransfer(this.payoutToolParams, this.form.valid);
         this.onChange.emit(transfer);
     }
@@ -56,10 +58,20 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
         return field.dirty && field.invalid;
     }
 
-    public copyContractBankAccount(event: any) {
+    public copyContractBankAccount() {
         if (this.sameBankAccountChecked) {
             this.setFormControls(this.contractBankAccount);
             this.emitData();
+        }
+    }
+
+    public contractBankAccountReady(): boolean {
+        return !_.isNil(this.contractBankAccount) && !_.isEmpty(this.contractBankAccount);
+    }
+
+    public compareAccounts() {
+        if (this.payoutToolParams) {
+            this.sameBankAccountChecked = BankAccountComparator.isEqual(this.payoutToolParams.bankAccount, this.contractBankAccount);
         }
     }
 

@@ -1,5 +1,10 @@
+doctype html
 kof-create-contract((onChange)="onContractorChange($event)")
-kof-create-paytool((onChange)="onPayoutToolChange($event)", [contractBankAccount]="contractorBankAccount")
+kof-create-paytool(
+    #createPaytool,
+    (onChange)="onPayoutToolChange($event)",
+    [contractBankAccount]="contractorBankAccount"
+)
 .form-group
     .col-xs-12.col-sm-6.col-sm-offset-3
         button.btn.btn-primary.pull-right(

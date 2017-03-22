@@ -53,7 +53,7 @@
                             .checkbox
                                 label
                                     input(type="checkbox", name="sameActualAddressChecked", [(ngModel)]="sameActualAddressChecked",
-                                        disabled="{{isCopyPostAddressAvailable()}}", (click)="copyPostAddress()")
+                                        disabled="{{isCopyPostAddressAvailable()}}", (change)="copyPostAddress()")
                                     | Совпадает с почтовым адресом
             .form-group([ngClass]="{'has-error': hasError(representativePosition)}")
                 .col-xs-12.col-sm-3
