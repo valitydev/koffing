@@ -6,7 +6,8 @@
             form.form-horizontal.form-label-left.css-form(*ngIf="shop", novalidate, name="form", #form="ngForm")
                 .form-group([ngClass]="{'has-error': hasError(shopName)}")
                     .col-xs-12.col-sm-3
-                        label.text-left Название магазина *
+                        label.text-left Название магазина
+                            span.highlighted  *
                     .col-xs-12.col-sm-6
                         input.form-control(type="text", [ngModel]="shop.details.name", (ngModelChange)="onFieldChange('details.name', $event)", name="shopName", #shopName="ngModel", required)
                 .form-group
@@ -27,11 +28,13 @@
                 .form-group
                     .col-xs-12.col-sm-3
                         label.text-left Категория
+                            span.highlighted  *
                     .col-xs-12.col-sm-6
                         kof-select([ngModel]="shop.categoryID", (onChange)="onSelectCategory($event)", [items]="categoryItems", name='category')
                 .form-group
                     .col-xs-12.col-sm-3
                         label.text-left Контракт
+                            span.highlighted  *
                     .col-xs-12.col-sm-6
                         kof-select([ngModel]="shop.contractID", [items]="contractItems", (onChange)="onSelectContract($event)", name='contractID')
                 .form-group
@@ -41,6 +44,7 @@
                 .form-group
                     .col-xs-12.col-sm-3
                         label.text-left Средство вывода
+                            span.highlighted  *
                     .col-xs-12.col-sm-6
                         kof-select([ngModel]="shop.payoutToolID", (onChange)="onSelectPayoutTool($event)", [items]="payoutToolItems", name='payoutToolID')
                 .form-group

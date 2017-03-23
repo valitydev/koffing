@@ -1,13 +1,12 @@
 .kof-select {
     overflow: hidden;
-    border: 1px solid #ccc;
     position: relative;
     select {
         background: transparent;
         -webkit-appearance: none;
         -moz-appearance: none;
         outline: 0;
-        border: 0;
+        border: 1px solid #ccc;
         border-radius: 0;
         width: 100%;
         padding: 0 20px 0 10px;
@@ -16,6 +15,11 @@
         color: #000;
         color: rgba(0,0,0,0);
         text-shadow: 0 0 0 #000;
+    }
+    &.has-error {
+        select {
+            border-color: #a94442;
+        }
     }
     &::before {
         content: '';

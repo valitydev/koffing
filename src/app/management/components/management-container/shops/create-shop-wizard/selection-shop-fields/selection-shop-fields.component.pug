@@ -1,7 +1,11 @@
+doctype html
 kof-loading([isLoading]="isLoading")
     .tile
-        kof-add-shop((onChange)="onShopFieldsChange($event)")
+        kof-add-shop(
+            #addShopRef,
+            (onChange)="onShopFieldsChange($event)"
+        )
     .actionBar
         .text-center
             a.btn.btn-danger(data-toggle="modal", data-target=".cancel-create-shop-modal", data-backdrop="false") Отмена
-            a.btn.btn-success((click)="createShop()", [ngClass]="{'buttonDisabled': isShopFieldsReady === false }") Создать заявку
+            a.btn.btn-success((click)="createShop()") Создать заявку

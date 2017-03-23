@@ -12,21 +12,15 @@ import { ContractService } from 'koffing/backend/services/contract.service';
 export class SelectPaytoolComponent implements OnInit {
 
     public selectableItems: SelectItem[] = [];
-
     public selectedPayoutToolId: number;
-
     public isLoading: boolean = true;
-
     public selectedOption: string;
-
     @Output()
     public onPayoutToolSelected = new EventEmitter();
-
     @Input()
     public contractID: number;
-
+    public errorHighlighted: boolean = false;
     private payoutTools: PayoutTool[];
-
     private selectedPayoutTool: PayoutTool;
 
     constructor(private contractService: ContractService) { }
@@ -39,8 +33,13 @@ export class SelectPaytoolComponent implements OnInit {
         });
     }
 
+    public highlightErrors() {
+        this.errorHighlighted = true;
+    }
+
     public selectPayoutAccount() {
         this.selectedPayoutTool = this.findSelectedTool(this.payoutTools, this.selectedPayoutToolId);
+        this.errorHighlighted = false;
         this.onPayoutToolSelected.emit(_.toNumber(this.selectedPayoutToolId));
     }
 

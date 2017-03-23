@@ -18,19 +18,15 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
 
     @Input()
     public contractBankAccount: BankAccount;
-
     @Output()
     public onChange = new EventEmitter();
-
     public payoutToolParams: PayoutToolBankAccount;
-
     @ViewChild('createPaytoolForm')
     public form: NgForm;
-
     public sameBankAccountChecked: boolean;
-
     @Input()
     private defaultPayoutToolParams: PayoutToolBankAccount;
+    private errorsHighlighted: boolean = false;
 
     constructor(
         private suggestionsService: SuggestionsService
@@ -54,8 +50,12 @@ export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
         this.onChange.emit(transfer);
     }
 
+    public highlightErrors() {
+        this.errorsHighlighted = true;
+    }
+
     public hasError(field: any): boolean {
-        return field.dirty && field.invalid;
+        return (this.errorsHighlighted || field.dirty) && field.invalid;
     }
 
     public copyContractBankAccount() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ContractService } from 'koffing/backend/services/contract.service';
@@ -6,6 +6,7 @@ import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
 import { ClaimCreateBroadcaster } from 'koffing/broadcaster/services/claim-create.broadcaster.service';
 import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
+import { CreatePayoutToolComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/create-paytool.component';
 
 @Component({
     selector: 'kof-payout-tool-create',
@@ -18,6 +19,8 @@ export class PayoutToolCreateComponent {
     public payoutToolsParams: PayoutToolBankAccount;
     public isPayoutToolValid: boolean = false;
     public isLoading: boolean = false;
+    @ViewChild('createPaytoolRef')
+    private createPaytoolComponent: CreatePayoutToolComponent;
 
     constructor(
         private route: ActivatedRoute,
@@ -41,6 +44,8 @@ export class PayoutToolCreateComponent {
                 this.claimCreateBroadcaster.fire();
                 this.navigateBack();
             });
+        } else {
+            this.createPaytoolComponent.highlightErrors();
         }
     }
 

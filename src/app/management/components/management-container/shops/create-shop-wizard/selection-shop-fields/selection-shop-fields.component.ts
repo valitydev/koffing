@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 
 import { ShopParams } from 'koffing/backend/classes/shop-params.class';
 import { PaytoolDecision } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/paytool-decision.class';
 import { ShopService } from 'koffing/backend/services/shop.service';
 import { ShopDetailTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-shop-fields/add-shop/shop-detail-transfer.class';
+import { AddShopComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-shop-fields/add-shop/add-shop.component';
 
 @Component({
     selector: 'kof-selection-shop-fields',
@@ -12,16 +13,14 @@ import { ShopDetailTransfer } from 'koffing/management/components/management-con
 export class SelectionShopComponent {
 
     public isShopFieldsReady: boolean = false;
-
     public isLoading = false;
-
     @Input()
     public payoutToolDecision: PaytoolDecision;
-
     @Output()
     public onCreated = new EventEmitter();
-
     private createShopArgs: ShopParams;
+    @ViewChild('addShopRef')
+    private addShopComponent: AddShopComponent;
 
     constructor(private shopService: ShopService) { }
 
@@ -36,12 +35,14 @@ export class SelectionShopComponent {
     }
 
     public createShop() {
-        this.isLoading = true;
         if (this.isShopFieldsReady) {
+            this.isLoading = true;
             this.shopService.createShop(this.createShopArgs).then(() => {
                 this.isLoading = false;
                 this.onCreated.emit();
             });
+        } else {
+            this.addShopComponent.highlightErrors();
         }
     }
 }

@@ -11,6 +11,7 @@ import { ContractorTransfer } from 'koffing/management/components/management-con
 import { PaytoolTransfer } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
 import { BankAccount } from 'koffing/backend/classes/bank-account.class';
 import { CreatePayoutToolComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/create-paytool.component';
+import { CreateContractComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/create-contract.component';
 
 @Component({
     selector: 'kof-contract-create',
@@ -24,8 +25,10 @@ export class ContractCreateComponent {
     public contractorBankAccount: BankAccount;
     public isPayoutToolReady: boolean = false;
     public payoutToolParams: PayoutToolBankAccount;
-    @ViewChild('createPaytool')
+    @ViewChild('createPaytoolRef')
     private createPaytoolComponent: CreatePayoutToolComponent;
+    @ViewChild('createContractRef')
+    private createContractComponent: CreateContractComponent;
 
     constructor(
         private router: Router,
@@ -58,6 +61,13 @@ export class ContractCreateComponent {
                 this.claimCreateBroadcaster.fire();
                 this.navigateBack();
             });
+        } else {
+            if (!this.isContractorReady) {
+                this.createContractComponent.highlightErrors();
+            }
+            if (!this.isPayoutToolReady) {
+                this.createPaytoolComponent.highlightErrors();
+            }
         }
     }
 

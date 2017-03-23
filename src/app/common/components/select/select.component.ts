@@ -19,16 +19,14 @@ export class SelectComponent {
 
     @Input()
     public items: SelectItem[];
-
     @Input()
     public placeholder: any;
-
     @Input()
     public modelOptions: any;
-
+    @Input()
+    public hasError: boolean = false;
     @Output()
     public onChange: EventEmitter<any> = new EventEmitter<any>();
-
     private innerSelectedValue: any;
     private onTouchedCallback: Function;
     private onChangeCallback: Function;

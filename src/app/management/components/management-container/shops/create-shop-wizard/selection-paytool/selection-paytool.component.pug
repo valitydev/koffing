@@ -1,3 +1,4 @@
+doctype html
 kof-loading([isLoading]="isLoading")
     .btn-group.btn-group-justified.text-center(data-toggle="buttons", *ngIf="contractDecision.contract !== undefined")
         label.btn.btn-default((click)="selectOptionNew()")
@@ -9,11 +10,13 @@ kof-loading([isLoading]="isLoading")
     br
     .tile
         kof-create-paytool(
+            #createPaytoolRef,
             *ngIf="selectedOption === optionNew",
             [contractBankAccount]="contractDecision?.contractor?.bankAccount",
             (onChange)="onPayoutToolChange($event)"
         )
         kof-select-paytool(
+            #selectPaytoolRef,
             *ngIf="selectedOption === optionExisting",
             [contractID]="contractDecision.contract.id",
             (onPayoutToolSelected)="onPayoutToolSelected($event)"
@@ -21,4 +24,4 @@ kof-loading([isLoading]="isLoading")
     .actionBar
         .text-center
             a.btn.btn-danger(data-toggle="modal", data-target=".cancel-create-shop-modal", data-backdrop="false") Отмена
-            a.btn.btn-success((click)="stepForward()", [ngClass]="{'buttonDisabled': isPayoutToolValid === false}") Вперед
+            a.btn.btn-success((click)="stepForward()", [ngClass]="{'buttonDisabled': selectedOption === undefined}") Вперед

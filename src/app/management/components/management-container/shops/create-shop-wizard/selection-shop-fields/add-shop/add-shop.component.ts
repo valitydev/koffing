@@ -18,15 +18,13 @@ export class AddShopComponent implements OnInit {
 
     @Output()
     public onChange = new EventEmitter();
-
     public categories: SelectItem[] = [];
-
     public isLoading: boolean = false;
     public url: string;
-
     public shopDetail: ShopDetails;
     public categoryId: number;
     public callbackUrl: string;
+    private errorsHighlighted: boolean = false;
 
     @Input()
     private defaultShop: Shop;
@@ -72,8 +70,12 @@ export class AddShopComponent implements OnInit {
         });
     }
 
+    public highlightErrors() {
+        this.errorsHighlighted = true;
+    }
+
     public hasError(field: any): boolean {
-        return field.dirty && field.invalid;
+        return (this.errorsHighlighted || field.dirty) && field.invalid;
     }
 
     public keyup(form: any) {

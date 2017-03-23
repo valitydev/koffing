@@ -6,14 +6,16 @@
             form.form-horizontal.form-label-left.css-form(novalidate, name="form", #form="ngForm")
                 .form-group([ngClass]="{'has-error': hasError(shop_details_name)}")
                     .col-xs-12.col-sm-3
-                        label.text-left Название магазина в системе *
+                        label.text-left Название магазина в системе
+                            span.highlighted  *
                     .col-xs-12.col-sm-6
                         input.form-control(type="text", required, name="shop_details_name",
                         [(ngModel)]="shopDetail.name", #shop_details_name="ngModel",
                         (keyup)="keyup(form)")
                 .form-group
                     .col-xs-12.col-sm-3
-                        label.text-left Категория *
+                        label.text-left Категория
+                            span.highlighted  *
                     .col-xs-12.col-sm-6
                         kof-select(
                         [(ngModel)]="categoryId",

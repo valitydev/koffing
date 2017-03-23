@@ -1,9 +1,11 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 
 import { SelectionOptions } from '../selection-options.class';
 import { ContractDecision } from './contract-decision.class';
 import { ContractorTransfer } from './create-contract/contractor-transfer.class';
 import { Contract } from 'koffing/backend/classes/contract.class';
+import { CreateContractComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/create-contract/create-contract.component';
+import { SelectContractComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-contract/select-contract/select-contract.component';
 
 @Component({
     selector: 'kof-selection-contract',
@@ -19,6 +21,10 @@ export class SelectionContractComponent {
     public optionExisting: number = SelectionOptions.Existing;
     public isContractorValid: boolean = false;
     public decision: ContractDecision = new ContractDecision();
+    @ViewChild('createContractRef')
+    private createContractComponent: CreateContractComponent;
+    @ViewChild('selectContractRef')
+    private selectContractComponent: SelectContractComponent;
 
     public onChangeContractor(value: ContractorTransfer) {
         this.isContractorValid = value.valid;
@@ -43,6 +49,12 @@ export class SelectionContractComponent {
     public stepForward() {
         if (this.isContractorValid) {
             this.steppedForward.emit(this.decision);
+        } else {
+            if (this.selectedOption === this.optionNew) {
+                this.createContractComponent.highlightErrors();
+            } else if (this.selectedOption === this.optionExisting) {
+                this.selectContractComponent.highlightErrors();
+            }
         }
     }
 }

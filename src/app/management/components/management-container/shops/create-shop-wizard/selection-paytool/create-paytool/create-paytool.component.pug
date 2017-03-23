@@ -21,27 +21,31 @@
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(bankBik)}")
                 .col-xs-12.col-sm-3
-                    label.text-left БИК *
+                    label.text-left БИК
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.paytool-bank-suggestions(type="text", required, name="bankBik",
                         [(ngModel)]="payoutToolParams.bankAccount.bankBik", #bankBik="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankName)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Наименование банка *
+                    label.text-left Наименование банка
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.paytool-bank-suggestions(type="text", required, name="bankName",
                         [(ngModel)]="payoutToolParams.bankAccount.bankName", #bankName="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankPostAccount)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Корреспондентский счет *
+                    label.text-left Корреспондентский счет
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankPostAccount",
                         [(ngModel)]="payoutToolParams.bankAccount.bankPostAccount", #bankPostAccount="ngModel", (keyup)="emitData()")
             .form-group([ngClass]="{'has-error': hasError(bankAccount)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Расчетный счет *
+                    label.text-left Расчетный счет
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="account",
                         [(ngModel)]="payoutToolParams.bankAccount.account", #bankAccount="ngModel", (keyup)="emitData()")

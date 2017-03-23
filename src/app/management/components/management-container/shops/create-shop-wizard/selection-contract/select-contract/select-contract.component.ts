@@ -19,6 +19,7 @@ export class SelectContractComponent implements OnInit {
     public contracts: Contract[];
     public selectedContract: Contract;
     public isLoading: boolean = true;
+    public errorHighlighted: boolean = false;
 
     constructor(private contractService: ContractService) { }
 
@@ -30,8 +31,13 @@ export class SelectContractComponent implements OnInit {
          });
     }
 
+    public highlightErrors() {
+        this.errorHighlighted = true;
+    }
+
     public selectContract() {
         this.selectedContract = this.findSelectedContract(this.contracts, this.selectedContractId);
+        this.errorHighlighted = false;
         this.onContractSelected.emit(this.selectedContract);
     }
 

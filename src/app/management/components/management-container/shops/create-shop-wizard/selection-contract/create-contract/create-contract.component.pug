@@ -14,35 +14,40 @@
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(registeredName)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Наименование юр.лица *
+                    label.text-left Наименование юр.лица
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="registeredName", required,
                         [(ngModel)]="contractor.legalEntity.registeredName", #registeredName="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(registeredNumber)}")
                 .col-xs-12.col-sm-3
-                    label.text-left ОГРН *
+                    label.text-left ОГРН
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="registeredNumber", required,
                         [(ngModel)]="contractor.legalEntity.registeredNumber", #registeredNumber="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(inn)}")
                 .col-xs-12.col-sm-3
-                    label.text-left ИНН *
+                    label.text-left ИНН
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="inn", required,
                         [(ngModel)]="contractor.legalEntity.inn", #inn="ngModel",(keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(postAddress)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Почтовый адрес *
+                    label.text-left Почтовый адрес
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contractor-suggestions(type="text", name="postAddress", required,
                         [(ngModel)]="contractor.legalEntity.postAddress", #postAddress="ngModel", (keyup)="emitAddress()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(actualAddress)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Фактический адрес *
+                    label.text-left Фактический адрес
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     .row
                         .col-xs-12.col-sm-12
@@ -57,19 +62,22 @@
                                     | Совпадает с почтовым адресом
             .form-group([ngClass]="{'has-error': hasError(representativePosition)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Должность ЕИО/представителя *
+                    label.text-left Должность ЕИО/представителя
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="representativePosition", required,
                         [(ngModel)]="contractor.legalEntity.representativePosition", #representativePosition="ngModel", (keyup)="emitData()")
             .form-group([ngClass]="{'has-error': hasError(representativeFullname)}")
                 .col-xs-12.col-sm-3
-                    label.text-left ФИО ЕИО/представителя *
+                    label.text-left ФИО ЕИО/представителя
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="representativeFullName", required,
                         [(ngModel)]="contractor.legalEntity.representativeFullName", #representativeFullname="ngModel", (keyup)="emitData()")
             .form-group([ngClass]="{'has-error': hasError(representativeDocument)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Документ ЕИО/представителя *
+                    label.text-left Документ ЕИО/представителя
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", name="representativeDocument", required,
                         [(ngModel)]="contractor.legalEntity.representativeDocument", #representativeDocument="ngModel", (keyup)="emitData()")
@@ -78,27 +86,31 @@
             .ln_solid
             .form-group([ngClass]="{'has-error': hasError(bankBik)}")
                 .col-xs-12.col-sm-3
-                    label.text-left БИК *
+                    label.text-left БИК
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contract-bank-suggestions(type="text", required, name="bankBik",
                         [(ngModel)]="contractor.bankAccount.bankBik", #bankBik="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankName)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Наименование банка *
+                    label.text-left Наименование банка
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control.has-feedback-right.contract-bank-suggestions(type="text", required, name="bankName",
                         [(ngModel)]="contractor.bankAccount.bankName", #bankName="ngModel", (keyup)="emitData()")
                     i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
             .form-group([ngClass]="{'has-error': hasError(bankPostAccount)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Корреспондентский счет *
+                    label.text-left Корреспондентский счет
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="bankPostAccount",
                         [(ngModel)]="contractor.bankAccount.bankPostAccount", #bankPostAccount="ngModel", (keyup)="emitData()", id="bankPostAccount")
             .form-group([ngClass]="{'has-error': hasError(bankAccount)}")
                 .col-xs-12.col-sm-3
-                    label.text-left Расчетный счет *
+                    label.text-left Расчетный счет
+                        span.highlighted  *
                 .col-xs-12.col-sm-6
                     input.form-control(type="text", required, name="account",
                         [(ngModel)]="contractor.bankAccount.account", #bankAccount="ngModel", (keyup)="emitData()")

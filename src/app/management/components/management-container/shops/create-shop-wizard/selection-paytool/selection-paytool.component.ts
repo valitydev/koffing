@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Output, EventEmitter, Input, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 
 import { SelectionOptions } from '../selection-options.class';
@@ -7,6 +7,8 @@ import { ContractDecision } from '../selection-contract/contract-decision.class'
 import { PaytoolDecision } from './paytool-decision.class';
 import { PaytoolTransfer } from './create-paytool/paytool-transfer.class';
 import { PaytoolDecisionService } from './paytool-decision.service';
+import { CreatePayoutToolComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/create-paytool/create-paytool.component';
+import { SelectPaytoolComponent } from 'koffing/management/components/management-container/shops/create-shop-wizard/selection-paytool/select-paytool/select-paytool.component';
 
 @Component({
     selector: 'kof-selection-paytool',
@@ -27,6 +29,10 @@ export class SelectionPaytoolComponent implements AfterViewInit {
     public payoutToolsParams: PayoutToolBankAccount;
     public payoutToolID: number;
     public isLoading: boolean = false;
+    @ViewChild('createPaytoolRef')
+    private createPayoutToolComponent: CreatePayoutToolComponent;
+    @ViewChild('selectPaytoolRef')
+    private selectPaytoolComponent: SelectPaytoolComponent;
 
     constructor(
         private paytoolDecisionService: PaytoolDecisionService,
@@ -62,6 +68,11 @@ export class SelectionPaytoolComponent implements AfterViewInit {
 
     public stepForward() {
         if (!this.isPayoutToolValid) {
+            if (this.selectedOption === this.optionNew) {
+                this.createPayoutToolComponent.highlightErrors();
+            } else if (this.selectedOption === this.optionExisting) {
+                this.selectPaytoolComponent.highlightErrors();
+            }
             return;
         }
         // new contract and new payout tools

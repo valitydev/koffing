@@ -1,5 +1,5 @@
 kof-loading([isLoading]="isLoading")
-    .text-center(*ngIf="contracts?.length === 0")
+    .text-center(*ngIf="!contracts || contracts?.length === 0")
         h4 Контракты отсутствуют
     .x_panel.tile(*ngIf="contracts?.length > 0")
         .x_title
@@ -7,6 +7,14 @@ kof-loading([isLoading]="isLoading")
             .x_content
                 .tile
                     br
-                    kof-select(*ngIf="selectableItems.length", [(ngModel)]="selectedContractId", [items]="selectableItems", (onChange)="selectContract()", [modelOptions]="{standalone: true}", name='selectedContract')
+                    kof-select(
+                        [hasError]="errorHighlighted",
+                        *ngIf="selectableItems.length",
+                        [(ngModel)]="selectedContractId",
+                        [items]="selectableItems",
+                        (onChange)="selectContract()",
+                        [modelOptions]="{standalone: true}",
+                        name='selectedContract'
+                    )
                 .ln_solid(*ngIf="selectedContract")
                 kof-contract-view([contract]="selectedContract")

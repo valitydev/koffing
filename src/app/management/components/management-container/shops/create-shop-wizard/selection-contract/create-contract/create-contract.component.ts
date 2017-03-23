@@ -17,16 +17,13 @@ export class CreateContractComponent implements OnInit, AfterViewInit {
 
     @Output()
     public onChange = new EventEmitter();
-
     public contractor: Contractor;
-
     @ViewChild('createContractForm')
     public form: NgForm;
-
     public sameActualAddressChecked: boolean;
-
     @Input()
     private defaultContractor: Contractor;
+    private errorsHighlighted: boolean = false;
 
     constructor(private suggestionsService: SuggestionsService) { }
 
@@ -58,8 +55,12 @@ export class CreateContractComponent implements OnInit, AfterViewInit {
         this.onChange.emit(new ContractorTransfer(this.contractor, this.form.valid));
     }
 
+    public highlightErrors() {
+        this.errorsHighlighted = true;
+    }
+
     public hasError(field: any): boolean {
-        return field.dirty && field.invalid;
+        return (this.errorsHighlighted || field.dirty) && field.invalid;
     }
 
     public copyPostAddress() {
