@@ -7,6 +7,11 @@ import { AccountComponent } from 'koffing/account/components/account.component';
         RouterModule.forChild([
             {
                 path: 'account',
+                redirectTo: 'account/edit',
+                pathMatch: 'full'
+            },
+            {
+                path: 'account/:path',
                 component: AccountComponent
             }
         ])

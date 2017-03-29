@@ -1,20 +1,18 @@
 kof-loading([isLoading]="isLoading")
     .text-center(*ngIf="!payoutTools || payoutTools?.length === 0")
         h4 Счета по контракту отсутствуют
-    .x_panel.tile(*ngIf="payoutTools?.length > 0")
+    .x_panel(*ngIf="payoutTools?.length > 0")
         .x_title
             h4 Выбор существующего счета
             .x_content
-                .tile
-                    br
-                    kof-select(
-                        [hasError]="errorHighlighted",
-                        *ngIf="selectableItems.length",
-                        [(ngModel)]="selectedPayoutToolId",
-                        [items]="selectableItems",
-                        (onChange)="selectPayoutAccount()",
-                        [modelOptions]="{standalone: true}",
-                        name='selectedPayoutTool'
-                    )
+                kof-select(
+                    [hasError]="errorHighlighted",
+                    *ngIf="selectableItems.length",
+                    [(ngModel)]="selectedPayoutToolId",
+                    [items]="selectableItems",
+                    (onChange)="selectPayoutAccount()",
+                    [modelOptions]="{standalone: true}",
+                    name='selectedPayoutTool'
+                )
                 .ln_solid(*ngIf="selectedPayoutTool")
                 kof-payout-tool-view([payoutTool]="selectedPayoutTool")

@@ -49,7 +49,7 @@
                         div {{uniqueCount}}
 .row
     .col-xs-12
-        .x_panel.tile
+        .x_panel
             .x_title
                 h4 Оборот
             .x_content
@@ -57,7 +57,7 @@
                     kof-revenue([fromTime]="fromTime", [chartData]="revenueChartData")
 .row
     .col-xs-12
-        .x_panel.tile
+        .x_panel
             .x_title
                 h4 Конверсия оплат
             .x_content
@@ -65,14 +65,14 @@
                     kof-conversion([fromTime]="fromTime", [chartData]="conversionChartData")
 .row
     .col-xs-12.col-sm-6
-        .x_panel.tile
+        .x_panel
             .x_title
                 h4 Способы оплаты
             .x_content
                 kof-loading([isLoading]="paymentMethodLoading")
                     kof-payment-method([chartData]="paymentMethodChartData")
     .col-xs-12.col-sm-6
-        .x_panel.tile
+        .x_panel
             .x_title
                 h4 Геолокация
             .x_content

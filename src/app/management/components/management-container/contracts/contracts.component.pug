@@ -20,7 +20,7 @@
                 tr(*ngIf="contract === selectedContract")
                     td(colspan=6)
                         kof-contract-view([contract]="contract")
-                        .x_panel.tile
+                        .x_panel
                             label Средства вывода
                             .x_content
                                 kof-payout-tools([contractID]="contract.id", [claimFound]="claimFound")

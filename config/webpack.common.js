@@ -11,7 +11,6 @@ module.exports = {
         'vendorjs': [
             './node_modules/jquery/dist/jquery.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
-            './node_modules/gentelella/build/js/custom.js',
             './node_modules/keycloak-js/dist/keycloak.js',
             './node_modules/suggestions-jquery/dist/js/jquery.suggestions.js'
         ],

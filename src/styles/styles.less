@@ -12,8 +12,38 @@ form {
     font-weight: 600;
 }
 
+.right_col {
+    display: block;
+    position: relative;
+    min-height: 100vh;
+    padding: 0 !important;
+}
+
+.top_nav {
+    margin: 0 !important;
+    .nav_menu {
+        float: none;
+        display: table;
+        margin: 0;
+        .toggle {
+            float: none;
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0;
+        }
+        .navbar-right {
+            float: none;
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0;
+        }
+    }
+}
+
 .outlet {
-    min-height: 900px;
+    display: block;
+    position: relative;
+    padding: 10px;
 }
 
 .credit_card_group {
@@ -89,6 +119,10 @@ div.tile_count {
 input.ui-inputtext {
     padding: 4px;
     margin: 4px 2px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
 }
 
 /* fix gentelella styles: end */
@@ -104,13 +138,6 @@ p-calendar.ui-inputtext {
     }
 }
 
-input.ui-inputtext {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border: 1px solid #ccc;
-    border-radius: 0;
-}
-
 /* Calendar global styles: end */
 
 .hand-cursor {
@@ -124,8 +151,9 @@ ul.bar_tabs > li {
     }
 }
 
-.nav-sm span.fa {
-    display: inline-block;
+.nav-md li.active ul.nav.child_menu,
+.opened ul.nav.child_menu {
+    display: block;
 }
 
 .nav-sm .nav.side-menu li a {
