@@ -12,7 +12,10 @@ import { ConfigService } from './config.service';
 @Injectable()
 export class GeolocationService {
 
-    constructor(private http: Http, private config: ConfigService) { }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) {}
 
     public getGeoChartData(shopID: number, requestParams: RequestParams): Promise<PaymentGeoStat[]> {
         const params = new URLSearchParams();
@@ -25,9 +28,7 @@ export class GeolocationService {
         params.set('splitUnit', requestParams.splitUnit);
         params.set('splitSize', requestParams.splitSize);
 
-        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/payments/stats/geo`, {
-            search: params
-        })
+        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/payments/stats/geo`, {search: params})
             .toPromise()
             .then(response => response.json());
     }
@@ -38,9 +39,7 @@ export class GeolocationService {
         params.set('geoIDs', _.join(geoIDs, ','));
         params.set('language', language);
 
-        return this.http.get(`${this.config.capiUrl}/reference/geo/location/names`, {
-            search: params
-        })
+        return this.http.get(`${this.config.capiUrl}/reference/geo/location/names`, {search: params})
             .toPromise()
             .then(response => response.json());
     }

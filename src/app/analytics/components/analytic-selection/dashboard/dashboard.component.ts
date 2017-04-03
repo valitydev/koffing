@@ -24,8 +24,8 @@ import { GeoChartData } from './geo-chart-data.class';
 export class DashboardComponent implements OnInit {
 
     public shopID: number;
-    public fromTimeDate: Date;
-    public toTimeDate: Date;
+    public fromTime: Date;
+    public toTime: Date;
     public uniqueCount: any;
     public successfulCount: any;
     public unfinishedCount: any;
@@ -55,9 +55,8 @@ export class DashboardComponent implements OnInit {
     ) {}
 
     public ngOnInit() {
-        this.toTimeDate = new Date();
-        this.fromTimeDate = new Date();
-        this.fromTimeDate.setMonth(this.fromTimeDate.getMonth() - 1);
+        this.fromTime = moment().subtract(1, 'month').hour(0).minute(0).second(0).toDate();
+        this.toTime = moment().hour(23).minute(59).second(59).toDate();
 
         this.route.parent.params.subscribe((params: Params) => {
             this.shopID = Number(params['shopID']);
@@ -65,16 +64,24 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    private loadData() {
-        if (this.fromTimeDate.getTime() >= this.toTimeDate.getTime()) {
+    public selectFromTime() {
+        this.fromTime = moment(this.fromTime).hour(0).minute(0).second(0).toDate();
+    }
+
+    public selectToTime() {
+        this.toTime = moment(this.toTime).hour(23).minute(59).second(59).toDate();
+    }
+
+    public loadData() {
+        if (this.fromTime.getTime() >= this.toTime.getTime()) {
             this.isInvalidDate = true;
             return false;
         }
         this.isInvalidDate = false;
 
         const shopID = this.shopID;
-        const fromTime = moment(this.fromTimeDate).format();
-        const toTime = moment(this.toTimeDate).format();
+        const fromTime = moment(this.fromTime).format();
+        const toTime = moment(this.toTime).format();
 
         this.loadPaymentMethod(shopID, fromTime, toTime);
         this.loadGeoChartData(shopID, fromTime, toTime);

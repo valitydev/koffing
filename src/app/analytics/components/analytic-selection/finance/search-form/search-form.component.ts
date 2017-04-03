@@ -19,38 +19,29 @@ export class SearchFormComponent implements OnInit {
     @Output()
     public onSearch: EventEmitter<any> = new EventEmitter<any>();
 
+    public fromTime: Date;
+    public toTime: Date;
+    public statuses: SelectItem[];
     public isInvalidDate: boolean = false;
-    private statuses: any;
-    private fromTime: Date;
-    private toTime: Date;
-
-    get searchFromTime() {
-        return this.fromTime;
-    }
-
-    set searchFromTime(value: Date) {
-        this.searchParams.fromTime = moment(value).utc().format();
-        this.fromTime = value;
-    }
-
-    get searchToTime() {
-        return this.toTime;
-    }
-
-    set searchToTime(value: Date) {
-        this.searchParams.toTime = moment(value).utc().format();
-        this.toTime = value;
-    }
 
     public ngOnInit() {
+        this.fromTime = moment(this.searchParams.fromTime).toDate();
+        this.toTime = moment(this.searchParams.toTime).toDate();
         this.statuses = _.map(PAYMENT_STATUSES.GET, (name: string, key: string) => new SelectItem(key, name));
+    }
 
-        this.fromTime = new Date(this.searchParams.fromTime);
-        this.toTime = new Date(this.searchParams.toTime);
+    public selectFromTime() {
+        this.fromTime = moment(this.fromTime).hour(0).minute(0).second(0).toDate();
+        this.searchParams.fromTime = moment(this.fromTime).format();
+    }
+
+    public selectToTime() {
+        this.toTime = moment(this.toTime).hour(23).minute(59).second(59).toDate();
+        this.searchParams.toTime = moment(this.toTime).format();
     }
 
     public search() {
-        if (this.searchFromTime.getTime() >= this.searchToTime.getTime()) {
+        if (this.fromTime.getTime() >= this.toTime.getTime()) {
             this.isInvalidDate = true;
             return false;
         }

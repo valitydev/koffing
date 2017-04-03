@@ -9,13 +9,16 @@ import { ConfigService } from './config.service';
 @Injectable()
 export class CustomerService {
 
-    constructor(private http: Http, private config: ConfigService) { }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) {}
 
     public getPaymentMethod(shopID: number, requestParams: RequestParams): Promise<any> {
-        let params = new URLSearchParams();
+        const params = new URLSearchParams();
 
-        let fromTime = moment(requestParams.fromTime).utc().format();
-        let toTime = moment(requestParams.toTime).utc().format();
+        const fromTime = moment(requestParams.fromTime).utc().format();
+        const toTime = moment(requestParams.toTime).utc().format();
 
         params.set('fromTime', fromTime);
         params.set('toTime', toTime);
@@ -23,25 +26,21 @@ export class CustomerService {
         params.set('splitSize', requestParams.splitSize);
         params.set('paymentMethod', requestParams.paymentMethod);
 
-        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/customers/stats/payment_method`, {
-            search: params
-        })
+        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/customers/stats/payment_method`, {search: params})
             .toPromise()
             .then((response) => response.json());
     }
 
     public getRate(shopID: number, requestParams: RequestParams): Promise<any> {
-        let params = new URLSearchParams();
+        const params = new URLSearchParams();
 
-        let fromTime = moment(requestParams.fromTime).utc().format();
-        let toTime = moment(requestParams.toTime).utc().format();
+        const fromTime = moment(requestParams.fromTime).utc().format();
+        const toTime = moment(requestParams.toTime).utc().format();
 
         params.set('fromTime', fromTime);
         params.set('toTime', toTime);
 
-        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/customers/stats/rate`, {
-            search: params
-        })
+        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/customers/stats/rate`, {search: params})
             .toPromise()
             .then((response) => response.json());
     }

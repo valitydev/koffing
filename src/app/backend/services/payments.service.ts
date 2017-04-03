@@ -11,7 +11,10 @@ import { ConfigService } from './config.service';
 @Injectable()
 export class PaymentsService {
 
-    constructor(private http: Http, private config: ConfigService) { }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) {}
 
     public getRevenueStat(shopID: number, requestParams: RequestParams): Promise<Revenue[]> {
         const params = new URLSearchParams();
@@ -24,9 +27,7 @@ export class PaymentsService {
         params.set('splitUnit', requestParams.splitUnit);
         params.set('splitSize', requestParams.splitSize);
 
-        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/payments/stats/revenue`, {
-            search: params
-        })
+        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/payments/stats/revenue`, {search: params})
             .toPromise()
             .then(response => response.json());
     }
@@ -42,9 +43,7 @@ export class PaymentsService {
         params.set('splitUnit', requestParams.splitUnit);
         params.set('splitSize', requestParams.splitSize);
 
-        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/payments/stats/conversion`, {
-            search: params
-        })
+        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/payments/stats/conversion`, {search: params})
             .toPromise()
             .then(response => response.json());
     }

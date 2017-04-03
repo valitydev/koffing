@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 import { CHART_OPTIONS } from './../chart-options.const';
-import { RevenueDataService } from 'koffing/analytics/components/analytic-selection/dashboard/revenue/revenue-data.service';
+import { RevenueDataService } from './revenue-data.service';
 
 @Component({
     selector: 'kof-revenue',
@@ -48,10 +48,11 @@ export class RevenueComponent implements OnChanges {
             this.labels = RevenueDataService.toLabels(this.fromTime, this.chartData);
             const data = RevenueDataService.toData(this.chartData);
             if (data.length > 0) {
-                this.datasets = [{
+                this.datasets.pop();
+                this.datasets.push({
                     data,
                     label: 'Оборот'
-                }];
+                });
             } else {
                 this.datasets = [];
             }

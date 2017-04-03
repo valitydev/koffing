@@ -19,13 +19,13 @@ export class FinanceComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private invoiceService: InvoiceService
-    ) { }
+    ) {}
 
     public ngOnInit() {
-        // todo: описать class SearchParams и создать как экземпляр класса
+        // todo: описать class SearchParams и создать как экземпляр класса, так как сделано в dashboard.component.ts
         this.searchParams = {
-            fromTime: moment().subtract(1, 'M').utc().format(),
-            toTime: moment().utc().format(),
+            fromTime: moment().subtract(1, 'month').hour(0).minute(0).second(0).format(),
+            toTime: moment().hour(23).minute(59).second(59).format(),
             limit: 20,
             offset: 0,
             invoiceID: null

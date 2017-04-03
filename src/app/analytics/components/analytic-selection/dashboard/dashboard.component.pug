@@ -4,11 +4,11 @@
             .form-group
                 label.control-label Статистика с&nbsp;
                 .ui-calendar
-                    p-calendar.ui-inputtext.statistics([(ngModel)]="fromTimeDate", name="fromTime", dateFormat="dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}")
+                    p-calendar.ui-inputtext.statistics([(ngModel)]="fromTime", name="fromTime", dateFormat="dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectFromTime()")
             .form-group
                 label.control-label &nbsp;&nbsp;по&nbsp;
                 .ui-calendar
-                    p-calendar.ui-inputtext.statistics([(ngModel)]="toTimeDate", name="toTime", dateFormat = "dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}")
+                    p-calendar.ui-inputtext.statistics([(ngModel)]="toTime", name="toTime", dateFormat = "dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectToTime()")
             span &nbsp;
             button.btn.btn-default(style="margin-bottom: 0; margin-right: 0; margin-left: 5px;", (click)="loadData()") Показать
 .row

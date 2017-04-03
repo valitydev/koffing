@@ -47,10 +47,11 @@ export class ConversionComponent implements OnChanges {
             this.labels = ConversionDataService.toLabels(this.fromTime, this.chartData);
             const data = ConversionDataService.toData(this.chartData);
             if (data.length > 0) {
-                this.datasets = [{
+                this.datasets.pop();
+                this.datasets.push({
                     data,
                     label: 'Конверсия'
-                }];
+                });
             } else {
                 this.datasets = [];
             }

@@ -6,13 +6,13 @@ form.form-horizontal.form-search-invoices
                     label.control-label Дата с
                 .col-xs-12.col-sm-6
                     .ui-calendar.search-form
-                        p-calendar.ui-inputtext.search-form([(ngModel)]="searchFromTime", name="searchFromTime", dateFormat = "dd.mm.yy", required, [ngClass]="{'has-error': isInvalidDate}")
+                        p-calendar.ui-inputtext.search-form([(ngModel)]="fromTime", name="searchFromTime", dateFormat = "dd.mm.yy", required, [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectFromTime()")
             .form-group
                 .col-xs-12.col-sm-4
                     label.control-label Дата по
                 .col-xs-12.col-sm-6
                     .ui-calendar.search-form
-                        p-calendar.ui-inputtext.search-form([(ngModel)]="searchToTime", name="searchToTime", dateFormat = "dd.mm.yy", required, [ngClass]="{'has-error': isInvalidDate}")
+                        p-calendar.ui-inputtext.search-form([(ngModel)]="toTime", name="toTime", dateFormat = "dd.mm.yy", required, [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectToTime()")
         .col-xs-12.col-sm-6
             .form-group
                 .col-xs-12.col-sm-4
