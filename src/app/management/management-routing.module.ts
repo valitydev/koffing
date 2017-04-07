@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ManagementComponent } from './components/management-container/management.component';
-import { ShopsComponent } from './components/management-container/shops/shops.component';
-import { ContractsComponent } from './components/management-container/contracts/contracts.component';
-import { ContractCreateComponent } from './components/management-container/contracts/contract-create/contract-create.component';
-import { PayoutToolCreateComponent } from './components/management-container/contracts/payout-tool-create/payout-tool-create.component';
+import { ManagementComponent } from './management.component';
+import { ShopsComponent } from './shops/shops.component';
+import { ContractsComponent } from './contracts/contracts.component';
+import { ContractCreateComponent } from './contracts/contract-create/contract-create.component';
+import { PayoutToolCreateComponent } from './contracts/payout-tool-create/payout-tool-create.component';
 
 @NgModule({
     imports: [

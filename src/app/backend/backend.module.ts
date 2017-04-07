@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { AccountService } from './services/accounts.service';
 import { CategoryService } from './services/category.service';
-import { ClaimService } from './services/claim.service';
 import { ContractService } from './services/contract.service';
 import { CustomerService } from './services/customer.service';
 import { InvoiceService } from './services/invoice.service';
@@ -15,7 +14,6 @@ import { GeolocationService } from './services/geolocation.service';
     providers: [
         AccountService,
         CategoryService,
-        ClaimService,
         ContractService,
         CustomerService,
         InvoiceService,
@@ -29,7 +27,6 @@ export class BackendModule { }
 
 export * from './services/accounts.service';
 export * from './services/category.service';
-export * from './services/claim.service';
 export * from './services/config.service';
 export * from './services/contract.service';
 export * from './services/customer.service';
@@ -42,7 +39,6 @@ export * from './classes/account.class';
 export * from './classes/bank-account.class';
 export * from './classes/callback-handler.class';
 export * from './classes/category.class';
-export * from './classes/claim/claim.class';
 export * from './classes/contract.class';
 export * from './classes/contractor.class';
 export * from './classes/conversion.class';
@@ -61,9 +57,3 @@ export * from './classes/shop-item.class';
 export * from './classes/shop-location.class';
 export * from './classes/location-name.class';
 export * from './classes/shop-params.class';
-export * from './classes/claim/contract-creation.class';
-export * from './classes/claim/contract-modification.class';
-export * from './classes/claim/contract-payout-tool-creation.class';
-export * from './classes/claim/shop-creation.class';
-export * from './classes/claim/shop-modification.class';
-export * from './classes/claim/shop-update.class';
