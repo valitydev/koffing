@@ -1,0 +1,11 @@
+div(*ngIf="data?.length > 0")
+    canvas(
+        baseChart,
+        [data]="data",
+        [labels]="labels",
+        chartType="doughnut",
+        [options]="options",
+        [colors]="chartColors",
+        height="130"
+    )
+div(*ngIf="data?.length === 0") Данные отсутствуют

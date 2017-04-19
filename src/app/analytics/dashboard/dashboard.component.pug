@@ -1,0 +1,35 @@
+.row
+    .col-xs-3
+        kof-loading([isLoading]="isLoading")
+    .col-xs-9
+        kof-date-range-selector([from]="fromTime", [to]="toTime", (onSelect)="loadData($event)")
+.row
+    .col-xs-12
+        kof-statistic-panel([data]="panelData")
+.row
+    .col-xs-12
+        .x_panel
+            .x_title
+                h4 Оборот
+            .x_content
+                kof-line-chart([chartData]="revenueChartData")
+.row
+    .col-xs-12
+        .x_panel
+            .x_title
+                h4 Конверсия оплат
+            .x_content
+                kof-line-chart([chartData]="conversionChartData")
+.row
+    .col-xs-12.col-sm-6
+        .x_panel
+            .x_title
+                h4 Способы оплаты
+            .x_content
+                kof-doughnut-chart([chartData]="paymentMethodChartData")
+    .col-xs-12.col-sm-6
+        .x_panel
+            .x_title
+                h4 Геолокация
+            .x_content
+                kof-doughnut-chart([chartData]="geoChartData")

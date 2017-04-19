@@ -1,0 +1,11 @@
+form.form-inline.form-label-right
+    .form-group
+        label.control-label Статистика с&nbsp;
+        .ui-calendar
+            p-calendar.ui-inputtext.statistics([(ngModel)]="from", name="fromTime", dateFormat="dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectFrom()")
+    .form-group
+        label.control-label &nbsp;&nbsp;по&nbsp;
+        .ui-calendar
+            p-calendar.ui-inputtext.statistics([(ngModel)]="to", name="toTime", dateFormat = "dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectTo()")
+    span &nbsp;
+    button.btn.btn-default.show-button(style="margin-bottom: 0; margin-right: 0; margin-left: 5px;", (click)="select()") Показать

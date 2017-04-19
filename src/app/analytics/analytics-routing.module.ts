@@ -1,24 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { DashboardComponent } from './components/analytic-selection/dashboard/dashboard.component';
-import { FinanceComponent } from './components/analytic-selection/finance/finance.component';
-import { AnalyticSelectionComponent } from './components/analytic-selection/analytic-selection.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { FinanceComponent } from './finance/finance.component';
+import { AnalyticsComponent } from './analytics.component';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
                 path: 'analytics',
-                component: AnalyticSelectionComponent
+                component: AnalyticsComponent
             },
             {
                 path: 'analytics/:shopID',
-                component: AnalyticSelectionComponent
-            },
-            {
-                path: 'analytics/:shopID',
-                component: AnalyticSelectionComponent,
+                component: AnalyticsComponent,
                 children: [
                     {
                         path: 'dashboard',
