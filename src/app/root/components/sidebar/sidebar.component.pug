@@ -31,6 +31,8 @@
                                 a([routerLink]=["/account/sessions"]) Сессии
                             li([routerLinkActive]="['active']")
                                 a([routerLink]=["/account/applications"]) Приложения
+                            li([routerLinkActive]="['active']")
+                                a([routerLink]=["/account/log"]) Логи
                     li([routerLinkActive]="['active']", (click)="closeSubMenu()")
                         a([routerLink]=["/tokenization"])
                             i.fa.fa-key
