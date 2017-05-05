@@ -1,0 +1,43 @@
+.row
+    .col-xs-12
+        .x_panel
+            .x_title
+                .row
+                    .col-xs-6
+                        h4
+                            a(href="https://rbkmoney.github.io/api/#tag/Webhooks", target="_blank")
+                                u Webhooks
+                    .col-xs-6.text-right
+                        a(routerLink="/api/webhook/new")
+                            button.btn.btn-primary Создать webhook
+            table.table.table-striped
+                thead
+                    tr
+                        th URL
+                        th События
+                        th Статус
+                        th
+                tbody(*ngFor="let item of webhooksList")
+                    tr.cursor-pointer((click)="toggleWebhook(item)")
+                        td {{item.webhook.url}}
+                        td {{makeEvents(item.webhook.scope.eventTypes)}}
+                        td
+                            span.label.label-success([ngClass]="{'label-danger': !item.webhook.active}") {{transformStatus(item.webhook.active)}}
+                        td
+                            .pull-right
+                                button.btn.btn-xs.btn-danger.pull-right(data-toggle="modal", [attr.data-target]="'#' + item.webhook.id", data-backdrop="false")
+                                    i.fa.fa-trash
+                                .modal.fade.remove-modal(tabindex="-1", role="dialog", id="{{item.webhook.id}}")
+                                    .modal-dialog.modal-sm
+                                        .modal-content
+                                            .modal-header
+                                                h5.modal-title Вы действительно хотите удалить этот webhook ({{item.webhook.id}})?
+                                            .modal-footer
+                                                .btn-toolbar.pull-left
+                                                    .btn-group.btn-group-sm
+                                                        button.btn.btn-danger(type="button", data-dismiss="modal", (click)="deleteWebhook(item.webhook.id)") Да
+                                                    .btn-group.btn-group-sm
+                                                        button.btn.btn-default(type="button", data-dismiss="modal") Нет
+                    tr(*ngIf="item.visible")
+                        td.row(colspan="5")
+                            kof-webhook-list-details([item]="item")

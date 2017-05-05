@@ -5,6 +5,7 @@ import { ContractService } from './services/contract.service';
 import { InvoiceService } from './services/invoice.service';
 import { ShopService } from './services/shop.service';
 import { ConfigService } from './services/config.service';
+import { WebhooksService } from './webhooks.service';
 import { AnalyticsService } from 'koffing/backend/analytics.service';
 import { LocationService } from 'koffing/backend/location.service';
 import { AccountsService } from 'koffing/backend/accounts.service';
@@ -18,7 +19,8 @@ import { AccountsService } from 'koffing/backend/accounts.service';
         ShopService,
         ConfigService,
         AnalyticsService,
-        LocationService
+        LocationService,
+        WebhooksService
     ]
 })
 export class BackendModule { }
@@ -28,6 +30,7 @@ export * from './services/config.service';
 export * from './services/contract.service';
 export * from './services/invoice.service';
 export * from './services/shop.service';
+export * from './webhooks.service';
 
 export * from './classes/account.class';
 export * from './classes/bank-account.class';

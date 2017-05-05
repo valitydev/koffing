@@ -5,14 +5,20 @@ import { Component } from '@angular/core';
     templateUrl: './sidebar.component.pug'
 })
 export class SidebarComponent {
+    public isOpenedSubMenu: any = {
+        account: false,
+        api: false
+    };
 
-    public isOpenedSubMenu: boolean;
-
-    public toggleSubMenu() {
-        this.isOpenedSubMenu = !this.isOpenedSubMenu;
+    public toggleSubMenu(submenu: string) {
+        this.isOpenedSubMenu[submenu] = !this.isOpenedSubMenu[submenu];
     }
 
     public closeSubMenu() {
-        this.isOpenedSubMenu = false;
+        for (let prop in this.isOpenedSubMenu) {
+            if (this.isOpenedSubMenu[prop] && this.isOpenedSubMenu.hasOwnProperty(prop)) {
+                this.isOpenedSubMenu[prop] = !this.isOpenedSubMenu[prop];
+            }
+        }
     }
 }

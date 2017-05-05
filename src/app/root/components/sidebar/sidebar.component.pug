@@ -15,7 +15,7 @@
                         a([routerLink]=["/management"])
                             i.fa.fa-shopping-cart
                             | Управление магазинами
-                    li([routerLinkActive]="['active']", (click)="toggleSubMenu()", [ngClass]="{'opened': isOpenedSubMenu}")
+                    li([routerLinkActive]="['active']", (click)="toggleSubMenu('account')", [ngClass]="{'opened': isOpenedSubMenu.account}")
                         a
                             i.fa.fa-user
                             | Мои данные
@@ -31,13 +31,16 @@
                                 a([routerLink]=["/account/sessions"]) Сессии
                             li([routerLinkActive]="['active']")
                                 a([routerLink]=["/account/applications"]) Приложения
+                    li([routerLinkActive]="['active']", (click)="toggleSubMenu('api')", [ngClass]="{'opened': isOpenedSubMenu.api}")
+                        a
+                            i.fa.fa-cogs
+                            | API
+                            span.fa.fa-chevron-down
+                        ul.nav.child_menu
                             li([routerLinkActive]="['active']")
-                                a([routerLink]=["/account/log"]) Логи
-                    li([routerLinkActive]="['active']", (click)="closeSubMenu()")
-                        a([routerLink]=["/tokenization"])
-                            i.fa.fa-key
-                            | API ключ
-                    li((click)="closeSubMenu()")
-                        a(href="https://rbkmoney.github.io/docs", target="_blank")
-                            i.fa.fa-file
-                            | Документация
+                                a([routerLink]=["/api/webhooks"]) Webhooks
+                            li([routerLinkActive]="['active']")
+                                a([routerLink]=["/api/key"]) API ключ
+                            li()
+                                a(href="https://rbkmoney.github.io/docs", target="_blank") Документация
+

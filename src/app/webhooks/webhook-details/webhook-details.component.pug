@@ -1,0 +1,10 @@
+.col-xs-12
+    dl
+        dt ID webhook
+        td {{item.webhook.id}}
+    dl
+        dt Магазин
+        td {{item.shopName}}
+    dl
+        dt Публичный ключ
+        textarea.form-control(readonly="true", rows="5") {{item.webhook.publicKey}}

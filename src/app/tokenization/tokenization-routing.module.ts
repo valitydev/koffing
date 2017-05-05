@@ -6,7 +6,7 @@ import { TokenComponent } from 'koffing/tokenization/components/token/token.comp
     imports: [
         RouterModule.forChild([
             {
-                path: 'tokenization',
+                path: 'api/key',
                 component: TokenComponent
             }
         ])

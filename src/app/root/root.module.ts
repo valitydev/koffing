@@ -5,6 +5,7 @@ import { GrowlModule } from 'primeng/primeng';
 import { RootRoutingModule } from './root-routing.module';
 import { BroadcasterModule } from '../broadcaster/broadcaster.module';
 import { TokenizationModule } from '../tokenization/tokenization.module';
+import { WebhooksModule } from '../webhooks/webhooks.module';
 import { AnalyticsModule } from '../analytics/analytics.module';
 import { ManagementModule } from '../management/management.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -23,7 +24,8 @@ import { NotificationHandleComponent } from './components/notification-handle/no
         TokenizationModule,
         AnalyticsModule,
         ManagementModule,
-        AccountModule
+        AccountModule,
+        WebhooksModule
     ],
     declarations: [
         ContainerComponent,
