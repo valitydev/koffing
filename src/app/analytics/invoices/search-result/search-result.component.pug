@@ -1,0 +1,23 @@
+table.table.table-striped
+    thead
+        tr
+            th.hidden-xs Идентификатор
+            th Статус
+            th Стоимость
+            th.hidden-xs Дата и время создания
+            th.hidden-xs Дата и время окончания действия
+            th
+    tbody(*ngFor="let item of invoiceTableItems | async")
+        tr
+            td.hidden-xs {{item.invoice.id}}
+            td
+                span.label.label-default([ngClass]="getLabelClass(item.invoice.status)") {{item.invoice.status | kofInvoiceStatus}}
+            td {{item.invoice.amount | kofRoubleCurrency}} {{item.invoice.currency}}
+            td.hidden-xs {{item.invoice.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+            td.hidden-xs {{item.invoice.dueDate | date: "dd.MM.yyyy HH:mm:ss"}}
+            td
+                .pull-right
+                    button.btn.btn-xs.btn-default((click)="togglePaymentPanel(item)") {{item.visible ? 'Скрыть' : 'Показать'}} детали
+        tr(*ngIf="item.visible")
+            td(colspan=6)
+                kof-search-details([invoice]="item.invoice", [searchParams]="searchParams", [shopID]="shopID")

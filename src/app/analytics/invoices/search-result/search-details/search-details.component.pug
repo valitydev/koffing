@@ -1,0 +1,38 @@
+form.form-horizontal.form-label-left.css-form
+    .row.visible-xs
+        .col-xs-12
+            .form-group
+                label Идентификатор:
+                div {{invoice.id}}
+        .col-xs-12
+            .form-group
+                label Дата и время создания:
+                div {{invoice.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+        .col-xs-12
+            .form-group
+                label Дата и время окончания действия:
+                div {{invoice.dueDate | date: "dd.MM.yyyy HH:mm:ss"}}
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                label Наименование предлагаемых товаров или услуг:
+                div {{invoice.product}}
+        .col-xs-12.col-sm-6
+            .form-group
+                label Описание предлагаемых товаров или услуг:
+                div {{invoice.description}}
+    .ln_solid
+    .row
+        .col-xs-6
+            h5 Платежи
+        .col-xs-6
+            .pull-right
+                span Всего: {{searchResult?.totalCount}}
+                i(*ngIf="isLoading").fa.fa-cog.fa-spin.fa-lg.fa-fw
+    .ln_solid
+    div(*ngFor="let item of searchResult?.result")
+        kof-payment-info([payment]="item.payment")
+        .ln_solid
+.row(*ngIf="searchResult?.isNextAvailable")
+    .col-xs-12
+        button.btn.btn-default.btn-block((click)="search()") Показать еще ...

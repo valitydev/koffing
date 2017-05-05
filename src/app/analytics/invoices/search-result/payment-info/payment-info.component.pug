@@ -1,0 +1,52 @@
+.row
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Идентификатор:
+            .col-sm-4
+                div {{payment.id}}
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Email плательщика:
+            .col-sm-4
+                div {{payment?.contactInfo?.email}}
+.row
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Статус:
+            .col-sm-4
+                span.label.label-default(
+                    [ngClass]="getLabelClass(payment.status)"
+                ) {{payment.status | kofPaymentStatus}}
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Fingerprint:
+            .col-sm-4
+                div {{payment.fingerprint}}
+.row
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Дата и время создания:
+            .col-sm-4
+                div {{payment.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 IP-адрес плательщика:
+            .col-sm-4
+                div {{payment.ip}}
+.row
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Стоимость:
+            .col-sm-4
+                div {{payment.amount | kofRoubleCurrency}} {{payment.currency}}
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Данные карты:
+            .col-sm-4
+                div **** **** **** {{payment.paymentToolDetails?.cardNumberMask}} ({{payment.paymentToolDetails?.paymentSystem}})
+.row(*ngIf="payment.error")
+    .col-xs-12.col-sm-6
+        .form-group
+            label.col-sm-4 Сообщение об ошибке:
+            .col-sm-4
+                div {{payment.error?.message}}

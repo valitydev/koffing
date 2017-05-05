@@ -10,7 +10,7 @@ kof-loading([isLoading]="isLoading")
             ul.nav.nav-tabs.bar_tabs(*ngIf="currentShopID")
                 li.hand-cursor([routerLink]="['dashboard']", [routerLinkActive]="['active']")
                     a Статистика
-                li.hand-cursor([routerLink]="['finance']", [routerLinkActive]="['active']")
-                    a Финансы
+                li.hand-cursor([routerLink]="['invoices']", [routerLinkActive]="['active']")
+                    a Инвойсы
             .tab-content
                 router-outlet

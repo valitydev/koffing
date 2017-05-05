@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { PAYMENT_STATUSES } from './payment-statuses.const';
+import { paymentStatuses } from 'koffing/analytics/invoices/payment-statuses';
 
 @Pipe({
     name: 'kofPaymentStatus'
@@ -8,7 +8,7 @@ import { PAYMENT_STATUSES } from './payment-statuses.const';
 export class PaymentStatusPipe implements PipeTransform {
 
     public transform(input: string): string {
-        const status = PAYMENT_STATUSES.GET[input];
+        const status = paymentStatuses[input];
         return status ? status : input;
     }
 }

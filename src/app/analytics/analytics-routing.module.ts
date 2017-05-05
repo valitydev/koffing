@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FinanceComponent } from './finance/finance.component';
+import { InvoicesComponent } from './invoices/invoices.component';
 import { AnalyticsComponent } from './analytics.component';
 
 @NgModule({
@@ -21,8 +21,8 @@ import { AnalyticsComponent } from './analytics.component';
                         component: DashboardComponent
                     },
                     {
-                        path: 'finance',
-                        component: FinanceComponent
+                        path: 'invoices',
+                        component: InvoicesComponent
                     }
                 ]
             }

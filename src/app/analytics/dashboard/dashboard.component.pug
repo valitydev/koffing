@@ -8,28 +8,24 @@
         kof-statistic-panel([data]="panelData")
 .row
     .col-xs-12
-        .x_panel
-            .x_title
-                h4 Оборот
-            .x_content
-                kof-line-chart([chartData]="revenueChartData")
+        .x_title
+            h4 Оборот
+        .x_content
+            kof-line-chart([chartData]="revenueChartData")
 .row
     .col-xs-12
-        .x_panel
-            .x_title
-                h4 Конверсия оплат
-            .x_content
-                kof-line-chart([chartData]="conversionChartData")
+        .x_title
+            h4 Конверсия оплат
+        .x_content
+            kof-line-chart([chartData]="conversionChartData")
 .row
     .col-xs-12.col-sm-6
-        .x_panel
-            .x_title
-                h4 Способы оплаты
-            .x_content
-                kof-doughnut-chart([chartData]="paymentMethodChartData")
+        .x_title
+            h4 Способы оплаты
+        .x_content
+            kof-doughnut-chart([chartData]="paymentMethodChartData")
     .col-xs-12.col-sm-6
-        .x_panel
-            .x_title
-                h4 Геолокация
-            .x_content
-                kof-doughnut-chart([chartData]="geoChartData")
+        .x_title
+            h4 Геолокация
+        .x_content
+            kof-doughnut-chart([chartData]="geoChartData")
