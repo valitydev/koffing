@@ -1,7 +1,7 @@
-import { PaymentViewItem } from './payment-view-item';
+import { Payment } from 'koffing/backend/model/payment';
 
 export class SearchResult {
     public isNextAvailable: boolean;
     public totalCount: number;
-    public result: PaymentViewItem[];
+    public payments: Payment[];
 }

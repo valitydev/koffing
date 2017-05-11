@@ -18,9 +18,6 @@ export class SearchDetailsComponent implements OnInit {
     @Input()
     public searchParams: FormSearchParams;
 
-    @Input()
-    public shopID: string;
-
     public searchResult: SearchResult;
 
     public isLoading: boolean;
@@ -34,7 +31,7 @@ export class SearchDetailsComponent implements OnInit {
 
     public search() {
         this.isLoading = true;
-        this.searchDetailsService.search(this.shopID, this.invoice.id, this.searchParams).subscribe((result) => {
+        this.searchDetailsService.search(String(this.invoice.shopID), this.invoice.id, this.searchParams).subscribe((result) => {
             this.isLoading = false;
             this.searchResult = result;
         });

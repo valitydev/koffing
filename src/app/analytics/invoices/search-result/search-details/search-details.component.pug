@@ -30,8 +30,8 @@ form.form-horizontal.form-label-left.css-form
                 span Всего: {{searchResult?.totalCount}}
                 i(*ngIf="isLoading").fa.fa-cog.fa-spin.fa-lg.fa-fw
     .ln_solid
-    div(*ngFor="let item of searchResult?.result")
-        kof-payment-info([payment]="item.payment")
+    div(*ngFor="let payment of searchResult?.payments")
+        kof-payment-info([payment]="payment")
         .ln_solid
 .row(*ngIf="searchResult?.isNextAvailable")
     .col-xs-12

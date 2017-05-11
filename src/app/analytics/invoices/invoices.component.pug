@@ -4,5 +4,5 @@
 .row
     .col-xs-12
         kof-loading([isLoading]="isLoading")
-            kof-search-result([invoices]="invoices", [searchParams]="searchParams", [shopID]="shopID")
+            kof-search-result([invoices]="invoices", [searchParams]="searchParams")
             kof-paginate([size]="totalCount", [limit]="limit", [offset]="offset", [pagesOnScreen]="10", (onChange)="onChangePage($event)")

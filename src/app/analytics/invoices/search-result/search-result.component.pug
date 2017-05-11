@@ -20,4 +20,4 @@ table.table.table-striped
                     button.btn.btn-xs.btn-default((click)="togglePaymentPanel(item)") {{item.visible ? 'Скрыть' : 'Показать'}} детали
         tr(*ngIf="item.visible")
             td(colspan=6)
-                kof-search-details([invoice]="item.invoice", [searchParams]="searchParams", [shopID]="shopID")
+                kof-search-details([invoice]="item.invoice", [searchParams]="searchParams")
