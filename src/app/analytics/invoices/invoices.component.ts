@@ -37,6 +37,7 @@ export class InvoicesComponent implements OnInit {
 
     public onSearch(searchParams: FormSearchParams) {
         this.searchParams = searchParams;
+        this.offset = 0;
         this.search();
     }
 
