@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { Shop } from '../classes/shop.class';
 import { ConfigService } from './config.service';
 import { ShopParams } from 'koffing/backend/classes/shop-params.class';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ShopService {
@@ -23,6 +24,11 @@ export class ShopService {
         return this.http.get(`${this.shopsUrl}/${shopID}`)
             .toPromise()
             .then(response => response.json() as Shop);
+    }
+
+    public getShopObservable(shopID: string): Observable<Shop> {
+        return this.http.get(`${this.shopsUrl}/${shopID}`)
+            .map((res) => res.json());
     }
 
     public createShop(args: ShopParams): Promise<string> {

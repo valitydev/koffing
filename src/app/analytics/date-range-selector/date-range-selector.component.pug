@@ -1,0 +1,6 @@
+form.form-inline.date-range-selector
+    label.control-label Временной интервал:
+    .form-group
+        p-calendar.ui-inputtext([(ngModel)]="from", name="fromTime", dateFormat="dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectFrom()")
+        p-calendar.ui-inputtext([(ngModel)]="to", name="toTime", dateFormat = "dd.mm.yy", [ngClass]="{'has-error': isInvalidDate}", (onSelect)="selectTo()")
+    button.btn.btn-default.show-button((click)="select()") {{buttonName}}

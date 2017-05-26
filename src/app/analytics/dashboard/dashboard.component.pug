@@ -1,8 +1,8 @@
 .row
-    .col-xs-3
+    .col-xs-12.col-sm-3
         kof-loading([isLoading]="isLoading")
-    .col-xs-9
-        kof-date-range-selector([from]="fromTime", [to]="toTime", (onSelect)="loadData($event)")
+    .col-xs-12.col-sm-9
+        kof-date-range-selector.form-label-right([from]="fromTime", [to]="toTime", (onSelect)="loadData($event)", [buttonName]="'Показать'")
 .row
     .col-xs-12
         kof-statistic-panel([data]="panelData")

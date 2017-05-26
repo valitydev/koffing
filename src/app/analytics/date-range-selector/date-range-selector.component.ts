@@ -17,6 +17,9 @@ export class DateRangeSelectorComponent {
     @Input()
     public to: Date;
 
+    @Input()
+    public buttonName: string;
+
     @Output()
     public onSelect = new EventEmitter();
 

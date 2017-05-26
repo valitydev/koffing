@@ -4,12 +4,12 @@ import * as moment from 'moment';
 import { Subject } from 'rxjs/Subject';
 
 import { ShopService }  from 'koffing/backend/services/shop.service';
-import { DateRange } from 'koffing/analytics/dashboard/date-range-selector/date-range.class';
 import { AccountsService } from 'koffing/backend/accounts.service';
-import { DashboardService } from 'koffing/analytics/dashboard/dashboard.service';
-import { PanelData } from 'koffing/analytics/statistic-panel/panel-data';
-import { LineChartData } from 'koffing/analytics/dashboard/stats-data/line-chart-data';
-import { DoughnutChartData } from 'koffing/analytics/dashboard/stats-data/doughnut-chart-data';
+import { DateRange } from '../date-range-selector/date-range.class';
+import { PanelData } from '../statistic-panel/panel-data';
+import { DashboardService } from './dashboard.service';
+import { LineChartData } from './stats-data/line-chart-data';
+import { DoughnutChartData } from './stats-data/doughnut-chart-data';
 
 @Component({
     templateUrl: './dashboard.component.pug',

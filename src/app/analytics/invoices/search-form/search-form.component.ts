@@ -5,7 +5,7 @@ import { map, clone } from 'lodash';
 import { SelectItem } from 'koffing/common/common.module';
 import { FormSearchParams } from './form-search-params';
 import { invoiceStatuses } from '../invoice-statuses';
-import { paymentStatuses } from 'koffing/analytics/invoices/payment-statuses';
+import { paymentStatuses } from '../payment-statuses';
 
 @Component({
     selector: 'kof-search-form',

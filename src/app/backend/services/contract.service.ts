@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import * as _ from 'lodash';
 
 import { ConfigService } from './config.service';
 import { Contract } from '../classes/contract.class';
 import { PayoutTool } from '../classes/payout-tool.class';
 import { ContractParams } from 'koffing/backend/classes/contract-params.class';
-import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
 import { PayoutToolParams } from 'koffing/backend/classes/payout-tool-params.class';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ContractService {
@@ -22,6 +21,11 @@ export class ContractService {
         return this.http.get(this.contractsUrl)
             .toPromise()
             .then(response => response.json());
+    }
+
+    public getContractsObservable(): Observable<Contract[]> {
+        return this.http.get(this.contractsUrl)
+            .map((res) => res.json());
     }
 
     public getContract(contractID: number): Promise<Contract> {

@@ -12,7 +12,8 @@ module.exports = {
             './node_modules/jquery/dist/jquery.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
             './node_modules/keycloak-js/dist/keycloak.js',
-            './node_modules/suggestions-jquery/dist/js/jquery.suggestions.js'
+            './node_modules/suggestions-jquery/dist/js/jquery.suggestions.js',
+            './node_modules/xlsx-style/dist/xlsx.core.min.js'
         ],
         'app': './src/main.ts'
     },
@@ -37,7 +38,7 @@ module.exports = {
         ],
         loaders: [
             {
-                test: /(jquery.js$)|(keycloak.js$)|(suggestions.js$)/,
+                test: /(jquery.js$)|(keycloak.js$)|(suggestions.js$)|(xlsx.core.min.js$)/,
                 loader: 'script-loader'
             },
             {

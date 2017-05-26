@@ -11,6 +11,7 @@ export class Payment {
     public paymentSession: string;
     public contactInfo: ContactInfo;
     public amount: number;
+    public fee: number;
     public currency: string;
     public fingerprint: string;
     public payerIP: string;
