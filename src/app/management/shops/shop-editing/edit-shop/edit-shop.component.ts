@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, AfterViewInit } from '@angular/core';
 import * as _ from 'lodash';
 
-import { CategoryService } from 'koffing/backend/backend.module';
 import { Shop } from 'koffing/backend/classes/shop.class';
 import { Contract } from 'koffing/backend/classes/contract.class';
 import { PayoutTool } from 'koffing/backend/classes/payout-tool.class';
 import { ContractService } from 'koffing/backend/services/contract.service';
-import { Category } from 'koffing/backend/classes/category.class';
 import { SelectItem } from 'koffing/common/common.module';
 import { ShopParams } from 'koffing/backend/classes/shop-params.class';
 import { ShopDetails } from 'koffing/backend/backend.module';
@@ -36,19 +34,16 @@ export class EditShopComponent implements OnInit, AfterViewInit {
 
     public contractItems: SelectItem[] = [];
     public payoutToolItems: SelectItem[] = [];
-    public categoryItems: SelectItem[] = [];
 
     public isLoading: boolean = false;
 
     constructor(
-        private categoryService: CategoryService,
         private contractService: ContractService
     ) { }
 
     public ngOnInit() {
         this.isLoading = true;
         Promise.all([
-            this.loadCategories(),
             this.loadShopContracts(),
             this.loadShopPayoutTools(this.shop.contractID)
         ]).then(() => {
@@ -80,15 +75,6 @@ export class EditShopComponent implements OnInit, AfterViewInit {
             this.shopEditing.details.location = new ShopLocationUrl();
         }
         _.set(this.shopEditing, path, value);
-    }
-
-    public loadCategories(): Promise<Category[]> {
-        return new Promise((resolve) => {
-            this.categoryService.getCategories().then((categories: Category[]) => {
-                this.categoryItems = _.map(categories, (category) => new SelectItem(category.categoryID, category.name));
-                resolve(categories);
-            });
-        });
     }
 
     public loadShopContracts(): Promise<Contract[]> {
@@ -133,10 +119,6 @@ export class EditShopComponent implements OnInit, AfterViewInit {
 
     public hasError(field: any): boolean {
         return field.dirty && field.invalid;
-    }
-
-    public onSelectCategory(categoryID: string) {
-        this.shopEditing.categoryID = _.toNumber(categoryID);
     }
 
     private findPayoutTool(payoutToolID: number) {

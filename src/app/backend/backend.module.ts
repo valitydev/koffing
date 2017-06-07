@@ -33,7 +33,6 @@ export * from './webhooks.service';
 
 export * from './classes/account.class';
 export * from './classes/bank-account.class';
-export * from './classes/callback-handler.class';
 export * from './classes/category.class';
 export * from './classes/contract.class';
 export * from './classes/contractor.class';

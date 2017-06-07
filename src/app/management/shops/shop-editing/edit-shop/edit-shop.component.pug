@@ -22,17 +22,6 @@
                         input.form-control(type="text", [ngModel]="shop.details.location ? shop.details.location.url : null", placeholder="https://example.com", (ngModelChange)="onFieldChange('details.location.url', $event)", name="shopLocation")
                 .form-group
                     .col-xs-12.col-sm-3
-                        label.text-left Callback handler URL
-                    .col-xs-12.col-sm-6
-                        input.form-control(type="text", [ngModel]="shop.callbackHandler ? shop.callbackHandler.url : null", placeholder="https://example.com", (ngModelChange)="onFieldChange('callbackUrl', $event)", name="callbackHandlerUrl")
-                .form-group
-                    .col-xs-12.col-sm-3
-                        label.text-left Категория
-                            span.highlighted  *
-                    .col-xs-12.col-sm-6
-                        kof-select([ngModel]="shop.categoryID", (onChange)="onSelectCategory($event)", [items]="categoryItems", name='category')
-                .form-group
-                    .col-xs-12.col-sm-3
                         label.text-left Контракт
                             span.highlighted  *
                     .col-xs-12.col-sm-6

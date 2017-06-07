@@ -59,10 +59,6 @@ export class ClaimsEditComponent implements OnInit {
         this.formsTouched = true;
         this.shopReady = value.valid;
         this.claimData.shop.details = value.shopDetail;
-        this.claimData.shop.categoryID = value.categoryID;
-        if (this.claimData.shop.callbackHandler) {
-            this.claimData.shop.callbackHandler.url = value.callbackUrl;
-        }
     }
     
     public onShopEditingChange(value: ShopEditingTransfer) {

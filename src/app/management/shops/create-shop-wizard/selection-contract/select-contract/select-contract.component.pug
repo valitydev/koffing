@@ -4,15 +4,15 @@ kof-loading([isLoading]="isLoading")
     .x_panel(*ngIf="contracts?.length > 0")
         .x_title
             h4 Выбор существующего контракта
-            .x_content
-                kof-select(
-                    [hasError]="errorHighlighted",
-                    *ngIf="selectableItems.length",
-                    [(ngModel)]="selectedContractId",
-                    [items]="selectableItems",
-                    (onChange)="selectContract()",
-                    [modelOptions]="{standalone: true}",
-                    name='selectedContract'
-                )
-                .ln_solid(*ngIf="selectedContract")
-                kof-contract-view([contract]="selectedContract")
+        .x_content
+            kof-select(
+                [hasError]="errorHighlighted",
+                *ngIf="selectableItems.length",
+                [(ngModel)]="selectedContractId",
+                [items]="selectableItems",
+                (onChange)="selectContract()",
+                [modelOptions]="{standalone: true}",
+                name='selectedContract'
+            )
+            .ln_solid(*ngIf="selectedContract")
+            kof-contract-view([contract]="selectedContract")
