@@ -1,5 +1,5 @@
 export class Account {
-    public id: string;
+    public id: number;
     public ownAmount: number;
     public availableAmount: number;
     public currency: string;

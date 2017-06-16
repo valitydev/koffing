@@ -12,7 +12,7 @@ export class AccountsService {
                 private config: ConfigService) {
     }
 
-    public getAccountByID(accountID: string): Observable<Account> {
+    public getAccountByID(accountID: number): Observable<Account> {
         return this.http.get(`${this.config.capiUrl}/processing/accounts/${accountID}`).map(res => res.json());
     }
 }

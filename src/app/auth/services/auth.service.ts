@@ -28,6 +28,7 @@ export class AuthService {
         const result = new AuthInfo();
         if (this.authInstance) {
             result.profileName = this.authInstance.tokenParsed.name;
+            result.email = this.authInstance.tokenParsed.email;
             result.token = this.authInstance.token;
             result.authUrl = this.authInstance.authServerUrl;
         }

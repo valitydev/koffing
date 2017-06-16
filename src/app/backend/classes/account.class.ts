@@ -1,5 +1,5 @@
 export class ShopAccount {
-    public guaranteeID: string;
-    public settlementID: string;
+    public guaranteeID: number;
+    public settlementID: number;
     public currency: string;
 }

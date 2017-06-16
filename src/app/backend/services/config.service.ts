@@ -6,6 +6,7 @@ export class ConfigService {
 
     public capiUrl: string;
     public suggestionsToken: string;
+    public supportEmail: string;
 
     constructor(private http: Http) { }
 
@@ -15,6 +16,7 @@ export class ConfigService {
                 .subscribe(data => {
                     this.capiUrl = `${data.capiEndpoint}/v1`;
                     this.suggestionsToken = data.suggestionsToken;
+                    this.supportEmail = data.supportEmail;
                     resolve();
                 });
         });
