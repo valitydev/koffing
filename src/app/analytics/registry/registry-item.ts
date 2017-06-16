@@ -3,6 +3,7 @@ export class RegistryItem {
     public invoiceID: string;
     public amount: number;
     public fee: number;
+    public userEmail: string;
     public product: string;
     public description: string;
 }

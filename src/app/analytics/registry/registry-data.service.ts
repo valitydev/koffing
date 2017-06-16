@@ -56,6 +56,7 @@ export class RegistryDataService {
             registryItem.paymentDate = payment.createdAt;
             registryItem.amount = payment.amount;
             registryItem.fee = payment.fee;
+            registryItem.userEmail = payment.contactInfo.email ? payment.contactInfo.email : '';
             registryItem.product = foundInvoice.product;
             registryItem.description = foundInvoice.description;
             registryItems.push(registryItem);
