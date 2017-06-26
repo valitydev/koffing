@@ -21,8 +21,13 @@ export class SearchResultComponent implements OnInit {
     public invoiceTableItems: Observable<InvoiceTableItem[]>;
 
     public ngOnInit() {
-        this.invoiceTableItems = this.invoices.map((invoices) =>
-            SearchResultService.toInvoiceTableItems(invoices));
+        this.invoiceTableItems = this.invoices
+            .map((invoices) => SearchResultService.toInvoiceTableItems(invoices))
+            .do((invoices) => {
+                if (invoices.length === 1) {
+                    invoices[0].visible = true;
+                }
+            });
     }
 
     public getLabelClass(status: string) {

@@ -6,7 +6,12 @@ import { AnalyticsService } from 'koffing/analytics/analytics.service';
 @Component({
     selector: 'kof-analytics',
     templateUrl: './analytics.component.pug',
-    providers: [AnalyticsService]
+    providers: [AnalyticsService],
+    styles: [`
+        .shop-selector {
+            padding-bottom: 10px;
+        }
+    `]
 })
 export class AnalyticsComponent implements OnInit {
 

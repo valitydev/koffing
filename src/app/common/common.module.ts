@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { SelectComponent } from './components/select/select.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { MinValueValidatorDirective } from 'koffing/common/min-value.directive';
+import { MaxValueValidatorDirective } from 'koffing/common/max-value.directive';
 
 @NgModule({
     imports: [
@@ -12,11 +14,15 @@ import { LoadingComponent } from './components/loading/loading.component';
     ],
     declarations: [
         SelectComponent,
-        LoadingComponent
+        LoadingComponent,
+        MinValueValidatorDirective,
+        MaxValueValidatorDirective
     ],
     exports: [
         SelectComponent,
-        LoadingComponent
+        LoadingComponent,
+        MinValueValidatorDirective,
+        MaxValueValidatorDirective
     ]
 })
 export class CommonModule { }

@@ -1,8 +1,19 @@
+.ln_solid
+kof-actions([activeAction]="activeAction", (onAction)="onAction($event)")
+.ln_solid
+.row(*ngIf="activeAction === action.search")
+    .col-xs-12
+        kof-search-form([searchParams]="searchParams", [shopID]="shopID", (onSearch)="onSearch($event)", [isSearch]="isLoading")
+.row(*ngIf="activeAction === action.create")
+    .col-xs-6
+        kof-create-invoice([shopID]="shopID", (onCreate)="onCreate($event)")
+.ln_solid(*ngIf="activeAction !== action.none")
 .row
     .col-xs-12
-        kof-search-form([searchParams]="searchParams", (onSearch)="onSearch($event)")
-.row
-    .col-xs-12
-        kof-loading([isLoading]="isLoading")
-            kof-search-result([invoices]="invoices", [searchParams]="searchParams")
-            kof-paginate([size]="totalCount", [limit]="limit", [offset]="offset", [pagesOnScreen]="10", (onChange)="onChangePage($event)")
+        kof-search-result([invoices]="invoices", [searchParams]="searchParams")
+        kof-paginate(
+            [size]="totalCount",
+            [limit]="limit",
+            [offset]="offset",
+            [pagesOnScreen]="10",
+            (onChange)="onChangePage($event)")

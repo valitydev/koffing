@@ -1,15 +1,18 @@
 .row
-    .col-xs-12.col-sm-3
-        kof-loading([isLoading]="isLoading")
-    .col-xs-12.col-sm-9
-        kof-date-range-selector.form-label-right([from]="fromTime", [to]="toTime", (onSelect)="loadData($event)", [buttonName]="'Показать'")
+    .col-xs-12
+        kof-date-range-selector.form-label-right(
+        [from]="fromTime",
+        [to]="toTime",
+        (onSelect)="loadData($event)",
+        [buttonName]="'Показать'",
+        [disabled]="isLoading")
 .row
     .col-xs-12
         kof-statistic-panel([data]="panelData")
 .row
     .col-xs-12
         .x_title
-            h4 Оборот
+            h4 Оборот {{profit | kofRoubleCurrency}} рублей
         .x_content
             kof-line-chart([chartData]="revenueChartData")
 .row

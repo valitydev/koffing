@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { map, clone } from 'lodash';
 
@@ -9,14 +9,18 @@ import { paymentStatuses } from '../payment-statuses';
 
 @Component({
     selector: 'kof-search-form',
-    templateUrl: 'search-form.component.pug',
-    styleUrls: ['search-form.component.less'],
-    encapsulation: ViewEncapsulation.None
+    templateUrl: 'search-form.component.pug'
 })
 export class SearchFormComponent implements OnInit {
 
     @Input()
     public searchParams: FormSearchParams;
+
+    @Input()
+    public shopID: string;
+
+    @Input()
+    public isSearch: boolean = false;
 
     @Output()
     public onSearch: EventEmitter<FormSearchParams> = new EventEmitter<FormSearchParams>();
@@ -25,8 +29,6 @@ export class SearchFormComponent implements OnInit {
 
     public paymentStatuses: SelectItem[];
 
-    public isValidDateRange: boolean = true;
-
     public isValidCardNumber: boolean = true;
 
     private initParams: FormSearchParams;
@@ -34,17 +36,18 @@ export class SearchFormComponent implements OnInit {
     public ngOnInit() {
         this.invoiceStatuses = map(invoiceStatuses, (name, key) => new SelectItem(key, name));
         this.paymentStatuses = map(paymentStatuses, (name, key) => new SelectItem(key, name));
-        this.initParams = clone(this.searchParams);
+        this.initParams = clone({
+            from: this.searchParams.from,
+            to: this.searchParams.to
+        });
     }
 
     public selectFrom() {
-        this.searchParams.from = moment(this.searchParams.from)
-            .hour(0).minute(0).second(0).toDate();
+        this.searchParams.from = moment(this.searchParams.from).startOf('day').toDate();
     }
 
     public selectTo() {
-        this.searchParams.to = moment(this.searchParams.to)
-            .hour(23).minute(59).second(59).toDate();
+        this.searchParams.to = moment(this.searchParams.to).endOf('day').toDate();
     }
 
     public search() {
@@ -59,10 +62,9 @@ export class SearchFormComponent implements OnInit {
     }
 
     private validate(): boolean {
-        this.isValidDateRange = this.searchParams.from < this.searchParams.to;
         this.isValidCardNumber = this.searchParams.cardNumberMask
             ? /^\d{4}$/.test(this.searchParams.cardNumberMask)
             : true;
-        return this.isValidDateRange && this.isValidCardNumber;
+        return this.isValidCardNumber;
     }
 }

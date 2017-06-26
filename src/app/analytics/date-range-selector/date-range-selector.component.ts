@@ -20,25 +20,21 @@ export class DateRangeSelectorComponent {
     @Input()
     public buttonName: string;
 
-    @Output()
-    public onSelect = new EventEmitter();
+    @Input()
+    public disabled: boolean = false;
 
-    private isInvalidDate: boolean = false;
+    @Output()
+    public onSelect = new EventEmitter<DateRange>();
 
     public selectFrom() {
-        this.from = moment(this.from).hour(0).minute(0).second(0).toDate();
+        this.from = moment(this.from).startOf('day').toDate();
     }
 
     public selectTo() {
-        this.to = moment(this.to).hour(23).minute(59).second(59).toDate();
+        this.to = moment(this.to).endOf('day').toDate();
     }
 
     public select() {
-        if (this.from >= this.to) {
-            this.isInvalidDate = true;
-            return false;
-        }
-        this.isInvalidDate = false;
         this.onSelect.emit(new DateRange(this.from, this.to));
     }
 }

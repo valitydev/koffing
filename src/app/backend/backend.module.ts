@@ -9,6 +9,7 @@ import { AnalyticsService } from 'koffing/backend/analytics.service';
 import { LocationService } from 'koffing/backend/location.service';
 import { AccountsService } from 'koffing/backend/accounts.service';
 import { SearchService } from 'koffing/backend/search.service';
+import { InvoiceService } from 'koffing/backend/invoice.service';
 
 @NgModule({
     providers: [
@@ -20,7 +21,8 @@ import { SearchService } from 'koffing/backend/search.service';
         AnalyticsService,
         LocationService,
         SearchService,
-        WebhooksService
+        WebhooksService,
+        InvoiceService
     ]
 })
 export class BackendModule { }

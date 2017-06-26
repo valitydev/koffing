@@ -37,4 +37,5 @@ import { RegistryComponent } from './registry/registry.component';
         RouterModule
     ]
 })
-export class AnalyticsRoutingModule { }
+export class AnalyticsRoutingModule {
+}

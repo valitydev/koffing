@@ -16,8 +16,6 @@ export class StatisticPanelComponent implements OnInit {
     public uniqueCount: Observable<number>;
     public successfulCount: Observable<number>;
     public unfinishedCount: Observable<number>;
-    public profit: Observable<number>;
-    public guaranteeBalance: Observable<number>;
     public settlementBalance: Observable<number>;
 
     public ngOnInit() {
@@ -34,14 +32,6 @@ export class StatisticPanelComponent implements OnInit {
         this.unfinishedCount = shared
             .filter((data: PanelData) => !isNil(data.unfinishedCount))
             .map((data: PanelData) => data.unfinishedCount);
-
-        this.profit = shared
-            .filter((data: PanelData) => !isNil(data.profit))
-            .map((data: PanelData) => data.profit);
-
-        this.guaranteeBalance = shared
-            .filter((data: PanelData) => !isNil(data.guaranteeBalance))
-            .map((data: PanelData) => data.guaranteeBalance);
 
         this.settlementBalance = shared
             .filter((data: PanelData) => !isNil(data.settlementBalance))

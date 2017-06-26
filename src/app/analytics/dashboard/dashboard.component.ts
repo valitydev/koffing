@@ -18,8 +18,9 @@ import { DoughnutChartData } from './stats-data/doughnut-chart-data';
 export class DashboardComponent implements OnInit {
 
     public shopID: number;
-    public fromTime: Date = moment().subtract(1, 'month').hour(0).minute(0).second(0).toDate();
-    public toTime: Date = moment().hour(23).minute(59).second(59).toDate();
+    public fromTime: Date = moment().subtract(1, 'month').startOf('day').toDate();
+    public toTime: Date = moment().endOf('day').toDate();
+    public profit: number = 0;
 
     public panelData: Subject<PanelData> = new Subject();
     public revenueChartData: Subject<LineChartData> = new Subject();
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
 
     public isLoading: boolean = true;
     public loadStatistic: Subject<null> = new Subject();
+    private requestCount = 5;
 
     constructor(private route: ActivatedRoute,
                 private accountsService: AccountsService,
@@ -53,7 +55,7 @@ export class DashboardComponent implements OnInit {
         this.loadAccounts(shopID);
 
         this.isLoading = true;
-        const loadSubscription = this.loadStatistic.skip(6).subscribe(() => {
+        const loadSubscription = this.loadStatistic.skip(this.requestCount).subscribe(() => {
             this.isLoading = false;
             loadSubscription.unsubscribe();
         });
@@ -93,7 +95,7 @@ export class DashboardComponent implements OnInit {
 
     private loadRevenueStat(shopID: number, from: Date, to: Date) {
         this.dashboardService.getPaymentRevenueData(shopID, from, to).subscribe((data) => {
-            this.panelData.next({profit : data.profit});
+            this.profit = data.profit;
             this.revenueChartData.next(data.revenueChartData);
             this.loadStatistic.next();
         });
@@ -101,12 +103,8 @@ export class DashboardComponent implements OnInit {
 
     private loadAccounts(shopID: number) {
         this.shopService.getShop(shopID).then((shop) => {
-            this.accountsService.getAccountByID(shop.account.guaranteeID).subscribe((account) => {
-                this.panelData.next({guaranteeBalance : account.ownAmount});
-                this.loadStatistic.next();
-            });
             this.accountsService.getAccountByID(shop.account.settlementID).subscribe((account) => {
-                this.panelData.next({settlementBalance : account.ownAmount});
+                this.panelData.next({settlementBalance: account.ownAmount});
                 this.loadStatistic.next();
             });
         });

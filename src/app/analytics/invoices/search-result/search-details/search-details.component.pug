@@ -22,14 +22,20 @@ form.form-horizontal.form-label-left.css-form
                 label Описание предлагаемых товаров или услуг:
                 div {{invoice.description}}
     .ln_solid
-    .row
-        .col-xs-6
-            h5 Платежи
-        .col-xs-6
-            .pull-right
-                span Всего: {{searchResult?.totalCount}}
-                i(*ngIf="isLoading").fa.fa-cog.fa-spin.fa-lg.fa-fw
-    .ln_solid
+    div(*ngIf="isPaymentLinkAvailable()")
+        .row
+            .col-xs-12
+                button.btn.btn-default.btn-sm Сформировать ссылку на оплату
+        .ln_solid
+    div(*ngIf="searchResult?.totalCount > 0")
+        .row
+            .col-xs-6
+                h5 Платежи
+            .col-xs-6
+                .pull-right
+                    span Всего: {{searchResult?.totalCount}}
+                    i(*ngIf="isLoading").fa.fa-cog.fa-spin.fa-lg.fa-fw
+        .ln_solid
     div(*ngFor="let payment of searchResult?.payments")
         kof-payment-info([payment]="payment")
         .ln_solid

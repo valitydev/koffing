@@ -1,0 +1,7 @@
+.row
+    .col-sm-3.col-xs-12
+        button.btn.btn-default.btn-lg.btn-block(type="button", (click)="select(action.search)") Поиск
+            i.fa(style="margin-left: 10px;", [ngClass]="getClass(action.search)")
+    .col-sm-3.col-xs-12
+        button.btn.btn-default.btn-lg.btn-block(type="button", (click)="select(action.create)") Создать инвойс
+            i.fa(style="margin-left: 10px;", [ngClass]="getClass(action.create)")

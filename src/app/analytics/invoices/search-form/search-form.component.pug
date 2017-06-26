@@ -8,27 +8,31 @@ form
                         .ui-calendar.search-form
                             p-calendar.ui-inputtext.search-form(
                             [(ngModel)]="searchParams.from",
+                            [maxDate]="searchParams.to",
                             name="invoiceFrom",
                             dateFormat = "dd.mm.yy",
-                            [ngClass]="{'has-error': !isValidDateRange}",
                             (onSelect)="selectFrom()",
+                            readonlyInput="true",
                             required)
                     .col-sm-6.col-xs-12
                         .ui-calendar.search-form
                             p-calendar.ui-inputtext.search-form(
                             [(ngModel)]="searchParams.to",
+                            [minDate]="searchParams.from",
                             name="invoiceTo",
                             dateFormat = "dd.mm.yy",
-                            [ngClass]="{'has-error': !isValidDateRange}",
                             (onSelect)="selectTo()",
+                            readonlyInput="true",
                             required)
         .col-sm-3.col-xs-12
             .form-group
                 label Номер карты (последние 4 цифры):
                 input.form-control(
-                    name="cardNumberMask",
-                    [ngClass]="{'has-error': !isValidCardNumber}",
-                    [(ngModel)]="searchParams.cardNumberMask")
+                type="number",
+                maxlength=4
+                name="cardNumberMask",
+                [ngClass]="{'has-error': !isValidCardNumber}",
+                [(ngModel)]="searchParams.cardNumberMask")
         .col-sm-3.col-xs-12
             .form-group
                 label Идентификатор инвойса:
@@ -54,7 +58,7 @@ form
         .col-sm-3.col-xs-12
             .form-group
                 label Идентификатор платежа:
-                input.form-control(name="paymentID", [(ngModel)]="searchParams.paymentID")
+                input.form-control(type="number", name="paymentID", [(ngModel)]="searchParams.paymentID")
         .col-sm-3.col-xs-12
             .form-group
                 label Статус платежа:
@@ -69,8 +73,7 @@ form
             .form-group
                 label Fingerprint:
                 input.form-control(name="fingerprint", [(ngModel)]="searchParams.fingerprint")
-    .row
-        .col-xs-12
-            .form-group
-                button.btn.btn-default.pull-right((click)="search()") Показать инвойсы
+        .col-sm-3.col-sm-offset-6.col-xs-12
+            .action-group
+                button.btn.btn-primary.pull-right([disabled]="isSearch", (click)="search()") Найти
                 button.btn.btn-default.pull-right((click)="reset()") Сбросить

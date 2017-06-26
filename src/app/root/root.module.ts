@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GrowlModule } from 'primeng/primeng';
 
 import { RootRoutingModule } from './root-routing.module';
@@ -18,6 +19,7 @@ import { NotificationHandleComponent } from './components/notification-handle/no
 @NgModule({
     imports: [
         BrowserModule,
+        NoopAnimationsModule,
         GrowlModule,
         RootRoutingModule,
         BroadcasterModule,
