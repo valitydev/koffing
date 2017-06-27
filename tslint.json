@@ -2,7 +2,7 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
-  "extends": "tslint:latest",
+  "extends": "tslint:recommended",
   "rules": {
     "quotemark": [true, "single"],
     "trailing-comma": false,
@@ -13,6 +13,12 @@
     "class-name": false,
     "max-line-length": false,
     "arrow-parens": false,
+    "no-bitwise": false,
+    "no-angle-bracket-type-assertion": false,
+    "no-console": [true, "log"],
+    "angular-whitespace": [true, "check-interpolation", "check-pipe"],
+    "banana-in-box": true,
+    "templates-no-negated-async": true,
     "directive-selector": [true, "attribute", "kof", "camelCase"],
     "component-selector": [true, "element", "kof", "kebab-case"],
     "use-input-property-decorator": true,
@@ -21,13 +27,15 @@
     "no-attribute-parameter-decorator": true,
     "no-input-rename": true,
     "no-output-rename": true,
+    "no-forward-ref": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "component-class-suffix": [true, "Component"],
-    "directive-class-suffix": [true, "Directive"],
-    "import-destructuring-spacing": true,
+    "pipe-naming": [true, "camelCase", "kof"],
+    "component-class-suffix": true,
+    "directive-class-suffix": true,
     "templates-use-public": true,
     "no-access-missing-member": true,
-    "invoke-injectable": true
+    "invoke-injectable": true,
+    "template-to-ng-template": true
   }
 }

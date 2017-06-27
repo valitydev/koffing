@@ -7,7 +7,7 @@ import { ConfigService } from 'koffing/backend/services/config.service';
 @Component({
     selector: 'kof-top-panel',
     templateUrl: './top-panel.component.pug',
-    styleUrls: [`.dropdown-toggle { cursor: pointer; }`]
+    styles: [`.dropdown-toggle { cursor: pointer; }`]
 })
 export class TopPanelComponent {
 

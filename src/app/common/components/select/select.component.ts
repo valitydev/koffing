@@ -1,19 +1,17 @@
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SelectItem } from './select.class';
-
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SelectComponent),
-    multi: true
-};
 
 @Component({
     selector: 'kof-select',
     templateUrl: 'select.component.pug',
     styleUrls: ['select.component.less'],
-    providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: SelectComponent,
+        multi: true
+    }]
 })
 export class SelectComponent {
 
@@ -28,8 +26,8 @@ export class SelectComponent {
     @Output()
     public onChange: EventEmitter<any> = new EventEmitter<any>();
     private innerSelectedValue: any;
-    private onTouchedCallback: Function;
-    private onChangeCallback: Function;
+    private onTouchedCallback: any;
+    private onChangeCallback: any;
 
     set selectedValue(value: any) {
         if (value !== this.innerSelectedValue) {
@@ -44,7 +42,7 @@ export class SelectComponent {
             this.innerSelectedValue = '';
         }
         return this.innerSelectedValue;
-    };
+    }
 
     public writeValue(value: any) {
         if (value !== this.innerSelectedValue) {

@@ -12,7 +12,7 @@ import { BankAccountComparator } from './payout-tool-comparator.service';
 @Component({
     selector: 'kof-create-paytool',
     templateUrl: 'create-paytool.component.pug',
-    styleUrls: [`.title-label { padding-top: 5px; }`]
+    styles: [`.title-label { padding-top: 5px; }`]
 })
 export class CreatePayoutToolComponent implements OnInit, AfterViewInit {
 

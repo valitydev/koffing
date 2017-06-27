@@ -110,7 +110,7 @@ export class ClaimsEditService {
             const handlersPromises = [];
 
             claimData.claimID = claim.id;
-            for (let setItem of claim.changeset) {
+            for (const setItem of claim.changeset) {
                 switch (setItem.partyModificationType) {
                     case 'ContractCreation': {
                         handlersPromises.push(

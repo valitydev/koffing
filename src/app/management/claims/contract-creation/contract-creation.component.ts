@@ -5,7 +5,7 @@ import { Contract } from 'koffing/backend/classes/contract.class';
 @Component({
     selector: 'kof-contract-creation',
     templateUrl: 'contract-creation.component.pug',
-    styleUrls: [`:host { cursor: pointer; }`]
+    styles: [`:host { cursor: pointer; }`]
 })
 export class ContractCreationComponent {
 

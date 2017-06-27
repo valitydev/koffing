@@ -7,7 +7,7 @@ export class Invoice {
     public dueDate: string;
     public amount: number;
     public currency: string;
-    public metadata: Object;
+    public metadata: object;
     public product: string;
     public description: string;
 }

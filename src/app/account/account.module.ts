@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AccountComponent } from 'koffing/account/components/account.component';
 import { AccountRoutingModule } from 'koffing/account/account-routing.module';

@@ -6,7 +6,7 @@ export class CalculatePagesService {
         const size = this.initParam(itemsSize);
         const limit = this.initParam(itemsLimit);
         const offset = this.initParam(itemsOffset);
-        let pages: any[] = [];
+        const pages: any[] = [];
         for (let page = 1; page <= this.calcPages(size, limit); page++) {
             const calcOffset = (page - 1) * limit;
             pages.push({

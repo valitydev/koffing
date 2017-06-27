@@ -8,7 +8,7 @@ declare const XLSX: any;
 @Injectable()
 export class ExcelService {
 
-    public worksheetFromArrayOfArrays(data: any[], offsetRow?: number, cellStyle?: Object): Object {
+    public worksheetFromArrayOfArrays(data: any[], offsetRow?: number, cellStyle?: object): object {
         offsetRow = offsetRow || 0;
         const ws = {};
         const range = {s: {c: 10000000, r: 10000000}, e: {c: 0, r: 0 }};

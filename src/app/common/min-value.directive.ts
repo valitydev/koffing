@@ -32,7 +32,7 @@ export class MinValueValidatorDirective implements Validator, OnChanges {
 
     private prepareValidatorFn(mn: number): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            let v = +control.value;
+            const v = +control.value;
             return (v < mn ? {min: {minValue: mn, actualValue: v}} : null);
         };
     }

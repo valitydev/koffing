@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const helpers = require('./helpers');
+const path = require('path');
 
 module.exports = {
     entry: {
@@ -19,85 +20,80 @@ module.exports = {
     },
 
     resolve: {
-        root: __dirname + '/node_modules',
+        modules: [
+            path.join(__dirname, 'src'),
+            'node_modules'
+        ],
         alias: {
             'Keycloak': 'keycloak-js/dist/keycloak.js',
             'jquery': 'jquery/dist/jquery',
             'suggestions': 'suggestions-jquery/dist/js/jquery.suggestions.js',
             'koffing': __dirname + '/../src/app'
         },
-        extensions: ['', '.ts', '.js']
+        extensions: ['.ts', '.js']
     },
 
     module: {
-        preLoaders: [
-            {
-                test: /\.ts$/,
-                loader: 'tslint-loader'
-            }
-        ],
-        loaders: [
+        rules: [
             {
                 test: /(jquery.js$)|(keycloak.js$)|(suggestions.js$)|(xlsx.core.min.js$)/,
-                loader: 'script-loader'
+                use: 'script-loader'
             },
             {
                 test: /\.ts$/,
-                loaders: ['awesome-typescript-loader', 'angular2-template-loader']
-            },
-            {
-                test: /\.html$/,
-                loader: 'html'
+                use: ['awesome-typescript-loader', 'angular2-template-loader', 'tslint-loader']
             },
             {
                 test: /\.pug$/,
-                include: /\.pug/,
-                loader: 'pug-html-loader'
+                use: ['html-loader', 'pug-html-loader']
             },
             {
                 test: /\.(png|jpe?g|gif|svg|ico)$/,
-                loader: 'file?name=assets/[name].[hash].[ext]'
+                use: 'file-loader?name=assets/[name].[hash].[ext]'
             },
-
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
-                loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+                use: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader?sourceMap'})
             },
             {
                 test: /\.less$/,
                 exclude: helpers.root('src', 'app'),
-                loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'less'])
+                use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader?sourceMap', 'less-loader']})
             },
             {
                 test: /\.less$/,
                 include: helpers.root('src', 'app'),
-                loader: 'raw!less'
+                use: ['raw-loader', 'less-loader']
             },
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=application/font-woff"
+                use: 'url-loader?limit=10000&mimetype=application/font-woff'
             },
             {
                 test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=application/font-woff"
+                use: 'url-loader?limit=10000&mimetype=application/font-woff'
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=application/octet-stream"
+                use: 'url-loader?limit=10000&mimetype=application/octet-stream'
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "file"
+                use: 'file-loader'
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=image/svg+xml"
+                use: 'url-loader?limit=10000&mimetype=image/svg+xml'
             }
         ]
     },
 
     plugins: [
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)@angular/,
+            path.resolve(__dirname, '../src')
+        ),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['app', 'vendor', 'vendorjs', 'polyfills']
         }),

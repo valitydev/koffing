@@ -29,7 +29,7 @@ export class SearchService {
             .map((res) => res.json());
     }
 
-    private toSearchParams(params: Object): URLSearchParams {
+    private toSearchParams(params: object): URLSearchParams {
         const result = new URLSearchParams();
         forEach(params, (value, field) => {
             if (value) {

@@ -7,8 +7,6 @@ const helpers = require('./helpers');
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = webpackMerge(commonConfig, {
-    devtool: 'source-map',
-
     output: {
         path: helpers.root('dist'),
         publicPath: '/',
@@ -16,13 +14,8 @@ module.exports = webpackMerge(commonConfig, {
         chunkFilename: '[id].[hash].chunk.js'
     },
 
-    htmlLoader: {
-        minimize: false
-    },
-
     plugins: [
-        new webpack.NoErrorsPlugin(),
-        new webpack.optimize.DedupePlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             mangle: {
                 keep_fnames: true
@@ -36,10 +29,11 @@ module.exports = webpackMerge(commonConfig, {
             'process.env': {
                 'ENV': JSON.stringify(ENV)
             }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            htmlLoader: {
+                minimize: false
+            }
         })
-    ],
-
-    devServer: {
-        historyApiFallback: true
-    }
+    ]
 });

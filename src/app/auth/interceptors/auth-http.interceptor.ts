@@ -47,7 +47,7 @@ export class AuthHttpInterceptor extends Http {
     }
 
     private configureRequest(
-        f: Function,
+        f: any,
         url: string | Request,
         options: RequestOptionsArgs,
         body?: any

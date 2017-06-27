@@ -15,7 +15,7 @@ export class SidebarComponent {
     }
 
     public closeSubMenu() {
-        for (let prop in this.isOpenedSubMenu) {
+        for (const prop in this.isOpenedSubMenu) {
             if (this.isOpenedSubMenu[prop] && this.isOpenedSubMenu.hasOwnProperty(prop)) {
                 this.isOpenedSubMenu[prop] = !this.isOpenedSubMenu[prop];
             }

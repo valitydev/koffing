@@ -37,7 +37,7 @@ export class RegistryExportService {
         return workbook;
     }
 
-    private createWorksheetFromRegistry(registry: Registry): Object {
+    private createWorksheetFromRegistry(registry: Registry): object {
         let worksheet = {};
         worksheet = _.merge(worksheet, this.createRegistryHeader(registry));
         worksheet = _.merge(worksheet, this.createRegistryBody(registry.items));
@@ -48,7 +48,7 @@ export class RegistryExportService {
         return `с ${moment(fromTime).format('DD.MM.YY')} по ${moment(toTime).format('DD.MM.YY')}`;
     }
 
-    private createRegistryHeader(registry: Registry): Object {
+    private createRegistryHeader(registry: Registry): object {
         const header = {};
         header['A1'] = {
             v: `Реестр операций за период ${this.getStringifyDateInterval(registry.fromTime, registry.toTime)}`,
@@ -76,7 +76,7 @@ export class RegistryExportService {
         return header;
     }
 
-    private createRegistryBody(registryItems: RegistryItem[]): Object {
+    private createRegistryBody(registryItems: RegistryItem[]): object {
         const offsetRow = this.worksheetHeaderSizes.rows;
         const arrayOfArrays = this.arrayOfArraysFromRegistry(registryItems);
         return this.excelService.worksheetFromArrayOfArrays(arrayOfArrays, offsetRow, {border: this.cellBorder});

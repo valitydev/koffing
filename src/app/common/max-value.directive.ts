@@ -32,7 +32,7 @@ export class MaxValueValidatorDirective implements Validator, OnChanges {
 
     private prepareValidatorFn(mx: number): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            let v = +control.value;
+            const v = +control.value;
             return (v > mx ? {max: {maxValue: mx, actualValue: v}} : null);
         };
     }
