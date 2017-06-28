@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AccountComponent } from 'koffing/account/components/account.component';
+
+import { AccountComponent } from './account.component';
 
 @NgModule({
     imports: [

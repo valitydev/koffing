@@ -1,0 +1,9 @@
+ul.account-navigation
+    li
+        a.back([routerLink]=["/"])
+            i.fa.fa-reply &nbsp;
+            | Назад
+    li(*ngFor="let link of accountRouterLinks")
+        a([routerLinkActive]="['active']", routerLink="/account/{{link.routePath}}") {{link.label}}
+
+iframe.account-frame(frameborder="0", scrolling="no", [src]="accountFrameUrl")

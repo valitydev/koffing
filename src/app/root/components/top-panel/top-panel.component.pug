@@ -10,9 +10,16 @@
                     i.fa.fa-angle-down
                 ul.dropdown-menu.dropdown-usermenu.pull-right
                     li
+                        a([routerLink]=["/account/edit"])
+                            i.fa.fa-user.pull-right
+                            | Учетная запись
+                    li
                         a((click)="logout()")
                             i.fa.fa-sign-out.pull-right
                             | Выйти
             li
-                a.user-profile.dropdown-toggle(href="{{ mailHref }}")
+                a.user-profile.dropdown-toggle(href="{{ mailHref }}", title="Написать письмо в поддержку")
                     i.fa.fa-envelope
+            li
+                a.user-profile.dropdown-toggle(href="https://rbkmoney.github.io/docs", target="_blank", title="Документация")
+                    i.fa.fa-file-text-o

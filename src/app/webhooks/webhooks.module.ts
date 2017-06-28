@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { WebhooksRoutingModule } from './webhooks-routing.module';
-import { WebhookComponent } from 'koffing/webhooks/webhook.component';
-import { WebhooksListDetailsComponent } from 'koffing/webhooks/webhook-details/webhook-details.component';
-import { WebhooksItemComponent } from 'koffing/webhooks/webhook-item/webhooks-item.component';
+import { WebhookComponent } from './webhook.component';
+import { WebhooksListDetailsComponent } from './webhook-details/webhook-details.component';
+import { WebhooksItemComponent } from './webhook-item/webhooks-item.component';
 import { CommonModule } from 'koffing/common/common.module';
 
 @NgModule({
@@ -22,6 +22,3 @@ import { CommonModule } from 'koffing/common/common.module';
     ]
 })
 export class WebhooksModule { }
-
-export * from './webhook.component';
-export * from './webhook-item/webhooks-item.component';

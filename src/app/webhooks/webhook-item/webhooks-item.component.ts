@@ -54,12 +54,12 @@ export class WebhooksItemComponent implements OnInit  {
     }
 
     public goBack() {
-        this.router.navigate(['/api/webhooks']);
+        this.router.navigate(['/webhooks']);
     }
 
     public createWebhook() {
         this.webhooksService.createWebhook(this.model).subscribe(() => {
-            this.router.navigate(['/api/webhooks']);
+            this.router.navigate(['/webhooks']);
         });
     }
 

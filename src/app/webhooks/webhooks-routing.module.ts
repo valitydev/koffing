@@ -7,11 +7,11 @@ import { WebhooksItemComponent } from 'koffing/webhooks/webhook-item/webhooks-it
     imports: [
         RouterModule.forChild([
             {
-                path: 'api/webhooks',
+                path: 'webhooks',
                 component: WebhookComponent
             },
             {
-                path: 'api/webhook/new',
+                path: 'webhook/new',
                 component: WebhooksItemComponent
             },
         ])
