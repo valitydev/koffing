@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
 
     public capiUrl: string;
+    public checkoutUrl: string;
     public suggestionsToken: string;
     public supportEmail: string;
 
@@ -15,6 +16,7 @@ export class ConfigService {
             this.http.get('appConfig.json').map(res => res.json())
                 .subscribe(data => {
                     this.capiUrl = `${data.capiEndpoint}/v1`;
+                    this.checkoutUrl = `${data.checkoutEndpoint}`;
                     this.suggestionsToken = data.suggestionsToken;
                     this.supportEmail = data.supportEmail;
                     resolve();

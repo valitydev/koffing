@@ -36,12 +36,11 @@
     .modal-dialog.modal-sm
         .modal-content.modal-wide
             .modal-header
-                h5.modal-title Подтверждение
+                h5.modal-title Подтвердите свое действие
             .modal-body Отменить создание магазина?
             .modal-footer
-                .btn-toolbar.pull-left
-                    .btn-group.btn-group-sm
-                        button.btn.btn-default(type="button", data-dismiss="modal") Назад
                 .btn-toolbar.pull-right
                     .btn-group.btn-group-sm
-                        button.btn.btn-danger(type="button", data-dismiss="modal",(click)="returnToManagement()") Отменить
+                        button.btn.btn-default(data-dismiss="modal") Нет
+                    .btn-group.btn-group-sm
+                        button.btn.btn-danger(data-dismiss="modal", (click)="returnToManagement()") Да

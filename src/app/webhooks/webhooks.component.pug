@@ -31,13 +31,14 @@
                                     .modal-dialog.modal-sm
                                         .modal-content
                                             .modal-header
-                                                h5.modal-title Вы действительно хотите удалить этот webhook ({{item.webhook.id}})?
+                                                h5.modal-title Подтвердите свое действие
+                                            .modal-body Удалить webhook ID {{item.webhook.id}}?
                                             .modal-footer
-                                                .btn-toolbar.pull-left
+                                                .btn-toolbar.pull-right
                                                     .btn-group.btn-group-sm
-                                                        button.btn.btn-danger(type="button", data-dismiss="modal", (click)="deleteWebhook(item.webhook.id)") Да
+                                                        button.btn.btn-default(data-dismiss="modal") Нет
                                                     .btn-group.btn-group-sm
-                                                        button.btn.btn-default(type="button", data-dismiss="modal") Нет
+                                                        button.btn.btn-danger(data-dismiss="modal", (click)="deleteWebhook(item.webhook.id)") Да
                     tr(*ngIf="item.visible")
                         td.row(colspan="5")
                             kof-webhook-list-details([item]="item")

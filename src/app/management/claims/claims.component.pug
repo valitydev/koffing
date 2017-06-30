@@ -22,7 +22,7 @@
             .modal-footer
                 .btn-toolbar.pull-left
                     .btn-group.btn-group-sm
-                        button.btn.btn-default(type="button", data-dismiss="modal") Назад
+                        button.btn.btn-default(data-dismiss="modal") Назад
                 .btn-toolbar.pull-right
                     .btn-group.btn-group-sm
-                        button.btn.btn-danger(*ngIf="reason.valid", type="button", data-dismiss="modal",(click)="revoke(reason)") Отменить заявку
+                        button.btn.btn-danger(*ngIf="reason.valid", data-dismiss="modal",(click)="revoke(reason)") Отменить заявку

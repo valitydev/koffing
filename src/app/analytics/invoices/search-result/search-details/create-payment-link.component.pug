@@ -1,0 +1,49 @@
+button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + invoiceID")
+    | Сформировать ссылку на оплату
+
+.modal.fade(tabindex="-1", role="dialog", id="{{invoiceID}}", data-backdrop="static")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header
+                button(class="close", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Конфигурирование платежной формы
+                    a(href="https://rbkmoney.github.io/docs/integrations/checkout/", target="_blank") &nbsp;
+                        u Checkout
+            kof-loading([isLoading]="isLoading")
+                .modal-body
+                    .form-group
+                        .col-xs-12.col-sm-5
+                            label.text-left Наименование вашей компании или сайта
+                        .col-xs-12.col-sm-7
+                            input.form-control(type="text", [(ngModel)]="paymentLinkArguments.name", (keyup)="createPaymentLink()")
+                    .form-group
+                        .col-xs-12.col-sm-5
+                            label.text-left Описание вашего продукта или сервиса
+                        .col-xs-12.col-sm-7
+                            input.form-control(type="text", [(ngModel)]="paymentLinkArguments.description", (keyup)="createPaymentLink()")
+                    .form-group
+                        .col-xs-12.col-sm-5
+                            label.text-left Текст кнопки оплаты
+                        .col-xs-12.col-sm-7
+                            input.form-control(type="text", [(ngModel)]="paymentLinkArguments.payButtonLabel", (keyup)="createPaymentLink()")
+                    .form-group
+                        .col-xs-12.col-sm-5
+                            label.text-left URL для задания логотипа
+                        .col-xs-12.col-sm-7
+                            input.form-control(type="text", [(ngModel)]="paymentLinkArguments.logo", placeholder="http(s)://example.com/image.png", (keyup)="createPaymentLink()")
+                    .form-group
+                        .col-xs-12.col-sm-5
+                            label.text-left Email плательщика (если известен)
+                        .col-xs-12.col-sm-7
+                            input.form-control(type="text", [(ngModel)]="paymentLinkArguments.email", placeholder="example@mail.com", (keyup)="createPaymentLink()")
+                    .form-group
+                        .col-xs-12.col-sm-5
+                            label.text-left Redirect URL после упешного завершения платежа
+                        .col-xs-12.col-sm-7
+                            input.form-control(type="text", [(ngModel)]="paymentLinkArguments.redirectUrl", placeholder="http(s)://example.com", (keyup)="createPaymentLink()")
+                    .form-group
+                        .col-xs-12
+                            label.text-left Ссылка на оплату:
+                        .col-xs-12
+                            textarea.form-control(readonly, rows="15") {{paymentLink}}

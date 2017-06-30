@@ -5,7 +5,7 @@ kof-actions([activeAction]="activeAction", (onAction)="onAction($event)")
     .col-xs-12
         kof-search-form([searchParams]="searchParams", [shopID]="shopID", (onSearch)="onSearch($event)", [isSearch]="isLoading")
 .row(*ngIf="activeAction === action.create")
-    .col-xs-6
+    .col-xs-12.col-md-6
         kof-create-invoice([shopID]="shopID", (onCreate)="onCreate($event)")
 .ln_solid(*ngIf="activeAction !== action.none")
 .row

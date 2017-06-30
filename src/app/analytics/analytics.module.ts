@@ -24,8 +24,9 @@ import { InvoiceStatusPipe } from './invoices/invoice-statuses.pipe';
 import { SearchDetailsComponent } from './invoices/search-result/search-details/search-details.component';
 import { PaymentInfoComponent } from './invoices/search-result/payment-info/payment-info.component';
 import { PaymentStatusPipe } from './invoices/payment-statuses.pipe';
-import { CreateInvoiceComponent } from 'koffing/analytics/invoices/create-invoice/create-invoice.component';
-import { ActionsComponent } from 'koffing/analytics/invoices/actions/actions.component';
+import { CreateInvoiceComponent } from './invoices/create-invoice/create-invoice.component';
+import { ActionsComponent } from './invoices/actions/actions.component';
+import { CreatePaymentLinkComponent } from './invoices/search-result/search-details/create-payment-link.component';
 
 @NgModule({
     imports: [
@@ -56,7 +57,8 @@ import { ActionsComponent } from 'koffing/analytics/invoices/actions/actions.com
         SearchDetailsComponent,
         PaymentInfoComponent,
         CreateInvoiceComponent,
-        ActionsComponent
+        ActionsComponent,
+        CreatePaymentLinkComponent
     ]
 })
 export class AnalyticsModule { }

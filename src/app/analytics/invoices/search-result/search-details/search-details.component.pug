@@ -25,7 +25,7 @@ form.form-horizontal.form-label-left.css-form
     div(*ngIf="isPaymentLinkAvailable()")
         .row
             .col-xs-12
-                button.btn.btn-default.btn-sm Сформировать ссылку на оплату
+                kof-create-payment-link([invoiceID]="invoice.id")
         .ln_solid
     div(*ngIf="searchResult?.totalCount > 0")
         .row
