@@ -4,19 +4,20 @@ import * as moment from 'moment';
 import { toString } from 'lodash';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from 'koffing/backend/services/config.service';
-import { PaymentMethodStat } from 'koffing/backend/model/payment-method-stat.class';
-import { PaymentRateStat } from 'koffing/backend/model/payment-rate-stat.class';
-import { PaymentGeoStat } from 'koffing/backend/model/payment-geo-stat.class';
-import { PaymentConversionStat } from 'koffing/backend/model/payment-conversion-stat.class';
-import { PaymentRevenueStat } from 'koffing/backend/model/payment-revenue-stat.class';
+import { ConfigService } from './config.service';
+import { PaymentMethodStat } from './model/payment-method-stat';
+import { PaymentRateStat } from './model/payment-rate-stat';
+import { PaymentGeoStat } from './model/payment-geo-stat';
+import { PaymentConversionStat } from './model/payment-conversion-stat';
+import { PaymentRevenueStat } from './model/payment-revenue-stat';
 
 @Injectable()
 export class AnalyticsService {
 
-    constructor(private http: Http,
-                private config: ConfigService) {
-    }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) { }
 
     public getPaymentMethodStats(shopID: number, from: Date, to: Date, splitUnit?: string, splitSize?: number, paymentMethod?: string): Observable<PaymentMethodStat[]> {
         const params = new URLSearchParams();

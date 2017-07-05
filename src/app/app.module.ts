@@ -2,8 +2,8 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { Http, XHRBackend, RequestOptions, HttpModule } from '@angular/http';
 
 import { RootModule } from './root/root.module';
-import { AuthHttpInterceptor } from './auth/interceptors/auth-http.interceptor';
-import { ConfigService } from './backend/services/config.service';
+import { AuthHttpInterceptor } from './auth/auth-http.interceptor';
+import { ConfigService } from './backend/config.service';
 import { ContainerComponent } from './root/components/container/container.component';
 import { HttpErrorBroadcaster } from 'koffing/broadcaster/services/http-error-broadcaster.service';
 

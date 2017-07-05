@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { AuthService } from 'koffing/auth/auth.module';
 import { ToggleMenuBroadcaster } from 'koffing/broadcaster/broadcaster.module';
-import { ConfigService } from 'koffing/backend/services/config.service';
+import { ConfigService } from 'koffing/backend/config.service';
 
 @Component({
     selector: 'kof-top-panel',

@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter, Input, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 
-import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
-import { SelectionOptions } from '../selection-options.class';
-import { ContractDecision } from '../selection-contract/contract-decision.class';
-import { PaytoolDecision } from './paytool-decision.class';
+import { PayoutToolBankAccount } from 'koffing/backend/model/payout-tool-bank-account';
+import { SelectionOptions } from '../selection-options';
+import { ContractDecision } from '../selection-contract/contract-decision';
+import { PaytoolDecision } from './paytool-decision';
 import { PaytoolDecisionService } from './paytool-decision.service';
-import { PaytoolTransfer } from './create-paytool/paytool-transfer.class';
+import { PaytoolTransfer } from './create-paytool/paytool-transfer';
 import { CreatePayoutToolComponent } from './create-paytool/create-paytool.component';
 import { SelectPaytoolComponent } from './select-paytool/select-paytool.component';
 

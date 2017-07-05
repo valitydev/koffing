@@ -1,18 +1,18 @@
-import { LogicError } from 'koffing/backend/model/logic-error';
-import { ContactInfo } from 'koffing/backend/model/contact-info';
+import { LogicError } from './logic-error';
+import { ContactInfo } from './contact-info';
 
 export class Payment {
     public id: string;
-    public status: string;
-    public error: LogicError;
     public invoiceID: string;
     public createdAt: string;
-    public paymentToolToken: string;
-    public paymentSession: string;
-    public contactInfo: ContactInfo;
     public amount: number;
-    public fee: number;
     public currency: string;
+    public contactInfo: ContactInfo;
+    public paymentSession: string;
+    public paymentToolToken: string;
+    public fee: number;
     public fingerprint: string;
     public payerIP: string;
+    public status: string;
+    public error: LogicError;
 }

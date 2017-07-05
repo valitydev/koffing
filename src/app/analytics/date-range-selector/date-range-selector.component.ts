@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 import * as moment from 'moment';
-import { DateRange } from './date-range.class';
+import { DateRange } from './date-range';
 
 @Component({
     selector: 'kof-date-range-selector',

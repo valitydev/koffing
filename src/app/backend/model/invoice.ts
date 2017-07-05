@@ -1,6 +1,4 @@
 export class Invoice {
-    public status: string;
-    public reason: string;
     public id: string;
     public shopID: number;
     public createdAt: string;
@@ -10,4 +8,6 @@ export class Invoice {
     public metadata: object;
     public product: string;
     public description: string;
+    public status: string;
+    public reason: string;
 }

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { ConfigService } from 'koffing/backend/services/config.service';
-import { Claim } from './claim.class';
+import { ConfigService } from 'koffing/backend/config.service';
+import { Claim } from './claim';
 
 @Injectable()
 export class ClaimService {

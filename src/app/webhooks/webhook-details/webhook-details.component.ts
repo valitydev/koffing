@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ShopService } from 'koffing/backend/backend.module';
-import { WebhookListItem } from '../webhook-item.class';
+import { ShopService } from 'koffing/backend/shop.service';
+import { WebhookListItem } from '../webhook-item';
 
 @Component({
     selector: 'kof-webhook-list-details',

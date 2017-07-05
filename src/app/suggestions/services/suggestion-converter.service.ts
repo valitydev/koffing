@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { BankAccount } from 'koffing/backend/classes/bank-account.class';
-import { RussianLegalEntity } from 'koffing/backend/classes/russian-legal-entity.class';
+import { BankAccount } from 'koffing/backend/model/bank-account';
+import { RussianLegalEntity } from 'koffing/backend/model/russian-legal-entity';
 
 @Injectable()
 export class SuggestionConverterService {

@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 
-import { SelectItem } from 'koffing/common/common.module';
-import { Contract } from 'koffing/backend/classes/contract.class';
-import { ContractService } from 'koffing/backend/services/contract.service';
+import { SelectItem } from 'koffing/common/select/select-item';
+import { Contract } from 'koffing/backend/model/contract';
+import { ContractService } from 'koffing/backend/contract.service';
 
 @Component({
     selector: 'kof-select-contract',

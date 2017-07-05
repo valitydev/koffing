@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ClaimCreateBroadcaster } from 'koffing/broadcaster/services/claim-create.broadcaster.service';
-import { ContractDecision } from './selection-contract/contract-decision.class';
-import { PaytoolDecision } from './selection-paytool/paytool-decision.class';
+import { ContractDecision } from './selection-contract/contract-decision';
+import { PaytoolDecision } from './selection-paytool/paytool-decision';
 
 @Component({
     templateUrl: 'create-shop-wizard.component.pug',

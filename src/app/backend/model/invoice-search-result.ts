@@ -1,4 +1,4 @@
-import { Invoice } from 'koffing/backend/model/invoice';
+import { Invoice } from './invoice';
 
 export class InvoiceSearchResult {
     public totalCount: number;

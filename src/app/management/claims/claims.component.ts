@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
 import { ClaimRevokeBroadcaster } from 'koffing/broadcaster/services/claim-revoke-broadcaster.service';
-import { Claim } from '../shared/claim.class';
+import { Claim } from '../shared/claim';
 import { ClaimService } from '../shared/claim.service';
 
 @Component({

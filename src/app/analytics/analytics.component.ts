@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SelectItem } from 'koffing/common/components/select/select.class';
+import { SelectItem } from 'koffing/common/select/select-item';
 import { AnalyticsService } from 'koffing/analytics/analytics.service';
 
 @Component({

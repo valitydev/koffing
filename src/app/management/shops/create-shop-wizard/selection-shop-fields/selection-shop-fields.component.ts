@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 
-import { ShopParams } from 'koffing/backend/classes/shop-params.class';
-import { ShopService } from 'koffing/backend/services/shop.service';
-import { PaytoolDecision } from '../selection-paytool/paytool-decision.class';
-import { ShopDetailTransfer } from './add-shop/shop-detail-transfer.class';
+import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { ShopService } from 'koffing/backend/shop.service';
+import { PaytoolDecision } from '../selection-paytool/paytool-decision';
+import { ShopDetailTransfer } from './add-shop/shop-detail-transfer';
 import { AddShopComponent } from './add-shop/add-shop.component';
 
 @Component({

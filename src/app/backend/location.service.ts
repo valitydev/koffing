@@ -4,15 +4,16 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { isNil } from 'lodash';
 
-import { ConfigService } from 'koffing/backend/services/config.service';
-import { LocationName } from 'koffing/backend/model/location-name.class';
+import { ConfigService } from './config.service';
+import { LocationName } from './model/location-name';
 
 @Injectable()
 export class LocationService {
 
-    constructor(private http: Http,
-                private config: ConfigService) {
-    }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) { }
 
     public getLocationsNames(geoIDs: string[], language?: string): Observable<LocationName[]> {
         if (isNil(geoIDs) || geoIDs.length === 0) {

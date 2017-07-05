@@ -2,9 +2,9 @@ import { Component, Output, Input, EventEmitter, OnInit, ViewChild, AfterViewIni
 import { NgForm } from '@angular/forms';
 import * as _ from 'lodash';
 
-import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
-import { BankAccount } from 'koffing/backend/classes/bank-account.class';
-import { PaytoolTransfer } from './paytool-transfer.class';
+import { PayoutToolBankAccount } from 'koffing/backend/model/payout-tool-bank-account';
+import { BankAccount } from 'koffing/backend/model/bank-account';
+import { PaytoolTransfer } from './paytool-transfer';
 import { SuggestionsService } from 'koffing/suggestions/services/suggestions.service';
 import { SuggestionConverterService } from 'koffing/suggestions/services/suggestion-converter.service';
 import { BankAccountComparator } from './payout-tool-comparator.service';

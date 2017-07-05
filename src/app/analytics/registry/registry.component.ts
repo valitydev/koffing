@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 
-import { DateRange } from '../date-range-selector/date-range.class';
+import { DateRange } from '../date-range-selector/date-range';
 import { RegistryExportService } from './registry-export.service';
 import { RegistryDataService } from './registry-data.service';
 import { ExcelService } from './excel/excel.service';

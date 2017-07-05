@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Shop } from 'koffing/backend/classes/shop.class';
+import { Shop } from 'koffing/backend/model/shop';
 
 export class ShopIDStorage {
 

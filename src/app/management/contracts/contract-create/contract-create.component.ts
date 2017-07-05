@@ -1,15 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ContractService } from 'koffing/backend/services/contract.service';
-import { Contractor } from 'koffing/backend/classes/contractor.class';
-import { PayoutToolBankAccount } from 'koffing/backend/classes/payout-tool-bank-account.class';
-import { ContractParams } from 'koffing/backend/classes/contract-params.class';
+import { ContractService } from 'koffing/backend/contract.service';
+import { Contractor } from 'koffing/backend/model/contractor';
+import { PayoutToolBankAccount } from 'koffing/backend/model/payout-tool-bank-account';
+import { ContractParams } from 'koffing/backend/model/contract-params';
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
 import { ClaimCreateBroadcaster } from 'koffing/broadcaster/services/claim-create.broadcaster.service';
-import { ContractorTransfer } from 'koffing/management/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
-import { PaytoolTransfer } from 'koffing/management/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
-import { BankAccount } from 'koffing/backend/classes/bank-account.class';
+import { ContractorTransfer } from 'koffing/management/shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer';
+import { PaytoolTransfer } from 'koffing/management/shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer';
+import { BankAccount } from 'koffing/backend/model/bank-account';
 import { CreatePayoutToolComponent } from 'koffing/management/shops/create-shop-wizard/selection-paytool/create-paytool/create-paytool.component';
 import { CreateContractComponent } from 'koffing/management/shops/create-shop-wizard/selection-contract/create-contract/create-contract.component';
 

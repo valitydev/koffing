@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
-import { Shop } from 'koffing/backend/classes/shop.class';
-import { ShopService } from 'koffing/backend/services/shop.service';
-import { ClaimData } from './claim-data.class';
-import { ShopEditingParams } from './shop-editing-params.class';
-import { ContractCreation } from './classes/contract-creation.class';
-import { ContractPayoutToolCreation } from './classes/contract-payout-tool-creation.class';
-import { ShopCreation } from './classes/shop-creation.class';
-import { ShopUpdate } from './classes/shop-update.class';
+import { Shop } from 'koffing/backend/model/shop';
+import { ShopService } from 'koffing/backend/shop.service';
+import { ClaimData } from './claim-data';
+import { ShopEditingParams } from './shop-editing-params';
+import { ContractCreation } from './classes/contract-creation';
+import { ContractPayoutToolCreation } from './classes/contract-payout-tool-creation';
+import { ShopCreation } from './classes/shop-creation';
+import { ShopUpdate } from './classes/shop-update';
 
 @Injectable()
 export class ClaimDataService {

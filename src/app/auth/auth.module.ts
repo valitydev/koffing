@@ -1,3 +1,3 @@
-export * from './classes/AuthInfo.class';
-export * from './interceptors/auth-http.interceptor';
-export * from './services/auth.service';
+export * from './auth-info';
+export * from './auth-http.interceptor';
+export * from './auth.service';

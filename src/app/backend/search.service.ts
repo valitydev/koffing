@@ -4,18 +4,19 @@ import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import { toString, forEach, isNumber, isDate } from 'lodash';
 
-import { InvoiceSearchResult } from 'koffing/backend/model/invoice-search-result';
-import { ConfigService } from 'koffing/backend/services/config.service';
-import { PaymentSearchResult } from 'koffing/backend/model/payment-search-result';
-import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-request';
-import { SearchPaymentsParams } from 'koffing/backend/requests/search-payments-request';
+import { ConfigService } from './config.service';
+import { InvoiceSearchResult } from './model/invoice-search-result';
+import { PaymentSearchResult } from './model/payment-search-result';
+import { SearchInvoicesParams } from './requests/search-invoices-request';
+import { SearchPaymentsParams } from './requests/search-payments-request';
 
 @Injectable()
 export class SearchService {
 
-    constructor(private http: Http,
-                private config: ConfigService) {
-    }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) { }
 
     public searchInvoices(shopID: string, invoiceParams: SearchInvoicesParams): Observable<InvoiceSearchResult> {
         const params = this.toSearchParams(invoiceParams);

@@ -1,4 +1,4 @@
-import { Payment } from 'koffing/backend/model/payment';
+import { Payment } from './payment';
 
 export class PaymentSearchResult {
     public totalCount: number;

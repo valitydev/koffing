@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ContractService } from 'koffing/backend/services/contract.service';
-import { Contract } from 'koffing/backend/classes/contract.class';
+import { ContractService } from 'koffing/backend/contract.service';
+import { Contract } from 'koffing/backend/model/contract';
 import { ClaimRevokeBroadcaster } from 'koffing/broadcaster/services/claim-revoke-broadcaster.service';
-import { Claim } from '../shared/claim.class';
+import { Claim } from '../shared/claim';
 import { ClaimService } from '../shared/claim.service';
 
 @Component({

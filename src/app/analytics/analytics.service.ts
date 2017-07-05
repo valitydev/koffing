@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { Shop } from 'koffing/backend/classes/shop.class';
-import { SelectItem } from 'koffing/common/components/select/select.class';
+import { Shop } from 'koffing/backend/model/shop';
+import { SelectItem } from 'koffing/common/select/select-item';
 import { ShopIDStorage } from 'koffing/analytics/shop-id-storage.service';
-import { ShopService } from 'koffing/backend/services/shop.service';
+import { ShopService } from 'koffing/backend/shop.service';
 
 @Injectable()
 export class AnalyticsService {

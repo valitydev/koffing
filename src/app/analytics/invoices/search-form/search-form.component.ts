@@ -2,7 +2,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { map, clone } from 'lodash';
 
-import { SelectItem } from 'koffing/common/common.module';
+import { SelectItem } from 'koffing/common/select/select-item';
 import { FormSearchParams } from './form-search-params';
 import { invoiceStatuses } from '../invoice-statuses';
 import { paymentStatuses } from '../payment-statuses';

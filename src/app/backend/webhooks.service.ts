@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from 'koffing/backend/services/config.service';
-import { Webhook } from 'koffing/backend/model/webhook.class';
-import { CreateWebhook } from 'koffing/backend/queries/create-webhook';
+import { ConfigService } from './config.service';
+import { Webhook } from './model/webhook';
+import { CreateWebhookParams } from './requests/create-webhook-request';
 
 @Injectable()
 export class WebhooksService {
 
-    constructor(private http: Http,
-                private config: ConfigService) {
-    }
+    constructor(
+        private http: Http,
+        private config: ConfigService
+    ) { }
 
-    public createWebhook(webhook: CreateWebhook): Observable<Webhook> {
+    public createWebhook(webhook: CreateWebhookParams): Observable<Webhook> {
         return this.http.post(`${this.config.capiUrl}/processing/webhooks`, webhook).map(res => res.json());
     }
 

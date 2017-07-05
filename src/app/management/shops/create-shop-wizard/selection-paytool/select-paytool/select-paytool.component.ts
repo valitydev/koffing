@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 
-import { SelectItem } from 'koffing/common/components/select/select.class';
-import { PayoutTool } from 'koffing/backend/classes/payout-tool.class';
-import { ContractService } from 'koffing/backend/services/contract.service';
+import { SelectItem } from 'koffing/common/select/select-item';
+import { PayoutTool } from 'koffing/backend/model/payout-tool';
+import { ContractService } from 'koffing/backend/contract.service';
 
 @Component({
     selector: 'kof-select-paytool',

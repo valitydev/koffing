@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { chain } from 'lodash';
 
-import { ConfigService } from 'koffing/backend/services/config.service';
+import { ConfigService } from 'koffing/backend/config.service';
 import { InvoiceService } from 'koffing/backend/invoice.service';
 import { PaymentLinkArguments } from './payment-link-arguments';
 

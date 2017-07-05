@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
-import { ContractorTransfer } from '../../shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer.class';
-import { PaytoolTransfer } from '../../shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer.class';
-import { ShopDetailTransfer } from '../../shops/create-shop-wizard/selection-shop-fields/add-shop/shop-detail-transfer.class';
-import { ShopEditingTransfer } from '../../shops/shop-editing/edit-shop/shop-editing-transfer.class';
+import { ContractorTransfer } from '../../shops/create-shop-wizard/selection-contract/create-contract/contractor-transfer';
+import { PaytoolTransfer } from '../../shops/create-shop-wizard/selection-paytool/create-paytool/paytool-transfer';
+import { ShopDetailTransfer } from '../../shops/create-shop-wizard/selection-shop-fields/add-shop/shop-detail-transfer';
+import { ShopEditingTransfer } from '../../shops/shop-editing/edit-shop/shop-editing-transfer';
 import { CreatePayoutToolComponent } from '../../shops/create-shop-wizard/selection-paytool/create-paytool/create-paytool.component';
-import { ClaimData } from './claim-data.class';
+import { ClaimData } from './claim-data';
 import { ClaimDataService } from './claim-data.service';
 import { ClaimsEditService } from './claims-edit.service';
 

@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { Shop } from 'koffing/backend/classes/shop.class';
-import { Contractor } from 'koffing/backend/classes/contractor.class';
-import { ShopService } from 'koffing/backend/services/shop.service';
-import { ShopParams } from 'koffing/backend/classes/shop-params.class';
-import { PayoutToolParams } from 'koffing/backend/classes/payout-tool-params.class';
-import { PaytoolDecision } from 'koffing/management/shops/create-shop-wizard/selection-paytool/paytool-decision.class';
+import { Shop } from 'koffing/backend/model/shop';
+import { Contractor } from 'koffing/backend/model/contractor';
+import { ShopService } from 'koffing/backend/shop.service';
+import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { PayoutToolParams } from 'koffing/backend/model/payout-tool-params';
+import { PaytoolDecision } from 'koffing/management/shops/create-shop-wizard/selection-paytool/paytool-decision';
 import { PaytoolDecisionService } from 'koffing/management/shops/create-shop-wizard/selection-paytool/paytool-decision.service';
 import { ClaimDataService } from './claim-data.service';
-import { ClaimData } from './claim-data.class';
-import { Claim } from '../../shared/claim.class';
+import { ClaimData } from './claim-data';
+import { Claim } from '../../shared/claim';
 import { ClaimService } from '../../shared/claim.service';
-import { ContractCreation } from './classes/contract-creation.class';
-import { ContractModification } from './classes/contract-modification.class';
-import { ContractPayoutToolCreation } from './classes/contract-payout-tool-creation.class';
-import { ShopCreation } from './classes/shop-creation.class';
-import { ShopModification } from './classes/shop-modification.class';
-import { ShopUpdate } from './classes/shop-update.class';
+import { ContractCreation } from './classes/contract-creation';
+import { ContractModification } from './classes/contract-modification';
+import { ContractPayoutToolCreation } from './classes/contract-payout-tool-creation';
+import { ShopCreation } from './classes/shop-creation';
+import { ShopModification } from './classes/shop-modification';
+import { ShopUpdate } from './classes/shop-update';
 
 @Injectable()
 export class ClaimsEditService {

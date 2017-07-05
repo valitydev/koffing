@@ -6,8 +6,8 @@ import { LocationService } from 'koffing/backend/location.service';
 import { AnalyticsService } from 'koffing/backend/analytics.service';
 import { DoughnutChartData } from './stats-data/doughnut-chart-data';
 import { StatsDataConverter } from './stats-data/stats-data.converter';
-import { PaymentConversionData } from './stats-data/payment-conversion-data.class';
-import { PaymentRevenueData } from './stats-data/payment-revenue-data.class';
+import { PaymentConversionData } from './stats-data/payment-conversion-data';
+import { PaymentRevenueData } from './stats-data/payment-revenue-data';
 
 @Injectable()
 export class DashboardService {

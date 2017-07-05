@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
-import { Category } from 'koffing/backend/backend.module';
-import { CategoryService } from 'koffing/backend/backend.module';
-import { ShopService } from 'koffing/backend/backend.module';
-import { Shop } from 'koffing/backend/classes/shop.class';
+import { find } from 'lodash';
+
+import { Shop } from 'koffing/backend/model/shop';
+import { Category } from 'koffing/backend/model/category';
+import { ShopService } from 'koffing/backend/shop.service';
+import { CategoryService } from 'koffing/backend/category.service';
 import { ClaimRevokeBroadcaster } from 'koffing/broadcaster/services/claim-revoke-broadcaster.service';
-import { Claim } from '../shared/claim.class';
+import { Claim } from '../shared/claim';
 import { ClaimService } from '../shared/claim.service';
 
 @Component({
@@ -80,7 +81,7 @@ export class ShopsComponent implements OnInit {
 
     public getCategoryName(categoryID: number): string {
         if (this.categories.length > 0) {
-            return (_.find(this.categories, (category: Category) => category.categoryID === categoryID)).name;
+            return (find(this.categories, (category: Category) => category.categoryID === categoryID)).name;
         }
     }
 

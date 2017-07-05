@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { WebhooksService } from 'koffing/backend/backend.module';
-import { Webhook } from 'koffing/backend/model/webhook.class';
-import { WebhookListItem } from './webhook-item.class';
+import { WebhooksService } from 'koffing/backend/webhooks.service';
+import { Webhook } from 'koffing/backend/model/webhook';
+import { WebhookListItem } from './webhook-item';
 
 @Component({
     selector: 'kof-webhook-list',

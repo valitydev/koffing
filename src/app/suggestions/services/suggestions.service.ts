@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ConfigService } from 'koffing/backend/services/config.service';
+import { ConfigService } from 'koffing/backend/config.service';
 import { SuggestionSettings } from 'koffing/suggestions/classes/suggestion-settings.const';
 
 @Injectable()

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ShopService } from 'koffing/backend/services/shop.service';
-import { Shop } from 'koffing/backend/classes/shop.class';
-import { ShopParams } from 'koffing/backend/classes/shop-params.class';
-import { ShopEditingTransfer } from './edit-shop/shop-editing-transfer.class';
+import { ShopService } from 'koffing/backend/shop.service';
+import { Shop } from 'koffing/backend/model/shop';
+import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { ShopEditingTransfer } from './edit-shop/shop-editing-transfer';
 
 @Component({
     selector: 'kof-shop-editing',

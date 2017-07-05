@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from './services/config.service';
+import { ConfigService } from './config.service';
 import { CreateInvoiceParams } from './requests/create-invoice-request';
 import { Invoice } from './model/invoice';
 import { InvoiceAccessToken } from './model/invoice-access-token';
