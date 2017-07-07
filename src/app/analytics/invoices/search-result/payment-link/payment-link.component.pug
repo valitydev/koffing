@@ -1,7 +1,8 @@
+doctype html
 button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + invoiceID")
     | Сформировать ссылку на оплату
 
-.modal.fade(tabindex="-1", role="dialog", id="{{invoiceID}}", data-backdrop="static")
+.modal.fade(tabindex="-1", role="dialog", id="{{invoiceID}}", data-backdrop="false")
     .modal-dialog.modal-lg
         .modal-content
             .modal-header
@@ -42,8 +43,12 @@ button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + inv
                             label.text-left Redirect URL после упешного завершения платежа
                         .col-xs-12.col-sm-7
                             input.form-control(type="text", [(ngModel)]="paymentLinkArguments.redirectUrl", placeholder="http(s)://example.com", (keyup)="createPaymentLink()")
+                    .ln_solid
                     .form-group
                         .col-xs-12
-                            label.text-left Ссылка на оплату:
+                            label.text-left Ссылка на оплату
                         .col-xs-12
-                            textarea.form-control(readonly, rows="15") {{paymentLink}}
+                            .input-group
+                                input.form-control(type="text", #paymentLinkInput, readonly, [value]="paymentLink")
+                                span.input-group-btn
+                                    button.btn.btn-sm.btn-primary(type="button", (click)="copy()") Скопировать
