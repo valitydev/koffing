@@ -13,7 +13,7 @@ export class ConfigService {
 
     public load() {
         return new Promise(resolve => {
-            this.http.get('appConfig.json').map(res => res.json())
+            this.http.get(`appConfig.json?timestamp=${new Date().getTime()}`).map(res => res.json())
                 .subscribe(data => {
                     this.capiUrl = `${data.capiEndpoint}/v1`;
                     this.checkoutUrl = `${data.checkoutEndpoint}`;
