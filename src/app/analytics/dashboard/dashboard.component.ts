@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
     public ngOnInit() {
         this.route.parent.params.subscribe((params: Params) => {
-            this.shopID = Number(params['shopID']);
+            this.shopID = params['shopID'];
             this.loadData(new DateRange(this.fromTime, this.toTime));
         });
     }

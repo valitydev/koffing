@@ -25,7 +25,7 @@ export class AnalyticsService {
     }
 
     public getActiveShopID(): number {
-        const routeShopID = Number(this.route.snapshot.params['shopID']);
+        const routeShopID = this.route.snapshot.params['shopID'];
         return routeShopID ? routeShopID : this.getFromStorage(this.shops);
     }
 
