@@ -19,15 +19,19 @@ export class SearchService {
     ) { }
 
     public searchInvoices(shopID: string, invoiceParams: SearchInvoicesParams): Observable<InvoiceSearchResult> {
-        const params = this.toSearchParams(invoiceParams);
-        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/invoices`, {search: params})
+        const search = this.toSearchParams(invoiceParams);
+        return this.http.get(`${this.getEndpoint(shopID)}/invoices`, {search})
             .map((res) => res.json());
     }
 
     public searchPayments(shopID: string, paymentsParams: SearchPaymentsParams): Observable<PaymentSearchResult> {
-        const params = this.toSearchParams(paymentsParams);
-        return this.http.get(`${this.config.capiUrl}/analytics/shops/${shopID}/payments`, {search: params})
+        const search = this.toSearchParams(paymentsParams);
+        return this.http.get(`${this.getEndpoint(shopID)}/payments`, {search})
             .map((res) => res.json());
+    }
+
+    private getEndpoint(shopID: string): string {
+        return `${this.config.capiUrl}/analytics/shops/${shopID}`;
     }
 
     private toSearchParams(params: object): URLSearchParams {

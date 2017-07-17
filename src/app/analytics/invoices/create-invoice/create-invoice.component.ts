@@ -31,7 +31,7 @@ export class CreateInvoiceComponent implements OnInit {
 
     public create() {
         const params = {
-            shopID: Number(this.shopID),
+            shopID: this.shopID,
             amount: this.formData.amount * 100,
             currency: 'RUB',
             metadata: {},

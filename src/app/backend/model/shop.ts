@@ -4,6 +4,9 @@ import { ShopDetails } from './shop-details';
 import { ShopAccount } from './shop-account';
 import { ShopParams } from '../requests/shop-request';
 
+/**
+ * @deprecated Use koffing/backend/model/shop/shop
+ */
 export class Shop {
     public id: number;
     public isBlocked: boolean;

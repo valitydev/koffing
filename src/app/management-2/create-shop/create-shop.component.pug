@@ -1,0 +1,34 @@
+.x_panel
+    .x_content
+        .form_wizard.wizard_horizontal
+            ul.wizard_steps
+                li.first_step
+                    a([ngClass]="{'done': currentStep > step.contract, 'selected': currentStep === step.contract}")
+                        span.step_no 1
+                        span.step_descr Контракт
+                li
+                    a([ngClass]="{'disabled': currentStep < step.payoutTool, 'done': currentStep > step.payoutTool, 'selected': currentStep === step.payoutTool}")
+                        span.step_no 2
+                        span.step_descr Средство вывода
+                li
+                    a([ngClass]="{'disabled': currentStep < step.shop, 'done': currentStep > step.shop, 'selected': currentStep === step.shop}")
+                        span.step_no 3
+                        span.step_descr Данные магазина
+        .ln_solid
+        kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractGroup")
+        kof-bank-account-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolGroup")
+        kof-shop-form(*ngIf="currentStep === step.shop", [form]="shopGroup")
+        .ln_solid
+        .row
+            .col-xs-12
+                button.btn.btn-default(
+                    [disabled]="currentStep === step.contract",
+                    (click)="prev()") Назад
+                button.btn.btn-default.pull-right(
+                    *ngIf="currentStep !== step.shop",
+                    [disabled]="!validStep",
+                    (click)="next()") Далее
+                button.btn.btn-primary.pull-right(
+                    *ngIf="currentStep === step.shop",
+                    [disabled]="!validStep",
+                    (click)="createClaim()") Создать заявку

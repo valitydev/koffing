@@ -17,7 +17,7 @@ import { DoughnutChartData } from './stats-data/doughnut-chart-data';
 })
 export class DashboardComponent implements OnInit {
 
-    public shopID: number;
+    public shopID: string;
     public fromTime: Date = moment().subtract(1, 'month').startOf('day').toDate();
     public toTime: Date = moment().endOf('day').toDate();
     public profit: number = 0;
@@ -61,21 +61,21 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    private loadPaymentMethod(shopID: number, fromTime: Date, toTime: Date) {
+    private loadPaymentMethod(shopID: string, fromTime: Date, toTime: Date) {
         this.dashboardService.getPaymentMethodChartData(shopID, fromTime, toTime).subscribe((data) => {
             this.paymentMethodChartData.next(data);
             this.loadStatistic.next();
         });
     }
 
-    private loadRate(shopID: number, from: Date, to: Date) {
+    private loadRate(shopID: string, from: Date, to: Date) {
         this.dashboardService.getUniqueCount(shopID, from, to).subscribe((count) => {
             this.panelData.next({uniqueCount: count});
             this.loadStatistic.next();
         });
     }
 
-    private loadConversionStat(shopID: number, from: Date, to: Date) {
+    private loadConversionStat(shopID: string, from: Date, to: Date) {
         this.dashboardService.getPaymentConversionData(shopID, from, to).subscribe((data) => {
             this.panelData.next({
                 successfulCount: data.paymentCount.successfulCount,
@@ -86,14 +86,14 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    private loadGeoChartData(shopID: number, from: Date, to: Date) {
+    private loadGeoChartData(shopID: string, from: Date, to: Date) {
         this.dashboardService.getPaymentGeoChartData(shopID, from, to).subscribe((data) => {
             this.geoChartData.next(data);
             this.loadStatistic.next();
         });
     }
 
-    private loadRevenueStat(shopID: number, from: Date, to: Date) {
+    private loadRevenueStat(shopID: string, from: Date, to: Date) {
         this.dashboardService.getPaymentRevenueData(shopID, from, to).subscribe((data) => {
             this.profit = data.profit;
             this.revenueChartData.next(data.revenueChartData);
@@ -101,8 +101,8 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    private loadAccounts(shopID: number) {
-        this.shopService.getShop(shopID).then((shop) => {
+    private loadAccounts(shopID: string) {
+        this.shopService.getShopByID(shopID).subscribe((shop) => {
             this.accountsService.getAccountByID(shop.account.settlementID).subscribe((account) => {
                 this.panelData.next({settlementBalance: account.ownAmount});
                 this.loadStatistic.next();

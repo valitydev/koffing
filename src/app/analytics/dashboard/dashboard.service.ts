@@ -16,17 +16,17 @@ export class DashboardService {
                 private locationService: LocationService) {
     }
 
-    public getPaymentMethodChartData(shopID: number, from: Date, to: Date): Observable<DoughnutChartData> {
+    public getPaymentMethodChartData(shopID: string, from: Date, to: Date): Observable<DoughnutChartData> {
         return this.analyticsService.getPaymentMethodStats(shopID, from, to)
             .map((paymentMethodStats) => StatsDataConverter.toPaymentMethodChartData(paymentMethodStats));
     }
 
-    public getUniqueCount(shopID: number, from: Date, to: Date): Observable<number> {
+    public getUniqueCount(shopID: string, from: Date, to: Date): Observable<number> {
         return this.analyticsService.getPaymentRateStats(shopID, from, to)
             .map((paymentRateStat) => paymentRateStat ? paymentRateStat.uniqueCount : 0);
     }
 
-    public getPaymentConversionData(shopID: number, from: Date, to: Date): Observable<PaymentConversionData> {
+    public getPaymentConversionData(shopID: string, from: Date, to: Date): Observable<PaymentConversionData> {
         return this.analyticsService.getPaymentConversionStats(shopID, from, to).map((paymentConversionStat) => {
             const paymentCount = StatsDataConverter.toPaymentCountInfo(paymentConversionStat);
             const conversionChartData = StatsDataConverter.toConversionChartData(from, paymentConversionStat);
@@ -34,7 +34,7 @@ export class DashboardService {
         });
     }
 
-    public getPaymentGeoChartData(shopID: number, from: Date, to: Date): Observable<DoughnutChartData> {
+    public getPaymentGeoChartData(shopID: string, from: Date, to: Date): Observable<DoughnutChartData> {
         return Observable.create((observer: Observer<DoughnutChartData>) => {
             this.analyticsService.getPaymentGeoStats(shopID, from, to).subscribe((paymentGeoStat) => {
                 const data = StatsDataConverter.toGeoChartData(paymentGeoStat);
@@ -47,7 +47,7 @@ export class DashboardService {
         });
     }
 
-    public getPaymentRevenueData(shopID: number, from: Date, to: Date): Observable<PaymentRevenueData> {
+    public getPaymentRevenueData(shopID: string, from: Date, to: Date): Observable<PaymentRevenueData> {
         return this.analyticsService.getPaymentRevenueStats(shopID, from, to).map((paymentRevenueStat) => {
             const profit = StatsDataConverter.toTotalProfit(paymentRevenueStat);
             const revenueChartData = StatsDataConverter.toRevenueChartData(from, paymentRevenueStat);

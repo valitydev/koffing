@@ -1,6 +1,9 @@
 import { ShopDetails } from '../model/shop-details';
 import * as _ from 'lodash';
 
+/**
+ * @deprecated Use ClaimService
+ */
 export class ShopParams {
 
     public details: ShopDetails;

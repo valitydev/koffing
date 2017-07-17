@@ -1,5 +1,8 @@
 import { Contractor } from './contractor';
 
+/**
+ * @deprecated Use koffing/backend/model/contract/contract
+ */
 export class Contract {
     public id: number;
     public contractor: Contractor;

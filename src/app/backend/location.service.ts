@@ -22,9 +22,9 @@ export class LocationService {
                 observer.complete();
             });
         }
-        const params = new URLSearchParams();
-        params.set('geoIDs', geoIDs.join(','));
-        params.set('language', language || 'ru');
-        return this.http.get(`${this.config.capiUrl}/reference/geo/location/names`, {search: params}).map((res) => res.json());
+        const search = new URLSearchParams();
+        search.set('geoIDs', geoIDs.join(','));
+        search.set('language', language || 'ru');
+        return this.http.get(`${this.config.capiUrl}/reference/geo/location/names`, {search}).map((res) => res.json());
     }
 }

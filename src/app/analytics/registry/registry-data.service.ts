@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
+import { filter, forEach, find } from 'lodash';
 import { Observable, Observer } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 
 import { ShopService } from 'koffing/backend/shop.service';
 import { ContractService } from 'koffing/backend/contract.service';
 import { SearchService } from 'koffing/backend/search.service';
-import { Shop } from 'koffing/backend/model/shop';
-import { Contract } from 'koffing/backend/model/contract';
 import { Invoice } from 'koffing/backend/model/invoice';
 import { Payment } from 'koffing/backend/model/payment';
-import { RussianLegalEntity } from 'koffing/backend/model/russian-legal-entity';
 import { SearchPaymentsParams } from 'koffing/backend/requests/search-payments-request';
 import { Registry } from './registry';
 import { RegistryItem } from './registry-item';
+import { Shop } from 'koffing/backend/model/shop/shop';
+import { Contract } from 'koffing/backend/model/contract/contract';
+import { RussianLegalEntity } from 'koffing/backend/model/contract/contractor/russian-legal-entity';
 
 @Injectable()
 export class RegistryDataService {
@@ -31,14 +31,14 @@ export class RegistryDataService {
             const searchParams = this.toSearchParams(fromTime, toTime);
             const observablePayments = this.searchService.searchPayments(shopID, searchParams);
             const observableInvoices = this.searchService.searchInvoices(shopID, searchParams);
-            const observableContracts = this.contractService.getContractsObservable();
-            const observableShop = this.shopService.getShopObservable(shopID);
+            const observableContracts = this.contractService.getContractsObs();
+            const observableShop = this.shopService.getShopByID(shopID);
             Observable.forkJoin([observablePayments, observableInvoices, observableContracts, observableShop]).subscribe((response) => {
                 const payments = response[0].result;
                 const invoices = response[1].result;
                 const contracts = response[2];
                 const shop = response[3];
-                const successPayments = _.filter(payments, (payment: Payment) => payment.status === 'captured');
+                const successPayments = filter(payments, (payment: Payment) => payment.status === 'captured');
                 const registryItems = this.getRegistryItems(successPayments, invoices);
                 const client = this.getClient(shop, contracts);
                 observer.next(new Registry(registryItems, fromTime, toTime, client));
@@ -49,8 +49,8 @@ export class RegistryDataService {
 
     private getRegistryItems(payments: Payment[], invoices: Invoice[]): RegistryItem[] {
         const registryItems: RegistryItem[] = [];
-        _.forEach(payments, (payment: Payment) => {
-            const foundInvoice = _.find(invoices, (invoice: Invoice) => invoice.id === payment.invoiceID);
+        forEach(payments, (payment: Payment) => {
+            const foundInvoice = find(invoices, (invoice: Invoice) => invoice.id === payment.invoiceID);
             const registryItem = new RegistryItem();
             registryItem.invoiceID = `${payment.invoiceID}.${payment.id}`;
             registryItem.paymentDate = payment.createdAt;
@@ -66,10 +66,10 @@ export class RegistryDataService {
 
     private getClient(shop: Shop, contracts: Contract[]): string {
         let client = '';
-        const activeContract = _.find(contracts, (contract: Contract) => contract.id === shop.contractID);
-        if (activeContract.contractor && activeContract.contractor.legalEntity) {
-            const russianLegalEntity = activeContract.contractor.legalEntity as RussianLegalEntity;
-            client = russianLegalEntity.registeredName;
+        const activeContract = find(contracts, (contract: Contract) => contract.id === shop.contractID);
+        if (activeContract.contractor) {
+            const legalEntity = activeContract.contractor as RussianLegalEntity;
+            client = legalEntity.registeredName;
         }
         return client;
     }

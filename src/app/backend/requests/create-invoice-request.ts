@@ -1,5 +1,5 @@
 export class CreateInvoiceParams {
-    public shopID: number;
+    public shopID: string;
     public amount: number;
     public currency: string;
     public metadata: Object;
