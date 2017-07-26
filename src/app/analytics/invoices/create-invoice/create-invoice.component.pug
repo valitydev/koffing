@@ -3,17 +3,17 @@ form.css-form(novalidate, name="createInvoiceForm", #createInvoiceForm="ngForm")
         .col-sm-6.col-xs-12
             .form-group
                 label.text-left Стоимость:
-                    span.highlighted  *
+                    span.highlighted &nbsp;*
                 input.form-control(type="number", name="amount", kofMin=10, required, [(ngModel)]="formData.amount", #amount="ngModel")
         .col-sm-6.col-xs-12
             .form-group
                 label.text-left Окончание действия инвойса:
-                    span.highlighted  *
+                    span.highlighted &nbsp;*
                 p-calendar.search-form.ui-inputtext(name="dueDate", required, [(ngModel)]="formData.dueDate",
                 showTime="true", dateFormat="dd.mm.yy", [minDate]="minDueDate", readonlyInput="true", #dueDate="ngModel")
     .form-group
         label.text-left Наименование предлагаемых товаров или услуг:
-            span.highlighted  *
+            span.highlighted &nbsp;*
         input.form-control(type="text", name="product", maxlength="100", required, [(ngModel)]="formData.product", #product="ngModel")
     .form-group
         label.text-left Описание предлагаемых товаров или услуг:

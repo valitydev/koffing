@@ -1,4 +1,4 @@
-import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { ShopParams } from 'koffing/backend/requests/shop-params';
 
 export class ShopEditingTransfer {
     public shopEditing: ShopParams;

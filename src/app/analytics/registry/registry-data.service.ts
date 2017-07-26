@@ -8,7 +8,7 @@ import { ContractService } from 'koffing/backend/contract.service';
 import { SearchService } from 'koffing/backend/search.service';
 import { Invoice } from 'koffing/backend/model/invoice';
 import { Payment } from 'koffing/backend/model/payment';
-import { SearchPaymentsParams } from 'koffing/backend/requests/search-payments-request';
+import { SearchPaymentsParams } from 'koffing/backend/requests/search-payments-params';
 import { Registry } from './registry';
 import { RegistryItem } from './registry-item';
 import { Shop } from 'koffing/backend/model/shop/shop';

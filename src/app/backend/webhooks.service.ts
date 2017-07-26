@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from './config.service';
 import { Webhook } from './model/webhook';
-import { CreateWebhookParams } from './requests/create-webhook-request';
+import { WebhookParams } from './requests/webhook-params';
 
 @Injectable()
 export class WebhooksService {
@@ -16,8 +16,8 @@ export class WebhooksService {
         private config: ConfigService
     ) { }
 
-    public createWebhook(webhook: CreateWebhookParams): Observable<Webhook> {
-        return this.http.post(this.endpoint, webhook).map(res => res.json());
+    public createWebhook(params: WebhookParams): Observable<Webhook> {
+        return this.http.post(this.endpoint, params).map(res => res.json());
     }
 
     public getWebhooks(): Observable<Webhook[]> {

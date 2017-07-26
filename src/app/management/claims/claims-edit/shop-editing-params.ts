@@ -1,5 +1,5 @@
 import { Shop } from 'koffing/backend/model/shop';
-import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { ShopParams } from 'koffing/backend/requests/shop-params';
 
 export class ShopEditingParams {
     public shop: Shop;

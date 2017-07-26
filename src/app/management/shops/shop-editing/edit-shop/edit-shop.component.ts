@@ -7,7 +7,7 @@ import { Contract } from 'koffing/backend/model/contract';
 import { PayoutTool } from 'koffing/backend/model/payout-tool';
 import { ContractService } from 'koffing/backend/contract.service';
 import { SelectItem } from 'koffing/common/select/select-item';
-import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { ShopParams } from 'koffing/backend/requests/shop-params';
 import { ShopDetails } from 'koffing/backend/model/shop-details';
 import { ShopLocationUrl } from 'koffing/backend/model/shop-location-url';
 import { ShopEditingTransfer } from './shop-editing-transfer';

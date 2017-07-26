@@ -2,7 +2,7 @@ import { assign, defaultTo } from 'lodash';
 
 import { ShopDetails } from './shop-details';
 import { ShopAccount } from './shop-account';
-import { ShopParams } from '../requests/shop-request';
+import { ShopParams } from '../requests/shop-params';
 
 /**
  * @deprecated Use koffing/backend/model/shop/shop

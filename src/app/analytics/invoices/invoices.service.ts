@@ -1,4 +1,4 @@
-import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-request';
+import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-params';
 import { FormSearchParams } from 'koffing/analytics/invoices/search-form/form-search-params';
 
 export class InvoicesService {

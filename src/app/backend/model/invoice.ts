@@ -1,6 +1,7 @@
 export class Invoice {
     public id: string;
     public shopID: number;
+    public invoiceTemplateID: string;
     public createdAt: string;
     public dueDate: string;
     public amount: number;

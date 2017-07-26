@@ -1,5 +1,9 @@
 .ln_solid
-kof-actions([activeAction]="activeAction", (onAction)="onAction($event)")
+.row
+    .col-xs-12.col-md-6
+        kof-actions([activeAction]="activeAction", (onAction)="onAction($event)")
+    .col-xs-12.col-md-6
+        kof-invoice-template-payment-link([shopID]="shopID")
 .ln_solid
 .row(*ngIf="activeAction === action.search")
     .col-xs-12

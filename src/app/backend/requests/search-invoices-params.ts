@@ -1,14 +1,17 @@
-export class SearchPaymentsParams {
+export class SearchInvoicesParams {
     public fromTime: Date;
     public toTime: Date;
-    public limit?: number;
+    public limit: number;
     public offset?: number;
+    public invoiceStatus?: string;
     public paymentStatus?: string;
     public invoiceID?: string;
+    public invoiceTemplateID?: string;
     public paymentID?: string;
     public payerEmail?: string;
     public payerIP?: string;
     public cardNumberMask?: string;
     public payerFingerprint?: string;
     public paymentAmount?: number;
+    public invoiceAmount?: number;
 }

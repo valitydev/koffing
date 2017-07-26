@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ShopService } from 'koffing/backend/shop.service';
 import { Shop } from 'koffing/backend/model/shop';
-import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { ShopParams } from 'koffing/backend/requests/shop-params';
 import { ShopEditingTransfer } from './edit-shop/shop-editing-transfer';
 
 @Component({

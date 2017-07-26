@@ -1,0 +1,60 @@
+form([formGroup]="form", novalidate)
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Наименование предлагаемых товаров или услуг:
+                    span.highlighted &nbsp;*
+            .col-xs-12.col-sm-7
+                input.form-control(formControlName="product")
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Описание предлагаемых товаров или услуг:
+            .col-xs-12.col-sm-7
+                input.form-control(formControlName="description")
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Тип ограничения стоимости:
+            .col-xs-12.col-sm-7
+                .btn-group
+                    label.btn.btn-sm.btn-default(*ngFor="let costType of costTypesItems", [ngClass]="{'active': isSelected(costType.value)}")
+                        input(type='radio', formControlName="selectedCostType", value="{{costType.value}}")
+                        | {{costType.label}}
+    div(formGroupName="cost")
+        div(*ngIf="form.value.cost.costType === 'InvoiceTemplateCostFixed'")
+            .form-group
+                .row
+                    .col-xs-12.col-sm-5
+                        label.text-left Стоимость предлагаемых товаров или услуг, в рублях:
+                            span.highlighted &nbsp;*
+                    .col-xs-12.col-sm-7
+                        input.form-control(type="number", formControlName="amount")
+        div(*ngIf="form.value.cost.costType === 'InvoiceTemplateCostRange'")
+            .form-group
+                .row
+                    .col-xs-12.col-sm-5
+                        label.text-left Нижняя граница стоимости, в рублях:
+                            span.highlighted &nbsp;*
+                    .col-xs-12.col-sm-7
+                        input.form-control(type="number", formControlName="lowerBound")
+            .form-group
+                .row
+                    .col-xs-12.col-sm-5
+                        label.text-left Верхняя граница стоимости, в рублях:
+                            span.highlighted &nbsp;*
+                    .col-xs-12.col-sm-7
+                        input.form-control(type="number", formControlName="upperBound")
+    .form-group(formGroupName="lifetime")
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Время жизни инвойса:
+                    span.highlighted &nbsp;*
+            .col-xs-12.col-sm-7
+                .row
+                    .col-xs-4
+                        input.form-control(type="number", formControlName="days", [placeholder]="'дни'")
+                    .col-xs-4
+                        input.form-control(type="number", formControlName="months", [placeholder]="'месяцы'")
+                    .col-xs-4
+                        input.form-control(type="number", formControlName="years", [placeholder]="'года'")

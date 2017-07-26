@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Shop } from 'koffing/backend/model/shop';
 import { Contractor } from 'koffing/backend/model/contractor';
 import { ShopService } from 'koffing/backend/shop.service';
-import { ShopParams } from 'koffing/backend/requests/shop-request';
+import { ShopParams } from 'koffing/backend/requests/shop-params';
 import { PayoutToolParams } from 'koffing/backend/model/payout-tool-params';
 import { PaytoolDecision } from 'koffing/management/shops/create-shop-wizard/selection-paytool/paytool-decision';
 import { PaytoolDecisionService } from 'koffing/management/shops/create-shop-wizard/selection-paytool/paytool-decision.service';

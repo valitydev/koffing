@@ -73,7 +73,7 @@ form
             .form-group
                 label Fingerprint:
                 input.form-control(name="fingerprint", [(ngModel)]="searchParams.fingerprint")
-        .col-sm-3.col-sm-offset-6.col-xs-12
+        .col-sm-9.col-xs-12
             .action-group
                 button.btn.btn-primary.pull-right([disabled]="isSearch", (click)="search()") Найти
                 button.btn.btn-default.pull-right((click)="reset()") Сбросить

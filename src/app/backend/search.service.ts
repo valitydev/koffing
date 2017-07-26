@@ -7,8 +7,10 @@ import { toString, forEach, isNumber, isDate } from 'lodash';
 import { ConfigService } from './config.service';
 import { InvoiceSearchResult } from './model/invoice-search-result';
 import { PaymentSearchResult } from './model/payment-search-result';
-import { SearchInvoicesParams } from './requests/search-invoices-request';
-import { SearchPaymentsParams } from './requests/search-payments-request';
+import { InvoiceTemplatesSearchResult } from './model/invoice-template/invoice-templates-search-result';
+import { SearchInvoicesParams } from './requests/search-invoices-params';
+import { SearchPaymentsParams } from './requests/search-payments-params';
+import { SearchInvoiceTemplatesParams } from './requests/search-invoice-templates-params';
 
 @Injectable()
 export class SearchService {
@@ -27,6 +29,12 @@ export class SearchService {
     public searchPayments(shopID: string, paymentsParams: SearchPaymentsParams): Observable<PaymentSearchResult> {
         const search = this.toSearchParams(paymentsParams);
         return this.http.get(`${this.getEndpoint(shopID)}/payments`, {search})
+            .map((res) => res.json());
+    }
+
+    public searchInvoiceTemplates(shopID: string, invoiceTemplatesParams: SearchInvoiceTemplatesParams): Observable<InvoiceTemplatesSearchResult> {
+        const params = this.toSearchParams(invoiceTemplatesParams);
+        return this.http.get(`${this.config.capiUrl}/processing/shops/${shopID}/invoice-templates`, {search: params})
             .map((res) => res.json());
     }
 

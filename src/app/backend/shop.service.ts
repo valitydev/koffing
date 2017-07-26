@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Shop } from './model/shop';
 import { ConfigService } from './config.service';
-import { ShopParams } from './requests/shop-request';
+import { ShopParams } from './requests/shop-params';
 import { Shop as ShopNew } from 'koffing/backend/model/shop/shop';
 
 @Injectable()

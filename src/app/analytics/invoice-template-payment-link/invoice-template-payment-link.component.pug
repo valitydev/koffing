@@ -1,0 +1,37 @@
+doctype html
+button.btn.btn-default.btn-lg.btn-block(data-toggle="modal", [attr.data-target]="'#invoiceTemplatePaymentLink'")
+    | Создать платежную ссылку
+
+.modal.fade(tabindex="-1", role="dialog", id="invoiceTemplatePaymentLink", data-backdrop="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header
+                button(class="close", data-dismiss="modal", aria-label="Close", (click)="resetForms()")
+                    span(aria-hidden="true") &times;
+                h4.modal-title
+                    | Создание платежной ссылки
+            .modal-body
+                kof-invoice-template-form([form]="invoiceTemplateForm")
+                .ln_solid
+                h5 Параметры платежной формы
+                    a(href="https://rbkmoney.github.io/docs/integrations/checkout/", target="_blank") &nbsp;
+                        u Checkout
+                .ln_solid
+                kof-checkout-config-form([form]="checkoutConfigForm")
+            .modal-footer
+                button.btn.btn-sm.btn-primary.pull-right(
+                    *ngIf="!isCreated",
+                    [disabled]="invoiceTemplateForm.invalid",
+                    (click)="createInvoiceTemplate()")
+                    | Создать
+                .form-group.text-left(*ngIf="isCreated")
+                    .row
+                        .col-xs-12
+                            label.text-left
+                                | Ссылка на оплату
+                        .col-xs-12
+                            .input-group
+                                input.form-control(type="text", #paymentLinkInput, readonly, [value]="paymentLink")
+                                span.input-group-btn
+                                    button.btn.btn-sm.btn-primary((click)="copy()")
+                                        | Скопировать

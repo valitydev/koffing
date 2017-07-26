@@ -1,6 +1,6 @@
 import { WebhookScope } from '../model/webhook-scope';
 
-export class CreateWebhookParams {
+export class WebhookParams {
     public url: string;
     public scope: WebhookScope;
 }

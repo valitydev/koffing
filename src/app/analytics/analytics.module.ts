@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
 
 import { CalendarModule } from 'primeng/components/calendar/calendar';
@@ -26,13 +26,17 @@ import { PaymentInfoComponent } from './invoices/search-result/payment-info/paym
 import { PaymentStatusPipe } from './invoices/payment-statuses.pipe';
 import { CreateInvoiceComponent } from './invoices/create-invoice/create-invoice.component';
 import { ActionsComponent } from './invoices/actions/actions.component';
-import { PaymentLinkComponent } from './invoices/search-result/payment-link/payment-link.component';
+import { InvoicePaymentLinkComponent } from './invoice-payment-link/invoice-payment-link.component';
+import { InvoiceTemplatePaymentLinkComponent } from './invoice-template-payment-link/invoice-template-payment-link.component';
+import { CheckoutConfigFormComponent } from './checkout-config-form/checkout-config-form.component';
+import { InvoiceTemplateFormComponent } from './invoice-template-form/invoice-template-form.component';
 
 @NgModule({
     imports: [
         AnalyticsRoutingModule,
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         CommonModule,
         CalendarModule,
         BackendModule
@@ -58,7 +62,10 @@ import { PaymentLinkComponent } from './invoices/search-result/payment-link/paym
         PaymentInfoComponent,
         CreateInvoiceComponent,
         ActionsComponent,
-        PaymentLinkComponent
+        InvoicePaymentLinkComponent,
+        InvoiceTemplatePaymentLinkComponent,
+        CheckoutConfigFormComponent,
+        InvoiceTemplateFormComponent
     ]
 })
 export class AnalyticsModule { }

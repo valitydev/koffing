@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ShopService } from 'koffing/backend/shop.service';
 import { WebhooksService } from 'koffing/backend/webhooks.service';
-import { CreateWebhookParams } from 'koffing/backend/requests/create-webhook-request';
+import { WebhookParams } from 'koffing/backend/requests/webhook-params';
 import { SelectItem } from 'koffing/common/select/select-item';
 
 @Component({
@@ -16,7 +16,7 @@ export class WebhooksItemComponent implements OnInit  {
 
     public shops: SelectItem[];
 
-    public model: CreateWebhookParams = {
+    public model: WebhookParams = {
         url: undefined,
         scope: {
             topic: 'InvoicesTopic',
