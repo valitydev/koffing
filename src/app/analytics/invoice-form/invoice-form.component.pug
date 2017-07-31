@@ -1,0 +1,54 @@
+form([formGroup]="form", novalidate)
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Окончание действия инвойса:
+                    span.highlighted &nbsp;*
+            .col-xs-12.col-sm-7
+                p-calendar.search-form.ui-inputtext(formControlName="dueDate", [minDate]="minDueDate", dateFormat="dd.mm.yy", showTime="true", readonlyInput="true")
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Наименование предлагаемых товаров или услуг:
+                    span.highlighted &nbsp;*
+            .col-xs-12.col-sm-7
+                input.form-control(formControlName="product")
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Описание предлагаемых товаров или услуг:
+            .col-xs-12.col-sm-7
+                input.form-control(formControlName="description")
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Тип инвойса:
+            .col-xs-12.col-sm-7
+                .btn-group
+                    label.btn.btn-sm.btn-default(*ngFor="let invoiceType of invoiceTypesItems", [ngClass]="{'active': isSelected(invoiceType.value)}")
+                        input(type='radio', formControlName="selectedInvoiceType", value="{{invoiceType.value}}")
+                        | {{invoiceType.label}}
+    .form-group(*ngIf="form.value.selectedInvoiceType === 'fixed'")
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Стоимость:
+                    span.highlighted &nbsp;*
+            .col-xs-12.col-sm-7
+                input.form-control(type="number", formControlName="amount")
+    div(*ngIf="form.value.selectedInvoiceType === 'cart'")
+        div(formArrayName="cart")
+            .form-group(*ngFor="let product of cart.controls; let i=index", [formGroupName]="i")
+                .row
+                    .col-xs-2
+                        input.form-control(type="number", formControlName="price", placeholder="Цена")
+                    .col-xs-2
+                        input.form-control(type="number", formControlName="quantity", placeholder="Количество")
+                    .col-xs-7
+                        input.form-control(type="text", formControlName="description", placeholder="Описание")
+                    .col-xs-1
+                        button.btn.btn-sm.btn-default(type="button", (click)="removeProduct(i)")
+                            i.fa.fa-trash
+
+        label.text-left Итого товаров на сумму: {{ form.value.cartAmount }} RUB
+        button.btn.btn-default.pull-right(type="button", (click)="addProduct()") Добавить товар
+        .ln_solid

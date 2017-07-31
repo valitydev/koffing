@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
-import { CreateInvoiceFormData } from './create-invoice-form-data';
-import { InvoiceService } from 'koffing/backend/invoice.service';
 import { Invoice } from 'koffing/backend/model/invoice';
-import { InvoiceParamsAll } from 'koffing/backend/requests/invoice-params-all';
+import { InvoiceService } from 'koffing/backend/invoice.service';
+import { CreateInvoiceService } from './create-invoice.service';
+import { InvoiceFormService } from '../../invoice-form/invoice-form.service';
+import { INVOICE_TYPES } from '../../invoice-form/invoice-types';
 
 @Component({
     selector: 'kof-create-invoice',
@@ -19,40 +21,35 @@ export class CreateInvoiceComponent implements OnInit {
     @Output()
     public onCreate: EventEmitter<Invoice> = new EventEmitter();
 
-    public formData: CreateInvoiceFormData;
+    public invoiceForm: FormGroup;
 
-    public minDueDate: Date = moment().toDate();
-
-    constructor(private invoiceService: InvoiceService) {
-    }
+    constructor(
+        private invoiceService: InvoiceService,
+        private invoiceFormService: InvoiceFormService
+    ) { }
 
     public ngOnInit() {
-        this.formData = this.createInstance();
+        this.invoiceForm = this.invoiceFormService.form;
+        this.setDefaultFormValues();
     }
 
-    public create() {
-        const params = new InvoiceParamsAll();
-        params.shopID = this.shopID;
-        params.amount = this.formData.amount * 100;
-        params.currency = 'RUB';
-        params.metadata = {};
-        params.dueDate = moment(this.formData.dueDate).utc().format();
-        params.product = this.formData.product;
-        params.description = this.formData.description;
+    public createInvoice() {
+        const params = CreateInvoiceService.toInvoiceParams(this.invoiceForm.value, this.shopID);
         this.invoiceService.createInvoice(params).subscribe((invoiceAndToken) => {
-            this.cancel();
+            this.setDefaultFormValues();
             this.onCreate.emit(invoiceAndToken.invoice);
         });
     }
 
-    public cancel() {
-        this.formData = this.createInstance();
-    }
-
-    private createInstance(): CreateInvoiceFormData {
-        const result = new CreateInvoiceFormData();
-        result.amount = 10;
-        result.dueDate = moment().add(1, 'h').toDate();
-        return result;
+    private setDefaultFormValues() {
+        this.invoiceForm.reset();
+        this.invoiceForm.patchValue({
+            amount: 10,
+            product: '',
+            description: '',
+            dueDate: moment().add(1, 'h').toDate(),
+            selectedInvoiceType: INVOICE_TYPES.fixed,
+            cart: []
+        });
     }
 }

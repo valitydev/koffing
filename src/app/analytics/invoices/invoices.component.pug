@@ -1,15 +1,15 @@
 .ln_solid
 .row
-    .col-xs-12.col-md-6
+    .col-xs-12.col-md-8
         kof-actions([activeAction]="activeAction", (onAction)="onAction($event)")
-    .col-xs-12.col-md-6
+    .col-xs-12.col-md-4
         kof-invoice-template-payment-link([shopID]="shopID")
 .ln_solid
 .row(*ngIf="activeAction === action.search")
     .col-xs-12
         kof-search-form([searchParams]="searchParams", [shopID]="shopID", (onSearch)="onSearch($event)", [isSearch]="isLoading")
 .row(*ngIf="activeAction === action.create")
-    .col-xs-12.col-md-6
+    .col-xs-12.col-lg-8.col-lg-offset-2
         kof-create-invoice([shopID]="shopID", (onCreate)="onCreate($event)")
 .ln_solid(*ngIf="activeAction !== action.none")
 .row

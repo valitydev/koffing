@@ -29,6 +29,7 @@ import { ActionsComponent } from './invoices/actions/actions.component';
 import { InvoicePaymentLinkComponent } from './invoice-payment-link/invoice-payment-link.component';
 import { InvoiceTemplatePaymentLinkComponent } from './invoice-template-payment-link/invoice-template-payment-link.component';
 import { CheckoutConfigFormComponent } from './checkout-config-form/checkout-config-form.component';
+import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
 import { InvoiceTemplateFormComponent } from './invoice-template-form/invoice-template-form.component';
 
 @NgModule({
@@ -65,6 +66,7 @@ import { InvoiceTemplateFormComponent } from './invoice-template-form/invoice-te
         InvoicePaymentLinkComponent,
         InvoiceTemplatePaymentLinkComponent,
         CheckoutConfigFormComponent,
+        InvoiceFormComponent,
         InvoiceTemplateFormComponent
     ]
 })
