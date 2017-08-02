@@ -1,6 +1,6 @@
 {
   "capiEndpoint": "http://api.rbk.test:8080",
   "checkoutEndpoint": "http://checkout.rbk.test:8080",
-  "suggestionsToken": "6abd2a4ecb51b2063471e32c1445d3987ff4b11a",
+  "suggestionsToken": "27a1864e226f61f145ca150b5b64a378af1da650",
   "supportEmail": "support@rbkmoney.com"
 }

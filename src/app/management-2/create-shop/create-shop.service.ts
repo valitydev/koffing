@@ -12,7 +12,7 @@ export class CreateShopService {
     public contractGroup: FormGroup;
     public payoutToolGroup: FormGroup;
     public shopGroup: FormGroup;
-    public changesetEmitter: Subject<PartyModification[]> = new Subject();
+    public changesetEmitter: Subject<PartyModification[] | false> = new Subject();
     private changeset: PartyModification[] = [ , , ];
     private contractID: string;
     private payoutToolID: string;
@@ -42,8 +42,9 @@ export class CreateShopService {
 
     private handleStatus(group: FormGroup, doHandler: any) {
         group.statusChanges
-            .filter((status) => status === 'VALID')
             .do(doHandler)
-            .subscribe(() => this.changesetEmitter.next(this.changeset));
+            .subscribe((status) => {
+                this.changesetEmitter.next(status === 'VALID' ? this.changeset : false);
+            });
     }
 }

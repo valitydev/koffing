@@ -26,7 +26,7 @@ export class FormResolver {
             ]],
             inn: ['', [
                 Validators.required,
-                Validators.pattern(/^\d{10}$/)
+                Validators.pattern(/^(\d{10}|\d{12})$/)
             ]],
             postAddress: ['', [
                 Validators.required,

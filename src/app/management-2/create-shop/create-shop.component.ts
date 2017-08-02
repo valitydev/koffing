@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CreateShopService } from './create-shop.service';
 import { ShopCreationStep } from './shop-creation-step';
 import { ClaimService } from 'koffing/backend/claim.service';
-import { PartyModification } from 'koffing/backend/model/claim/party-modification/party-modification';
+import { PartyModification } from 'koffing/backend/model';
 import { FormResolver } from './form-resolver.service';
 
 @Component({
@@ -31,8 +31,12 @@ export class CreateShopComponent implements OnInit {
 
     public ngOnInit() {
         this.createShopService.changesetEmitter.subscribe((changeset) => {
-            this.changeset = changeset;
-            this.validStep = this.isValid();
+            if (changeset) {
+                this.validStep = true;
+                this.changeset = changeset;
+            } else {
+                this.validStep = false;
+            }
         });
     }
 
