@@ -41,7 +41,7 @@ export class CreateInvoiceComponent implements OnInit {
         });
     }
 
-    private setDefaultFormValues() {
+    public setDefaultFormValues() {
         this.invoiceForm.reset();
         this.invoiceForm.patchValue({
             amount: 10,

@@ -37,7 +37,7 @@ form([formGroup]="form", novalidate)
                 input.form-control(type="number", formControlName="amount")
     div(*ngIf="form.value.selectedInvoiceType === 'cart'")
         div(formArrayName="cart")
-            .form-group(*ngFor="let product of cart.controls; let i=index", [formGroupName]="i")
+            .form-group(*ngFor="let product of form.controls.cart.controls; let i=index", [formGroupName]="i")
                 .row
                     .col-xs-2
                         input.form-control(type="number", formControlName="price", placeholder="Цена")
@@ -46,9 +46,8 @@ form([formGroup]="form", novalidate)
                     .col-xs-7
                         input.form-control(type="text", formControlName="description", placeholder="Описание")
                     .col-xs-1
-                        button.btn.btn-sm.btn-default(type="button", (click)="removeProduct(i)")
+                        button.btn.btn-sm.btn-default.pull-right(type="button", (click)="removeProduct(i)")
                             i.fa.fa-trash
 
         label.text-left Итого товаров на сумму: {{ form.value.cartAmount }} RUB
         button.btn.btn-default.pull-right(type="button", (click)="addProduct()") Добавить товар
-        .ln_solid

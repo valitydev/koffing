@@ -25,7 +25,6 @@ import { SearchDetailsComponent } from './invoices/search-result/search-details/
 import { PaymentInfoComponent } from './invoices/search-result/payment-info/payment-info.component';
 import { PaymentStatusPipe } from './invoices/payment-statuses.pipe';
 import { CreateInvoiceComponent } from './invoices/create-invoice/create-invoice.component';
-import { ActionsComponent } from './invoices/actions/actions.component';
 import { InvoicePaymentLinkComponent } from './invoice-payment-link/invoice-payment-link.component';
 import { InvoiceTemplatePaymentLinkComponent } from './invoice-template-payment-link/invoice-template-payment-link.component';
 import { CheckoutConfigFormComponent } from './checkout-config-form/checkout-config-form.component';
@@ -62,7 +61,6 @@ import { InvoiceTemplateFormComponent } from './invoice-template-form/invoice-te
         SearchDetailsComponent,
         PaymentInfoComponent,
         CreateInvoiceComponent,
-        ActionsComponent,
         InvoicePaymentLinkComponent,
         InvoiceTemplatePaymentLinkComponent,
         CheckoutConfigFormComponent,

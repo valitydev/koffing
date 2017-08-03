@@ -7,7 +7,6 @@ import { Invoice } from 'koffing/backend/model/invoice';
 import { FormSearchParams } from 'koffing/analytics/invoices/search-form/form-search-params';
 import { SearchService } from 'koffing/backend/search.service';
 import { InvoicesService } from 'koffing/analytics/invoices/invoices.service';
-import { Action } from 'koffing/analytics/invoices/actions/action';
 
 @Component({
     templateUrl: './invoices.component.pug',
@@ -18,6 +17,7 @@ export class InvoicesComponent implements OnInit {
 
     public invoices: Subject<Invoice[]> = new Subject();
     public isLoading: boolean = false;
+    public isSearchAction: boolean = false;
     public shopID: string;
     public totalCount: number;
     public offset: number = 0;
@@ -26,22 +26,17 @@ export class InvoicesComponent implements OnInit {
         from: moment().subtract(1, 'month').startOf('day').toDate(),
         to: moment().endOf('day').toDate()
     };
-    public activeAction: Action = Action.none;
-    public action = Action;
 
-    constructor(private route: ActivatedRoute,
-                private searchService: SearchService) {
-    }
+    constructor(
+        private route: ActivatedRoute,
+        private searchService: SearchService
+    ) { }
 
     public ngOnInit() {
         this.route.parent.params.subscribe((params) => {
             this.shopID = params['shopID'];
             this.search();
         });
-    }
-
-    public onAction(action: Action) {
-        this.activeAction = action;
     }
 
     public onSearch(searchParams: FormSearchParams) {
@@ -56,10 +51,10 @@ export class InvoicesComponent implements OnInit {
     }
 
     public onCreate(invoice: Invoice) {
-        this.activeAction = Action.search;
         this.searchParams.invoiceID = invoice.id;
         this.totalCount = 1;
         this.invoices.next([invoice]);
+        this.isSearchAction = true;
     }
 
     private search() {
@@ -69,6 +64,7 @@ export class InvoicesComponent implements OnInit {
             this.isLoading = false;
             this.totalCount = response.totalCount;
             this.invoices.next(response.result);
+            this.isSearchAction = true;
         });
     }
 }

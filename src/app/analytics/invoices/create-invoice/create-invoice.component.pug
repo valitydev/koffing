@@ -1,2 +1,17 @@
-kof-invoice-form([form]="invoiceForm")
-button.btn.btn-primary.pull-right([disabled]="invoiceForm.invalid", (click)="createInvoice()") Создать инвойс
+doctype html
+button.btn.btn-default.btn-lg.btn-block(data-toggle="modal", [attr.data-target]="'#createInvoice'")
+    | Создать инвойс
+
+.modal.fade(tabindex="-1", role="dialog", id="createInvoice", data-backdrop="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header
+                button.close(data-dismiss="modal", aria-label="Close", (click)="setDefaultFormValues()")
+                    span(aria-hidden="true") &times;
+                h4.modal-title
+                    | Создание инвойса
+            .modal-body
+                kof-invoice-form([form]="invoiceForm")
+            .modal-footer
+                button.btn.btn-primary.pull-right(data-dismiss="modal", [disabled]="invoiceForm.invalid", (click)="createInvoice()")
+                    | Создать инвойс

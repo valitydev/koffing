@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
 import { SelectItem } from 'koffing/common/select/select-item';
+import { InvoiceFormService } from './invoice-form.service';
 import { INVOICE_TYPES } from './invoice-types';
 
 @Component({
@@ -18,7 +19,7 @@ export class InvoiceFormComponent implements OnInit {
     public invoiceTypesItems: SelectItem[];
     public minDueDate: Date = moment().toDate();
 
-    constructor(private fb: FormBuilder) {}
+    constructor(private invoiceFormService: InvoiceFormService) { }
 
     public ngOnInit() {
         this.invoiceTypesItems = [
@@ -31,23 +32,11 @@ export class InvoiceFormComponent implements OnInit {
         return this.form.value.selectedInvoiceType === type;
     }
 
-    public removeProduct(index: number) {
-        this.cart.removeAt(index);
-    }
-
     public addProduct() {
-        this.cart.push(this.product());
+        this.invoiceFormService.addProduct();
     }
 
-    private product(): FormGroup {
-        return this.fb.group({
-            quantity: ['', [ Validators.required ]],
-            price: ['', [ Validators.required, Validators.maxLength(100) ]],
-            description: ['', [ Validators.required, Validators.maxLength(1000) ]],
-        });
-    }
-
-    get cart(): FormArray {
-        return this.form.get('cart') as FormArray;
+    public removeProduct(index: number) {
+        this.invoiceFormService.removeProduct(index);
     }
 }
