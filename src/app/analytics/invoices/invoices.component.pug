@@ -15,7 +15,7 @@ div(*ngIf="isSearchAction")
     .ln_solid
 .row
     .col-xs-12
-        kof-search-result([invoices]="invoices", [searchParams]="searchParams")
+        kof-search-result([invoices]="invoices", [searchParams]="searchParams", [shopID]="shopID")
         kof-paginate(
             [size]="totalCount",
             [limit]="limit",

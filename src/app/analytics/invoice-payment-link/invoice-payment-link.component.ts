@@ -16,6 +16,9 @@ export class InvoicePaymentLinkComponent implements OnInit {
     @Input()
     public invoiceID: string;
 
+    @Input()
+    public shopID: string;
+
     @ViewChild('paymentLinkInput')
     public paymentLinkInput: ElementRef;
 
@@ -51,6 +54,6 @@ export class InvoicePaymentLinkComponent implements OnInit {
 
     private generatePaymentLink() {
         const accessData = new PaymentLinkInvoice(this.invoiceID, this.invoiceAccessToken);
-        this.paymentLink = this.paymentLinkService.getPaymentLink(this.checkoutConfigForm.value, accessData);
+        this.paymentLink = this.paymentLinkService.getPaymentLink(this.checkoutConfigForm.value, accessData, this.shopID);
     }
 }

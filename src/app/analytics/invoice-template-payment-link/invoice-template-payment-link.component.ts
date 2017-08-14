@@ -69,6 +69,6 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
 
     private generatePaymentLink() {
         const accessData = new PaymentLinkInvoiceTemplate(this.invoiceTemplateID, this.invoiceTemplateAccessToken);
-        this.paymentLink = this.paymentLinkService.getPaymentLink(this.checkoutConfigForm.value, accessData);
+        this.paymentLink = this.paymentLinkService.getPaymentLink(this.checkoutConfigForm.value, accessData, this.shopID);
     }
 }

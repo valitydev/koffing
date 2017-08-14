@@ -10,4 +10,5 @@ export class PaymentLinkArguments {
     public email?: string;
     public popupMode?: boolean;
     public redirectUrl?: string;
+    public applePayTest?: boolean;
 }

@@ -11,8 +11,8 @@ export class PaymentLinkService {
 
     constructor(private configService: ConfigService) {}
 
-    public getPaymentLink(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate) {
-        const paymentLinkArguments = this.toPaymentLinkArguments(formValue, accessData);
+    public getPaymentLink(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string) {
+        const paymentLinkArguments = this.toPaymentLinkArguments(formValue, accessData, shopID);
         const args = chain(paymentLinkArguments)
             .map((value: string | boolean | number, key: string) => `${key}=${encodeURIComponent(String(value))}`)
             .join('&')
@@ -20,7 +20,7 @@ export class PaymentLinkService {
         return `${this.configService.checkoutUrl}/html/payframe.html?${args}`;
     }
 
-    private toPaymentLinkArguments(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate): PaymentLinkArguments {
+    private toPaymentLinkArguments(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string): PaymentLinkArguments {
         const args = new PaymentLinkArguments();
         args.name = formValue.name || '';
         args.description = formValue.description || '';
@@ -29,6 +29,10 @@ export class PaymentLinkService {
         args.email = formValue.email || '';
         args.redirectUrl = formValue.redirectUrl || '';
         args.popupMode = true;
+        // TODO fix after real apple pay payments api capability
+        if (shopID === 'TEST') {
+            args.applePayTest = true;
+        }
         if (accessData instanceof PaymentLinkInvoice) {
             args.invoiceID = accessData.invoiceID || '';
             args.invoiceAccessToken = accessData.invoiceAccessToken || '';

@@ -18,6 +18,9 @@ export class SearchDetailsComponent implements OnInit {
     @Input()
     public searchParams: FormSearchParams;
 
+    @Input()
+    public shopID: string;
+
     public searchResult: SearchResult;
 
     public isLoading: boolean;

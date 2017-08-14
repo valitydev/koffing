@@ -25,7 +25,7 @@ form.form-horizontal.form-label-left.css-form
     div(*ngIf="isPaymentLinkAvailable()")
         .row
             .col-xs-12
-                kof-invoice-payment-link([invoiceID]="invoice.id")
+                kof-invoice-payment-link([invoiceID]="invoice.id", [shopID]="shopID")
         .ln_solid
     div(*ngIf="searchResult?.totalCount > 0")
         .row
