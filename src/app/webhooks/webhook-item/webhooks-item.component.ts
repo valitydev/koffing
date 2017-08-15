@@ -39,8 +39,8 @@ export class WebhooksItemComponent implements OnInit  {
                 private router: Router,
                 private shopService: ShopService) {}
 
-    public onChangeShop(value: any) {
-        this.model.scope.shopID = parseInt(value, 10);
+    public onChangeShop(shopID: string) {
+        this.model.scope.shopID = shopID;
     }
 
     public onChangeEventTypes() {
@@ -70,15 +70,14 @@ export class WebhooksItemComponent implements OnInit  {
     }
 
     public ngOnInit() {
-        this.shopService.getShops()
-            .then((shops) => {
-                this.model.scope.shopID = shops[0].id;
-                this.shops = shops.map((shop) => {
-                    return {
-                        label: shop.details.name,
-                        value: shop.id
-                    };
-                });
+        this.shopService.getShops().subscribe((shops) => {
+            this.model.scope.shopID = shops[0].id;
+            this.shops = shops.map((shop) => {
+                return {
+                    label: shop.details.name,
+                    value: shop.id
+                };
             });
+        });
     }
 }

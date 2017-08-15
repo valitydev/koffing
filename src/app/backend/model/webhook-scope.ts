@@ -1,5 +1,5 @@
 export class WebhookScope {
     topic: string;
-    shopID: number;
+    shopID: string;
     eventTypes: string[]
 }

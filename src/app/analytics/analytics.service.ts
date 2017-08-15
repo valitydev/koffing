@@ -18,7 +18,7 @@ export class AnalyticsService {
     }
 
     public getShopItems(): Observable<SelectItem[]> {
-        return this.shopService.getShopsObs().map((shops: Shop[]) => {
+        return this.shopService.getShops().map((shops: Shop[]) => {
             this.shops = shops;
             return this.toShopItems(shops);
         });

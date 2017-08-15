@@ -3,8 +3,8 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from './config.service';
-import { InvoiceTemplate } from './model/invoice-template/invoice-template';
-import { InvoiceTemplateAndToken } from './model/invoice-template/invoice-template-and-token';
+import { InvoiceTemplate } from 'koffing/backend/model';
+import { InvoiceTemplateAndToken } from 'koffing/backend/model';
 import { InvoiceTemplateParams } from './requests/invoice-template-params';
 
 @Injectable()

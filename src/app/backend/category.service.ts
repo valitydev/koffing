@@ -15,16 +15,7 @@ export class CategoryService {
         private config: ConfigService
     ) { }
 
-    /**
-     * @deprecated Use getCategoriesObs
-     */
-    public getCategories(): Promise<Category[]> {
-        return this.http.get(this.endpoint)
-            .toPromise()
-            .then(response => response.json());
-    }
-
-    public getCategoriesObs(): Observable<Category[]> {
+    public getCategories(): Observable<Category[]> {
         return this.http.get(this.endpoint).map((res) => res.json());
     }
 

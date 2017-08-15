@@ -1,5 +1,5 @@
 import { ShopModification } from './shop-modification';
-import { ShopDetails } from '../../../shop-details';
+import { ShopDetails } from './../../../shop/shop-details';
 
 export class ShopDetailsChange extends ShopModification {
 

@@ -12,13 +12,12 @@ export class WebhooksListDetailsComponent implements OnInit {
     @Input()
     public item: WebhookListItem;
 
-    constructor(private shopService: ShopService) {}
+    constructor(private shopService: ShopService) { }
 
     public ngOnInit() {
         if (this.item.visible && !this.item.shopName) {
-            this.shopService.getShop(this.item.webhook.scope.shopID).then((result) => {
-               this.item.shopName = result.details.name;
-            });
+            this.shopService.getShopByID(this.item.webhook.scope.shopID)
+                .subscribe((shop) => this.item.shopName = shop.details.name);
         }
     }
 }

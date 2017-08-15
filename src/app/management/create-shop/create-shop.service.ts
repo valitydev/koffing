@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 
 import { PartyModification } from 'koffing/backend/model/claim/party-modification/party-modification';
-import { FormResolver } from 'koffing/management-2/create-shop/form-resolver.service';
-import { ShopCreationStep } from 'koffing/management-2/create-shop/shop-creation-step';
+import { FormResolver } from 'koffing/management/create-shop/form-resolver.service';
+import { ShopCreationStep } from 'koffing/management/create-shop/shop-creation-step';
 
 @Injectable()
 export class CreateShopService {

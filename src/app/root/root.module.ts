@@ -8,7 +8,7 @@ import { BroadcasterModule } from '../broadcaster/broadcaster.module';
 import { TokenizationModule } from '../tokenization/tokenization.module';
 import { WebhooksModule } from '../webhooks/webhooks.module';
 import { AnalyticsModule } from '../analytics/analytics.module';
-import { ManagementModule } from '../management-2/management.module';
+import { ManagementModule } from '../management/management.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopPanelComponent } from './components/top-panel/top-panel.component';
 import { ContainerComponent } from './components/container/container.component';

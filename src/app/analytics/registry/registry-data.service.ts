@@ -31,7 +31,7 @@ export class RegistryDataService {
             const searchParams = this.toSearchParams(fromTime, toTime);
             const observablePayments = this.searchService.searchPayments(shopID, searchParams);
             const observableInvoices = this.searchService.searchInvoices(shopID, searchParams);
-            const observableContracts = this.contractService.getContractsObs();
+            const observableContracts = this.contractService.getContracts();
             const observableShop = this.shopService.getShopByID(shopID);
             Observable.forkJoin([observablePayments, observableInvoices, observableContracts, observableShop]).subscribe((response) => {
                 const payments = response[0].result;
