@@ -1,0 +1,54 @@
+.row
+    .col-sm-8.col-sm-offset-2.col-xs-12
+        .x_panel
+            .x_title
+                h5 Детали заявки
+            .x_content
+                form.form-horizontal.form-label-left.css-form
+                    .form-group
+                        .col-xs-12.col-sm-4
+                            label.text-left Идентификатор:
+                        .col-xs-12.col-sm-8
+                            div {{claim?.id}}
+                    .form-group
+                        .col-xs-12.col-sm-4
+                            label.text-left Номер ревизии:
+                        .col-xs-12.col-sm-8
+                            div {{claim?.revision}}
+                    .form-group
+                        .col-xs-12.col-sm-4
+                            label.text-left Дата и время создания:
+                        .col-xs-12.col-sm-8
+                            div {{claim?.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+                    .form-group(*ngIf="claim?.updatedAt")
+                        .col-xs-12.col-sm-4
+                            label.text-left Дата и время изменения:
+                        .col-xs-12.col-sm-8
+                            div {{claim?.updatedAt | date: "dd.MM.yyyy HH:mm:ss"}}
+                    .form-group
+                        .col-xs-12.col-sm-4
+                            label.text-left Статус:
+                        .col-xs-12.col-sm-8
+                            div {{claim?.status | kofClaimStatus}}
+                .ln_solid
+                .row
+                    .col-xs-12
+                        kof-revoke-claim([claim]="claim")
+
+        .x_panel(*ngIf="contractCreations")
+            .x_title
+                h5 Данные контракта
+            .x_content
+                kof-contract-creation-details([contractCreations]="contractCreations")
+
+        .x_panel(*ngIf="contractPayoutToolCreations")
+            .x_title
+                h5 Средство вывода
+            .x_content
+                kof-contract-payout-tool-creation-details([contractPayoutToolCreations]="contractPayoutToolCreations")
+
+        .x_panel(*ngIf="shopCreations")
+            .x_title
+                h5 Данные магазина
+            .x_content
+                kof-shop-creation-details([shopCreations]="shopCreations")

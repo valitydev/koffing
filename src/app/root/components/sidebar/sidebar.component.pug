@@ -1,25 +1,25 @@
-.col-md-3.left_col
+.left_col.col-md-3
     .left_col.scroll-view
-        .navbar.nav_title
-            a.site_title(href="/")
-                span RBKmoney
-        .clearfix
         #sidebar-menu.main_menu_side.hidden-print.main_menu
             .menu_section
                 ul.nav.side-menu
                     li([routerLinkActive]="['active']")
-                        a([routerLink]=["/analytics"])
+                        a(routerLink="invoices")
+                            i.fa.fa-table
+                            | Инвойсы
+                    li([routerLinkActive]="['active']")
+                        a(routerLink="analytics")
                             i.fa.fa-bar-chart-o
                             | Аналитика
                     li([routerLinkActive]="['active']")
-                        a([routerLink]=["/webhooks"])
+                        a(routerLink="documents/registry")
+                            i.fa.fa-file-o
+                            | Документы
+                    li([routerLinkActive]="['active']")
+                        a(routerLink="webhooks")
                             i.fa.fa-cogs
                             | Webhooks
                     li([routerLinkActive]="['active']")
-                        a([routerLink]=["/key"])
+                        a(routerLink="key")
                             i.fa.fa-key
                             | API ключ
-                    li([routerLinkActive]="['active']")
-                        a([routerLink]=["/management"])
-                            i.fa.fa-shopping-cart
-                            | Управление магазинами

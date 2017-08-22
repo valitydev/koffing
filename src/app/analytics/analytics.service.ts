@@ -1,46 +1,57 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
-import { SelectItem } from 'koffing/common/select/select-item';
-import { ShopIDStorage } from 'koffing/analytics/shop-id-storage.service';
-import { ShopService } from 'koffing/backend/shop.service';
-import { Shop } from 'koffing/backend/model/shop/shop';
+import { LocationService } from 'koffing/backend/location.service';
+import { AnalyticsService as AnalyticsBackendService } from 'koffing/backend/analytics.service';
+import { DoughnutChartData } from './stats-data/doughnut-chart-data';
+import { StatsDataConverter } from './stats-data/stats-data.converter';
+import { PaymentConversionData } from './stats-data/payment-conversion-data';
+import { PaymentRevenueData } from './stats-data/payment-revenue-data';
 
 @Injectable()
 export class AnalyticsService {
 
-    private shops: Shop[];
-
-    constructor(private shopService: ShopService,
-                private route: ActivatedRoute,
-                private router: Router) {
+    constructor(private analyticsService: AnalyticsBackendService,
+                private locationService: LocationService) {
     }
 
-    public getShopItems(): Observable<SelectItem[]> {
-        return this.shopService.getShops().map((shops: Shop[]) => {
-            this.shops = shops;
-            return this.toShopItems(shops);
+    public getPaymentMethodChartData(shopID: string, from: Date, to: Date): Observable<DoughnutChartData> {
+        return this.analyticsService.getPaymentMethodStats(shopID, from, to)
+            .map((paymentMethodStats) => StatsDataConverter.toPaymentMethodChartData(paymentMethodStats));
+    }
+
+    public getUniqueCount(shopID: string, from: Date, to: Date): Observable<number> {
+        return this.analyticsService.getPaymentRateStats(shopID, from, to)
+            .map((paymentRateStat) => paymentRateStat ? paymentRateStat.uniqueCount : 0);
+    }
+
+    public getPaymentConversionData(shopID: string, from: Date, to: Date): Observable<PaymentConversionData> {
+        return this.analyticsService.getPaymentConversionStats(shopID, from, to).map((paymentConversionStat) => {
+            const paymentCount = StatsDataConverter.toPaymentCountInfo(paymentConversionStat);
+            const conversionChartData = StatsDataConverter.toConversionChartData(from, paymentConversionStat);
+            return {paymentCount, conversionChartData};
         });
     }
-      
-    public getActiveShopID(): string {
-        const routeShopID = this.route.snapshot.params['shopID'];
-        return routeShopID ? routeShopID : this.getFromStorage(this.shops);
+
+    public getPaymentGeoChartData(shopID: string, from: Date, to: Date): Observable<DoughnutChartData> {
+        return Observable.create((observer: Observer<DoughnutChartData>) => {
+            this.analyticsService.getPaymentGeoStats(shopID, from, to).subscribe((paymentGeoStat) => {
+                const data = StatsDataConverter.toGeoChartData(paymentGeoStat);
+                this.locationService.getLocationsNames(data.labels)
+                    .subscribe((locationNames) => {
+                        data.labels = locationNames.map(locationName => locationName.name);
+                        observer.next(data);
+                    });
+            });
+        });
     }
 
-    public navigateToShop(shopID: string) {
-        ShopIDStorage.set(shopID);
-        const hasChildren = this.route.children.length > 0;
-        const childComponent = hasChildren ? this.route.children[0].routeConfig.path : 'dashboard';
-        this.router.navigate(['analytics', shopID, childComponent]);
-    }
-
-    private toShopItems(shops: Shop[]): SelectItem[] {
-        return shops.map((shop) => new SelectItem(shop.id, shop.details.name));
-    }
-
-    private getFromStorage(shops: Shop[]) {
-        return ShopIDStorage.isAvailable(shops) ? ShopIDStorage.get() : this.shops[0].id;
+    public getPaymentRevenueData(shopID: string, from: Date, to: Date): Observable<PaymentRevenueData> {
+        return this.analyticsService.getPaymentRevenueStats(shopID, from, to).map((paymentRevenueStat) => {
+            const profit = StatsDataConverter.toTotalProfit(paymentRevenueStat);
+            const revenueChartData = StatsDataConverter.toRevenueChartData(from, paymentRevenueStat);
+            return {profit, revenueChartData};
+        });
     }
 }

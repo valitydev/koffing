@@ -1,44 +1,29 @@
 .row
-    .col-xs-12
+    .col-xs-12.col-md-10.col-md-offset-1
         .x_panel
             .x_title
                 .row
                     .col-xs-6
-                        h4
+                        h5
                             a(href="https://rbkmoney.github.io/api/#tag/Webhooks", target="_blank")
                                 u Webhooks
                     .col-xs-6.text-right
-                        a(routerLink="/webhook/new")
-                            button.btn.btn-primary Создать webhook
+                        a.btn.btn-primary((click)="createWebhook()") Создать webhook
             table.table.table-striped
                 thead
                     tr
                         th URL
-                        th События
                         th Статус
                         th
-                tbody(*ngFor="let item of webhooksList")
-                    tr.cursor-pointer((click)="toggleWebhook(item)")
+                tbody(*ngFor="let item of webhooksTableItems")
+                    tr
                         td {{item.webhook.url}}
-                        td {{makeEvents(item.webhook.scope.eventTypes)}}
                         td
-                            span.label.label-success([ngClass]="{'label-danger': !item.webhook.active}") {{transformStatus(item.webhook.active)}}
+                            span.label.label-success([ngClass]="{'label-danger': !item.webhook.active}") {{item.webhook.active | kofWebhookStatus}}
                         td
                             .pull-right
-                                button.btn.btn-xs.btn-danger.pull-right(data-toggle="modal", [attr.data-target]="'#' + item.webhook.id", data-backdrop="false")
-                                    i.fa.fa-trash
-                                .modal.fade.remove-modal(tabindex="-1", role="dialog", id="{{item.webhook.id}}")
-                                    .modal-dialog.modal-sm
-                                        .modal-content
-                                            .modal-header
-                                                h5.modal-title Подтвердите свое действие
-                                            .modal-body Удалить webhook ID {{item.webhook.id}}?
-                                            .modal-footer
-                                                .btn-toolbar.pull-right
-                                                    .btn-group.btn-group-sm
-                                                        button.btn.btn-default(data-dismiss="modal") Нет
-                                                    .btn-group.btn-group-sm
-                                                        button.btn.btn-danger(data-dismiss="modal", (click)="deleteWebhook(item.webhook.id)") Да
+                                button.btn.btn-xs.btn-default((click)="toggleWebhookDetailsPanel(item)")
+                                    | {{item.visible ? 'Скрыть' : 'Показать'}} детали
                     tr(*ngIf="item.visible")
                         td.row(colspan="5")
-                            kof-webhook-list-details([item]="item")
+                            kof-webhook-details([webhook]="item.webhook", (onWebhookDelete)="prepareTableItems()")

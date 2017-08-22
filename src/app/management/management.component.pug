@@ -1,24 +1,45 @@
-.x_panel
-    .x_title
-        h5 Действия
-    .x_content
-        button.btn.btn-primary((click)="createShop()") Создать магазин
-.x_panel
-    .x_title
-        h5 Заявки
-    .x_content
-        table.table.table-hover.table-striped
-            thead
-                tr
-                    th Идентификатор
-                    th Статус
-                    th Дата и время создания
-                    th Дата и время изменения
-                    th Номер ревизии
-            tbody(*ngFor="let claim of claims")
-                tr
-                    td {{claim.id}}
-                    td {{claim.status | kofClaimStatus}}
-                    td {{claim.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
-                    td {{claim.updatedAt | date: "dd.MM.yyyy HH:mm:ss"}}
-                    td {{claim.revision}}
+.row
+    .col-xs-12.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
+        .x_panel(*ngIf="claims?.length > 0")
+            .x_title
+                h5 Заявки
+            .x_content
+                table.table.table-striped
+                    thead
+                        tr
+                            th Идентификатор
+                            th Статус
+                            th Дата и время создания
+                            th Номер ревизии
+                            th
+                    tbody(*ngFor="let claim of claims")
+                        tr
+                            td {{claim.id}}
+                            td {{claim.status | kofClaimStatus}}
+                            td {{claim.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+                            td {{claim.revision}}
+                            td
+                                .pull-right
+                                    button.btn.btn-xs.btn-default((click)="goToClaimDetails(claim.id)") Детали заявки
+        .x_panel
+            .x_title
+                h5 Магазины
+            .x_content
+                table.table.table-striped
+                    thead
+                        tr
+                            th Наименование
+                            th.hidden-xs.hidden-sm Адрес
+                            th
+                    tbody(*ngFor="let shop of shops")
+                        tr
+                            td {{shop?.details?.name}}
+                            td.hidden-xs.hidden-sm {{shop?.location?.url}}
+                            td
+                                .pull-right
+                                    button.btn.btn-xs.btn-default((click)="goToShop(shop.id)") Перейти в магазин
+        .x_panel
+            .x_title
+                h5 Действия
+            .x_content
+                button.btn.btn-primary((click)="createShop()") Создать магазин

@@ -1,0 +1,32 @@
+.row
+    .col-xs-12.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
+        .x_panel
+            .x_title
+                h5 Создание webhook
+            .x_content
+                form.form-horizontal.form-label-left([formGroup]="form", novalidate)
+                    .form-group
+                        .row
+                            .col-xs-12.col-sm-5
+                                label.text-left URL, на который будут поступать оповещения о произошедших событиях:
+                                    span.highlighted &nbsp;*
+                            .col-xs-12.col-sm-7
+                                input.form-control(formControlName="url", placeholder="http(s)://example.com")
+                    .form-group
+                        .form-group
+                            .row
+                                .col-xs-12.col-sm-5
+                                    label.text-left Набор типов событий, о которых следует оповещать:
+                                        span.highlighted &nbsp;*
+                                .col-xs-12.col-sm-7(formGroupName="eventTypes")
+                                    .checkbox(*ngFor="let eventType of eventTypes")
+                                        label
+                                            input(type="checkbox", [formControlName]="eventType.name")
+                                            span
+                                                strong {{eventType.name}}
+                                                | &nbsp;({{eventType.description}})
+
+                    .ln_solid
+                    .form-group
+                        button.btn.btn-default(type="button", (click)="goBack()") Назад
+                        button.btn.btn-primary.pull-right((click)="createWebhook()", [disabled]="!form.valid") Создать

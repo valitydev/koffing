@@ -16,7 +16,8 @@ export class BankAccountFormComponent implements AfterViewInit {
     public form: FormGroup;
 
     constructor(private suggestionsService: SuggestionsService,
-                private bankAccountFormService: BankAccountFormService) { }
+                private bankAccountFormService: BankAccountFormService) {
+    }
 
     public ngAfterViewInit() {
         this.initBankSuggestions();

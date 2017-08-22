@@ -1,0 +1,2 @@
+select.shop-selector([(ngModel)]="selected")
+    option(*ngFor="let item of selectorItems", [value]="item.value") {{item.label}}

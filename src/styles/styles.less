@@ -21,6 +21,9 @@ form {
 
 .top_nav {
     margin: 0 !important;
+    .navbar-right {
+        width: 100%;
+    }
     .nav_menu {
         float: none;
         display: table;
@@ -28,14 +31,45 @@ form {
         .toggle {
             float: none;
             display: table-cell;
-            vertical-align: middle;
+            width: 52px;
             padding: 0;
+            vertical-align: middle;
         }
-        .navbar-right {
-            float: none;
-            display: table-cell;
-            vertical-align: middle;
-            padding: 0;
+        .logo {
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .shop-selector {
+            @media (max-width: 991px) {
+                display: none;
+            }
+        }
+        .toggle-menu {
+            display: none;
+            @media (max-width: 991px) {
+                display: table-cell;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    // этот media - это переписывание стилей gentelella для того, чтобы на больших размерах экрана sidebar был таким же как и на маленьких
+    .left_col {
+        width: 70px !important;
+    }
+    .right_col {
+        margin-left: 70px !important;
+    }
+    .nav.side-menu li a {
+        font-size: 9px !important;
+        font-weight: 400 !important;
+        text-align: center !important;
+        padding: 10px 5px !important;
+        i {
+            font-size: 25px !important;
+            width: 100% !important;
+            margin-bottom: 5px !important;
         }
     }
 }
@@ -195,7 +229,7 @@ span.highlighted {
         width: 100% !important;
         margin: 0 !important;
     }
-    .left_col, .nav.toggle {
+    .left_col {
         display: none !important;
     }
 }
@@ -204,7 +238,17 @@ span.highlighted {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.btn.pull-right {
-    margin-right: 0;
-    margin-left: 5px;
+.btn {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &.pull-right {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+}
+
+.desktop-only {
+    @media (max-width: 991px) {
+        display: none !important;
+    }
 }

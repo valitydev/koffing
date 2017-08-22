@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from './config.service';
@@ -34,7 +34,7 @@ export class ClaimService {
     public revokeClaimByID(claimID: number, claimRevision: number, reason: string): Observable<void> {
         const search = new URLSearchParams();
         search.set('claimRevision', String(claimRevision));
-        return this.http.put(`${this.endpoint}/${claimID}/revoke`, reason, {search}).map((res) => res.json());
+        return this.http.put(`${this.endpoint}/${claimID}/revoke`, {reason}, {search}).map((res) => res.json());
     }
 
     public updateClaimByID(claimID: number, claimRevision: number, claimChangeset: PartyModification[]): Observable<void> {

@@ -5,6 +5,7 @@ import { HttpErrorBroadcaster } from './services/http-error-broadcaster.service'
 import { ClaimReceiveBroadcaster } from 'koffing/broadcaster/services/claim-receive.broadcaster.service';
 import { ClaimRevokeBroadcaster } from 'koffing/broadcaster/services/claim-revoke-broadcaster.service';
 import { ClaimCreateBroadcaster } from './services/claim-create.broadcaster.service';
+import { BreadcrumbBroadcaster } from 'koffing/broadcaster/services/breadcrumb.broadcaster';
 
 @NgModule({
     providers: [
@@ -13,7 +14,8 @@ import { ClaimCreateBroadcaster } from './services/claim-create.broadcaster.serv
         HttpErrorBroadcaster,
         ClaimReceiveBroadcaster,
         ClaimRevokeBroadcaster,
-        ClaimCreateBroadcaster
+        ClaimCreateBroadcaster,
+        BreadcrumbBroadcaster
     ]
 })
 export class BroadcasterModule { }

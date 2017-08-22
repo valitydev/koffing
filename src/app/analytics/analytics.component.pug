@@ -1,22 +1,40 @@
-kof-loading([isLoading]="isLoading")
-    .x_panel
-        .x_content
-            .row.shop-selector
-                .col-xs-12.col-sm-6
-                    kof-select(*ngIf="shopItems.length",
-                    [(ngModel)]="currentShopID",
-                    [items]="shopItems",
-                    (onChange)="navigate()",
-                    [modelOptions]="{standalone: true}",
-                    name='shopId')
-            .row
-                .col-xs-12
-                    ul.nav.nav-tabs.bar_tabs(*ngIf="currentShopID")
-                        li.hand-cursor([routerLink]="['dashboard']", [routerLinkActive]="['active']")
-                            a Статистика
-                        li.hand-cursor([routerLink]="['invoices']", [routerLinkActive]="['active']")
-                            a Инвойсы
-                        li.hand-cursor([routerLink]="['registry']", [routerLinkActive]="['active']")
-                            a Реестры
-                    .tab-content
-                        router-outlet
+.row
+    .col-xs-12.col-md-10.col-md-offset-1
+        .x_panel
+            .x_title
+                h5 Аналитика
+            .x_content
+                .row
+                    .col-xs-12
+                        kof-date-range-selector.form-label-right(
+                        [from]="fromTime",
+                        [to]="toTime",
+                        (onSelect)="loadData($event)",
+                        [buttonName]="'Показать'",
+                        [disabled]="isLoading")
+                .row
+                    .col-xs-12
+                        kof-statistic-panel([data]="panelData")
+                .row
+                    .col-xs-12
+                        .x_title
+                            h4 Оборот {{profit | kofRoubleCurrency}} рублей
+                        .x_content
+                            kof-line-chart([chartData]="revenueChartData")
+                .row
+                    .col-xs-12
+                        .x_title
+                            h4 Конверсия оплат
+                        .x_content
+                            kof-line-chart([chartData]="conversionChartData")
+                .row
+                    .col-xs-12.col-sm-6
+                        .x_title
+                            h4 Способы оплаты
+                        .x_content
+                            kof-doughnut-chart([chartData]="paymentMethodChartData")
+                    .col-xs-12.col-sm-6
+                        .x_title
+                            h4 Геолокация
+                        .x_content
+                            kof-doughnut-chart([chartData]="geoChartData")

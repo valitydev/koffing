@@ -1,0 +1,20 @@
+button.btn.btn-danger.pull-right(data-toggle="modal", [attr.data-target]="'#' + claim?.id")
+    | Отозвать заявку
+.modal.fade.remove-modal(tabindex="-1", id="{{claim?.id}}", role="dialog", data-backdrop="false")
+    .modal-dialog.modal-sm
+        .modal-content
+            .modal-header
+                h5.modal-title Отозвать заявку
+            .modal-body
+                .row
+                    .col-xs-12
+                        form(name="revokeClaimForm", #revokeClaimForm="ngForm")
+                            .form-group
+                                label Причина отзыва:
+                                textarea.form-control([(ngModel)]="reason", name="reason", required)
+            .modal-footer
+                .btn-toolbar.pull-right
+                    .btn-group.btn-group-sm
+                        button.btn.btn-default(data-dismiss="modal") Назад
+                    .btn-group.btn-group-sm
+                        button.btn.btn-danger(data-dismiss="modal", [disabled]="revokeClaimForm.invalid", (click)="revokeClaim(reason)") Отозвать

@@ -1,52 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { WebhooksService } from 'koffing/backend/webhooks.service';
-import { Webhook } from 'koffing/backend/model/webhook';
-import { WebhookListItem } from './webhook-item';
+import { WebhookTableItem } from './webhook-table-item';
 
 @Component({
-    selector: 'kof-webhook-list',
     templateUrl: './webhooks.component.pug',
 })
 export class WebhookComponent implements OnInit {
 
-    public webhooksList: WebhookListItem[];
+    public webhooksTableItems: WebhookTableItem[];
 
-    constructor(private webhooksService: WebhooksService) {}
+    private shopID: string;
 
-    public transformStatus(status: boolean) {
-        return status ? 'Активен' : 'Неактивен';
-    }
-
-    public makeEvents(events: string[]) {
-        return events.join(', ');
-    }
-
-    public toggleWebhook(item: WebhookListItem) {
-        item.visible = !item.visible;
-    }
+    constructor(private webhooksService: WebhooksService,
+                private router: Router,
+                private route: ActivatedRoute) {}
 
     public ngOnInit() {
-         this.webhooksService.getWebhooks().subscribe(result => {
-             this.webhooksList = this.createWebhooksList(result);
+        this.route.parent.params.subscribe((params) => {
+            this.shopID = params['shopID'];
+            this.prepareTableItems();
         });
     }
 
-    public deleteWebhook(id: string) {
-        this.webhooksService.deleteWebhookByID(id)
-            .switchMap(() => this.webhooksService.getWebhooks())
-            .subscribe((result) => {
-                this.webhooksList = this.createWebhooksList(result);
-             });
+    public toggleWebhookDetailsPanel(item: WebhookTableItem) {
+        item.visible = !item.visible;
     }
 
-    private createWebhooksList(webhooks: Webhook[]) {
-        return webhooks.map((webhook) => {
-            return {
-                visible: false,
-                shopName: '',
-                webhook
-            };
+    public createWebhook() {
+        this.router.navigate(['shop', this.shopID, 'webhook', 'create']);
+    }
+
+    private prepareTableItems() {
+        this.webhooksService.getWebhooks().subscribe((webhooks) => {
+            const filtered = webhooks.filter((webhook) => webhook.scope.shopID === this.shopID);
+            this.webhooksTableItems = filtered.map((webhook) => new WebhookTableItem(webhook));
         });
     }
 }

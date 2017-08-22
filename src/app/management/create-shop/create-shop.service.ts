@@ -5,6 +5,8 @@ import { Subject } from 'rxjs/Subject';
 import { PartyModification } from 'koffing/backend/model/claim/party-modification/party-modification';
 import { FormResolver } from 'koffing/management/create-shop/form-resolver.service';
 import { ShopCreationStep } from 'koffing/management/create-shop/shop-creation-step';
+import { BankAccount } from 'koffing/backend/model/bank-account';
+import { ContractCreation, RussianLegalEntity } from 'koffing/backend';
 
 @Injectable()
 export class CreateShopService {
@@ -22,6 +24,16 @@ export class CreateShopService {
         this.payoutToolGroup = this.formResolver.prepareBankAccountGroup();
         this.shopGroup = this.formResolver.prepareShopGroup();
         this.handleGroups();
+    }
+
+    public getContractBankAccount(): BankAccount {
+        const partyModification = this.changeset[ShopCreationStep.contract];
+        if (!partyModification) {
+            return null;
+        }
+        const contractCreation = partyModification as ContractCreation;
+        const contractor = contractCreation.contractor as RussianLegalEntity;
+        return contractor.bankAccount;
     }
 
     private handleGroups() {
@@ -43,8 +55,7 @@ export class CreateShopService {
     private handleStatus(group: FormGroup, doHandler: any) {
         group.statusChanges
             .do(doHandler)
-            .subscribe((status) => {
-                this.changesetEmitter.next(status === 'VALID' ? this.changeset : false);
-            });
+            .subscribe((status) =>
+                this.changesetEmitter.next(status === 'VALID' ? this.changeset : false));
     }
 }
