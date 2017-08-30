@@ -10,6 +10,7 @@ import { LocationService } from './location.service';
 import { AccountsService } from './accounts.service';
 import { SearchService } from './search.service';
 import { InvoiceService } from './invoice.service';
+import { EventService } from './event.service';
 
 @NgModule({
     providers: [
@@ -22,7 +23,8 @@ import { InvoiceService } from './invoice.service';
         LocationService,
         SearchService,
         WebhooksService,
-        InvoiceService
+        InvoiceService,
+        EventService
     ]
 })
 export class BackendModule { }
