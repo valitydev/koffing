@@ -25,22 +25,24 @@ form.form-horizontal.form-label-left.css-form
     div(*ngIf="invoice.cart?.length")
         .row
             .col-xs-12
-                h5 Список товаров или услуг:
+                h5 Список товаров или услуг
+        .ln_solid
+        .row
             .col-xs-12
                 .form-group
                     table.table.table-striped
                         thead
                             tr
-                                th Сумма
                                 th Стоимость
                                 th Количество
+                                th Сумма
                                 th Налог
                                 th Описание
                         tbody(*ngFor="let item of invoice.cart")
                             tr
-                                td {{item.cost | kofRoubleCurrency}} {{invoice.currency}}
                                 td {{item.price | kofRoubleCurrency}} {{invoice.currency}}
                                 td {{item.quantity}}
+                                td {{item.cost | kofRoubleCurrency}} {{invoice.currency}}
                                 td {{item?.taxMode?.rate || 'без НДС'}}
                                 td {{item.product}}
         .ln_solid
