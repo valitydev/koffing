@@ -5,10 +5,10 @@ export class InvoiceTemplateCostRange extends InvoiceTemplateCost {
     public range: CostAmountRange;
     public currency: string;
 
-    constructor(range: CostAmountRange) {
+    constructor(range: CostAmountRange, currency: string) {
         super();
         this.invoiceTemplateCostType = 'InvoiceTemplateCostRange';
         this.range = range;
-        this.currency = 'RUB';
+        this.currency = currency;
     }
 }

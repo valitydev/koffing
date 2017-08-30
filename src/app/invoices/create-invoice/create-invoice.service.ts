@@ -1,35 +1,29 @@
-import { round, map } from 'lodash';
+import { map } from 'lodash';
 import * as moment from 'moment';
 
-import { InvoiceParamsAll } from 'koffing/backend/requests/invoice-params-all';
-import { INVOICE_TYPES } from 'koffing/invoices/invoice-form/invoice-types';
-import { Product } from 'koffing/invoices/invoice-form/product';
+import { InvoiceParams } from 'koffing/backend/requests/invoice-params';
+import { InvoiceLine } from 'koffing/backend/model/invoice-cart/invoice-line';
+import { InvoiceLineTaxVAT } from 'koffing/backend/model/invoice-cart/invoice-line-tax-vat';
+import { CurrencyService } from 'koffing/common/currency.service';
+import { Product } from '../invoice-form/product';
 
 export class CreateInvoiceService {
 
-    public static toInvoiceParams(formValue: any, shopID: string): InvoiceParamsAll {
-        const params = new InvoiceParamsAll();
+    public static toInvoiceParams(formValue: any, shopID: string): InvoiceParams {
+        const params = new InvoiceParams();
         params.shopID = shopID;
         params.product = formValue.product;
         params.currency = 'RUB';
         params.dueDate = moment(formValue.dueDate).utc().format();
         params.description = formValue.description;
-        if (formValue.selectedInvoiceType === INVOICE_TYPES.fixed) {
-            params.amount = this.toMinor(formValue.amount);
-            params.metadata = {};
-        } else if (formValue.selectedInvoiceType === INVOICE_TYPES.cart) {
-            params.amount = this.toMinor(formValue.cartAmount);
-            params.metadata = {
-                items: map(formValue.cart, (product: Product) => {
-                    product.price = this.toMinor(product.price);
-                    return product;
-                })
-            };
-        }
+        params.metadata = {};
+        params.cart = map(formValue.cart, (product: Product) => {
+            const invoiceLine = new InvoiceLine(product.product, product.quantity, CurrencyService.toMinor(product.price));
+            if (product.tax) {
+                invoiceLine.taxMode = new InvoiceLineTaxVAT(product.tax);
+            }
+            return invoiceLine;
+        });
         return params;
-    }
-
-    private static toMinor(value: number): number {
-        return round(value * 100);
     }
 }

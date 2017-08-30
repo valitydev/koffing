@@ -1,5 +1,6 @@
 export class Product {
-    public price: number;
+    public product: string;
     public quantity: number;
-    public description: string;
+    public price: number;
+    public tax: string;
 }

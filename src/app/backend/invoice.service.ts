@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ConfigService } from './config.service';
 import { InvoiceAndToken } from './model/invoice-and-token';
 import { InvoiceAccessToken } from './model/invoice-access-token';
-import { InvoiceParamsAll } from './requests/invoice-params-all';
+import { InvoiceParams } from './requests/invoice-params';
 
 @Injectable()
 export class InvoiceService {
@@ -17,7 +17,7 @@ export class InvoiceService {
         private config: ConfigService
     ) {}
 
-    public createInvoice(params: InvoiceParamsAll): Observable<InvoiceAndToken> {
+    public createInvoice(params: InvoiceParams): Observable<InvoiceAndToken> {
         return this.http.post(this.endpoint, params).map(res => res.json());
     }
 

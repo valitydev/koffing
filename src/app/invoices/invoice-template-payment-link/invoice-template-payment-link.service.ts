@@ -1,5 +1,3 @@
-import { round } from 'lodash';
-
 import {
     LifetimeInterval,
     InvoiceTemplateCostFixed,
@@ -8,6 +6,7 @@ import {
     CostAmountRange
 } from 'koffing/backend';
 import { InvoiceTemplateParams } from 'koffing/backend/requests/invoice-template-params';
+import { CurrencyService } from 'koffing/common/currency.service';
 import { COST_TYPES } from '../invoice-template-form/invoice-template-cost-types';
 
 export class InvoiceTemplatePaymentLinkService {
@@ -22,15 +21,17 @@ export class InvoiceTemplatePaymentLinkService {
         params.lifetime = this.toLifetimeInterval(formValue.lifetime);
         if (formValue.selectedCostType) {
             let cost;
+            const currency = 'RUB';
             if (formValue.selectedCostType === COST_TYPES.unlim) {
                 cost = new InvoiceTemplateCostUnlim();
             } else if (formValue.selectedCostType === COST_TYPES.fixed) {
-                cost = new InvoiceTemplateCostFixed(this.toMinor(formValue.cost.amount));
+                const amount = CurrencyService.toMinor(formValue.cost.amount);
+                cost = new InvoiceTemplateCostFixed(amount, currency);
             } else if (formValue.selectedCostType === COST_TYPES.range) {
-                const lowerBound = this.toMinor(formValue.cost.lowerBound);
-                const upperBound = this.toMinor(formValue.cost.upperBound);
+                const lowerBound = CurrencyService.toMinor(formValue.cost.lowerBound);
+                const upperBound = CurrencyService.toMinor(formValue.cost.upperBound);
                 const range = new CostAmountRange(lowerBound, upperBound);
-                cost = new InvoiceTemplateCostRange(range);
+                cost = new InvoiceTemplateCostRange(range, currency);
             }
             params.cost = cost;
         }
@@ -43,9 +44,5 @@ export class InvoiceTemplatePaymentLinkService {
             formLifetime.months || 0,
             formLifetime.years || 0
         );
-    }
-
-    private static toMinor(value: number): number {
-        return round(value * 100);
     }
 }

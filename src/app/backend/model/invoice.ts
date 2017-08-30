@@ -1,3 +1,5 @@
+import { InvoiceLine } from './invoice-cart/invoice-line';
+
 export class Invoice {
     public id: string;
     public shopID: number;
@@ -11,4 +13,5 @@ export class Invoice {
     public description: string;
     public status: string;
     public reason: string;
+    public cart: InvoiceLine[];
 }
