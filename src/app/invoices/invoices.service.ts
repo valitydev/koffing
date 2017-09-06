@@ -1,9 +1,11 @@
-import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-params';
-import { FormSearchParams } from 'koffing/invoices/search-form/form-search-params';
+import { Injectable } from '@angular/core';
 
+import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-params';
+
+@Injectable()
 export class InvoicesService {
 
-    public static toSearchParams(limit: number, offset: number, formParams: FormSearchParams): SearchInvoicesParams {
+    public toSearchParams(limit: number, offset: number, formParams: any): SearchInvoicesParams {
         const result = new SearchInvoicesParams();
         result.limit = limit;
         result.offset = offset;

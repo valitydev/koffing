@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/primeng';
-
 import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
 import { InvoicesComponent } from 'koffing/invoices/invoices.component';
@@ -28,6 +28,7 @@ import { PaymentCancelComponent } from 'koffing/invoices/search-result/payment-i
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         CommonModule,
         CalendarModule,
         BackendModule

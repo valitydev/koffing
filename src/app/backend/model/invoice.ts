@@ -2,7 +2,7 @@ import { InvoiceLine } from './invoice-cart/invoice-line';
 
 export class Invoice {
     public id: string;
-    public shopID: number;
+    public shopID: string;
     public invoiceTemplateID: string;
     public createdAt: string;
     public dueDate: string;

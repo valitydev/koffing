@@ -5,7 +5,6 @@ import { SearchPaymentsParams } from 'koffing/backend/requests/search-payments-p
 import { SearchService } from 'koffing/backend/search.service';
 import { PaymentSearchResult } from 'koffing/backend/model/payment-search-result';
 import { SearchResult } from 'koffing/invoices/search-result/search-details/search-result';
-import { FormSearchParams } from 'koffing/invoices/search-form/form-search-params';
 
 @Injectable()
 export class SearchDetailsService {
@@ -21,7 +20,7 @@ export class SearchDetailsService {
     constructor(private searchService: SearchService) {
     }
 
-    public search(shopID: string, invoiceID: string, params: FormSearchParams): Observable<SearchResult> {
+    public search(shopID: string, invoiceID: string, params: any): Observable<SearchResult> {
         const request = this.toSearchParams(invoiceID, this.detailedRequestLimit, params);
         return this.searchService.searchPayments(shopID, request)
             .map((paymentResult) => this.toSearchResult(paymentResult, this.detailedRequestLimit))
@@ -43,7 +42,7 @@ export class SearchDetailsService {
         return searchResult;
     }
 
-    private toSearchParams(invoiceID: string, limit: number, formParams: FormSearchParams): SearchPaymentsParams {
+    private toSearchParams(invoiceID: string, limit: number, formParams: any): SearchPaymentsParams {
         const result = new SearchPaymentsParams();
         result.invoiceID = invoiceID;
         result.limit = limit;

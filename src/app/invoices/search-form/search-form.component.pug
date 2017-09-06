@@ -1,79 +1,72 @@
-form
+form([formGroup]="searchForm", novalidate)
     .row
         .col-sm-3.col-xs-12
             .form-group
-                label Временной интервал:
-                .row
-                    .col-sm-6.col-xs-12
-                        .ui-calendar.search-form
-                            p-calendar.ui-inputtext.search-form(
-                            [(ngModel)]="searchParams.from",
-                            [maxDate]="searchParams.to",
-                            name="invoiceFrom",
-                            dateFormat = "dd.mm.yy",
-                            (onSelect)="selectFrom()",
-                            readonlyInput="true",
-                            required)
-                    .col-sm-6.col-xs-12
-                        .ui-calendar.search-form
-                            p-calendar.ui-inputtext.search-form(
-                            [(ngModel)]="searchParams.to",
-                            [minDate]="searchParams.from",
-                            name="invoiceTo",
-                            dateFormat = "dd.mm.yy",
-                            (onSelect)="selectTo()",
-                            readonlyInput="true",
-                            required)
-        .col-sm-3.col-xs-12
-            .form-group
-                label Номер карты (последние 4 цифры):
-                input.form-control(
-                type="number",
-                maxlength=4
-                name="cardNumberMask",
-                [ngClass]="{'has-error': !isValidCardNumber}",
-                [(ngModel)]="searchParams.cardNumberMask")
-        .col-sm-3.col-xs-12
-            .form-group
                 label Идентификатор инвойса:
-                input.form-control(name="invoiceID", [(ngModel)]="searchParams.invoiceID")
+                input.form-control(formControlName="invoiceID")
         .col-sm-3.col-xs-12
             .form-group
                 label Статус инвойса:
                 kof-select(
-                [(ngModel)]="searchParams.invoiceStatus",
                 [items]="invoiceStatuses",
                 [placeholder]="'Любой статус'",
-                [modelOptions]="{standalone: true}",
-                name="invoiceStatus")
-    .row
-        .col-sm-3.col-xs-12
-            .form-group
-                label IP-адрес плательщика:
-                input.form-control(name="payerIP", [(ngModel)]="searchParams.ip")
-        .col-sm-3.col-xs-12
-            .form-group
-                label Email плательщика:
-                input.form-control(name="payerEmail", [(ngModel)]="searchParams.email")
-        .col-sm-3.col-xs-12
-            .form-group
-                label Идентификатор платежа:
-                input.form-control(type="number", name="paymentID", [(ngModel)]="searchParams.paymentID")
+                formControlName="invoiceStatus")
         .col-sm-3.col-xs-12
             .form-group
                 label Статус платежа:
                 kof-select(
-                [(ngModel)]="searchParams.paymentStatus",
                 [items]="paymentStatuses",
                 [placeholder]="'Любой статус'",
-                [modelOptions]="{standalone: true}",
-                name="paymentStatus")
-    .row
+                formControlName="paymentStatus")
         .col-sm-3.col-xs-12
-            .form-group
-                label Fingerprint:
-                input.form-control(name="fingerprint", [(ngModel)]="searchParams.fingerprint")
-        .col-sm-9.col-xs-12
-            .action-group
-                button.btn.btn-primary.pull-right([disabled]="isSearch", (click)="search()") Найти
-                button.btn.btn-default.pull-right((click)="reset()") Сбросить
+            .toggle-button-container
+                button.btn.btn-default((click)="toggleAdditionalParamsVisible()") ...
+
+    div(*ngIf="additionalParamsVisible", [@flyInOut]="in")
+        .row
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Временной интервал:
+                    .row
+                        .col-sm-6.col-xs-12
+                            .ui-calendar.search-form
+                                p-calendar.ui-inputtext.search-form(
+                                formControlName="from",
+                                dateFormat = "dd.mm.yy",
+                                [maxDate]="searchForm.controls.to.value",
+                                readonlyInput="true")
+                        .col-sm-6.col-xs-12
+                            .ui-calendar.search-form
+                                p-calendar.ui-inputtext.search-form(
+                                formControlName="to",
+                                dateFormat = "dd.mm.yy",
+                                [minDate]="searchForm.controls.from.value",
+                                readonlyInput="true")
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Номер карты (последние 4 цифры):
+                    input.form-control(
+                    type="number",
+                    maxlength=4
+                    formControlName="cardNumberMask")
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Fingerprint:
+                    input.form-control(formControlName="fingerprint")
+        .row
+            .col-sm-3.col-xs-12
+                .form-group
+                    label IP-адрес плательщика:
+                    input.form-control(formControlName="ip")
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Email плательщика:
+                    input.form-control(formControlName="email")
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Идентификатор платежа:
+                    input.form-control(type="number", formControlName="paymentID")
+        .row
+            .col-sm-9.col-xs-12
+                .reset-button-container
+                    button.btn.btn-default((click)="reset()") Сбросить параметры поиска
