@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+import { COST_TYPE } from 'koffing/backend/constants/invoice-template-cost-type';
+import { HOLD_EXPIRATION } from 'koffing/backend/constants/hold-expiration';
 import { InvoiceTemplateService } from 'koffing/backend/invoice-template.service';
 import { InvoiceTemplatePaymentLinkService } from './invoice-template-payment-link.service';
 import { InvoiceTemplateFormService } from '../invoice-template-form/invoice-template-form.service';
@@ -46,9 +48,16 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
 
     public resetForms() {
         this.isCreated = false;
-        this.checkoutConfigForm.reset();
-        this.invoiceTemplateForm.reset();
         this.invoiceTemplateForm.enable();
+        this.invoiceTemplateForm.reset();
+        this.invoiceTemplateForm.patchValue({
+            selectedCostType: COST_TYPE.unlim
+        });
+        this.checkoutConfigForm.reset();
+        this.checkoutConfigForm.patchValue({
+            paymentFlowHold: false,
+            holdExpiration: HOLD_EXPIRATION.cancel
+        });
     }
 
     public copy() {

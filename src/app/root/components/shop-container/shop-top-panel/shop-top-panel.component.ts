@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ToggleMenuBroadcaster } from 'koffing/broadcaster/broadcaster.module';
+import { ToggleMenuBroadcaster } from 'koffing/broadcaster';
 
 @Component({
     selector: 'kof-shop-top-panel',

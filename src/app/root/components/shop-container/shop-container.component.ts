@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { ToggleMenuBroadcaster } from 'koffing/broadcaster/services/toggle-menu-broadcaster.service';
+import { ToggleMenuBroadcaster } from 'koffing/broadcaster';
 import { SidebarStateService } from './sidebar-state.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,11 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
 export class ShopContainerComponent implements OnInit, OnDestroy {
 
     public isSidebarOpened: boolean;
-
     private toggleMenuSubscription: Subscription;
 
-    constructor(private toggleMenuBroadcaster: ToggleMenuBroadcaster) {
-    }
+    constructor(private toggleMenuBroadcaster: ToggleMenuBroadcaster) { }
 
     public ngOnInit() {
         this.isSidebarOpened = SidebarStateService.isOpened();

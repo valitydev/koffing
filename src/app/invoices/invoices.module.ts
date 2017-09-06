@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/primeng';
 
 import { CommonModule } from 'koffing/common/common.module';
-import { CalendarModule } from 'primeng/primeng';
 import { BackendModule } from 'koffing/backend/backend.module';
 import { InvoicesComponent } from 'koffing/invoices/invoices.component';
 import { PaginateComponent } from 'koffing/invoices/paginate/paginate.component';
@@ -20,6 +20,8 @@ import { CheckoutConfigFormComponent } from 'koffing/invoices/checkout-config-fo
 import { InvoiceFormComponent } from 'koffing/invoices/invoice-form/invoice-form.component';
 import { InvoiceTemplateFormComponent } from 'koffing/invoices/invoice-template-form/invoice-template-form.component';
 import { PaymentInfoComponent } from 'koffing/invoices/search-result/payment-info/payment-info.component';
+import { PaymentCaptureComponent } from 'koffing/invoices/search-result/payment-info/payment-capture/payment-capture.component';
+import { PaymentCancelComponent } from 'koffing/invoices/search-result/payment-info/payment-cancel/payment-cancel.component';
 
 @NgModule({
     imports: [
@@ -45,7 +47,9 @@ import { PaymentInfoComponent } from 'koffing/invoices/search-result/payment-inf
         CheckoutConfigFormComponent,
         InvoiceFormComponent,
         InvoiceTemplateFormComponent,
-        PaymentInfoComponent
+        PaymentInfoComponent,
+        PaymentCaptureComponent,
+        PaymentCancelComponent,
     ]
 })
 export class InvoicesModule { }

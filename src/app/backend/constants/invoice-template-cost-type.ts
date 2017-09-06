@@ -1,4 +1,4 @@
-export const COST_TYPES = {
+export const COST_TYPE = {
     unlim: 'InvoiceTemplateCostUnlim',
     fixed: 'InvoiceTemplateCostFixed',
     range: 'InvoiceTemplateCostRange'

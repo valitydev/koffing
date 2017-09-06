@@ -3,10 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { clone, find } from 'lodash';
 
-import { Event } from 'koffing/backend/model/event/event';
-import { InvoiceChange } from 'koffing/backend/model/event/invoice-change';
-import { InvoiceStatusChanged } from 'koffing/backend/model/event/invoice-status-changed';
-import { PaymentStatusChanged } from 'koffing/backend/model/event/payment-status-changed';
+import { Event, InvoiceChange, InvoiceStatusChanged, PaymentStatusChanged } from 'koffing/backend';
 import { EventService } from 'koffing/backend/event.service';
 
 @Injectable()
@@ -68,7 +65,7 @@ export class EventPollerService {
 
     private getNextLastEvent(invoiceID: string, currentLastEventID?: number): Observable<Event> {
         if (currentLastEventID || currentLastEventID === 0) {
-            return this.eventService.getInvoiceEvents(invoiceID, 1, currentLastEventID).map((events) => events[0]);
+            return this.eventService.getInvoiceEvents(invoiceID, 2, currentLastEventID).map((events) => events[0]);
         } else {
             return this.eventService.getInvoiceEvents(invoiceID, this.limitStartEvents).map((events) => this.filterLastEvent(events));
         }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { map, clone } from 'lodash';
 
@@ -26,11 +26,8 @@ export class SearchFormComponent implements OnInit {
     public onSearch: EventEmitter<FormSearchParams> = new EventEmitter<FormSearchParams>();
 
     public invoiceStatuses: SelectItem[];
-
     public paymentStatuses: SelectItem[];
-
     public isValidCardNumber: boolean = true;
-
     private initParams: FormSearchParams;
 
     public ngOnInit() {

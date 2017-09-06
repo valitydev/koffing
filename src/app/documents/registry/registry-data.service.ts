@@ -3,6 +3,7 @@ import { filter, forEach, find } from 'lodash';
 import { Observable, Observer } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 
+import { PAYMENT_STATUS } from 'koffing/backend/constants/payment-status';
 import { ShopService } from 'koffing/backend/shop.service';
 import { ContractService } from 'koffing/backend/contract.service';
 import { SearchService } from 'koffing/backend/search.service';
@@ -38,7 +39,7 @@ export class RegistryDataService {
                 const invoices = response[1].result;
                 const contracts = response[2];
                 const shop = response[3];
-                const successPayments = filter(payments, (payment: Payment) => payment.status === 'captured');
+                const successPayments = filter(payments, (payment: Payment) => payment.status === PAYMENT_STATUS.captured);
                 const registryItems = this.getRegistryItems(successPayments, invoices);
                 const client = this.getClient(shop, contracts);
                 observer.next(new Registry(registryItems, fromTime, toTime, client));

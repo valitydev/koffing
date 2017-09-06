@@ -22,6 +22,5 @@ export class PayoutToolService {
 
     private getEndpoint(contractID: string) {
         return `${this.config.capiUrl}/processing/contracts/${contractID}/payout_tools`;
-
     }
 }

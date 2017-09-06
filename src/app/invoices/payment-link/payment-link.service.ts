@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { chain } from 'lodash';
+import { forEach } from 'lodash';
 
 import { ConfigService } from 'koffing/backend/config.service';
 import { PaymentLinkArguments } from './payment-link-arguments';
@@ -11,13 +11,11 @@ export class PaymentLinkService {
 
     constructor(private configService: ConfigService) {}
 
-    public getPaymentLink(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string) {
+    public getPaymentLink(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string): string {
         const paymentLinkArguments = this.toPaymentLinkArguments(formValue, accessData, shopID);
-        const args = chain(paymentLinkArguments)
-            .map((value: string | boolean | number, key: string) => `${key}=${encodeURIComponent(String(value))}`)
-            .join('&')
-            .value();
-        return `${this.configService.checkoutUrl}/html/payframe.html?${args}`;
+        const searchParams = new URLSearchParams();
+        forEach(paymentLinkArguments, (value, key) => searchParams.append(key, value));
+        return `${this.configService.checkoutUrl}/html/payframe.html?${searchParams.toString()}`;
     }
 
     private toPaymentLinkArguments(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string): PaymentLinkArguments {
@@ -29,6 +27,10 @@ export class PaymentLinkService {
         args.email = formValue.email || '';
         args.redirectUrl = formValue.redirectUrl || '';
         args.popupMode = true;
+        if (formValue.paymentFlowHold) {
+            args.paymentFlowHold = formValue.paymentFlowHold;
+            args.holdExpiration = formValue.holdExpiration;
+        }
         // TODO fix after real apple pay payments api capability
         if (shopID === 'TEST') {
             args.applePayTest = true;

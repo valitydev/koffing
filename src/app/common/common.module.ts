@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/primeng';
 
+import { EventPollerService } from './event-poller.service';
 import { SelectComponent } from './select/select.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MinValueValidatorDirective } from './min-value.directive';
@@ -31,6 +32,9 @@ import { DateRangeSelectorComponent } from './date-range-selector/date-range-sel
         MaxValueValidatorDirective,
         RoubleCurrencyPipe,
         DateRangeSelectorComponent
+    ],
+    providers: [
+        EventPollerService
     ]
 })
 export class CommonModule { }

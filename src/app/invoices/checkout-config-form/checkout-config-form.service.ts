@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { HOLD_EXPIRATION } from 'koffing/backend/constants/hold-expiration';
+
 @Injectable()
 export class CheckoutConfigFormService {
 
@@ -18,6 +20,8 @@ export class CheckoutConfigFormService {
             logo: [''],
             email: [''],
             redirectUrl: [''],
+            paymentFlowHold: [false, [Validators.required] ],
+            holdExpiration: [HOLD_EXPIRATION.cancel, [Validators.required]],
         });
     }
 }

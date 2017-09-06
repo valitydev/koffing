@@ -11,4 +11,6 @@ export class PaymentLinkArguments {
     public popupMode?: boolean;
     public redirectUrl?: string;
     public applePayTest?: boolean;
+    public paymentFlowHold?: boolean;
+    public holdExpiration?: string;
 }

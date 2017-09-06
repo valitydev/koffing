@@ -47,9 +47,7 @@ form.form-horizontal.form-label-left.css-form
                                 td {{item.product}}
         .ln_solid
     div(*ngIf="isPaymentLinkAvailable()")
-        .row
-            .col-xs-12
-                kof-invoice-payment-link([invoiceID]="invoice.id", [shopID]="shopID")
+        kof-invoice-payment-link([invoiceID]="invoice.id", [shopID]="shopID")
         .ln_solid
     div(*ngIf="searchResult?.totalCount > 0")
         .row
@@ -61,7 +59,7 @@ form.form-horizontal.form-label-left.css-form
                     i(*ngIf="isLoading").fa.fa-cog.fa-spin.fa-lg.fa-fw
         .ln_solid
     div(*ngFor="let payment of searchResult?.payments")
-        kof-payment-info([payment]="payment")
+        kof-payment-info([invoiceID]="invoice.id", [payment]="payment")
         .ln_solid
 .row(*ngIf="searchResult?.isNextAvailable")
     .col-xs-12

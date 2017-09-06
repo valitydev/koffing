@@ -7,7 +7,7 @@ import {
 } from 'koffing/backend';
 import { InvoiceTemplateParams } from 'koffing/backend/requests/invoice-template-params';
 import { CurrencyService } from 'koffing/common/currency.service';
-import { COST_TYPES } from '../invoice-template-form/invoice-template-cost-types';
+import { COST_TYPE } from 'koffing/backend/constants/invoice-template-cost-type';
 
 export class InvoiceTemplatePaymentLinkService {
 
@@ -22,12 +22,12 @@ export class InvoiceTemplatePaymentLinkService {
         if (formValue.selectedCostType) {
             let cost;
             const currency = 'RUB';
-            if (formValue.selectedCostType === COST_TYPES.unlim) {
+            if (formValue.selectedCostType === COST_TYPE.unlim) {
                 cost = new InvoiceTemplateCostUnlim();
-            } else if (formValue.selectedCostType === COST_TYPES.fixed) {
+            } else if (formValue.selectedCostType === COST_TYPE.fixed) {
                 const amount = CurrencyService.toMinor(formValue.cost.amount);
                 cost = new InvoiceTemplateCostFixed(amount, currency);
-            } else if (formValue.selectedCostType === COST_TYPES.range) {
+            } else if (formValue.selectedCostType === COST_TYPE.range) {
                 const lowerBound = CurrencyService.toMinor(formValue.cost.lowerBound);
                 const upperBound = CurrencyService.toMinor(formValue.cost.upperBound);
                 const range = new CostAmountRange(lowerBound, upperBound);
