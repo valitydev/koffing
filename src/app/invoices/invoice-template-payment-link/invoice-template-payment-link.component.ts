@@ -73,11 +73,10 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
         const params = InvoiceTemplatePaymentLinkService.toInvoiceTemplateParams(this.invoiceTemplateForm.value, this.shopID);
         this.invoiceTemplateService.createInvoiceTemplate(params).subscribe((response) => {
             this.isCreated = true;
-            this.paymentLinkVisible = true;
-            this.generatePaymentLink();
             this.invoiceTemplateForm.disable();
             this.invoiceTemplateID = response.invoiceTemplate.id;
             this.invoiceTemplateAccessToken = response.invoiceTemplateAccessToken.payload;
+            this.generatePaymentLink();
         });
     }
 
