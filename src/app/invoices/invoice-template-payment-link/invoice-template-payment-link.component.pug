@@ -23,15 +23,12 @@ button.btn.btn-default.btn-block(data-toggle="modal", [attr.data-target]="'#invo
                     *ngIf="!isCreated",
                     [disabled]="invoiceTemplateForm.invalid",
                     (click)="createInvoiceTemplate()")
-                    | Создать
-                .form-group.text-left(*ngIf="isCreated")
-                    .row
-                        .col-xs-12
-                            label.text-left
-                                | Ссылка на оплату
-                        .col-xs-12
+                    | Сформировать ссылку на оплату
+                div(*ngIf="isCreated")
+                    button.btn.btn-sm.btn-primary(*ngIf="!paymentLinkVisible", (click)="generatePaymentLink()") Сформировать ссылку на оплату
+                    .row(*ngIf="paymentLinkVisible")
+                        .col-xs-12.col-sm-7.col-sm-offset-5
                             .input-group
                                 input.form-control(type="text", #paymentLinkInput, readonly, [value]="paymentLink")
                                 span.input-group-btn
-                                    button.btn.btn-sm.btn-primary((click)="copy()")
-                                        | Скопировать
+                                    button.btn.btn-sm.btn-primary((click)="copy()") Скопировать

@@ -8,6 +8,8 @@ export class ConfigService {
     public checkoutUrl: string;
     public suggestionsToken: string;
     public supportEmail: string;
+    public shortenUrlEndpoint: string;
+    public urlShortenerEndpoint: string;
 
     constructor(private http: Http) { }
 
@@ -19,6 +21,8 @@ export class ConfigService {
                     this.checkoutUrl = `${data.checkoutEndpoint}`;
                     this.suggestionsToken = data.suggestionsToken;
                     this.supportEmail = data.supportEmail;
+                    this.shortenUrlEndpoint = data.shortenUrlEndpoint;
+                    this.urlShortenerEndpoint = data.urlShortenerEndpoint;
                     resolve();
                 });
         });

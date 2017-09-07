@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import { toString, forEach, isNumber, isDate } from 'lodash';
 
+import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';
 import { InvoiceSearchResult } from './model/invoice-search-result';
 import { PaymentSearchResult } from './model/payment-search-result';
-import { InvoiceTemplatesSearchResult } from './model/invoice-template/invoice-templates-search-result';
 import { SearchInvoicesParams } from './requests/search-invoices-params';
 import { SearchPaymentsParams } from './requests/search-payments-params';
-import { SearchInvoiceTemplatesParams } from './requests/search-invoice-templates-params';
 
 @Injectable()
 export class SearchService {
 
     constructor(
-        private http: Http,
+        private http: CapiHttp,
         private config: ConfigService
     ) { }
 
@@ -29,12 +28,6 @@ export class SearchService {
     public searchPayments(shopID: string, paymentsParams: SearchPaymentsParams): Observable<PaymentSearchResult> {
         const search = this.toSearchParams(paymentsParams);
         return this.http.get(`${this.getEndpoint(shopID)}/payments`, {search})
-            .map((res) => res.json());
-    }
-
-    public searchInvoiceTemplates(shopID: string, invoiceTemplatesParams: SearchInvoiceTemplatesParams): Observable<InvoiceTemplatesSearchResult> {
-        const params = this.toSearchParams(invoiceTemplatesParams);
-        return this.http.get(`${this.config.capiUrl}/processing/shops/${shopID}/invoice-templates`, {search: params})
             .map((res) => res.json());
     }
 

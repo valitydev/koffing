@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { isNil } from 'lodash';
 
+import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';
 import { LocationName } from './model/location-name';
 
@@ -11,7 +12,7 @@ import { LocationName } from './model/location-name';
 export class LocationService {
 
     constructor(
-        private http: Http,
+        private http: CapiHttp,
         private config: ConfigService
     ) { }
 

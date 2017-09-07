@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';
 import { InvoiceTemplate } from 'koffing/backend/model';
 import { InvoiceTemplateAndToken } from 'koffing/backend/model';
@@ -13,7 +13,7 @@ export class InvoiceTemplateService {
     private invoiceTemplatesUrl: string = `${this.config.capiUrl}/processing/invoice-templates`;
 
     constructor(
-        private http: Http,
+        private http: CapiHttp,
         private config: ConfigService
     ) {}
 

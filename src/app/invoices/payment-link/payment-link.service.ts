@@ -1,21 +1,29 @@
 import { Injectable } from '@angular/core';
-import { forEach } from 'lodash';
+import { chain } from 'lodash';
 
 import { ConfigService } from 'koffing/backend/config.service';
 import { PaymentLinkArguments } from './payment-link-arguments';
 import { PaymentLinkInvoice } from './payment-link-invoice';
 import { PaymentLinkInvoiceTemplate } from './payment-link-invoice-template';
+import { UrlShortenerService } from 'koffing/backend/url-shortener.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PaymentLinkService {
 
-    constructor(private configService: ConfigService) {}
+    constructor(private configService: ConfigService,
+                private urlShortenerService: UrlShortenerService) {
+    }
 
-    public getPaymentLink(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string): string {
+    public getPaymentLink(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string): Observable<string> {
         const paymentLinkArguments = this.toPaymentLinkArguments(formValue, accessData, shopID);
-        const searchParams = new URLSearchParams();
-        forEach(paymentLinkArguments, (value, key) => searchParams.append(key, value));
-        return `${this.configService.checkoutUrl}/html/payframe.html?${searchParams.toString()}`;
+        const args = chain(paymentLinkArguments)
+            .map((value: string | boolean | number, key: string) => `${key}=${encodeURIComponent(String(value))}`)
+            .join('&')
+            .value();
+        const checkoutUrl = `${this.configService.checkoutUrl}/html/payframe.html?${args}`;
+        return this.urlShortenerService.shorten(checkoutUrl)
+            .map((response) => `${this.configService.shortenUrlEndpoint}/${response.sid}`);
     }
 
     private toPaymentLinkArguments(formValue: any, accessData: PaymentLinkInvoice | PaymentLinkInvoiceTemplate, shopID: string): PaymentLinkArguments {

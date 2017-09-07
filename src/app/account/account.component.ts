@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { trimEnd } from 'lodash';
 
-import { AuthService } from 'koffing/auth/auth.module';
+import { AuthService } from 'koffing/auth/auth.service';
 
 @Component({
     selector: 'kof-account',

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from './config.service';
 import { Claim } from './model/claim/claim';
 import { PartyModification } from 'koffing/backend/model';
+import { CapiHttp } from 'koffing/backend/capi-http.service';
 
 @Injectable()
 export class ClaimService {
 
     private endpoint = `${this.config.capiUrl}/processing/claims`;
 
-    constructor(private http: Http,
+    constructor(private http: CapiHttp,
                 private config: ConfigService) {
     }
 

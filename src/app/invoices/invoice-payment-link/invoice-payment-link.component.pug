@@ -15,14 +15,10 @@ button.btn.btn-primary.btn-sm(data-toggle="modal", [attr.data-target]="'#' + inv
             .modal-body
                 kof-checkout-config-form([form]="checkoutConfigForm")
             .modal-footer
-                .form-group.text-left
-                    .row
-                        .col-xs-12
-                            label.text-left
-                                | Ссылка на оплату
-                        .col-xs-12
-                            .input-group
-                                input.form-control(type="text", #paymentLinkInput, readonly, [value]="paymentLink")
-                                span.input-group-btn
-                                    button.btn.btn-sm.btn-primary((click)="copy()")
-                                        | Скопировать
+                button.btn.btn-sm.btn-primary(*ngIf="!paymentLinkVisible", (click)="generatePaymentLink()") Сформировать ссылку на оплату
+                .row(*ngIf="paymentLinkVisible")
+                    .col-xs-12.col-sm-7.col-sm-offset-5
+                        .input-group
+                            input.form-control(type="text", #paymentLinkInput, readonly, [value]="paymentLink")
+                            span.input-group-btn
+                                button.btn.btn-sm.btn-primary((click)="copy()") Скопировать

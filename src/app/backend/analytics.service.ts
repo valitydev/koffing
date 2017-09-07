@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { URLSearchParams } from '@angular/http';
 import * as moment from 'moment';
 import { toString } from 'lodash';
 import { Observable } from 'rxjs/Observable';
 
+import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';
 import { PaymentMethodStat } from './model/payment-method-stat';
 import { PaymentRateStat } from './model/payment-rate-stat';
@@ -14,7 +15,7 @@ import { PaymentRevenueStat } from './model/payment-revenue-stat';
 @Injectable()
 export class AnalyticsService {
 
-    constructor(private http: Http,
+    constructor(private http: CapiHttp,
                 private config: ConfigService) {
     }
 

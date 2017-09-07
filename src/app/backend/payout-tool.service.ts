@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http/src';
 import { Observable } from 'rxjs/Observable';
 
+import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';
 import { PayoutTool } from './model/payout-tool/payout-tool';
 
 @Injectable()
 export class PayoutToolService {
 
-    constructor(private http: Http,
+    constructor(private http: CapiHttp,
                 private config: ConfigService) {
     }
 

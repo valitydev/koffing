@@ -1,10 +1,10 @@
 import { Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { AuthService } from './auth.service';
 import { HttpErrorBroadcaster } from 'koffing/broadcaster/services/http-error-broadcaster.service';
+import { AuthService } from 'koffing/auth/auth.service';
 
-export class AuthHttpInterceptor extends Http {
+export class CapiHttp extends Http {
 
     constructor(
         connectionBackend: ConnectionBackend,
@@ -60,7 +60,6 @@ export class AuthHttpInterceptor extends Http {
                 options = new RequestOptions({headers});
             }
             this.setHeaders(options);
-            this.excludeHeader(url, options, 'authorization', 'appConfig.json');
             observer.next();
             observer.complete();
         });
@@ -103,12 +102,6 @@ export class AuthHttpInterceptor extends Http {
         options.headers.set('X-Request-ID', this.guid());
         options.headers.set('Accept', 'application/json');
         options.headers.set('Content-Type', 'application/json; charset=UTF-8');
-    }
-
-    private excludeHeader(url: string | Request, options: RequestOptionsArgs, excludeHeader: string, excludeUrl: string) {
-        if (url === excludeUrl || (url instanceof Request && url.url === excludeUrl)) {
-            options.headers.delete(excludeHeader);
-        }
     }
 
     private guid(): string {

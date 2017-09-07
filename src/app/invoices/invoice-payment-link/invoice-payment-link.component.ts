@@ -8,8 +8,8 @@ import { PaymentLinkInvoice } from '../payment-link/payment-link-invoice';
 
 @Component({
     selector: 'kof-invoice-payment-link',
-    templateUrl: './invoice-payment-link.component.pug',
-    styles: [`input.form-control { height: 30px }`]
+    templateUrl: 'invoice-payment-link.component.pug',
+    styles: [`.form-control {height: 30px;}`]
 })
 export class InvoicePaymentLinkComponent implements OnInit {
 
@@ -25,18 +25,18 @@ export class InvoicePaymentLinkComponent implements OnInit {
     public checkoutConfigForm: FormGroup;
     public paymentLink: string;
     public invoiceAccessToken: string;
+    public paymentLinkVisible: boolean = false;
 
-    constructor(
-        private invoiceService: InvoiceService,
-        private checkoutConfigFormService: CheckoutConfigFormService,
-        private paymentLinkService: PaymentLinkService
-    ) {}
+    constructor(private invoiceService: InvoiceService,
+                private checkoutConfigFormService: CheckoutConfigFormService,
+                private paymentLinkService: PaymentLinkService) {
+    }
 
     public ngOnInit() {
         this.createInvoiceAccessToken();
         this.checkoutConfigForm = this.checkoutConfigFormService.form;
         this.checkoutConfigForm.valueChanges.subscribe(() => {
-            this.generatePaymentLink();
+            this.paymentLinkVisible = false;
         });
     }
 
@@ -45,15 +45,17 @@ export class InvoicePaymentLinkComponent implements OnInit {
         document.execCommand('copy');
     }
 
-    private createInvoiceAccessToken() {
-        this.invoiceService.createInvoiceAccessToken(this.invoiceID).subscribe((response) => {
-            this.invoiceAccessToken = response.payload;
-            this.generatePaymentLink();
+    public generatePaymentLink() {
+        const accessData = new PaymentLinkInvoice(this.invoiceID, this.invoiceAccessToken);
+        this.paymentLinkService.getPaymentLink(this.checkoutConfigForm.value, accessData, this.shopID).subscribe((paymentLink) => {
+            this.paymentLink = paymentLink;
+            this.paymentLinkVisible = true;
         });
     }
 
-    private generatePaymentLink() {
-        const accessData = new PaymentLinkInvoice(this.invoiceID, this.invoiceAccessToken);
-        this.paymentLink = this.paymentLinkService.getPaymentLink(this.checkoutConfigForm.value, accessData, this.shopID);
+    private createInvoiceAccessToken() {
+        this.invoiceService.createInvoiceAccessToken(this.invoiceID).subscribe((response) => {
+            this.invoiceAccessToken = response.payload;
+        });
     }
 }

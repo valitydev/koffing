@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
+import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';
-import { Contract as ContractNew } from './model/contract/contract';
+import { Contract } from 'koffing/backend/model';
 
 @Injectable()
 export class ContractService {
@@ -11,15 +11,15 @@ export class ContractService {
     private endpoint: string = `${this.config.capiUrl}/processing/contracts`;
 
     constructor(
-        private http: Http,
+        private http: CapiHttp,
         private config: ConfigService
     ) { }
 
-    public getContracts(): Observable<ContractNew[]> {
+    public getContracts(): Observable<Contract[]> {
         return this.http.get(this.endpoint).map((res) => res.json());
     }
 
-    public getContractByID(contractID: string): Observable<ContractNew> {
+    public getContractByID(contractID: string): Observable<Contract> {
         return this.http.get(`${this.endpoint}/${contractID}`).map((res) => res.json());
     }
 }
