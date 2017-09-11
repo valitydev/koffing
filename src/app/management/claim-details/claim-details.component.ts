@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { ClaimService } from 'koffing/backend/claim.service';
 import { ClaimDetailsService } from './claim-details.service';
 import {
@@ -8,7 +9,7 @@ import {
     ContractPayoutToolCreation,
     ShopCreation
 } from 'koffing/backend';
-import { BreadcrumbBroadcaster } from 'koffing/broadcaster/services/breadcrumb.broadcaster';
+import { BreadcrumbBroadcaster } from 'koffing/broadcaster';
 
 @Component({
     templateUrl: 'claim-details.component.pug',

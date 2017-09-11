@@ -13,16 +13,16 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContainerComponent } from './components/container/container.component';
 import { HttpErrorHandleComponent } from './components/http-error-handle/http-error-handle.component';
 import { AccountModule } from 'koffing/account/account.module';
-import { NotificationHandleComponent } from './components/notification-handle/notification-handle.component';
 import { InvoicesModule } from 'koffing/invoices/invoices.module';
 import { DocumentsModule } from 'koffing/documents/documents.module';
 import { AnalyticsModule } from 'koffing/analytics/analytics.module';
+import { ShopInfoModule } from 'koffing/shop-info/shop-info.module';
 import { LandingContainerComponent } from './components/landing-container/landing-container.component';
-import { ShopContainerComponent } from './components/shop-container/shop-container.component';
 import { LandingTopPanelComponent } from './components/landing-container/landing-top-panel/landing-top-panel.component';
 import { TopPanelActionsComponent } from './components/top-panel-actions/top-panel-actions.component';
 import { ShopSelectorComponent } from 'koffing/root/components/shop-container/shop-top-panel/shop-selector/shop-selector.component';
 import { ShopTopPanelComponent } from 'koffing/root/components/shop-container/shop-top-panel/shop-top-panel.component';
+import { ShopContainerComponent } from './components/shop-container/shop-container.component';
 
 @NgModule({
     imports: [
@@ -38,7 +38,8 @@ import { ShopTopPanelComponent } from 'koffing/root/components/shop-container/sh
         WebhooksModule,
         InvoicesModule,
         DocumentsModule,
-        AnalyticsModule
+        AnalyticsModule,
+        ShopInfoModule,
     ],
     declarations: [
         ContainerComponent,
@@ -47,7 +48,6 @@ import { ShopTopPanelComponent } from 'koffing/root/components/shop-container/sh
         SidebarComponent,
         ShopTopPanelComponent,
         HttpErrorHandleComponent,
-        NotificationHandleComponent,
         ShopSelectorComponent,
         LandingTopPanelComponent,
         TopPanelActionsComponent

@@ -13,6 +13,7 @@ import { CreateShopComponent } from 'koffing/management/create-shop/create-shop.
 import { ClaimDetailsComponent } from 'koffing/management/claim-details/claim-details.component';
 import { AccountComponent } from 'koffing/account/account.component';
 import { CreateWebhookComponent } from 'koffing/webhooks/create-webhook/create-webhook.component';
+import { ShopInfoComponent } from 'koffing/shop-info/shop-info.component';
 
 @NgModule({
     imports: [
@@ -55,6 +56,10 @@ import { CreateWebhookComponent } from 'koffing/webhooks/create-webhook/create-w
                     {
                         path: 'analytics',
                         component: AnalyticsComponent
+                    },
+                    {
+                        path: 'info',
+                        component: ShopInfoComponent
                     },
                     {
                         path: 'documents/registry',

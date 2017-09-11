@@ -1,11 +1,11 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { XHRBackend, RequestOptions, HttpModule } from '@angular/http';
 
-import { RootModule } from './root/root.module';
-import { ConfigService } from './backend/config.service';
-import { ContainerComponent } from './root/components/container/container.component';
-import { HttpErrorBroadcaster } from 'koffing/broadcaster/services/http-error-broadcaster.service';
+import { ConfigService } from 'koffing/backend/config.service';
 import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { HttpErrorBroadcaster } from 'koffing/broadcaster';
+import { ContainerComponent } from './root/components/container/container.component';
+import { RootModule } from './root/root.module';
 
 @NgModule({
     imports: [

@@ -1,0 +1,42 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Название магазина:
+        .col-xs-12.col-sm-8
+            div {{shop?.details?.name}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Идентификатор:
+        .col-xs-12.col-sm-8
+            div {{shop?.id}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Статус:
+        .col-xs-12.col-sm-8
+            span.label.label-default([ngClass]="getShopLabel()", [innerHTML]="getShopStatus()")
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Дата и время создания:
+        .col-xs-12.col-sm-8
+            div {{shop?.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+    .form-group(*ngIf="shop?.details?.description")
+        .col-xs-12.col-sm-4
+            label.text-left Описание:
+        .col-xs-12.col-sm-8
+            div {{shop?.details?.description}}
+    .form-group(*ngIf="shop?.location?.url")
+        .col-xs-12.col-sm-4
+            label.text-left URL сайта магазина:
+        .col-xs-12.col-sm-8
+            div {{shop?.location?.url}}
+    div(*ngIf="category")
+        .form-group
+            .col-xs-12.col-sm-4
+                label.text-left Категория магазина:
+            .col-xs-12.col-sm-8
+                div {{category?.name}}
+        .form-group
+            .col-xs-12.col-sm-4
+                label.text-left Описание категории:
+            .col-xs-12.col-sm-8
+                div {{category?.description}}

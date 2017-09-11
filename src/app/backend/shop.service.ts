@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { Shop } from 'koffing/backend/model/shop/shop';
+import { Shop } from './model/shop/shop';
 
 @Injectable()
 export class ShopService {
 
     private endpoint: string = `${this.config.capiUrl}/processing/shops`;
 
-    constructor(private http: CapiHttp,
-                private config: ConfigService) {
-    }
+    constructor(
+        private http: CapiHttp,
+        private config: ConfigService
+    ) { }
 
     public getShops(): Observable<Shop[]> {
         return this.http.get(this.endpoint).map((res) => res.json());

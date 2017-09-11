@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BreadcrumbBroadcaster } from 'koffing/broadcaster/services/breadcrumb.broadcaster';
-import { BreadcrumbConfig } from 'koffing/broadcaster/services/breadcrumb-config';
+import { BreadcrumbBroadcaster, BreadcrumbConfig } from 'koffing/broadcaster';
 
 @Component({
     selector: 'kof-landing-top-panel',

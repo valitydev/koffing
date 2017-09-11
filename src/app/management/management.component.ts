@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ClaimService } from 'koffing/backend/claim.service';
 import { ShopService } from 'koffing/backend/shop.service';
 import { Claim, Shop } from 'koffing/backend';
-import { BreadcrumbBroadcaster } from 'koffing/broadcaster/services/breadcrumb.broadcaster';
+import { BreadcrumbBroadcaster } from 'koffing/broadcaster';
 
 @Component({
     templateUrl: 'management.component.pug'

@@ -1,0 +1,28 @@
+p-growl([(value)]="messages", [life]="messageLifeTime", [immutable]= "false")
+.row
+    .col-xs-12.col-md-8.col-md-offset-2
+        .x_panel
+            .x_title
+                h5 Детали магазина
+            .x_content
+                kof-shop-details([shop]="shop")
+
+        .x_panel
+            .x_title
+                h5 Контракт
+            .x_content
+                kof-contract-details([contract]="contract")
+
+        .x_panel
+            .x_title
+                h5 Средство вывода
+            .x_content
+                kof-payout-tool-details([payoutTool]="payoutTool")
+
+        .x_panel
+            .x_title
+                h5 Действия
+            .x_content
+                div(*ngIf="shop && !shop.isBlocked")
+                    button.btn.btn-default(*ngIf="shop.isSuspended", (click)="activateShop()") Активировать магазин
+                    button.btn.btn-default(*ngIf="!shop.isSuspended", (click)="suspendShop()") Заморозить магазин

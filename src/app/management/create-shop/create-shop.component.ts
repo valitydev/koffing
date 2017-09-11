@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { ClaimService } from 'koffing/backend/claim.service';
+import { BankAccount } from 'koffing/backend/model/bank-account';
+import { PartyModification } from 'koffing/backend';
+import { BreadcrumbBroadcaster } from 'koffing/broadcaster';
 import { CreateShopService } from './create-shop.service';
 import { ShopCreationStep } from './shop-creation-step';
-import { ClaimService } from 'koffing/backend/claim.service';
-import { PartyModification } from 'koffing/backend/model';
 import { FormResolver } from './form-resolver.service';
-import { BankAccount } from 'koffing/backend/model/bank-account';
-import { BreadcrumbBroadcaster } from 'koffing/broadcaster/services/breadcrumb.broadcaster';
 
 @Component({
     templateUrl: 'create-shop.component.pug',

@@ -1,7 +1,7 @@
 import { Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { HttpErrorBroadcaster } from 'koffing/broadcaster/services/http-error-broadcaster.service';
+import { HttpErrorBroadcaster } from 'koffing/broadcaster';
 import { AuthService } from 'koffing/auth/auth.service';
 
 export class CapiHttp extends Http {

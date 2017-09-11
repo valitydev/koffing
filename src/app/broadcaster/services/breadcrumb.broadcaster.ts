@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
-import { Broadcaster } from 'koffing/broadcaster/services/broadcaster.service';
-import { BreadcrumbConfig } from 'koffing/broadcaster/services/breadcrumb-config';
+import { Broadcaster } from './broadcaster.service';
+import { BreadcrumbConfig } from './breadcrumb-config';
 
 @Injectable()
 export class BreadcrumbBroadcaster {

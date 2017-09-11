@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { CategoryService } from './category.service';
 import { ContractService } from './contract.service';
+import { PayoutToolService } from './payout-tool.service';
 import { ShopService } from './shop.service';
 import { ConfigService } from './config.service';
 import { WebhooksService } from './webhooks.service';
@@ -18,6 +19,7 @@ import { UrlShortenerService } from './url-shortener.service';
         AccountsService,
         CategoryService,
         ContractService,
+        PayoutToolService,
         ShopService,
         ConfigService,
         AnalyticsService,

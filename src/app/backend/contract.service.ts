@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';

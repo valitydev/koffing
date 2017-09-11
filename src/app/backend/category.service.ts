@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { CapiHttp } from 'koffing/backend/capi-http.service';
-import { Category } from './model/category';
+import { Category } from './model/shop/category';
 import { ConfigService } from './config.service';
 
 @Injectable()

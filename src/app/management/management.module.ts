@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
+import { DomainInfoModule } from 'koffing/domain-info/domain-info.module';
 import { SuggestionsModule } from 'koffing/suggestions/suggestions.module';
 import { CreateShopComponent } from './create-shop/create-shop.component';
 import { ContractFormComponent } from './contract-form/contract-form.component';
@@ -14,7 +15,6 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { ClaimStatusPipe } from './claim-status.pipe';
 import { ClaimService } from 'koffing/backend/claim.service';
 import { ContractCreationDetailsComponent } from './claim-details/contract-creation-details/contract-creation-details.component';
-import { BankAccountDetailsComponent } from './claim-details/bank-account-details/bank-account-details.component';
 import { ContractPayoutToolCreationDetailsComponent } from './claim-details/contract-payout-tool-creation-details/contract-payout-tool-creation-details.component';
 import { ShopCreationDetailsComponent } from './claim-details/shop-creation-details/shop-creation-details.component';
 import { RevokeClaimComponent } from './claim-details/revoke-claim/revoke-claim.component';
@@ -27,6 +27,7 @@ import { PayoutToolFormComponent } from './payout-tool-form/payout-tool-form.com
         ReactiveFormsModule,
         CommonModule,
         BackendModule,
+        DomainInfoModule,
         SuggestionsModule
     ],
     declarations: [
@@ -38,7 +39,6 @@ import { PayoutToolFormComponent } from './payout-tool-form/payout-tool-form.com
         ClaimStatusPipe,
         ClaimDetailsComponent,
         ContractCreationDetailsComponent,
-        BankAccountDetailsComponent,
         ContractPayoutToolCreationDetailsComponent,
         ShopCreationDetailsComponent,
         RevokeClaimComponent,
