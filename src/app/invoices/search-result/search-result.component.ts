@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Invoice } from 'koffing/backend/model/invoice';
-import { InvoiceTableItem } from './invoice-table-item';
-import { SearchResultService } from './search-result.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'kof-search-result',
@@ -14,16 +13,15 @@ export class SearchResultComponent implements OnInit {
     @Input()
     public invoices: Observable<Invoice[]>;
 
-    public invoiceTableItems: Observable<InvoiceTableItem[]>;
+    private shopID: string;
+
+    constructor(private router: Router,
+                private route: ActivatedRoute) { }
 
     public ngOnInit() {
-        this.invoiceTableItems = this.invoices
-            .map((invoices) => SearchResultService.toInvoiceTableItems(invoices))
-            .do((invoices) => {
-                if (invoices.length === 1) {
-                    invoices[0].visible = true;
-                }
-            });
+        this.route.parent.params.subscribe((params) => {
+            this.shopID = params['shopID'];
+        });
     }
 
     public getLabelClass(status: string) {
@@ -34,7 +32,7 @@ export class SearchResultComponent implements OnInit {
         };
     }
 
-    public togglePaymentPanel(item: InvoiceTableItem) {
-        item.visible = !item.visible;
+    public gotToInvoiceDetails(invoiceID: string) {
+        this.router.navigate(['shop', this.shopID, 'invoice', invoiceID]);
     }
 }

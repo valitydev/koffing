@@ -1,0 +1,28 @@
+kof-loading([isLoading]="!invoice && !invoiceNotFound")
+.row(*ngIf="invoice || invoiceNotFound")
+    .col-xs-12.col-md-10.col-md-offset-1(*ngIf="!invoiceNotFound")
+        .x_panel
+            .x_title
+                .row
+                    .col-xs-6
+                        h5 Инвойс
+                    .col-xs-6
+                        button.btn.btn-default.btn-sm.pull-right((click)="back()") Назад
+            .x_content
+                kof-invoice-details([invoice]="invoice")
+                .ln_solid
+                kof-invoice-payment-link(*ngIf="isPaymentLinkAvailable()", [invoice]="invoice")
+        .x_panel(*ngIf="invoice?.cart")
+            .x_title
+                h5 Корзина товаров или услуг
+            .x_content
+                kof-invoice-line-details([cart]="invoice?.cart")
+        .x_panel
+            .x_title
+                h5 Платежи
+            .x_content
+                kof-payments([invoice]="invoice", (onProcessedPayment)="onProcessedPayment($event)")
+    .col-xs-12.col-md-6.col-md-offset-3(*ngIf="invoiceNotFound")
+        .x_panel
+            .x_content
+                h5.text-center Инвойс не найден

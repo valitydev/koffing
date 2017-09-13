@@ -1,0 +1,15 @@
+table.table.table-striped
+    thead
+        tr
+            th Стоимость
+            th Количество
+            th Сумма
+            th Налог
+            th Описание
+    tbody(*ngFor="let lineItem of cart")
+        tr
+            td {{lineItem.price | kofRoubleCurrency}} ₽
+            td {{lineItem.quantity}}
+            td {{lineItem.cost | kofRoubleCurrency}} ₽
+            td {{lineItem?.taxMode?.rate || 'без НДС'}}
+            td {{lineItem.product}}

@@ -4,3 +4,4 @@ export * from './event';
 export * from './invoice-template';
 export * from './payout-tool';
 export * from './shop';
+export * from './payment';

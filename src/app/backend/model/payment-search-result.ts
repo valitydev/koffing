@@ -1,4 +1,4 @@
-import { Payment } from './payment';
+import { Payment } from './payment/payment';
 
 export class PaymentSearchResult {
     public totalCount: number;

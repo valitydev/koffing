@@ -1,0 +1,25 @@
+doctype html
+button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + paymentID + 'cancel'")
+    | Отменить платеж
+
+.modal.fade(tabindex="-1", role="dialog", id="{{paymentID}}cancel", data-backdrop="false")
+    .modal-dialog.modal-sm
+        .modal-content
+            .modal-header
+                h5.modal-title Отмена платежа
+            .modal-body
+                form(name="cancelForm", #cancelForm="ngForm")
+                    label Причина совершения операции:
+                    input.form-control.input-sm([(ngModel)]="reason", name="reason", required)
+            .modal-footer
+                .btn-toolbar
+                    .btn-group.btn-group-sm(*ngIf="!inProcess")
+                        button.btn.btn-default((click)="close()") Назад
+                    .btn-group.btn-group-sm.pull-right
+                        button.btn.btn-primary(
+                            *ngIf="!inProcess",
+                            [disabled]="cancelForm.invalid",
+                            (click)="cancelPayment()") Отменить платеж
+                        button.btn.btn-primary(*ngIf="inProcess", disabled="true")
+                            i.fa.fa-cog.fa-spin.fa-1x.fa-fw
+                            span В процессе...

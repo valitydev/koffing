@@ -6,18 +6,17 @@ import { HOLD_EXPIRATION } from 'koffing/backend/constants/hold-expiration';
 import { InvoiceTemplateService } from 'koffing/backend/invoice-template.service';
 import { InvoiceTemplatePaymentLinkService } from './invoice-template-payment-link.service';
 import { InvoiceTemplateFormService } from '../invoice-template-form/invoice-template-form.service';
-import { CheckoutConfigFormService } from '../checkout-config-form/checkout-config-form.service';
-import { PaymentLinkService } from '../payment-link/payment-link.service';
-import { PaymentLinkInvoiceTemplate } from '../payment-link/payment-link-invoice-template';
+import { PaymentLinkService } from 'koffing/checkout/payment-link/payment-link.service';
+import { InvoiceTemplateAndToken } from 'koffing/backend';
+import { CheckoutConfigFormService } from 'koffing/checkout/checkout-config-form/checkout-config-form.service';
 
 @Component({
     selector: 'kof-invoice-template-payment-link',
     templateUrl: './invoice-template-payment-link.component.pug',
     providers: [
-        InvoiceTemplateService,
-        PaymentLinkService
+        InvoiceTemplateService
     ],
-    styles: [`.form-control {height: 30px;}`]
+    styles: [`.form-control { height: 30px; }`]
 })
 export class InvoiceTemplatePaymentLinkComponent implements OnInit {
 
@@ -31,16 +30,15 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
     public invoiceTemplateForm: FormGroup;
     public paymentLink: string;
     public isCreated: boolean;
-    public invoiceTemplateID: string;
-    public invoiceTemplateAccessToken: string;
     public paymentLinkVisible: boolean = false;
 
-    constructor(
-        private invoiceTemplateService: InvoiceTemplateService,
-        private invoiceTemplateFormService: InvoiceTemplateFormService,
-        private checkoutConfigFormService: CheckoutConfigFormService,
-        private paymentLinkService: PaymentLinkService
-    ) {}
+    private invoiceTemplateAndToken: InvoiceTemplateAndToken;
+
+    constructor(private invoiceTemplateService: InvoiceTemplateService,
+                private invoiceTemplateFormService: InvoiceTemplateFormService,
+                private checkoutConfigFormService: CheckoutConfigFormService,
+                private paymentLinkService: PaymentLinkService) {
+    }
 
     public ngOnInit() {
         this.invoiceTemplateForm = this.invoiceTemplateFormService.form;
@@ -74,17 +72,16 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
         this.invoiceTemplateService.createInvoiceTemplate(params).subscribe((response) => {
             this.isCreated = true;
             this.invoiceTemplateForm.disable();
-            this.invoiceTemplateID = response.invoiceTemplate.id;
-            this.invoiceTemplateAccessToken = response.invoiceTemplateAccessToken.payload;
+            this.invoiceTemplateAndToken = response;
             this.generatePaymentLink();
         });
     }
 
     public generatePaymentLink() {
-        const accessData = new PaymentLinkInvoiceTemplate(this.invoiceTemplateID, this.invoiceTemplateAccessToken);
-        this.paymentLinkService.getPaymentLink(this.checkoutConfigForm.value, accessData, this.shopID).subscribe((paymentLink) => {
-            this.paymentLink = paymentLink;
-            this.paymentLinkVisible = true;
-        });
+        this.paymentLinkService.getInvoiceTemplatePaymentLink(this.invoiceTemplateAndToken, this.checkoutConfigForm.value)
+            .subscribe((paymentLink) => {
+                this.paymentLink = paymentLink;
+                this.paymentLinkVisible = true;
+            });
     }
 }

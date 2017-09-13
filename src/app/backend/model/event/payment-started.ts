@@ -1,5 +1,5 @@
 import { InvoiceChange } from './invoice-change';
-import { Payment } from '../payment';
+import { Payment } from '../payment/payment';
 
 export class PaymentStarted extends InvoiceChange {
     public payment: Payment;

@@ -3,6 +3,6 @@
   "checkoutEndpoint": "http://checkout.rbk.test:8080",
   "suggestionsToken": "27a1864e226f61f145ca150b5b64a378af1da650",
   "supportEmail": "support@rbkmoney.com",
-  "shortenUrlEndpoint": "https://rurz.us/s",
+  "shortenUrlEndpoint": "https://rbk.mn/s",
   "urlShortenerEndpoint": "https://bakka.su/short/api/new/json"
 }

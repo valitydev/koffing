@@ -10,6 +10,8 @@ import { MinValueValidatorDirective } from './min-value.directive';
 import { MaxValueValidatorDirective } from './max-value.directive';
 import { RoubleCurrencyPipe } from './rouble-currency.pipe';
 import { DateRangeSelectorComponent } from './date-range-selector/date-range-selector.component';
+import { InvoiceStatusPipe } from './invoice-statuses.pipe';
+import { PaymentStatusPipe } from './payment-statuses.pipe';
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import { DateRangeSelectorComponent } from './date-range-selector/date-range-sel
         MinValueValidatorDirective,
         MaxValueValidatorDirective,
         RoubleCurrencyPipe,
-        DateRangeSelectorComponent
+        DateRangeSelectorComponent,
+        InvoiceStatusPipe,
+        PaymentStatusPipe
     ],
     exports: [
         SelectComponent,
@@ -31,7 +35,9 @@ import { DateRangeSelectorComponent } from './date-range-selector/date-range-sel
         MinValueValidatorDirective,
         MaxValueValidatorDirective,
         RoubleCurrencyPipe,
-        DateRangeSelectorComponent
+        DateRangeSelectorComponent,
+        InvoiceStatusPipe,
+        PaymentStatusPipe
     ],
     providers: [
         EventPollerService

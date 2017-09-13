@@ -1,0 +1,70 @@
+form.form-horizontal.form-label-left.css-form
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Идентификатор:
+                .col-sm-7
+                    div {{payment.id}}
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Email плательщика:
+                .col-sm-7
+                    div {{payment?.contactInfo?.email}}
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Статус:
+                .col-sm-7
+                    span.label.label-default([ngClass]="getLabelClass(payment.status)") {{payment.status | kofPaymentStatus}}
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Fingerprint:
+                .col-sm-7
+                    div {{payment.fingerprint}}
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Дата и время создания:
+                .col-sm-7
+                    div {{payment.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 IP-адрес плательщика:
+                .col-sm-7
+                    div {{payment.ip}}
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Сумма списания:
+                .col-sm-7
+                    div {{payment.amount | kofRoubleCurrency}} ₽
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Данные карты:
+                .col-sm-7
+                    div **** **** **** {{payment.paymentToolDetails?.cardNumberMask}} ({{payment.paymentToolDetails?.paymentSystem}})
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Сумма к зачислению:
+                .col-sm-7
+                    div {{payment.amount - payment.fee | kofRoubleCurrency}} ₽
+    .row(*ngIf="payment.error")
+        .col-xs-12.col-sm-6
+            .form-group
+                label.col-sm-5 Сообщение об ошибке:
+                .col-sm-7
+                    div {{payment.error?.message}}
+    div(*ngIf="isFlowInformationAvailable(payment)")
+        .row
+            .col-xs-12.col-sm-6
+                .form-group
+                    label.col-sm-5 Удержан до:
+                    .col-sm-7
+                        div {{payment.flow.heldUntil | date: "dd.MM.yyyy HH:mm:ss"}}
+        .row
+            .col-xs-12.col-sm-6
+                .form-group
+                    label.col-sm-5 По истечению срока удержания:
+                    .col-sm-7
+                        div {{payment.flow.onHoldExpiration | kofOnHoldExpiration}}

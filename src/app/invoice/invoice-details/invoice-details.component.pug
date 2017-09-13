@@ -1,0 +1,41 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Идентификатор:
+        .col-xs-12.col-sm-8
+            div {{invoice?.id}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Статус:
+        .col-xs-12.col-sm-8
+            div.label.label-default([ngClass]="getLabelClass(invoice?.status)") {{invoice?.status | kofInvoiceStatus}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Наименование предлагаемых товаров или услуг:
+        .col-xs-12.col-sm-8
+            div {{invoice?.product}}
+    .form-group(*ngIf="invoice?.description")
+        .col-xs-12.col-sm-4
+            label.text-left Описание предлагаемых товаров или услуг:
+        .col-xs-12.col-sm-8
+            div {{invoice?.description}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Дата и время создания:
+        .col-xs-12.col-sm-8
+            div {{invoice?.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Дата и время окончания действия:
+        .col-xs-12.col-sm-8
+            div {{invoice?.dueDate | date: "dd.MM.yyyy HH:mm:ss"}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Стоимость:
+        .col-xs-12.col-sm-8
+            div {{invoice?.amount | kofRoubleCurrency}} ₽
+    .form-group(*ngIf="invoice?.reason")
+        .col-xs-12.col-sm-4
+            label.text-left Причина отмены или погашения инвойса:
+        .col-xs-12.col-sm-8
+            div {{invoice?.reason}}
