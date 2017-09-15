@@ -36,4 +36,9 @@ export class InvoiceService {
         return this.http.post(`${this.endpoint}/${invoiceID}/payments/${paymentID}/cancel`, {reason})
             .map((res) => null);
     }
+
+    public refundPayment(invoiceID: string, paymentID: string, reason: string): Observable<void> {
+        return this.http.post(`${this.endpoint}/${invoiceID}/payments/${paymentID}/refunds`, {reason})
+            .map((res) => null);
+    }
 }

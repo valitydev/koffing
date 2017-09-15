@@ -3,5 +3,6 @@ export const PAYMENT_STATUS = {
     processed: 'processed',
     captured: 'captured',
     cancelled: 'cancelled',
+    refunded: 'refunded',
     failed: 'failed'
 };

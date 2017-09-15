@@ -10,6 +10,12 @@ div(*ngFor="let payment of searchResult?.payments")
                 [invoiceID]="invoice.id",
                 [paymentID]="payment.id",
                 (onChangeStatus)="changeStatus($event, payment)")
+    .payment-actions.row(*ngIf="isRefundActionAvailable(payment)")
+        .col-xs-12
+            kof-payment-refund(
+                [invoiceID]="invoice.id",
+                [paymentID]="payment.id",
+                (onChangeStatus)="changeStatus($event, payment)")
     .ln_solid
 .row(*ngIf="searchResult?.isNextAvailable")
     .col-xs-12

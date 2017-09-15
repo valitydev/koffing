@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { paymentStatuses } from 'koffing/invoices/payment-statuses';
+import { PAYMENT_STATUS_LABEL } from 'koffing/invoices/payment-statuses';
 
 @Pipe({
     name: 'kofPaymentStatus'
@@ -7,7 +7,7 @@ import { paymentStatuses } from 'koffing/invoices/payment-statuses';
 export class PaymentStatusPipe implements PipeTransform {
 
     public transform(input: string): string {
-        const status = paymentStatuses[input];
+        const status = PAYMENT_STATUS_LABEL[input];
         return status ? status : input;
     }
 }

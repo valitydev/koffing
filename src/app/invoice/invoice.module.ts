@@ -14,6 +14,7 @@ import { InvoicePaymentLinkComponent } from './invoice-payment-link/invoice-paym
 import { HoldExpirationPipe } from './payments/payment-details/hold-expiration.pipe';
 import { PaymentCancelComponent } from './payments/payment-cancel/payment-cancel.component';
 import { PaymentCaptureComponent } from './payments/payment-capture/payment-capture.component';
+import { PaymentRefundComponent } from './payments/payment-refund/payment-refund.component';
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import { PaymentCaptureComponent } from './payments/payment-capture/payment-capt
         InvoicePaymentLinkComponent,
         HoldExpirationPipe,
         PaymentCancelComponent,
-        PaymentCaptureComponent
+        PaymentCaptureComponent,
+        PaymentRefundComponent
     ]
 })
 export class InvoiceModule { }

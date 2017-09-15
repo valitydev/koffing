@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
-import { Invoice } from 'koffing/backend/model/invoice';
-import { Payment } from 'koffing/backend/model/payment/payment';
+import { Invoice, Payment, INVOICE_STATUS, PAYMENT_STATUS } from 'koffing/backend';
 import { PaymentsService } from './payments.service';
 import { SearchResult } from './search-result';
-import { INVOICE_STATUS, PAYMENT_STATUS } from 'koffing/backend';
 
 @Component({
     selector: 'kof-payments',
@@ -22,8 +20,7 @@ export class PaymentsComponent implements OnChanges {
 
     public searchResult: SearchResult;
 
-    constructor(private paymentsService: PaymentsService) {
-    }
+    constructor(private paymentsService: PaymentsService) { }
 
     public ngOnChanges() {
         if (this.invoice) {
@@ -41,6 +38,10 @@ export class PaymentsComponent implements OnChanges {
 
     public isHoldActionsAvailable(payment: Payment) {
         return payment.status === PAYMENT_STATUS.processed;
+    }
+
+    public isRefundActionAvailable(payment: Payment) {
+        return payment.status === PAYMENT_STATUS.captured;
     }
 
     public changeStatus(status: string, payment: Payment) {

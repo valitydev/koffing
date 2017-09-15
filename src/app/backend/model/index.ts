@@ -5,3 +5,4 @@ export * from './invoice-template';
 export * from './payout-tool';
 export * from './shop';
 export * from './payment';
+export * from './invoice';
