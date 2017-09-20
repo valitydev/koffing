@@ -7,7 +7,7 @@ import { WebhookTableItem } from './webhook-table-item';
 @Component({
     templateUrl: './webhooks.component.pug',
 })
-export class WebhookComponent implements OnInit {
+export class WebhooksComponent implements OnInit {
 
     public webhooksTableItems: WebhookTableItem[];
 

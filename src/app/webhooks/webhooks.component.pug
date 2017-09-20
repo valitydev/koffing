@@ -9,21 +9,25 @@
                                 u Webhooks
                     .col-xs-6.text-right
                         a.btn.btn-primary((click)="createWebhook()") Создать webhook
-            table.table.table-striped
-                thead
-                    tr
-                        th URL
-                        th Статус
-                        th
-                tbody(*ngFor="let item of webhooksTableItems")
-                    tr
-                        td {{item.webhook.url}}
-                        td
-                            span.label.label-success([ngClass]="{'label-danger': !item.webhook.active}") {{item.webhook.active | kofWebhookStatus}}
-                        td
-                            .pull-right
-                                button.btn.btn-xs.btn-default((click)="toggleWebhookDetailsPanel(item)")
-                                    | {{item.visible ? 'Скрыть' : 'Показать'}} детали
-                    tr(*ngIf="item.visible")
-                        td.row(colspan="5")
-                            kof-webhook-details([webhook]="item.webhook", (onWebhookDelete)="prepareTableItems()")
+
+            .x_content
+                table.table.table-striped(*ngIf="webhooksTableItems?.length")
+                    thead
+                        tr
+                            th URL
+                            th Статус
+                            th
+                    tbody(*ngFor="let item of webhooksTableItems")
+                        tr
+                            td {{item.webhook.url}}
+                            td
+                                span.label.label-success([ngClass]="{'label-danger': !item.webhook.active}") {{item.webhook.active | kofWebhookStatus}}
+                            td
+                                .pull-right
+                                    button.btn.btn-xs.btn-default((click)="toggleWebhookDetailsPanel(item)")
+                                        | {{item.visible ? 'Скрыть' : 'Показать'}} детали
+                        tr(*ngIf="item.visible")
+                            td.row(colspan="5")
+                                kof-webhook-details([webhook]="item.webhook", (onWebhookDelete)="prepareTableItems()")
+
+                div(*ngIf="!webhooksTableItems?.length") Webhook'и отсутствуют

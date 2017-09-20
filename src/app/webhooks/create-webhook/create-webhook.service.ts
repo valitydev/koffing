@@ -19,15 +19,19 @@ export class CreateWebhookService {
         new EventTypePresent('InvoiceCancelled', 'инвойс отменен по истечению срока давности'),
         new EventTypePresent('InvoiceFulfilled', 'инвойс успешно погашен'),
         new EventTypePresent('PaymentStarted', 'создан платеж'),
+        new EventTypePresent('PaymentProcessed', 'платеж в обработке'),
         new EventTypePresent('PaymentCaptured', 'платеж успешно завершен'),
+        new EventTypePresent('PaymentCancelled', 'платеж успешно отменен'),
+        new EventTypePresent('PaymentRefunded', 'платеж успешно возвращен'),
         new EventTypePresent('PaymentFailed', 'при проведении платежа возникла ошибка')
     ];
 
-    constructor(private fb: FormBuilder,
-                private webhooksService: WebhooksService) {
+    constructor(
+        private fb: FormBuilder,
+        private webhooksService: WebhooksService
+    ) {
         this.createWebhookGroup = this.prepareForm(this.eventTypes);
         this.createWebhookGroup.controls.eventTypes.setValidators(this.eventTypesValidator);
-
     }
 
     public createWebhook(shopID: string): Observable<Webhook> {

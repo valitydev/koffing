@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { InvoicesComponent } from 'koffing/invoices/invoices.component';
 import { RegistryComponent } from 'koffing/documents/registry/registry.component';
-import { WebhookComponent } from 'koffing/webhooks/webhook.component';
+import { WebhooksComponent } from 'koffing/webhooks/webhooks.component';
 import { TokenComponent } from 'koffing/tokenization/components/token/token.component';
 import { AnalyticsComponent } from 'koffing/analytics/analytics.component';
 import { ManagementComponent } from 'koffing/management/management.component';
@@ -72,7 +72,7 @@ import { ShopInfoComponent } from 'koffing/shop-info/shop-info.component';
                     },
                     {
                         path: 'webhooks',
-                        component: WebhookComponent
+                        component: WebhooksComponent
                     },
                     {
                         path: 'webhook/create',
