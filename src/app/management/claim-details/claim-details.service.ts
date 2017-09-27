@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+
 import {
     ContractCreation,
     ContractModification,
     ContractPayoutToolCreation,
     PartyModification,
+    ShopContractBinding,
     ShopCreation,
     ShopModification
 } from 'koffing/backend';
@@ -21,6 +23,10 @@ export class ClaimDetailsService {
 
     public toShopCreation(partyModifications: PartyModification[]): ShopCreation[] {
         return this.findShopChangesetPart(partyModifications, 'ShopCreation') as ShopCreation[];
+    }
+
+    public toContractBinding(partyModifications: PartyModification[]): ShopContractBinding[] {
+        return this.findShopChangesetPart(partyModifications, 'ShopContractBinding') as ShopContractBinding[];
     }
 
     private findContractChangesetPart(partyModifications: PartyModification[], modificationTypeName: string): ContractModification[] {

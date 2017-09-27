@@ -1,0 +1,7 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Дата и время создания:
+        .col-xs-12.col-sm-8
+            div {{contract?.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+    kof-contractor-details(*ngIf="contract?.contractor", [contractor]="contract.contractor")

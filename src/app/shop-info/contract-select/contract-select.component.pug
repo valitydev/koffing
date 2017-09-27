@@ -1,0 +1,4 @@
+.btn-group(*ngIf="contractItems?.length")
+    label.btn.btn-sm.btn-default(*ngFor="let contractItem of contractItems", [ngClass]="{'active': contractItem.value === selectedContractID}")
+        input(type="radio", value="{{contractItem.value}}", (click)="select(contractItem.value)")
+        | {{contractItem.label}}

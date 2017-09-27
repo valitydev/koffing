@@ -1,0 +1,25 @@
+.form_wizard.wizard_horizontal
+    ul.wizard_steps
+        li.first_step
+            a([ngClass]="{'selected': currentStep === step.contract, 'done': currentStep > step.contract}")
+                span.step_no 1
+                span.step_descr Контракт
+        li
+            a([ngClass]="{'selected': currentStep === step.payoutTool, 'done': currentStep > step.payoutTool, 'disabled': currentStep < step.payoutTool}")
+                span.step_no 2
+                span.step_descr Средство вывода
+.ln_solid
+kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractForm")
+kof-payout-tool-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolForm", [bankAccount]="contractForm.value.bankAccount")
+.ln_solid
+button.btn.btn-default(
+    [disabled]="currentStep === step.contract",
+    (click)="prev()") Назад
+button.btn.btn-default.pull-right(
+    *ngIf="currentStep !== step.payoutTool",
+    [disabled]="!validStep",
+    (click)="next()") Далее
+button.btn.btn-primary.pull-right(
+    *ngIf="currentStep === step.payoutTool",
+    [disabled]="!validStep",
+    (click)="createAndBindContract()") Создать заявку

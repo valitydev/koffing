@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { ClaimService } from 'koffing/backend/claim.service';
-import { ClaimDetailsService } from './claim-details.service';
-import {
-    Claim,
-    ContractCreation,
-    ContractPayoutToolCreation,
-    ShopCreation
-} from 'koffing/backend';
 import { BreadcrumbBroadcaster } from 'koffing/broadcaster';
+import { ClaimService } from 'koffing/backend/claim.service';
+import { Claim } from 'koffing/backend';
+import { ClaimDetailsService } from './claim-details.service';
+import { ModificationType } from '../modification-type';
+import { ClaimModificationService } from '../claim-modification.service';
 
 @Component({
     templateUrl: 'claim-details.component.pug',
@@ -18,27 +15,27 @@ import { BreadcrumbBroadcaster } from 'koffing/broadcaster';
 export class ClaimDetailsComponent implements OnInit {
 
     public claim: Claim;
+    public modificationType: ModificationType;
+    public ModificationType = ModificationType;
 
-    public contractCreations: ContractCreation[];
-
-    public contractPayoutToolCreations: ContractPayoutToolCreation[];
-
-    public shopCreations: ShopCreation[];
-
-    constructor(private claimService: ClaimService,
-                private route: ActivatedRoute,
-                private claimDetailsService: ClaimDetailsService,
-                private breadcrumbBroadcaster: BreadcrumbBroadcaster) {
-    }
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private claimService: ClaimService,
+        private breadcrumbBroadcaster: BreadcrumbBroadcaster,
+        private claimModificationService: ClaimModificationService
+    ) { }
 
     public ngOnInit() {
         const claimID = this.route.snapshot.params['claimID'];
         this.claimService.getClaimByID(claimID).subscribe((claim) => {
             this.claim = claim;
-            this.contractCreations = this.claimDetailsService.toContractCreations(claim.changeset);
-            this.contractPayoutToolCreations = this.claimDetailsService.toContractPayoutToolCreations(claim.changeset);
-            this.shopCreations = this.claimDetailsService.toShopCreation(claim.changeset);
+            this.modificationType = this.claimModificationService.getModificationType(claim.changeset);
         });
         this.breadcrumbBroadcaster.fire([{label: 'Детали заявки'}]);
+    }
+
+    public back() {
+        this.router.navigate(['/']);
     }
 }

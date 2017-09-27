@@ -1,0 +1,10 @@
+div(*ngIf="bankAccount")
+    .checkbox
+        label
+            input(type="checkbox",
+                name="copyBankAccount",
+                [(ngModel)]="isCopyBankAccount",
+                (change)="copyBankAccount(isCopyBankAccount)")
+            span Использовать банковские реквизиты из контракта
+    .ln_solid
+kof-bank-account-form([form]="bankAccountForm", [suggestionCssClass]="'payout-tool-suggestion'")

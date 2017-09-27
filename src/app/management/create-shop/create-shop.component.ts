@@ -2,44 +2,38 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ClaimService } from 'koffing/backend/claim.service';
-import { BankAccount } from 'koffing/backend/model/bank-account';
 import { PartyModification } from 'koffing/backend';
 import { BreadcrumbBroadcaster } from 'koffing/broadcaster';
 import { CreateShopService } from './create-shop.service';
 import { ShopCreationStep } from './shop-creation-step';
-import { FormResolver } from './form-resolver.service';
 
 @Component({
     templateUrl: 'create-shop.component.pug',
-    providers: [
-        CreateShopService,
-        FormResolver
-    ],
-    styleUrls: ['create-shop.component.less']
+    styleUrls: ['create-shop.component.less'],
+    providers: [CreateShopService]
 })
 export class CreateShopComponent implements OnInit {
 
     public validStep = false;
     public step = ShopCreationStep;
     public currentStep = ShopCreationStep.contract;
-    public contractGroup = this.createShopService.contractGroup;
-    public payoutToolGroup = this.createShopService.payoutToolGroup;
-    public shopGroup = this.createShopService.shopGroup;
-    public contractBankAccount: BankAccount;
-    private changeset: PartyModification[];
+    public contractForm = this.createShopService.contractForm;
+    public payoutToolForm = this.createShopService.payoutToolForm;
+    public shopForm = this.createShopService.shopForm;
+    private changeSet: PartyModification[];
 
-    constructor(private claimService: ClaimService,
-                private createShopService: CreateShopService,
-                private router: Router,
-                private breadcrumbBroadcaster: BreadcrumbBroadcaster) {
-    }
+    constructor(
+        private claimService: ClaimService,
+        private createShopService: CreateShopService,
+        private router: Router,
+        private breadcrumbBroadcaster: BreadcrumbBroadcaster
+    ) { }
 
     public ngOnInit() {
-        this.createShopService.changesetEmitter.subscribe((changeset) => {
-            if (changeset) {
+        this.createShopService.changeSetEmitter.subscribe((changeSet) => {
+            if (changeSet) {
                 this.validStep = true;
-                this.changeset = changeset;
-                this.contractBankAccount = this.createShopService.getContractBankAccount();
+                this.changeSet = changeSet;
             } else {
                 this.validStep = false;
             }
@@ -58,12 +52,12 @@ export class CreateShopComponent implements OnInit {
     }
 
     public createClaim() {
-        this.claimService.createClaim(this.changeset).subscribe(() =>
+        this.claimService.createClaim(this.changeSet).subscribe(() =>
             this.router.navigate(['/']));
     }
 
     private isValid(): boolean {
-        return !!this.changeset[this.currentStep];
+        return Boolean(this.changeSet[this.currentStep]);
     }
 
 }

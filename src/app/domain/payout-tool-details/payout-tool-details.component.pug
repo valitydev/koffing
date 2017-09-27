@@ -1,0 +1,7 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Валюта:
+        .col-xs-12.col-sm-8
+            div {{payoutTool?.currency}}
+    kof-bank-account-details(*ngIf="payoutTool?.details?.payoutToolType === 'PayoutToolBankAccount'", [bankAccount]="payoutTool.details.bankAccount")

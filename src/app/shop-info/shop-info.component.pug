@@ -23,6 +23,11 @@ p-growl([(value)]="messages", [life]="messageLifeTime", [immutable]= "false")
             .x_title
                 h5 Действия
             .x_content
-                div(*ngIf="shop && !shop.isBlocked")
+                span(*ngIf="shop && !shop.isBlocked")
                     button.btn.btn-default(*ngIf="shop.isSuspended", (click)="activateShop()") Активировать магазин
                     button.btn.btn-default(*ngIf="!shop.isSuspended", (click)="suspendShop()") Заморозить магазин
+                button.btn.btn-default(
+                    [disabled]="isDisabledContractChange",
+                    (click)="navigateToContractChange()",
+                    [title]="isDisabledContractChange ? 'Заявка на изменение контракта уже существует' : ''"
+                ) Изменить контракт

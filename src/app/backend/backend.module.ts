@@ -13,6 +13,7 @@ import { SearchService } from './search.service';
 import { InvoiceService } from './invoice.service';
 import { EventService } from './event.service';
 import { UrlShortenerService } from './url-shortener.service';
+import { ClaimService } from './claim.service';
 
 @NgModule({
     providers: [
@@ -28,7 +29,8 @@ import { UrlShortenerService } from './url-shortener.service';
         WebhooksService,
         InvoiceService,
         EventService,
-        UrlShortenerService
+        UrlShortenerService,
+        ClaimService
     ]
 })
 export class BackendModule { }

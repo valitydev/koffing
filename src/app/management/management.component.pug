@@ -7,17 +7,15 @@
                 table.table.table-striped
                     thead
                         tr
-                            th Идентификатор
+                            th Магазин
+                            th Тип заявки
                             th Статус
-                            th Дата и время создания
-                            th Номер ревизии
                             th
                     tbody(*ngFor="let claim of claims")
                         tr
-                            td {{claim.id}}
+                            td {{getShopName(claim)}}
+                            td {{getModificationType(claim) | kofClaimModificationType}}
                             td {{claim.status | kofClaimStatus}}
-                            td {{claim.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
-                            td {{claim.revision}}
                             td
                                 .pull-right
                                     button.btn.btn-xs.btn-default((click)="goToClaimDetails(claim.id)") Детали заявки
@@ -42,4 +40,4 @@
             .x_title
                 h5 Действия
             .x_content
-                button.btn.btn-primary((click)="createShop()") Создать магазин
+                button.btn.btn-default((click)="createShop()") Создать магазин

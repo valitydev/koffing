@@ -1,0 +1,55 @@
+form.form-horizontal.form-label-left.css-form([formGroup]="form", novalidate)
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Зарегистрированное наименование юридического лица
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right.contractor-suggestions(type="text", formControlName="registeredName")
+            i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Регистрационный номер (ОГРН/ОГРНИП)
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right.contractor-suggestions(type="text", formControlName="registeredNumber")
+            i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Идентификационный номер налогоплательщика (ИНН)
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right.contractor-suggestions(type="text", formControlName="inn")
+            i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Почтовый адрес для отправки корреспонденции
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right.contractor-suggestions(type="text", formControlName="postAddress")
+            i.fa.fa-magic.form-control-feedback.right(aria-hidden="true")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Почтовый адрес места нахождения
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control(type="text", formControlName="actualAddress")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Наименование должности ЕИО/представителя
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control(type="text", formControlName="representativePosition")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left ФИО ЕИО/представителя
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control(type="text", formControlName="representativeFullName")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Данные документа ЕИО/представителя
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control(type="text", formControlName="representativeDocument")
+    .ln_solid
+    kof-bank-account-form([form]="bankAccountForm", [suggestionCssClass]="'contract-suggestion'")

@@ -1,0 +1,4 @@
+.btn-group
+    label.btn.btn-sm.btn-default(*ngFor="let payoutToolItem of payoutToolItems", [ngClass]="{'active': payoutToolItem.value === selectedPayoutToolID}")
+        input(type="radio", value="{{payoutToolItem.value}}", (click)="select(payoutToolItem.value)")
+        | {{payoutToolItem.label}}

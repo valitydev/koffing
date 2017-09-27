@@ -5,8 +5,12 @@ import { GrowlModule } from 'primeng/primeng';
 
 import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
-import { DomainInfoModule } from 'koffing/domain-info/domain-info.module';
+import { DomainModule } from 'koffing/domain/domain.module';
 import { ShopInfoComponent } from './shop-info.component';
+import { ContractManageComponent } from './contract-manage/contract-manage.component';
+import { ContractCreateComponent } from './contract-create/contract-create.component';
+import { ContractSelectComponent } from './contract-select/contract-select.component';
+import { PayoutToolSelectComponent } from './payout-tool-select/payout-tool-select.component';
 
 @NgModule({
     imports: [
@@ -15,10 +19,14 @@ import { ShopInfoComponent } from './shop-info.component';
         GrowlModule,
         CommonModule,
         BackendModule,
-        DomainInfoModule,
+        DomainModule
     ],
     declarations: [
         ShopInfoComponent,
+        ContractManageComponent,
+        ContractCreateComponent,
+        ContractSelectComponent,
+        PayoutToolSelectComponent,
     ]
 })
 export class ShopInfoModule { }

@@ -5,21 +5,21 @@
                 .form_wizard.wizard_horizontal
                     ul.wizard_steps
                         li.first_step
-                            a([ngClass]="{'done': currentStep > step.contract, 'selected': currentStep === step.contract}")
+                            a([ngClass]="{'selected': currentStep === step.contract, 'done': currentStep > step.contract}")
                                 span.step_no 1
                                 span.step_descr Контракт
                         li
-                            a([ngClass]="{'disabled': currentStep < step.payoutTool, 'done': currentStep > step.payoutTool, 'selected': currentStep === step.payoutTool}")
+                            a([ngClass]="{'selected': currentStep === step.payoutTool, 'done': currentStep > step.payoutTool, 'disabled': currentStep < step.payoutTool}")
                                 span.step_no 2
                                 span.step_descr Средство вывода
                         li
-                            a([ngClass]="{'disabled': currentStep < step.shop, 'done': currentStep > step.shop, 'selected': currentStep === step.shop}")
+                            a([ngClass]="{'selected': currentStep === step.shop, 'done': currentStep > step.shop, 'disabled': currentStep < step.shop}")
                                 span.step_no 3
                                 span.step_descr Данные магазина
                 .ln_solid
-                kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractGroup")
-                kof-payout-tool-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolGroup", [bankAccount]="contractBankAccount")
-                kof-shop-form(*ngIf="currentStep === step.shop", [form]="shopGroup")
+                kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractForm")
+                kof-payout-tool-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolForm", [bankAccount]="contractForm.value.bankAccount")
+                kof-shop-form(*ngIf="currentStep === step.shop", [form]="shopForm")
                 .ln_solid
                 .row
                     .col-xs-12

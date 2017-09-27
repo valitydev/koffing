@@ -1,10 +1,19 @@
-.row
+.row(*ngIf="claim")
     .col-xs-12.col-md-8.col-md-offset-2
         .x_panel
             .x_title
-                h5 Детали заявки
+                .row
+                    .col-xs-6
+                        h5 Детали заявки
+                    .col-xs-6
+                        button.btn.btn-default.btn-sm.pull-right((click)="back()") Назад
             .x_content
                 form.form-horizontal.form-label-left.css-form
+                    .form-group
+                        .col-xs-12.col-sm-4
+                            label.text-left Тип заявки:
+                        .col-xs-12.col-sm-8
+                            div {{modificationType | kofClaimModificationType}}
                     .form-group
                         .col-xs-12.col-sm-4
                             label.text-left Идентификатор:
@@ -31,24 +40,16 @@
                         .col-xs-12.col-sm-8
                             div {{claim?.status | kofClaimStatus}}
                 .ln_solid
-                .row
+                .row(*ngIf="claim.status === 'ClaimPending'")
                     .col-xs-12
                         kof-revoke-claim([claim]="claim")
 
-        .x_panel(*ngIf="contractCreations")
-            .x_title
-                h5 Данные контракта
-            .x_content
-                kof-contract-creation-details([contractCreations]="contractCreations")
-
-        .x_panel(*ngIf="contractPayoutToolCreations")
-            .x_title
-                h5 Средство вывода
-            .x_content
-                kof-contract-payout-tool-creation-details([contractPayoutToolCreations]="contractPayoutToolCreations")
-
-        .x_panel(*ngIf="shopCreations")
-            .x_title
-                h5 Данные магазина
-            .x_content
-                kof-shop-creation-details([shopCreations]="shopCreations")
+        kof-shop-creation-details(
+            *ngIf="modificationType === ModificationType.shopCreation",
+            [partyModifications]="claim.changeset")
+        kof-contract-binding-details(
+            *ngIf="modificationType === ModificationType.contractBinding",
+            [partyModifications]="claim.changeset")
+        kof-contract-creation-details(
+            *ngIf="modificationType === ModificationType.contractCreation",
+            [partyModifications]="claim.changeset")

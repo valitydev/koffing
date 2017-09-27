@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from './config.service';
 import { Claim } from './model/claim/claim';
-import { PartyModification } from 'koffing/backend/model';
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { PartyModification } from './model/claim/party-modification/party-modification';
+import { CapiHttp } from './capi-http.service';
 
 @Injectable()
 export class ClaimService {

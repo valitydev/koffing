@@ -1,5 +1,5 @@
 import { find } from 'lodash';
-import { Shop } from 'koffing/backend/model/shop/shop';
+import { Shop } from 'koffing/backend';
 
 export class ShopIDStorage {
 
