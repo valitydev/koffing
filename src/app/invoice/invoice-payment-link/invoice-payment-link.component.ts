@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Invoice } from 'koffing/backend/model/invoice';
 import { CheckoutConfigFormService } from 'koffing/checkout/checkout-config-form/checkout-config-form.service';
 import { PaymentLinkService } from 'koffing/checkout/payment-link/payment-link.service';
+import { InvoiceService } from 'koffing/backend/invoice.service';
+import { PaymentMethod } from 'koffing/backend/model/payment-method/payment-method';
 
 @Component({
     selector: 'kof-invoice-payment-link',
@@ -21,17 +23,20 @@ export class InvoicePaymentLinkComponent implements OnInit {
     public checkoutConfigForm: FormGroup;
     public paymentLink: string;
     public paymentLinkVisible: boolean = false;
+    public methods: PaymentMethod[];
 
     constructor(
         private checkoutConfigFormService: CheckoutConfigFormService,
-        private paymentLinkService: PaymentLinkService) {
+        private paymentLinkService: PaymentLinkService,
+        private invoiceService: InvoiceService) {
     }
 
     public ngOnInit() {
         this.checkoutConfigForm = this.checkoutConfigFormService.form;
-        this.checkoutConfigForm.valueChanges.subscribe(() => {
-            this.paymentLinkVisible = false;
-        });
+        this.checkoutConfigForm.valueChanges
+            .subscribe(() => this.paymentLinkVisible = false);
+        this.invoiceService.getInvoicePaymentMethods(this.invoice.id)
+            .subscribe((methods) => this.methods = methods);
     }
 
     public copy() {

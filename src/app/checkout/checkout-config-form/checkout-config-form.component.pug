@@ -2,39 +2,48 @@ form([formGroup]="form", novalidate)
     .form-group
         .row
             .col-xs-12.col-sm-5
-                label.text-left Наименование вашей компании или сайта
+                label.text-left Наименование вашей компании или сайта:
             .col-xs-12.col-sm-7
                 input.form-control(type="text", formControlName="name")
     .form-group
         .row
             .col-xs-12.col-sm-5
-                label.text-left Описание вашего продукта или сервиса
+                label.text-left Описание вашего продукта или сервиса:
             .col-xs-12.col-sm-7
                 input.form-control(type="text", formControlName="description")
     .form-group
         .row
             .col-xs-12.col-sm-5
-                label.text-left Текст кнопки оплаты
+                label.text-left Текст кнопки оплаты:
             .col-xs-12.col-sm-7
                 input.form-control(type="text", formControlName="payButtonLabel")
     .form-group
         .row
             .col-xs-12.col-sm-5
-                label.text-left URL для задания логотипа
+                label.text-left URL для задания логотипа:
             .col-xs-12.col-sm-7
                 input.form-control(type="text", formControlName="logo", placeholder="http(s)://example.com/image.png")
     .form-group
         .row
             .col-xs-12.col-sm-5
-                label.text-left Email плательщика (если известен)
+                label.text-left Email плательщика (если известен):
             .col-xs-12.col-sm-7
                 input.form-control(type="text", formControlName="email", placeholder="example@mail.com")
     .form-group
         .row
             .col-xs-12.col-sm-5
-                label.text-left Redirect URL после упешного завершения платежа
+                label.text-left Redirect URL после упешного завершения платежа:
             .col-xs-12.col-sm-7
                 input.form-control(type="text", formControlName="redirectUrl", placeholder="http(s)://example.com")
+    .form-group(*ngIf="additionalMethods")
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Дополнительные методы оплаты:
+            .col-xs-12.col-sm-5
+                .text-left
+                    input(type="checkbox", formControlName="terminals")
+                    | &nbsp;Терминалы "Евросеть"
+    .ln_solid
     .form-group
         .row
             .col-xs-12
@@ -44,9 +53,10 @@ form([formGroup]="form", novalidate)
     .form-group(*ngIf="form.value.paymentFlowHold")
         .row
             .col-xs-12.col-sm-5
-                label.text-left Политика, которая будет применена по истечении срока удержания
+                label.text-left Политика, которая будет применена по истечении срока удержания:
             .col-xs-12.col-sm-7
                 .btn-group
                     label.btn.btn-sm.btn-default(*ngFor="let holdExpirationItem of holdExpirationItems", [ngClass]="{'active': isSelected(holdExpirationItem.value)}")
                         input(type="radio", formControlName="holdExpiration", value="{{holdExpirationItem.value}}")
                         | {{holdExpirationItem.label}}
+

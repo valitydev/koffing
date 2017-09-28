@@ -84,6 +84,7 @@ export class PaymentLinkService {
         if (shopID === 'TEST') {
             args.applePayTest = true;
         }
+        args.terminals = formValue.terminals;
         return args;
     }
 

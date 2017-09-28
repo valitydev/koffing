@@ -13,7 +13,7 @@ button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + inv
                     a(href="https://rbkmoney.github.io/docs/integrations/checkout/", target="_blank") &nbsp;
                         u Checkout
             .modal-body
-                kof-checkout-config-form
+                kof-checkout-config-form([methods]="methods")
             .modal-footer
                 button.btn.btn-sm.btn-primary(*ngIf="!paymentLinkVisible", (click)="generatePaymentLink()") Сформировать ссылку на оплату
                 .row(*ngIf="paymentLinkVisible")

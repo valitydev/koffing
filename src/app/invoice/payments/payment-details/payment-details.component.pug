@@ -40,15 +40,25 @@ form.form-horizontal.form-label-left.css-form
                     div {{payment.amount | kofRoubleCurrency}} ₽
         .col-xs-12.col-sm-6
             .form-group
-                label.col-sm-5 Данные карты:
+                label.col-sm-5 Метод оплаты:
                 .col-sm-7
-                    div **** **** **** {{payment.paymentToolDetails?.cardNumberMask}} ({{payment.paymentToolDetails?.paymentSystem}})
+                    div {{payment.paymentToolDetails?.detailsType | kofPaymentToolDetailsType}}
     .row
         .col-xs-12.col-sm-6
             .form-group
                 label.col-sm-5 Сумма к зачислению:
                 .col-sm-7
                     div {{payment.amount - payment.fee | kofRoubleCurrency}} ₽
+        .col-xs-12.col-sm-6(*ngIf="payment.paymentToolDetails?.detailsType === 'PaymentToolDetailsPaymentTerminalData'")
+            .form-group
+                label.col-sm-5 Провайдер:
+                .col-sm-7
+                    div {{payment.paymentToolDetails?.provider | kofProviderName}}
+        .col-xs-12.col-sm-6(*ngIf="payment.paymentToolDetails?.detailsType === 'PaymentToolDetailsCardData'")
+            .form-group
+                label.col-sm-5 Данные карты:
+                .col-sm-7
+                    div **** **** **** {{payment.paymentToolDetails?.cardNumberMask}} ({{payment.paymentToolDetails?.paymentSystem}})
     .row(*ngIf="payment.error")
         .col-xs-12.col-sm-6
             .form-group

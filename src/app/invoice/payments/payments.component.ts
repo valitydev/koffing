@@ -31,7 +31,8 @@ export class PaymentsComponent implements OnChanges {
     public search() {
         this.paymentsService.search(this.invoice.shopID, this.invoice.id).subscribe((result) => {
             const processedPayment = result.payments.find((payment) => payment.status === PAYMENT_STATUS.processed);
-            this.onProcessedPayment.emit(!!processedPayment);
+            const pendingPayment = result.payments.find((payment) => payment.status === PAYMENT_STATUS.pending);
+            this.onProcessedPayment.emit(!!processedPayment || !!pendingPayment);
             this.searchResult = result;
         });
     }

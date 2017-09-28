@@ -13,4 +13,5 @@ export class PaymentLinkArguments {
     public applePayTest?: boolean;
     public paymentFlowHold?: boolean;
     public holdExpiration?: string;
+    public terminals?: boolean;
 }
