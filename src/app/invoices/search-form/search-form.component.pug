@@ -44,15 +44,12 @@ form([formGroup]="searchForm", novalidate)
                                 readonlyInput="true")
             .col-sm-3.col-xs-12
                 .form-group
-                    label Номер карты (последние 4 цифры):
-                    input.form-control(
-                    type="number",
-                    maxlength=4
-                    formControlName="cardNumberMask")
+                    label Метод оплаты:
+                    kof-select(formControlName="paymentMethod", [items]="paymentMethods", [placeholder]="'Любой метод'")
             .col-sm-3.col-xs-12
                 .form-group
-                    label Fingerprint:
-                    input.form-control(formControlName="fingerprint")
+                    label Тип проведения платежа:
+                    kof-select(formControlName="paymentFlow", [items]="paymentFlows", [placeholder]="'Любой тип'")
         .row
             .col-sm-3.col-xs-12
                 .form-group
@@ -66,6 +63,15 @@ form([formGroup]="searchForm", novalidate)
                 .form-group
                     label Идентификатор платежа:
                     input.form-control(type="number", formControlName="paymentID")
+        .row
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Номер карты (последние 4 цифры):
+                    input.form-control(type="number", maxlength=4, formControlName="cardNumberMask")
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Fingerprint:
+                    input.form-control(formControlName="fingerprint")
         .row
             .col-sm-9.col-xs-12
                 .reset-button-container

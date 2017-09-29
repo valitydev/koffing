@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { INVOICE_STATUS_LABEL } from 'koffing/invoices/invoice-statuses';
+import { INVOICE_STATUS_LABEL } from 'koffing/invoices/invoice-status-label';
 
 @Pipe({
     name: 'kofInvoiceStatus'

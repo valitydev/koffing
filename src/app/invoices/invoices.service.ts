@@ -15,6 +15,8 @@ export class InvoicesService {
         result.invoiceStatus = formParams.invoiceStatus;
         result.paymentID = formParams.paymentID;
         result.paymentStatus = formParams.paymentStatus;
+        result.paymentMethod = formParams.paymentMethod;
+        result.paymentFlow = formParams.paymentFlow;
         result.payerIP = formParams.ip;
         result.payerEmail = formParams.email;
         result.payerFingerprint = formParams.fingerprint;
