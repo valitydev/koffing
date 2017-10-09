@@ -39,17 +39,25 @@
                             label.text-left Статус:
                         .col-xs-12.col-sm-8
                             div {{claim?.status | kofClaimStatus}}
+                    .form-group(*ngIf="claim?.reason")
+                        .col-xs-12.col-sm-4
+                            label.text-left Причина:
+                        .col-xs-12.col-sm-8
+                            div {{claim?.reason}}
                 .ln_solid
                 .row(*ngIf="claim.status === 'ClaimPending'")
                     .col-xs-12
                         kof-revoke-claim([claim]="claim")
 
         kof-shop-creation-details(
-            *ngIf="modificationType === ModificationType.shopCreation",
-            [partyModifications]="claim.changeset")
-        kof-contract-binding-details(
-            *ngIf="modificationType === ModificationType.contractBinding",
+            *ngIf="modificationType === MODIFICATION_TYPE.ShopCreation",
             [partyModifications]="claim.changeset")
         kof-contract-creation-details(
-            *ngIf="modificationType === ModificationType.contractCreation",
+            *ngIf="modificationType === MODIFICATION_TYPE.ContractCreation",
+            [partyModifications]="claim.changeset")
+        kof-payout-tool-creation-details(
+            *ngIf="modificationType === MODIFICATION_TYPE.ContractPayoutToolCreation",
+            [partyModifications]="claim.changeset")
+        kof-contract-binding-details(
+            *ngIf="modificationType === MODIFICATION_TYPE.ShopContractBinding",
             [partyModifications]="claim.changeset")

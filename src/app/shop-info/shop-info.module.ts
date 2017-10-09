@@ -11,6 +11,7 @@ import { ContractManageComponent } from './contract-manage/contract-manage.compo
 import { ContractCreateComponent } from './contract-create/contract-create.component';
 import { ContractSelectComponent } from './contract-select/contract-select.component';
 import { PayoutToolSelectComponent } from './payout-tool-select/payout-tool-select.component';
+import { PayoutToolCreateComponent } from './payout-tool-create/payout-tool-create.component';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { PayoutToolSelectComponent } from './payout-tool-select/payout-tool-sele
         ContractCreateComponent,
         ContractSelectComponent,
         PayoutToolSelectComponent,
+        PayoutToolCreateComponent,
     ]
 })
 export class ShopInfoModule { }

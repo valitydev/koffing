@@ -19,14 +19,13 @@
                 h5 Выбор средства вывода
             .x_content
                 kof-payout-tool-select([contractID]="selectedContract.id", [currentPayoutToolID]="shop.payoutToolID", (onSelect)="selectPayoutTool($event)")
-
-                div(*ngIf="selectedPayoutTool")
-                    .ln_solid
-                    kof-payout-tool-details([payoutTool]="selectedPayoutTool")
+                .ln_solid
+                kof-payout-tool-details(*ngIf="selectedPayoutTool", [payoutTool]="selectedPayoutTool")
+                kof-payout-tool-create(*ngIf="!selectedPayoutTool", [contractID]="selectedContract.id", (onCreate)="createAndBindPayoutTool($event)")
 
         .x_panel(*ngIf="selectedContract && selectedPayoutTool && (selectedContract.id !== shop.contractID || selectedPayoutTool.id !== shop.payoutToolID)")
             .x_content
-                button.btn.btn-primary.pull-right.clear-margin((click)="bindContract()") Создать заявку на изменение контракта
+                button.btn.btn-primary.pull-right.clear-margin((click)="bindContract()") Создать заявку
 
         .x_panel(*ngIf="!selectedContract")
             .x_content

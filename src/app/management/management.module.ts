@@ -10,11 +10,12 @@ import { CreateShopComponent } from './create-shop/create-shop.component';
 import { ManagementComponent } from './management.component';
 import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { ClaimStatusPipe } from './claim-status.pipe';
-import { ContractCreationDetailsComponent } from './claim-details/contract-creation-details/contract-creation-details.component';
-import { ContractBindingDetailsComponent } from './claim-details/contract-binding-details/contract-binding-details.component';
 import { ShopCreationDetailsComponent } from './claim-details/shop-creation-details/shop-creation-details.component';
+import { ContractCreationDetailsComponent } from './claim-details/contract-creation-details/contract-creation-details.component';
+import { PayoutToolCreationDetailsComponent } from './claim-details/payout-tool-creation-details/payout-tool-creation-details.component';
+import { ContractBindingDetailsComponent } from './claim-details/contract-binding-details/contract-binding-details.component';
 import { RevokeClaimComponent } from './claim-details/revoke-claim/revoke-claim.component';
-import { ClaimTypePipe } from './claim-type.pipe';
+import { ModificationTypePipe } from './modification-type.pipe';
 import { ClaimModificationService } from './claim-modification.service';
 
 @NgModule({
@@ -32,11 +33,12 @@ import { ClaimModificationService } from './claim-modification.service';
         CreateShopComponent,
         ClaimStatusPipe,
         ClaimDetailsComponent,
-        ContractCreationDetailsComponent,
-        ContractBindingDetailsComponent,
         ShopCreationDetailsComponent,
+        ContractCreationDetailsComponent,
+        PayoutToolCreationDetailsComponent,
+        ContractBindingDetailsComponent,
         RevokeClaimComponent,
-        ClaimTypePipe
+        ModificationTypePipe
     ],
     providers: [
         ClaimModificationService

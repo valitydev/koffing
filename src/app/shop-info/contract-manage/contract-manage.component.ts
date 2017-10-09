@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Claim, Shop, Contract, PayoutTool, ShopContractBinding, PartyModification } from 'koffing/backend';
+import {
+    Claim, Shop, Contract, PayoutTool, ShopContractBinding, PartyModification,
+    ContractPayoutToolCreation
+} from 'koffing/backend';
 import { ClaimService } from 'koffing/backend/claim.service';
 import { ShopService } from 'koffing/backend/shop.service';
 
@@ -46,6 +49,11 @@ export class ContractManageComponent implements OnInit {
 
     public createAndBindContract(changeSet: PartyModification[]) {
         this.claimService.createClaim(changeSet).subscribe((claim: Claim) => this.navigateToRoot());
+    }
+
+    public createAndBindPayoutTool(payoutToolCreation: ContractPayoutToolCreation) {
+        const shopContractBinding = new ShopContractBinding(this.shop.id, payoutToolCreation.contractID, payoutToolCreation.payoutToolID);
+        this.claimService.createClaim([payoutToolCreation, shopContractBinding]).subscribe((claim: Claim) => this.navigateToRoot());
     }
 
     public navigateBack() {

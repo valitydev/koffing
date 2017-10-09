@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ClaimStatusPipe implements PipeTransform {
 
-    private statuses = {
+    private STATUSES = {
         ClaimAccepted: 'Подтверждена',
         ClaimDenied: 'Отклонена',
         ClaimPending: 'На рассмотрении',
@@ -13,7 +13,7 @@ export class ClaimStatusPipe implements PipeTransform {
     };
 
     public transform(input: string): string {
-        const status = this.statuses[input];
+        const status = this.STATUSES[input];
         return status ? status : input;
     }
 }

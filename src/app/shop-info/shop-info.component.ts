@@ -6,7 +6,7 @@ import { Shop, Contract, PayoutTool } from 'koffing/backend';
 import { ShopService } from 'koffing/backend/shop.service';
 import { ContractService } from 'koffing/backend/contract.service';
 import { PayoutToolService } from 'koffing/backend/payout-tool.service';
-import { CLAIM_TYPE } from 'koffing/management/claim-type';
+import { MODIFICATION_TYPE } from 'koffing/management/modification-type';
 import { ShopInfoService } from './shop-info.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class ShopInfoComponent implements OnInit {
         this.route.parent.params.subscribe((params) => {
             const shopID = params['shopID'];
             this.loadShop(shopID);
-            this.shopInfoService.checkExistenceClaim(shopID, CLAIM_TYPE.ShopContractBinding).subscribe((isExist) => {
+            this.shopInfoService.checkExistenceClaim(shopID, MODIFICATION_TYPE.ShopContractBinding).subscribe((isExist) => {
                 this.isDisabledContractChange = isExist;
             });
         });
@@ -43,6 +43,10 @@ export class ShopInfoComponent implements OnInit {
 
     public navigateToContractChange() {
         this.router.navigate(['shop', this.shop.id, 'contract']);
+    }
+
+    public navigateToPayoutToolChange() {
+        this.router.navigate(['shop', this.shop.id, 'contract', this.shop.contractID, 'payout-tool']);
     }
 
     public activateShop() {

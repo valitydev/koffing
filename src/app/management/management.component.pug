@@ -17,8 +17,7 @@
                             td {{getModificationType(claim) | kofClaimModificationType}}
                             td {{claim.status | kofClaimStatus}}
                             td
-                                .pull-right
-                                    button.btn.btn-xs.btn-default((click)="goToClaimDetails(claim.id)") Детали заявки
+                                button.btn.btn-xs.btn-default.pull-right((click)="goToClaimDetails(claim.id)") Детали заявки
         .x_panel
             .x_title
                 h5 Магазины
