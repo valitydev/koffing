@@ -10,6 +10,7 @@ import { InvoiceSearchResult } from './model/invoice-search-result';
 import { PaymentSearchResult } from './model/payment-search-result';
 import { SearchInvoicesParams } from './requests/search-invoices-params';
 import { SearchPaymentsParams } from './requests/search-payments-params';
+import { SearchPayoutsParams } from './requests/search-payouts-params';
 
 @Injectable()
 export class SearchService {
@@ -28,6 +29,12 @@ export class SearchService {
     public searchPayments(shopID: string, paymentsParams: SearchPaymentsParams): Observable<PaymentSearchResult> {
         const search = this.toSearchParams(paymentsParams);
         return this.http.get(`${this.getEndpoint(shopID)}/payments`, {search})
+            .map((res) => res.json());
+    }
+
+    public searchPayouts(shopID: string, payoutsParams: SearchPayoutsParams): Observable<PaymentSearchResult> {
+        const search = this.toSearchParams(payoutsParams);
+        return this.http.get(`${this.getEndpoint(shopID)}/payouts`, {search})
             .map((res) => res.json());
     }
 

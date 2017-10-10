@@ -18,6 +18,7 @@ import { InvoiceModule } from 'koffing/invoice/invoice.module';
 import { DocumentsModule } from 'koffing/documents/documents.module';
 import { AnalyticsModule } from 'koffing/analytics/analytics.module';
 import { ShopInfoModule } from 'koffing/shop-info/shop-info.module';
+import { PayoutsModule } from 'koffing/payouts/payouts.module';
 import { LandingContainerComponent } from './components/landing-container/landing-container.component';
 import { LandingTopPanelComponent } from './components/landing-container/landing-top-panel/landing-top-panel.component';
 import { TopPanelActionsComponent } from './components/top-panel-actions/top-panel-actions.component';
@@ -42,6 +43,7 @@ import { ShopContainerComponent } from './components/shop-container/shop-contain
         DocumentsModule,
         AnalyticsModule,
         ShopInfoModule,
+        PayoutsModule,
     ],
     declarations: [
         ContainerComponent,

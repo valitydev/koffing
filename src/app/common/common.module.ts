@@ -10,8 +10,11 @@ import { MinValueValidatorDirective } from './min-value.directive';
 import { MaxValueValidatorDirective } from './max-value.directive';
 import { RoubleCurrencyPipe } from './rouble-currency.pipe';
 import { DateRangeSelectorComponent } from './date-range-selector/date-range-selector.component';
+import { PaginateComponent } from './paginate/paginate.component';
+import { PaginationPipe } from './paginate/pagination.pipe';
 import { InvoiceStatusPipe } from './invoice-statuses.pipe';
 import { PaymentStatusPipe } from './payment-statuses.pipe';
+import { PayoutStatusPipe } from './payout-statuses.pipe';
 
 @NgModule({
     imports: [
@@ -26,8 +29,11 @@ import { PaymentStatusPipe } from './payment-statuses.pipe';
         MaxValueValidatorDirective,
         RoubleCurrencyPipe,
         DateRangeSelectorComponent,
+        PaginateComponent,
+        PaginationPipe,
         InvoiceStatusPipe,
-        PaymentStatusPipe
+        PaymentStatusPipe,
+        PayoutStatusPipe
     ],
     exports: [
         SelectComponent,
@@ -36,8 +42,11 @@ import { PaymentStatusPipe } from './payment-statuses.pipe';
         MaxValueValidatorDirective,
         RoubleCurrencyPipe,
         DateRangeSelectorComponent,
+        PaginateComponent,
+        PaginationPipe,
         InvoiceStatusPipe,
-        PaymentStatusPipe
+        PaymentStatusPipe,
+        PayoutStatusPipe
     ],
     providers: [
         EventPollerService

@@ -7,4 +7,5 @@ export * from './shop';
 export * from './payment';
 
 export * from './invoice';
+export * from './payout';
 export * from './bank-account';

@@ -52,6 +52,7 @@ export class SearchFormComponent implements OnInit {
         this.paymentStatuses = map(PAYMENT_STATUS_LABEL, (name, key) => new SelectItem(key, name));
         this.paymentMethods = map(PAYMENT_METHOD_LABEL, (name, key) => new SelectItem(key, name));
         this.paymentFlows = map(PAYMENT_FLOW_LABEL, (name, key) => new SelectItem(key, name));
+
         this.searchForm = this.searchFormService.searchForm;
         this.searchForm.valueChanges
             .filter((value) => this.searchForm.status === 'VALID')

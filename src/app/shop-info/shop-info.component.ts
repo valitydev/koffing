@@ -45,10 +45,6 @@ export class ShopInfoComponent implements OnInit {
         this.router.navigate(['shop', this.shop.id, 'contract']);
     }
 
-    public navigateToPayoutToolChange() {
-        this.router.navigate(['shop', this.shop.id, 'contract', this.shop.contractID, 'payout-tool']);
-    }
-
     public activateShop() {
         this.shopService.activateShop(this.shop.id).subscribe(() => {
             this.shop.isSuspended = !this.shop.isSuspended;

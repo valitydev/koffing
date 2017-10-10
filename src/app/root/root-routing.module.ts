@@ -6,6 +6,7 @@ import { RegistryComponent } from 'koffing/documents/registry/registry.component
 import { WebhooksComponent } from 'koffing/webhooks/webhooks.component';
 import { TokenComponent } from 'koffing/tokenization/components/token/token.component';
 import { AnalyticsComponent } from 'koffing/analytics/analytics.component';
+import { PayoutsComponent } from 'koffing/payouts/payouts.component';
 import { ManagementComponent } from 'koffing/management/management.component';
 import { LandingContainerComponent } from './components/landing-container/landing-container.component';
 import { ShopContainerComponent } from './components/shop-container/shop-container.component';
@@ -62,6 +63,10 @@ import { ContractManageComponent } from 'koffing/shop-info/contract-manage/contr
                     {
                         path: 'analytics',
                         component: AnalyticsComponent
+                    },
+                    {
+                        path: 'payouts',
+                        component: PayoutsComponent
                     },
                     {
                         path: 'info',

@@ -1,0 +1,24 @@
+form([formGroup]="form", novalidate)
+    .row
+        .col-xs-12.col-sm-6
+            .form-group
+                label Временной интервал:
+                .row
+                    .col-xs-12.col-sm-6
+                        .ui-calendar.search-form
+                            p-calendar.ui-inputtext.search-form(
+                                formControlName="from",
+                                [maxDate]="form.controls.to.value",
+                                dateFormat = "dd.mm.yy",
+                                readonlyInput="true")
+                    .col-xs-12.col-sm-6
+                        .ui-calendar.search-form
+                            p-calendar.ui-inputtext.search-form(
+                                formControlName="to",
+                                [minDate]="form.controls.from.value",
+                                dateFormat = "dd.mm.yy",
+                                readonlyInput="true")
+        .col-xs-12.col-sm-3
+            .form-group
+                label Идентификатор выплаты:
+                input.form-control(formControlName="payoutID")

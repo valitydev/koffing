@@ -1,6 +1,6 @@
 .row
     .col-md-2 Всего: {{ size }}
-    .col-md-10
+    .col-md-10.pull-right
         .dataTables_paginate.paging_simple_numbers(*ngIf="size > limit")
             ul.pagination.custom_pagination
                 li.paginate_button.previous((click)="back($event)")

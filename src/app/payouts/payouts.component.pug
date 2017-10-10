@@ -1,0 +1,15 @@
+.row
+    .col-xs-12.col-md-10.col-md-offset-1
+        .x_panel
+            .x_title
+                h5 Поиск выплат
+            .x_content
+                kof-search-payouts-form((onReadyParams)="searchPayouts()")
+                .ln_solid
+                kof-search-payouts-result([payouts]="payouts")
+                kof-paginate(
+                    [size]="totalCount",
+                    [limit]="limit",
+                    [offset]="offset",
+                    [pagesOnScreen]="10",
+                    (onChange)="onChangePage($event)")
