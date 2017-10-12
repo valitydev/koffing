@@ -9,6 +9,8 @@ import { InvoiceTemplateFormService } from '../invoice-template-form/invoice-tem
 import { PaymentLinkService } from 'koffing/checkout/payment-link/payment-link.service';
 import { InvoiceTemplateAndToken } from 'koffing/backend';
 import { CheckoutConfigFormService } from 'koffing/checkout/checkout-config-form/checkout-config-form.service';
+import { PaymentMethod } from 'koffing/backend/model/payment-method/payment-method';
+import { PAYMENT_LINK_CREATION_STEP } from 'koffing/invoices/invoice-template-payment-link/invoice-template-payment-link-step';
 
 @Component({
     selector: 'kof-invoice-template-payment-link',
@@ -31,6 +33,9 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
     public paymentLink: string;
     public isCreated: boolean;
     public paymentLinkVisible: boolean = false;
+    public methods: PaymentMethod[];
+    public step = PAYMENT_LINK_CREATION_STEP;
+    public currentStep = PAYMENT_LINK_CREATION_STEP.template;
 
     private invoiceTemplateAndToken: InvoiceTemplateAndToken;
 
@@ -73,7 +78,8 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
             this.isCreated = true;
             this.invoiceTemplateForm.disable();
             this.invoiceTemplateAndToken = response;
-            this.generatePaymentLink();
+            this.invoiceTemplateService.getInvoiceTemplatePaymentMethods(response.invoiceTemplate.id).subscribe((methods) => this.methods = methods);
+            this.currentStep = this.currentStep + 1;
         });
     }
 

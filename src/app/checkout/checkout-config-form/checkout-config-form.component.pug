@@ -41,22 +41,23 @@ form([formGroup]="form", novalidate)
                 label.text-left Дополнительные методы оплаты:
             .col-xs-12.col-sm-5
                 .text-left
-                    input(type="checkbox", formControlName="terminals")
+                    input(type="checkbox", formControlName="terminals", (click)="toggleTerminals()")
                     | &nbsp;Терминалы "Евросеть"
-    .ln_solid
-    .form-group
-        .row
-            .col-xs-12
-                label.text-left
-                    input(type="checkbox", formControlName="paymentFlowHold")
-                    | &nbsp;Платеж производить с удержанием денежных средств
-    .form-group(*ngIf="form.value.paymentFlowHold")
-        .row
-            .col-xs-12.col-sm-5
-                label.text-left Политика, которая будет применена по истечении срока удержания:
-            .col-xs-12.col-sm-7
-                .btn-group
-                    label.btn.btn-sm.btn-default(*ngFor="let holdExpirationItem of holdExpirationItems", [ngClass]="{'active': isSelected(holdExpirationItem.value)}")
-                        input(type="radio", formControlName="holdExpiration", value="{{holdExpirationItem.value}}")
-                        | {{holdExpirationItem.label}}
+    div(*ngIf="!form.value.terminals")
+        .ln_solid
+        .form-group
+            .row
+                .col-xs-12
+                    label.text-left
+                        input(type="checkbox", formControlName="paymentFlowHold")
+                        | &nbsp;Платеж производить с удержанием денежных средств
+        .form-group(*ngIf="form.value.paymentFlowHold")
+            .row
+                .col-xs-12.col-sm-5
+                    label.text-left Политика, которая будет применена по истечении срока удержания:
+                .col-xs-12.col-sm-7
+                    .btn-group
+                        label.btn.btn-sm.btn-default(*ngFor="let holdExpirationItem of holdExpirationItems", [ngClass]="{'active': isSelected(holdExpirationItem.value)}")
+                            input(type="radio", formControlName="holdExpiration", value="{{holdExpirationItem.value}}")
+                            | {{holdExpirationItem.label}}
 

@@ -10,21 +10,27 @@ button.btn.btn-default.btn-block(data-toggle="modal", [attr.data-target]="'#invo
                     span(aria-hidden="true") &times;
                 h4.modal-title
                     | Создание платежной ссылки
+                .ln_solid
+                .form_wizard.wizard_horizontal
+                    ul.wizard_steps
+                        li.first_step
+                            a([ngClass]="{'selected': currentStep === step.template, 'done': currentStep > step.template}")
+                                span.step_no 1
+                                span.step_descr Конфигурирование инвойса
+                        li
+                            a([ngClass]="{'selected': currentStep === step.config, 'done': currentStep > step.config, 'disabled': currentStep < step.template}")
+                                span.step_no 2
+                                span.step_descr Конфигурирование формы оплаты
             .modal-body
-                kof-invoice-template-form([form]="invoiceTemplateForm")
-                .ln_solid
-                h5 Параметры платежной формы
-                    a(href="https://rbkmoney.github.io/docs/integrations/checkout/", target="_blank") &nbsp;
-                        u Checkout
-                .ln_solid
-                kof-checkout-config-form
+                kof-invoice-template-form(*ngIf="currentStep === step.template", [form]="invoiceTemplateForm")
+                kof-checkout-config-form(*ngIf="currentStep === step.config", [methods]="methods")
             .modal-footer
-                button.btn.btn-sm.btn-primary.pull-right(
-                    *ngIf="!isCreated",
-                    [disabled]="invoiceTemplateForm.invalid",
-                    (click)="createInvoiceTemplate()")
-                    | Сформировать ссылку на оплату
-                div(*ngIf="isCreated")
+                div(*ngIf="!isCreated && currentStep === step.template")
+                    button.btn.btn-sm.btn-default(
+                        *ngIf="!paymentLinkVisible",
+                        (click)="createInvoiceTemplate()",
+                        [disabled]="invoiceTemplateForm.invalid") Далее
+                div(*ngIf="isCreated && currentStep === step.config")
                     button.btn.btn-sm.btn-primary(*ngIf="!paymentLinkVisible", (click)="generatePaymentLink()") Сформировать ссылку на оплату
                     .row(*ngIf="paymentLinkVisible")
                         .col-xs-12.col-sm-7.col-sm-offset-5
@@ -32,3 +38,4 @@ button.btn.btn-default.btn-block(data-toggle="modal", [attr.data-target]="'#invo
                                 input.form-control(type="text", #paymentLinkInput, readonly, [value]="paymentLink")
                                 span.input-group-btn
                                     button.btn.btn-sm.btn-primary((click)="copy()") Скопировать
+

@@ -6,6 +6,7 @@ import { ConfigService } from './config.service';
 import { InvoiceTemplate } from 'koffing/backend/model';
 import { InvoiceTemplateAndToken } from 'koffing/backend/model';
 import { InvoiceTemplateParams } from './requests/invoice-template-params';
+import { PaymentMethod } from 'koffing/backend/model/payment-method/payment-method';
 
 @Injectable()
 export class InvoiceTemplateService {
@@ -31,5 +32,9 @@ export class InvoiceTemplateService {
 
     public deleteInvoiceTemplate(invoiceTemplateID: string): Observable<any> {
         return this.http.delete(`${this.invoiceTemplatesUrl}/${invoiceTemplateID}`).map(res => res.json());
+    }
+    
+    public getInvoiceTemplatePaymentMethods(invoiceTemplateID: string): Observable<PaymentMethod[]> {
+        return this.http.get(`${this.invoiceTemplatesUrl}/${invoiceTemplateID}/payment-methods`).map(res => res.json());
     }
 }

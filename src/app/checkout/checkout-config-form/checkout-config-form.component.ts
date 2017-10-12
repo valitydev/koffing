@@ -45,4 +45,11 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
     public isSelected(holdExpiration: string): boolean {
         return this.form.value.holdExpiration === holdExpiration;
     }
+
+    public toggleTerminals() {
+        this.form.patchValue({
+            paymentFlowHold: false,
+            terminals: !this.form.value.terminals
+        });
+    }
 }
