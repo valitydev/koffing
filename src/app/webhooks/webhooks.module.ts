@@ -7,6 +7,7 @@ import { WebhooksListDetailsComponent } from './webhook-details/webhook-details.
 import { CommonModule } from 'koffing/common/common.module';
 import { CreateWebhookComponent } from './create-webhook/create-webhook.component';
 import { WebhookStatusPipe } from './webhook-status.pipe';
+import { WebhookTopicPipe } from './webhook-topic.pipe';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { WebhookStatusPipe } from './webhook-status.pipe';
         WebhooksComponent,
         WebhooksListDetailsComponent,
         CreateWebhookComponent,
-        WebhookStatusPipe
+        WebhookStatusPipe,
+        WebhookTopicPipe
     ]
 })
 export class WebhooksModule { }

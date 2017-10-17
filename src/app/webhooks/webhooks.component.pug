@@ -15,6 +15,7 @@
                     thead
                         tr
                             th URL
+                            th Предмет оповещений
                             th Статус
                             th
                     tbody(*ngFor="let item of webhooksTableItems")
@@ -22,6 +23,7 @@
                             td {{item.webhook.url}}
                             td
                                 span.label.label-success([ngClass]="{'label-danger': !item.webhook.active}") {{item.webhook.active | kofWebhookStatus}}
+                            td {{item.webhook?.scope?.topic | kofWebhookTopic}}
                             td
                                 .pull-right
                                     button.btn.btn-xs.btn-default((click)="toggleWebhookDetailsPanel(item)")

@@ -8,6 +8,16 @@
                     .form-group
                         .row
                             .col-xs-12.col-sm-5
+                                label.text-left Предмет оповещений:
+                                    span.highlighted &nbsp;*
+                            .col-xs-12.col-sm-7
+                                .btn-group
+                                    label.btn.btn-sm.btn-default(*ngFor="let topicItem of topicItems", [ngClass]="{'active': isTopicActive(topicItem.value)}")
+                                        input(type="radio", formControlName="topic", value="{{topicItem.value}}", (click)="selectTopic()")
+                                        | {{topicItem.label}}
+                    .form-group
+                        .row
+                            .col-xs-12.col-sm-5
                                 label.text-left URL, на который будут поступать оповещения о произошедших событиях:
                                     span.highlighted &nbsp;*
                             .col-xs-12.col-sm-7
@@ -18,13 +28,21 @@
                                 .col-xs-12.col-sm-5
                                     label.text-left Набор типов событий, о которых следует оповещать:
                                         span.highlighted &nbsp;*
-                                .col-xs-12.col-sm-7(formGroupName="eventTypes")
-                                    .checkbox(*ngFor="let eventType of eventTypes")
-                                        label
-                                            input(type="checkbox", [formControlName]="eventType.name")
-                                            span
-                                                strong {{eventType.name}}
-                                                | &nbsp;({{eventType.description}})
+                                .col-xs-12.col-sm-7
+                                    div(*ngIf="form.value.topic === 'InvoicesTopic'", formGroupName="eventTypes")
+                                        .checkbox(*ngFor="let eventType of invoiceEventTypes")
+                                            label
+                                                input(type="checkbox", [formControlName]="eventType.name")
+                                                span
+                                                    strong {{eventType.name}}
+                                                    | &nbsp;({{eventType.description}})
+                                    div(*ngIf="form.value.topic === 'CustomersTopic'", formGroupName="eventTypes")
+                                        .checkbox(*ngFor="let eventType of customerEventTypes")
+                                            label
+                                                input(type="checkbox", [formControlName]="eventType.name")
+                                                span
+                                                    strong {{eventType.name}}
+                                                    | &nbsp;({{eventType.description}})
 
                     .ln_solid
                     .form-group
