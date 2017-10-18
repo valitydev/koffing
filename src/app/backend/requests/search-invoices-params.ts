@@ -6,14 +6,15 @@ export class SearchInvoicesParams {
     public invoiceID?: string;
     public invoiceAmount?: number;
     public invoiceStatus?: string;
-    public invoiceTemplateID?: string;
     public paymentID?: string;
     public paymentAmount?: number;
     public paymentStatus?: string;
-    public paymentMethod?: string;
-    public paymentFlow?: string;
+    public paymentMethod?: 'bankCard' | 'bankTerminal';
+    public paymentFlow?: 'instant' | 'hold';
+    public paymentTerminalProvider?: 'euroset';
     public payerIP?: string;
     public payerEmail?: string;
     public payerFingerprint?: string;
     public cardNumberMask?: string;
+    public customerID?: string;
 }

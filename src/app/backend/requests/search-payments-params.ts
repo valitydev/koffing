@@ -4,12 +4,15 @@ export class SearchPaymentsParams {
     public limit: number;
     public offset?: number;
     public paymentStatus?: string;
+    public paymentFlow?: 'instant' | 'hold';
+    public paymentMethod?: 'bankCard' | 'paymentTerminal';
+    public paymentTerminalProvider?: 'euroset';
     public invoiceID?: string;
-    public invoiceTemplateID?: string;
     public paymentID?: string;
     public payerEmail?: string;
     public payerIP?: string;
-    public cardNumberMask?: string;
     public payerFingerprint?: string;
+    public customerID?: string;
+    public cardNumberMask?: string;
     public paymentAmount?: number;
 }

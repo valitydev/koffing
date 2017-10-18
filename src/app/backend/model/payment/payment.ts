@@ -1,20 +1,20 @@
 import { LogicError } from '../logic-error';
-import { ContactInfo } from '../contact-info';
 import { PaymentFlow } from './payment-flow';
+import { GeoLocationInfo } from '../geo-location-info';
+import { Payer } from '../payer';
 
 export class Payment {
     public id: string;
     public invoiceID: string;
+    public shopID: string;
     public createdAt: string;
     public amount: number;
     public currency: string;
-    public contactInfo: ContactInfo;
-    public paymentSession: string;
-    public paymentToolToken: string;
     public fee: number;
-    public fingerprint: string;
-    public payerIP: string;
     public status: string;
     public error: LogicError;
     public flow: PaymentFlow;
+    public metadata: object;
+    public geoLocationInfo: GeoLocationInfo;
+    public payer: Payer;
 }

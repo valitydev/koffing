@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PaymentToolDetailsTypePipe implements PipeTransform {
 
     private names = {
-        PaymentToolDetailsPaymentTerminalData: 'Терминал',
-        PaymentToolDetailsCardData: 'Банковская карта'
+        PaymentToolDetailsPaymentTerminal: 'Терминал',
+        PaymentToolDetailsBankCard: 'Банковская карта'
     };
 
     public transform(input: string): string {

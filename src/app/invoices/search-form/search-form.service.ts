@@ -74,7 +74,8 @@ export class SearchFormService {
             paymentStatus: '',
             paymentMethod: '',
             paymentFlow: '',
-            fingerprint: ''
+            fingerprint: '',
+            customerID: ''
         });
     }
 

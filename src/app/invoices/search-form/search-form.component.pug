@@ -72,6 +72,10 @@ form([formGroup]="searchForm", novalidate)
                 .form-group
                     label Fingerprint:
                     input.form-control(formControlName="fingerprint")
+            .col-sm-3.col-xs-12
+                .form-group
+                    label Идентификатор плательщика:
+                    input.form-control(formControlName="customerID")
         .row
             .col-sm-9.col-xs-12
                 .reset-button-container

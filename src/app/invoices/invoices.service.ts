@@ -21,6 +21,7 @@ export class InvoicesService {
         result.payerEmail = formParams.email;
         result.payerFingerprint = formParams.fingerprint;
         result.cardNumberMask = formParams.cardNumberMask;
+        result.customerID = formParams.customerID;
         return result;
     }
 }

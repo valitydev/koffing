@@ -14,6 +14,7 @@ import { InvoiceService } from './invoice.service';
 import { EventService } from './event.service';
 import { UrlShortenerService } from './url-shortener.service';
 import { ClaimService } from './claim.service';
+import { CustomerService } from './customer.service';
 
 @NgModule({
     providers: [
@@ -30,7 +31,8 @@ import { ClaimService } from './claim.service';
         InvoiceService,
         EventService,
         UrlShortenerService,
-        ClaimService
+        ClaimService,
+        CustomerService
     ]
 })
 export class BackendModule { }

@@ -24,7 +24,7 @@ export class InvoiceService {
     }
 
     public createInvoiceAccessToken(invoiceID: string): Observable<InvoiceAccessToken> {
-        return this.http.post(`${this.endpoint}/${invoiceID}/access_tokens`, {})
+        return this.http.post(`${this.endpoint}/${invoiceID}/access-tokens`, {})
             .map((res) => res.json());
     }
 

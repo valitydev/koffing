@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { filter, forEach, find } from 'lodash';
 import { Observable, Observer } from 'rxjs';
-import 'rxjs/add/observable/forkJoin';
 
 import { PAYMENT_STATUS } from 'koffing/backend/constants/payment-status';
 import { ShopService } from 'koffing/backend/shop.service';
@@ -15,6 +14,8 @@ import { RegistryItem } from './registry-item';
 import { Shop } from 'koffing/backend/model/shop/shop';
 import { Contract } from 'koffing/backend/model/contract/contract';
 import { RussianLegalEntity } from 'koffing/backend/model/contract/contractor/russian-legal-entity';
+import { PaymentResourcePayer } from 'koffing/backend/model/payer/payment-resource-payer';
+import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-params';
 
 @Injectable()
 export class RegistryDataService {
@@ -30,8 +31,8 @@ export class RegistryDataService {
     public getRegistry(shopID: string, fromTime: Date, toTime: Date): Observable<Registry> {
         return Observable.create((observer: Observer<Registry>) => {
             const searchParams = this.toSearchParams(fromTime, toTime);
-            const observablePayments = this.searchService.searchPayments(shopID, searchParams);
-            const observableInvoices = this.searchService.searchInvoices(shopID, searchParams);
+            const observablePayments = this.searchService.searchPayments(shopID, searchParams as SearchPaymentsParams);
+            const observableInvoices = this.searchService.searchInvoices(shopID, searchParams as SearchInvoicesParams);
             const observableContracts = this.contractService.getContracts();
             const observableShop = this.shopService.getShopByID(shopID);
             Observable.forkJoin([observablePayments, observableInvoices, observableContracts, observableShop]).subscribe((response) => {
@@ -57,7 +58,12 @@ export class RegistryDataService {
             registryItem.paymentDate = payment.createdAt;
             registryItem.amount = payment.amount;
             registryItem.fee = payment.fee;
-            registryItem.userEmail = payment.contactInfo.email ? payment.contactInfo.email : '';
+            if (payment.payer.payerType === 'PaymentResourcePayer') {
+                const payer = payment.payer as PaymentResourcePayer;
+                registryItem.userEmail = payer.contactInfo.email;
+            } else {
+                registryItem.userEmail = '';
+            }
             registryItem.product = foundInvoice.product;
             registryItem.description = foundInvoice.description;
             registryItems.push(registryItem);
@@ -75,7 +81,7 @@ export class RegistryDataService {
         return client;
     }
 
-    private toSearchParams(fromTime: Date, toTime: Date): SearchPaymentsParams {
+    private toSearchParams(fromTime: Date, toTime: Date): SearchPaymentsParams | SearchInvoicesParams {
         const searchParams = new SearchPaymentsParams();
         searchParams.fromTime = fromTime;
         searchParams.toTime = toTime;

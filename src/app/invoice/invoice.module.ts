@@ -17,6 +17,7 @@ import { PaymentCaptureComponent } from './payments/payment-capture/payment-capt
 import { PaymentRefundComponent } from './payments/payment-refund/payment-refund.component';
 import { PaymentToolDetailsTypePipe } from './payments/payment-details/payment-tool-details-type.pipe';
 import { ProviderNamePipe } from './payments/payment-details/provider-name.pipe';
+import { CustomerStatusPipe } from './payments/payment-details/customer-status.pipe';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { ProviderNamePipe } from './payments/payment-details/provider-name.pipe'
         PaymentCaptureComponent,
         PaymentRefundComponent,
         PaymentToolDetailsTypePipe,
-        ProviderNamePipe
+        ProviderNamePipe,
+        CustomerStatusPipe
     ]
 })
 export class InvoiceModule { }
