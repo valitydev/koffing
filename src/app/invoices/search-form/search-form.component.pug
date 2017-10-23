@@ -61,8 +61,8 @@ form([formGroup]="searchForm", novalidate)
                     input.form-control(formControlName="email")
             .col-sm-3.col-xs-12
                 .form-group
-                    label Идентификатор платежа:
-                    input.form-control(type="number", formControlName="paymentID")
+                    label Идентификатор плательщика:
+                    input.form-control(formControlName="customerID")
         .row
             .col-sm-3.col-xs-12
                 .form-group
@@ -72,10 +72,12 @@ form([formGroup]="searchForm", novalidate)
                 .form-group
                     label Fingerprint:
                     input.form-control(formControlName="fingerprint")
+        .row
             .col-sm-3.col-xs-12
                 .form-group
-                    label Идентификатор плательщика:
-                    input.form-control(formControlName="customerID")
+                    label.text-left
+                        input(type="checkbox", formControlName="invoicesWithPayments")
+                        | &nbsp;Инвойсы с платежами
         .row
             .col-sm-9.col-xs-12
                 .reset-button-container

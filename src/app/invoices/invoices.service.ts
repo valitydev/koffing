@@ -13,7 +13,7 @@ export class InvoicesService {
         result.toTime = formParams.to;
         result.invoiceID = formParams.invoiceID;
         result.invoiceStatus = formParams.invoiceStatus;
-        result.paymentID = formParams.paymentID;
+        result.paymentID = formParams.invoicesWithPayments ? '1' : '';
         result.paymentStatus = formParams.paymentStatus;
         result.paymentMethod = formParams.paymentMethod;
         result.paymentFlow = formParams.paymentFlow;
