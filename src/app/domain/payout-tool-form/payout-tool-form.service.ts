@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
 
-import { PayoutToolBankAccount, ContractPayoutToolCreation } from 'koffing/backend';
+import { PayoutToolDetailsBankAccount, ContractPayoutToolCreation } from 'koffing/backend';
 import { BankAccountFormService } from '../bank-account-form/bank-account-form.service';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class PayoutToolFormService {
     }
 
     public toPayoutToolCreation(contractID: string, payoutTool: FormGroup): ContractPayoutToolCreation {
-        const payoutToolDetails = new PayoutToolBankAccount(payoutTool.value.bankAccount);
+        const payoutToolDetails = new PayoutToolDetailsBankAccount(payoutTool.value.bankAccount);
         return new ContractPayoutToolCreation(contractID, uuid(), payoutToolDetails);
     }
 }

@@ -1,3 +1,3 @@
 export abstract class PayoutToolDetails {
-    public type: string;
+    public detailsType: string;
 }
