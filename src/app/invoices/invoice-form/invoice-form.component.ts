@@ -5,7 +5,7 @@ import { map } from 'lodash';
 
 import { SelectItem } from 'koffing/common/select/select-item';
 import { InvoiceFormService } from './invoice-form.service';
-import { INVOICE_LINE_TAX_VAT_RATES } from 'koffing/backend/model/invoice-cart/invoice-line-tax-vat-rates';
+import { INVOICE_LINE_TAX_VAT_RATES } from 'koffing/backend/constants/invoice-line-tax-vat-rates';
 
 @Component({
     selector: 'kof-invoice-form',

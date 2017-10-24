@@ -9,8 +9,7 @@ import { PaymentMethod } from 'koffing/backend/model/payment-method/payment-meth
 
 @Component({
     selector: 'kof-invoice-payment-link',
-    templateUrl: 'invoice-payment-link.component.pug',
-    styles: [`.form-control {height: 30px;}`]
+    templateUrl: 'invoice-payment-link.component.pug'
 })
 export class InvoicePaymentLinkComponent implements OnInit {
 

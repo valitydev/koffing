@@ -1,13 +1,14 @@
-import { InvoiceTemplateCost } from './invoice-template-cost';
+import { InvoiceTemplateLineCost } from './invoice-template-line-cost';
 import { CostAmountRange } from './cost-amount-range';
 
-export class InvoiceTemplateCostRange extends InvoiceTemplateCost {
+export class InvoiceTemplateLineCostRange extends InvoiceTemplateLineCost {
+
     public range: CostAmountRange;
     public currency: string;
 
     constructor(range: CostAmountRange, currency: string) {
         super();
-        this.invoiceTemplateCostType = 'InvoiceTemplateCostRange';
+        this.costType = 'InvoiceTemplateLineCostRange';
         this.range = range;
         this.currency = currency;
     }
