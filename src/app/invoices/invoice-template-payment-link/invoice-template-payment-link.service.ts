@@ -73,7 +73,7 @@ export class InvoiceTemplatePaymentLinkService {
 
     private static toMultiLine(details: any) {
         const cart = details.cart.map((item: any) => {
-            const invoiceLine = new InvoiceLine(item.product, item.quantity, item.price);
+            const invoiceLine = new InvoiceLine(item.product, item.quantity, CurrencyService.toMinor(item.price));
             if (item.tax) {
                 invoiceLine.taxMode = new InvoiceLineTaxVAT(item.tax);
             }
