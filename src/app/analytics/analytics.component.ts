@@ -18,7 +18,7 @@ import { AnalyticsService } from 'koffing/analytics/analytics.service';
 export class AnalyticsComponent implements OnInit {
 
     public shopID: string;
-    public fromTime: Date = moment().subtract(1, 'month').startOf('day').toDate();
+    public fromTime: Date = moment().subtract(1, 'day').startOf('day').toDate();
     public toTime: Date = moment().endOf('day').toDate();
     public profit: number = 0;
 

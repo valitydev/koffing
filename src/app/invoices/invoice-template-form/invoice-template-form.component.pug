@@ -2,9 +2,49 @@ form([formGroup]="form", novalidate)
     .form-group
         .row
             .col-xs-12.col-sm-5
+                label.text-left Наименование предлагаемых товаров или услуг:
+                    span.highlighted &nbsp;*
+            .col-xs-12.col-sm-7
+                input.form-control(formControlName="product")
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
                 label.text-left Описание предлагаемых товаров или услуг:
             .col-xs-12.col-sm-7
                 input.form-control(formControlName="description")
+    .form-group
+        .row
+            .col-xs-12.col-sm-5
+                label.text-left Тип ограничения стоимости:
+            .col-xs-12.col-sm-7
+                .btn-group
+                    label.btn.btn-sm.btn-default(*ngFor="let costType of costTypesItems", [ngClass]="{'active': isSelected(costType.value)}")
+                        input(type='radio', formControlName="selectedCostType", value="{{costType.value}}")
+                        | {{costType.label}}
+    div(formGroupName="cost")
+        div(*ngIf="form.value.cost.costType === 'InvoiceTemplateCostFixed'")
+            .form-group
+                .row
+                    .col-xs-12.col-sm-5
+                        label.text-left Стоимость предлагаемых товаров или услуг, в рублях:
+                            span.highlighted &nbsp;*
+                    .col-xs-12.col-sm-7
+                        input.form-control(type="number", formControlName="amount")
+        div(*ngIf="form.value.cost.costType === 'InvoiceTemplateCostRange'")
+            .form-group
+                .row
+                    .col-xs-12.col-sm-5
+                        label.text-left Нижняя граница стоимости, в рублях:
+                            span.highlighted &nbsp;*
+                    .col-xs-12.col-sm-7
+                        input.form-control(type="number", formControlName="lowerBound")
+            .form-group
+                .row
+                    .col-xs-12.col-sm-5
+                        label.text-left Верхняя граница стоимости, в рублях:
+                            span.highlighted &nbsp;*
+                    .col-xs-12.col-sm-7
+                        input.form-control(type="number", formControlName="upperBound")
     .form-group(formGroupName="lifetime")
         .row
             .col-xs-12.col-sm-5
@@ -18,94 +58,3 @@ form([formGroup]="form", novalidate)
                         input.form-control(type="number", formControlName="months", [placeholder]="'месяцы'")
                     .col-xs-4
                         input.form-control(type="number", formControlName="years", [placeholder]="'года'")
-    .form-group
-        .row
-            .col-xs-12.col-sm-5
-                label.text-left Тип шаблона:
-            .col-xs-12.col-sm-7
-                .btn-group
-                    label.btn.btn-sm.btn-default(*ngFor="let templateType of templateTypeItems", [ngClass]="{'active': isSelectedTemplateType(templateType.value)}")
-                        input(type='radio', formControlName="selectedTemplateType", value="{{templateType.value}}")
-                        | {{templateType.label}}
-
-    div(*ngIf="form.value.selectedTemplateType === 'InvoiceTemplateSingleLine'")
-        div(formGroupName="details")
-            .form-group
-                .row
-                    .col-xs-12.col-sm-5
-                        label.text-left Наименование предлагаемых товаров или услуг:
-                            span.highlighted &nbsp;*
-                    .col-xs-12.col-sm-7
-                        input.form-control(formControlName="product")
-
-            .form-group
-                .row
-                    .col-xs-12.col-sm-5
-                        label.text-left Схема налогообложения:
-                            span.highlighted &nbsp;*
-                    .col-xs-12.col-sm-7
-                        kof-select([items]="invoiceLineTaxItems", formControlName="tax", [placeholder]="'без НДС'")
-
-        .form-group
-            .row
-                .col-xs-12.col-sm-5
-                    label.text-left Тип ограничения стоимости:
-                .col-xs-12.col-sm-7
-                    .btn-group
-                        label.btn.btn-sm.btn-default(*ngFor="let costType of costTypesItems", [ngClass]="{'active': isSelectedCostType(costType.value)}")
-                            input(type='radio', formControlName="selectedCostType", value="{{costType.value}}")
-                            | {{costType.label}}
-
-        div(formGroupName="details")
-            div(formGroupName="cost")
-                div(*ngIf="form.value.selectedCostType === 'InvoiceTemplateLineCostFixed'")
-                    .form-group
-                        .row
-                            .col-xs-12.col-sm-5
-                                label.text-left Стоимость предлагаемых товаров или услуг, в рублях:
-                                    span.highlighted &nbsp;*
-                            .col-xs-12.col-sm-7
-                                input.form-control(type="number", formControlName="amount")
-
-                div(*ngIf="form.value.selectedCostType === 'InvoiceTemplateLineCostRange'")
-                    .form-group
-                        .row
-                            .col-xs-12.col-sm-5
-                                label.text-left Нижняя граница стоимости, в рублях:
-                                    span.highlighted &nbsp;*
-                            .col-xs-12.col-sm-7
-                                input.form-control(type="number", formControlName="lowerBound")
-                    .form-group
-                        .row
-                            .col-xs-12.col-sm-5
-                                label.text-left Верхняя граница стоимости, в рублях:
-                                    span.highlighted &nbsp;*
-                            .col-xs-12.col-sm-7
-                                input.form-control(type="number", formControlName="upperBound")
-
-    div(*ngIf="form.value.selectedTemplateType === 'InvoiceTemplateMultiLine'")
-        div(formGroupName="details")
-            .form-group(formArrayName="cart")
-                .row
-                    .col-xs-12
-                        label.text-left Список товаров и услуг:
-                .row
-                    .col-xs-12
-                        .form-group(*ngFor="let product of form.controls.details.controls.cart.controls; let i=index", [formGroupName]="i")
-                            .row
-                                .col-xs-4.col-sm-2
-                                    input.form-control(type="number", formControlName="price", placeholder="Стоимость")
-                                .col-xs-4.col-sm-2
-                                    input.form-control(type="number", formControlName="quantity", placeholder="Количество")
-                                .col-xs-4.col-sm-2
-                                    kof-select([items]="invoiceLineTaxItems", formControlName="tax", [placeholder]="'без НДС'")
-                                .col-xs-10.col-sm-5
-                                    input.form-control(type="text", formControlName="product", placeholder="Описание")
-                                .col-xs-2.col-sm-1
-                                    button.btn.btn-sm.btn-default.pull-right(type="button", (click)="removeProduct(i)")
-                                        i.fa.fa-trash
-                .row
-                    .col-xs-12
-                        label.text-left Итого товаров и услуг на сумму: {{ form.value.details.cartAmount }} RUB
-                        button.btn.btn-default.pull-right(type="button", (click)="addProduct()") Добавить товар или услугу
-
