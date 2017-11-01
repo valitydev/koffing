@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from './config.service';
-import { Claim } from './model/claim/claim';
-import { PartyModification } from './model/claim/party-modification/party-modification';
 import { CapiHttp } from './capi-http.service';
+import { ConfigService } from './config.service';
+import { Claim, PartyModification } from './model';
 
 @Injectable()
 export class ClaimService {

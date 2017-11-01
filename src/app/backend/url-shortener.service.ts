@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfigService } from 'koffing/backend/config.service';
-import { UrlShortenerResult } from 'koffing/backend/model/url-shortener-response';
+import { ConfigService } from './config.service';
+import { UrlShortenerResult } from './model';
 
 @Injectable()
 export class UrlShortenerService {

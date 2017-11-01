@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { Webhook } from './model/webhook';
-import { WebhookParams } from './requests/webhook-params';
+import { Webhook } from './model';
+import { WebhookParams } from './requests';
 
 @Injectable()
 export class WebhooksService {

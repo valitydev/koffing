@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { PayoutTool } from './model/payout-tool/payout-tool';
+import { PayoutTool } from './model';
 
 @Injectable()
 export class PayoutToolService {

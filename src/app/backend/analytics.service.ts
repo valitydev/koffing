@@ -4,13 +4,15 @@ import * as moment from 'moment';
 import { toString } from 'lodash';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { PaymentMethodStat } from './model/payment-method-stat';
-import { PaymentRateStat } from './model/payment-rate-stat';
-import { PaymentGeoStat } from './model/payment-geo-stat';
-import { PaymentConversionStat } from './model/payment-conversion-stat';
-import { PaymentRevenueStat } from './model/payment-revenue-stat';
+import {
+    PaymentMethodStat,
+    PaymentRateStat,
+    PaymentGeoStat,
+    PaymentConversionStat,
+    PaymentRevenueStat
+} from './model';
 
 @Injectable()
 export class AnalyticsService {

@@ -4,9 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { isNil } from 'lodash';
 
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { LocationName } from './model/location-name';
+import { LocationName } from './model';
 
 @Injectable()
 export class LocationService {

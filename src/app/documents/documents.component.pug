@@ -1,1 +1,11 @@
-router-outlet
+.row
+    .col-xs-12.col-md-10.col-md-offset-1
+        .x_panel
+            .x_content
+                ul.nav.nav-tabs.bar_tabs
+                    li.hand-cursor([routerLink]="['reports']", [routerLinkActive]="['active']")
+                        a Акты
+                    li.hand-cursor([routerLink]="['registry']", [routerLinkActive]="['active']")
+                        a Реестр операций
+                .tab-content
+                    router-outlet

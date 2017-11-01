@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/primeng';
 
 import { EventPollerService } from './event-poller.service';
@@ -10,6 +10,7 @@ import { MinValueValidatorDirective } from './min-value.directive';
 import { MaxValueValidatorDirective } from './max-value.directive';
 import { RoubleCurrencyPipe } from './rouble-currency.pipe';
 import { DateRangeSelectorComponent } from './date-range-selector/date-range-selector.component';
+import { DateRangeComponent } from './date-range/date-range.component';
 import { PaginateComponent } from './paginate/paginate.component';
 import { PaginationPipe } from './paginate/pagination.pipe';
 import { InvoiceStatusPipe } from './invoice-statuses.pipe';
@@ -20,6 +21,7 @@ import { PayoutStatusPipe } from './payout-statuses.pipe';
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         CalendarModule
     ],
     declarations: [
@@ -29,6 +31,7 @@ import { PayoutStatusPipe } from './payout-statuses.pipe';
         MaxValueValidatorDirective,
         RoubleCurrencyPipe,
         DateRangeSelectorComponent,
+        DateRangeComponent,
         PaginateComponent,
         PaginationPipe,
         InvoiceStatusPipe,
@@ -42,6 +45,7 @@ import { PayoutStatusPipe } from './payout-statuses.pipe';
         MaxValueValidatorDirective,
         RoubleCurrencyPipe,
         DateRangeSelectorComponent,
+        DateRangeComponent,
         PaginateComponent,
         PaginationPipe,
         InvoiceStatusPipe,

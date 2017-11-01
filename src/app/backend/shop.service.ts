@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { Shop } from './model/shop/shop';
+import { Shop } from './model';
 
 @Injectable()
 export class ShopService {

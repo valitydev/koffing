@@ -4,13 +4,18 @@ import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import { toString, forEach, isNumber, isDate } from 'lodash';
 
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { InvoiceSearchResult } from './model/invoice-search-result';
-import { PaymentSearchResult } from './model/payment-search-result';
-import { SearchInvoicesParams } from './requests/search-invoices-params';
-import { SearchPaymentsParams } from './requests/search-payments-params';
-import { SearchPayoutsParams } from './requests/search-payouts-params';
+import {
+    SearchInvoicesParams,
+    SearchPaymentsParams,
+    SearchPayoutsParams,
+    SearchReportParams
+} from './requests';
+import {
+    InvoiceSearchResult,
+    PaymentSearchResult
+} from './model';
 
 @Injectable()
 export class SearchService {
@@ -35,6 +40,12 @@ export class SearchService {
     public searchPayouts(shopID: string, payoutsParams: SearchPayoutsParams): Observable<PaymentSearchResult> {
         const search = this.toSearchParams(payoutsParams);
         return this.http.get(`${this.getEndpoint(shopID)}/payouts`, {search})
+            .map((res) => res.json());
+    }
+
+    public getReports(shopID: string, reportParams: SearchReportParams): Observable<any> { // todo type
+        const search = this.toSearchParams(reportParams);
+        return this.http.get(`${this.config.capiUrl}/shops/${shopID}/reports`, {search})
             .map((res) => res.json());
     }
 

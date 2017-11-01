@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { CapiHttp } from './capi-http.service';
 import { ConfigService } from './config.service';
-import { InvoiceTemplate } from 'koffing/backend/model';
-import { InvoiceTemplateAndToken } from 'koffing/backend/model';
-import { InvoiceTemplateParams } from './requests/invoice-template-params';
-import { PaymentMethod } from 'koffing/backend/model/payment-method/payment-method';
+import { InvoiceTemplateParams } from './requests';
+import { InvoiceTemplate, InvoiceTemplateAndToken, PaymentMethod } from './model';
 
 @Injectable()
 export class InvoiceTemplateService {

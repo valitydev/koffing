@@ -1,24 +1,30 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
-import { DocumentsComponent } from 'koffing/documents/documents.component';
-import { DocumentsRoutingModule } from 'koffing/documents/documents-routing.module';
 import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
-import { RegistryComponent } from 'koffing/documents/registry/registry.component';
+import { DocumentsComponent } from './documents.component';
+import { ReportsComponent } from './reports/reports.component';
+import { SearchReportsResultComponent } from './reports/search-reports-result/search-reports-result.component';
+import { ReportFilesComponent } from './reports/search-reports-result/report-files/report-files.component';
+import { ReportTypePipe } from './reports/search-reports-result/report-type.pipe';
+import { RegistryComponent } from './registry/registry.component';
 
 @NgModule({
     imports: [
-        DocumentsRoutingModule,
+        RouterModule,
         BrowserModule,
-        FormsModule,
         CommonModule,
         BackendModule
     ],
     declarations: [
         DocumentsComponent,
-        RegistryComponent
+        ReportsComponent,
+        SearchReportsResultComponent,
+        ReportFilesComponent,
+        ReportTypePipe,
+        RegistryComponent,
     ]
 })
 export class DocumentsModule { }

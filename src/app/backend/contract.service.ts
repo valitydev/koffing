@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { CapiHttp } from 'koffing/backend/capi-http.service';
 import { ConfigService } from './config.service';
-import { Contract } from 'koffing/backend/model';
+import { Contract } from './model';
 
 @Injectable()
 export class ContractService {

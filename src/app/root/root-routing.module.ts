@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { InvoicesComponent } from 'koffing/invoices/invoices.component';
-import { RegistryComponent } from 'koffing/documents/registry/registry.component';
 import { WebhooksComponent } from 'koffing/webhooks/webhooks.component';
 import { TokenComponent } from 'koffing/tokenization/components/token/token.component';
 import { AnalyticsComponent } from 'koffing/analytics/analytics.component';
@@ -17,6 +16,9 @@ import { CreateWebhookComponent } from 'koffing/webhooks/create-webhook/create-w
 import { InvoiceComponent } from 'koffing/invoice/invoice.component';
 import { ShopInfoComponent } from 'koffing/shop-info/shop-info.component';
 import { ContractManageComponent } from 'koffing/shop-info/contract-manage/contract-manage.component';
+import { DocumentsComponent } from 'koffing/documents/documents.component';
+import { ReportsComponent } from 'koffing/documents/reports/reports.component';
+import { RegistryComponent } from 'koffing/documents/registry/registry.component';
 
 @NgModule({
     imports: [
@@ -77,8 +79,23 @@ import { ContractManageComponent } from 'koffing/shop-info/contract-manage/contr
                         component: ContractManageComponent
                     },
                     {
-                        path: 'documents/registry',
-                        component: RegistryComponent
+                        path: 'documents',
+                        component: DocumentsComponent,
+                        children: [
+                            {
+                                path: '',
+                                redirectTo: 'reports',
+                                pathMatch: 'full'
+                            },
+                            {
+                                path: 'reports',
+                                component: ReportsComponent
+                            },
+                            {
+                                path: 'registry',
+                                component: RegistryComponent
+                            }
+                        ]
                     },
                     {
                         path: 'webhooks',

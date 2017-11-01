@@ -1,3 +1,3 @@
 export class PaymentRateStat {
-    uniqueCount: number;
+    public uniqueCount: number;
 }

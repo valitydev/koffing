@@ -15,6 +15,7 @@ import { EventService } from './event.service';
 import { UrlShortenerService } from './url-shortener.service';
 import { ClaimService } from './claim.service';
 import { CustomerService } from './customer.service';
+import { DownloadService } from './download.service';
 
 @NgModule({
     providers: [
@@ -32,7 +33,8 @@ import { CustomerService } from './customer.service';
         EventService,
         UrlShortenerService,
         ClaimService,
-        CustomerService
+        CustomerService,
+        DownloadService
     ]
 })
 export class BackendModule { }
