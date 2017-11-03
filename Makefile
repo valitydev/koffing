@@ -13,7 +13,7 @@ SERVICE_IMAGE_PUSH_TAG ?= $(SERVICE_IMAGE_TAG)
 
 # Base image for the service
 BASE_IMAGE_NAME := service-fe
-BASE_IMAGE_TAG := 0e86b4057cbf773232d9c04bb8d1cebfea78a088
+BASE_IMAGE_TAG := 768cf0f40600e290060502e047dd2e86d4fd6020
 
 BUILD_IMAGE_TAG := 55e987e74e9457191a5b4a7c5dc9e3838ae82d2b
 
@@ -40,3 +40,9 @@ build:
 
 clean:
 	rm -rf dist
+
+.state: build_image
+	echo $(SERVICE_IMAGE_TAG) > $@
+
+test: .state
+	docker run --rm $(SERVICE_IMAGE_NAME):$(shell cat .state) nginx -T -c /etc/nginx/nginx.conf

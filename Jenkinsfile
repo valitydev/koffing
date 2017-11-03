@@ -27,6 +27,10 @@ build('koffing', 'docker-host') {
       sh 'make build_image'
     }
 
+    runStage('test image') {
+      sh 'make test'
+    }
+
     try {
       if (env.BRANCH_NAME == 'master') {
         runStage('push image') {
