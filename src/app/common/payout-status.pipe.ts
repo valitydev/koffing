@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PAYOUT_STATUS_LABEL } from 'koffing/payouts/payout-status-label';
+import { PAYOUT_STATUS_LABEL } from './payout-status-label';
 
 @Pipe({
     name: 'kofPayoutStatus'

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
 import { mapValues, isEqual } from 'lodash';
+import { PAYOUT_STATUS } from 'koffing/backend';
 
 @Injectable()
 export class SearchPayoutsFormService {
@@ -11,7 +12,9 @@ export class SearchPayoutsFormService {
     private shopID: string;
     private defaultValues = {
         from: moment().subtract(1, 'month').startOf('day').toDate(),
-        to: moment().endOf('day').toDate()
+        to: moment().endOf('day').toDate(),
+        payoutStatus: PAYOUT_STATUS.confirmed,
+        payoutID: ''
     };
 
     constructor(
@@ -33,15 +36,10 @@ export class SearchPayoutsFormService {
 
     public initForm(): FormGroup {
         return this.fb.group({
-            from: [
-                this.defaultValues.from,
-                Validators.required
-            ],
-            to: [
-                this.defaultValues.to,
-                Validators.required
-            ],
-            payoutID: ''
+            from: [this.defaultValues.from, Validators.required],
+            to: [this.defaultValues.to, Validators.required],
+            payoutStatus: this.defaultValues.payoutStatus,
+            payoutID: this.defaultValues.payoutID
         });
     }
 
@@ -59,8 +57,7 @@ export class SearchPayoutsFormService {
     }
 
     private formValueToQueryParams(formValue: any): Params {
-        const mapped = mapValues(formValue, (value) =>
-            isEqual(value, '') ? null : value);
+        const mapped = mapValues(formValue, (value) => isEqual(value, '') ? null : value);
         const urlDateFormat = 'YYYY-MM-DD';
         return {
             ...mapped,
