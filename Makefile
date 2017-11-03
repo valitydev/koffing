@@ -40,3 +40,9 @@ build:
 
 clean:
 	rm -rf dist
+
+.state: build_image
+	echo $(SERVICE_IMAGE_TAG) > $@
+
+test: .state
+	docker run --rm $(SERVICE_IMAGE_NAME):$(shell cat .state) nginx -T -c /etc/nginx/nginx.conf
