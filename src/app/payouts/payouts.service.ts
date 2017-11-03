@@ -12,7 +12,7 @@ export class PayoutsService {
         result.offset = offset;
         result.fromTime = formValue.from;
         result.toTime = formValue.to;
-        result.payoutStatus = PAYOUT_STATUS.confirmed; // hardcode
+        result.payoutStatus = formValue.payoutStatus;
         result.payoutID = formValue.payoutID;
         result.payoutToolType = ''; // hardcode
         return result;
