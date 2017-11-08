@@ -15,7 +15,6 @@ import { PaginateComponent } from './paginate/paginate.component';
 import { PaginationPipe } from './paginate/pagination.pipe';
 import { InvoiceStatusPipe } from './invoice-statuses.pipe';
 import { PaymentStatusPipe } from './payment-statuses.pipe';
-import { PayoutStatusPipe } from './payout-status.pipe';
 
 @NgModule({
     imports: [
@@ -35,8 +34,7 @@ import { PayoutStatusPipe } from './payout-status.pipe';
         PaginateComponent,
         PaginationPipe,
         InvoiceStatusPipe,
-        PaymentStatusPipe,
-        PayoutStatusPipe
+        PaymentStatusPipe
     ],
     exports: [
         SelectComponent,
@@ -49,8 +47,7 @@ import { PayoutStatusPipe } from './payout-status.pipe';
         PaginateComponent,
         PaginationPipe,
         InvoiceStatusPipe,
-        PaymentStatusPipe,
-        PayoutStatusPipe
+        PaymentStatusPipe
     ],
     providers: [
         EventPollerService

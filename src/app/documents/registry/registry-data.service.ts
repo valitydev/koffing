@@ -59,13 +59,13 @@ export class RegistryDataService {
         return Observable.create((observer: Observer<Payment[] | Invoice[]>) => {
             fn.apply(context, [shopID, params]).subscribe((response: any) => {
                 let searchData = response.result;
-                const countRequests = ceil(response.totalCount / this.limit);
+                const countRequests = ceil(response.totalCount / params.limit);
                 if (countRequests > 1) {
                     const streamRequests$ = [];
                     for (let i = 1; i < countRequests; i++) {
                         const modified = clone(params);
-                        modified.offset = this.limit * i;
-                        const request$ = fn.apply(this.searchService, [shopID, modified]);
+                        modified.offset = params.limit * i;
+                        const request$ = fn.apply(context, [shopID, modified]);
                         streamRequests$.push(request$);
                     }
                     Observable.forkJoin(streamRequests$).subscribe((streamData: any[]) => {

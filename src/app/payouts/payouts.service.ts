@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SearchPayoutsParams } from 'koffing/backend/requests/search-payouts-params';
 
-import { PAYOUT_STATUS } from 'koffing/backend';
-
 @Injectable()
 export class PayoutsService {
 
@@ -12,7 +10,6 @@ export class PayoutsService {
         result.offset = offset;
         result.fromTime = formValue.from;
         result.toTime = formValue.to;
-        result.payoutStatus = formValue.payoutStatus;
         result.payoutID = formValue.payoutID;
         result.payoutToolType = ''; // hardcode
         return result;

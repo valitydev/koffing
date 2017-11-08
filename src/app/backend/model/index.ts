@@ -38,3 +38,4 @@ export * from './signature';
 export * from './url-shortener-response';
 export * from './webhook';
 export * from './webhook-scope';
+export * from './payout-search-result';

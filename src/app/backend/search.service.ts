@@ -14,7 +14,8 @@ import {
 } from './requests';
 import {
     InvoiceSearchResult,
-    PaymentSearchResult
+    PaymentSearchResult,
+    PayoutSearchResult
 } from './model';
 
 @Injectable()
@@ -37,7 +38,7 @@ export class SearchService {
             .map((res) => res.json());
     }
 
-    public searchPayouts(shopID: string, payoutsParams: SearchPayoutsParams): Observable<PaymentSearchResult> {
+    public searchPayouts(shopID: string, payoutsParams: SearchPayoutsParams): Observable<PayoutSearchResult> {
         const search = this.toSearchParams(payoutsParams);
         return this.http.get(`${this.getEndpoint(shopID)}/payouts`, {search})
             .map((res) => res.json());

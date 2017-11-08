@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
 import { mapValues, isEqual } from 'lodash';
-import { PAYOUT_STATUS } from 'koffing/backend';
 
 @Injectable()
 export class SearchPayoutsFormService {
@@ -13,7 +12,6 @@ export class SearchPayoutsFormService {
     private defaultValues = {
         from: moment().subtract(1, 'month').startOf('day').toDate(),
         to: moment().endOf('day').toDate(),
-        payoutStatus: PAYOUT_STATUS.confirmed,
         payoutID: ''
     };
 
@@ -30,15 +28,10 @@ export class SearchPayoutsFormService {
         this.form.valueChanges.subscribe((values) => this.updateQueryParams(values));
     }
 
-    public reset() {
-        this.form.reset(this.defaultValues);
-    }
-
     public initForm(): FormGroup {
         return this.fb.group({
             from: [this.defaultValues.from, Validators.required],
             to: [this.defaultValues.to, Validators.required],
-            payoutStatus: this.defaultValues.payoutStatus,
             payoutID: this.defaultValues.payoutID
         });
     }

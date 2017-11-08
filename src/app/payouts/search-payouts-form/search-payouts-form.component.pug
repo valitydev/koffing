@@ -20,12 +20,5 @@ form([formGroup]="form", novalidate)
                                 readonlyInput="true")
         .col-xs-12.col-sm-3
             .form-group
-                label Статус выплаты:
-                kof-select(
-                [items]="payoutStatuses",
-                [placeholder]="'Любой статус'",
-                formControlName="payoutStatus")
-        .col-xs-12.col-sm-3
-            .form-group
                 label Идентификатор выплаты:
                 input.form-control(formControlName="payoutID")
