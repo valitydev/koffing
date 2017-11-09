@@ -11,7 +11,7 @@ export class ContractCreateService {
 
     public contractForm: FormGroup;
     public payoutToolForm: FormGroup;
-    public changeSetEmitter: Subject<PartyModification[] | false> = new Subject();
+    public changeSetEmitter: Subject<PartyModification[] | boolean> = new Subject();
     private changeSet: PartyModification[] = [];
     private contractID: string;
     private payoutToolID: string;

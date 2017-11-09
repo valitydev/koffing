@@ -28,14 +28,12 @@
     "no-input-rename": true,
     "no-output-rename": true,
     "no-forward-ref": true,
+    "use-view-encapsulation": false,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "pipe-naming": [true, "camelCase", "kof"],
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "templates-use-public": true,
-    "no-access-missing-member": true,
-    "invoke-injectable": true,
-    "template-to-ng-template": true
+    "pipe-impure": true
   }
 }

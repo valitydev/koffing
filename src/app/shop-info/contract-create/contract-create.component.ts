@@ -32,7 +32,7 @@ export class ContractCreateComponent implements OnInit {
     }
     
     public ngOnInit() {
-        this.contractCreateService.changeSetEmitter.subscribe((changeSet) => {
+        this.contractCreateService.changeSetEmitter.subscribe((changeSet: PartyModification[]) => {
             if (changeSet) {
                 this.validStep = true;
                 this.changeSet = changeSet;

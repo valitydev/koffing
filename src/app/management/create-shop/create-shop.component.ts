@@ -30,7 +30,7 @@ export class CreateShopComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
-        this.createShopService.changeSetEmitter.subscribe((changeSet) => {
+        this.createShopService.changeSetEmitter.subscribe((changeSet: PartyModification[]) => {
             if (changeSet) {
                 this.validStep = true;
                 this.changeSet = changeSet;

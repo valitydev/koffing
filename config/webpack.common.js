@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const aot = require('@ngtools/webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -41,7 +42,7 @@ module.exports = {
             },
             {
                 test: /\.ts$/,
-                use: ['awesome-typescript-loader', 'angular2-template-loader', 'tslint-loader']
+                use: ['@ngtools/webpack', 'tslint-loader']
             },
             {
                 test: /\.pug$/,
@@ -90,8 +91,13 @@ module.exports = {
     },
 
     plugins: [
+        new aot.AotPlugin({
+            tsConfigPath: 'tsconfig.json',
+            entryModule: helpers.root('src/app/app.module#AppModule'),
+            skipCodeGeneration: true
+        }),
         new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)@angular/,
+            /angular(\\|\/)core(\\|\/)/,
             path.resolve(__dirname, '../src')
         ),
         new webpack.optimize.CommonsChunkPlugin({

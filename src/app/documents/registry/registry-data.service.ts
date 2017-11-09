@@ -42,10 +42,10 @@ export class RegistryDataService {
         const contracts$ = this.contractService.getContracts();
         const shop$ = this.shopService.getShopByID(shopID);
         return Observable.forkJoin([payments$, invoices$, contracts$, shop$]).map((response) => {
-            const payments = response[0];
-            const invoices = response[1];
-            const contracts = response[2];
-            const shop = response[3];
+            const payments: any = response[0];
+            const invoices: any = response[1];
+            const contracts: any = response[2];
+            const shop: any = response[3];
             const capturedPayments = filter(payments, (payment: Payment) => payment.status === PAYMENT_STATUS.captured);
             const refundedPayments = filter(payments, (payment: Payment) => payment.status === PAYMENT_STATUS.refunded);
             const capturedPaymentItems = this.getRegistryItems(capturedPayments, invoices);
