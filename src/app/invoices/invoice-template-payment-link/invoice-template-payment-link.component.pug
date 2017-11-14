@@ -6,7 +6,7 @@ button.btn.btn-default.btn-block(data-toggle="modal", [attr.data-target]="'#invo
     .modal-dialog.modal-lg
         .modal-content
             .modal-header
-                button.close(data-dismiss="modal", aria-label="Close", (click)="resetForms()")
+                button.close(data-dismiss="modal", aria-label="Close")
                     span(aria-hidden="true") &times;
                 h4.modal-title
                     | Создание платежной ссылки
@@ -18,19 +18,19 @@ button.btn.btn-default.btn-block(data-toggle="modal", [attr.data-target]="'#invo
                                 span.step_no 1
                                 span.step_descr Конфигурирование инвойса
                         li
-                            a([ngClass]="{'selected': currentStep === step.config, 'done': currentStep > step.config, 'disabled': currentStep < step.template}")
+                            a([ngClass]="{'selected': currentStep === step.config, 'done': currentStep > step.config, 'disabled': currentStep < step.config}")
                                 span.step_no 2
                                 span.step_descr Конфигурирование формы оплаты
             .modal-body
                 kof-invoice-template-form(*ngIf="currentStep === step.template", [form]="invoiceTemplateForm")
                 kof-checkout-config-form(*ngIf="currentStep === step.config", [methods]="methods")
             .modal-footer
-                div(*ngIf="!isCreated && currentStep === step.template")
+                div(*ngIf="currentStep === step.template")
                     button.btn.btn-sm.btn-default(
                         *ngIf="!paymentLinkVisible",
                         (click)="createInvoiceTemplate()",
                         [disabled]="invoiceTemplateForm.invalid") Далее
-                div(*ngIf="isCreated && currentStep === step.config")
+                div(*ngIf="currentStep === step.config")
                     button.btn.btn-sm.btn-primary(*ngIf="!paymentLinkVisible", (click)="generatePaymentLink()") Сформировать ссылку на оплату
                     .row(*ngIf="paymentLinkVisible")
                         .col-xs-12.col-sm-7.col-sm-offset-5

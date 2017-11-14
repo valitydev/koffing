@@ -5,5 +5,5 @@ export * from './invoice-template-params';
 export * from './search-invoices-params';
 export * from './search-payments-params';
 export * from './search-payouts-params';
-export * from './search-report-params';
 export * from './webhook-params';
+export * from './search-report-params';

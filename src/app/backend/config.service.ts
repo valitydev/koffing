@@ -17,7 +17,7 @@ export class ConfigService {
         return new Promise(resolve => {
             this.http.get(`appConfig.json?timestamp=${new Date().getTime()}`).map(res => res.json())
                 .subscribe(data => {
-                    this.capiUrl = `${data.capiEndpoint}/v1`;
+                    this.capiUrl = `${data.capiEndpoint}/v2`;
                     this.checkoutUrl = `${data.checkoutEndpoint}`;
                     this.suggestionsToken = data.suggestionsToken;
                     this.supportEmail = data.supportEmail;
