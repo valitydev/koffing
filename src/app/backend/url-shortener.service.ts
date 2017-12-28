@@ -13,7 +13,7 @@ export class UrlShortenerService {
     }
 
     public shorten(sourceUrl: string, expiresAt: string): Observable<UrlShortenerResult> {
-        return this.http.post(this.config.shortenUrlEndpoint, {sourceUrl, expiresAt})
+        return this.http.post(`${this.config.shortenUrlEndpoint}/v1/shortened-urls`, {sourceUrl, expiresAt})
             .map(res => res.json());
     }
 }
