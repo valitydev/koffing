@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ResponseContentType } from '@angular/http';
 
-import { CapiHttp } from './capi-http.service';
+import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 
 @Injectable()
 export class DownloadService {
 
     constructor(
-        private http: CapiHttp,
+        private http: KoffingHttp,
         private config: ConfigService
     ) { }
 

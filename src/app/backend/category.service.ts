@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from './capi-http.service';
+import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 import { Category } from './model';
 
@@ -11,7 +11,7 @@ export class CategoryService {
     private endpoint = `${this.config.capiUrl}/processing/categories`;
 
     constructor(
-        private http: CapiHttp,
+        private http: KoffingHttp,
         private config: ConfigService
     ) { }
 

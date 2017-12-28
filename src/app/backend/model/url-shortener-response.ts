@@ -1,4 +1,6 @@
 export class UrlShortenerResult {
-    public pid: string;
-    public sid: string;
+    public id: string;
+    public shortenedUrl: string;
+    public sourceUrl: string;
+    public expiresAt: string;
 }

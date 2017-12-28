@@ -8,6 +8,7 @@ import { UrlShortenerService } from 'koffing/backend/url-shortener.service';
 import { Invoice } from 'koffing/backend/model/invoice';
 import { InvoiceService } from 'koffing/backend/invoice.service';
 import { InvoiceTemplateAndToken } from 'koffing/backend';
+import * as moment from 'moment';
 
 @Injectable()
 export class PaymentLinkService {
@@ -20,14 +21,20 @@ export class PaymentLinkService {
     public getInvoicePaymentLink(invoice: Invoice, formValue: any): Observable<string> {
         return this.createInvoiceAccessToken(invoice.id)
             .map((accessToken) => this.prepareInvoiceUrl(formValue, invoice, accessToken))
-            .switchMap((url) => this.urlShortenerService.shorten(url))
-            .map((response) => `${this.configService.shortenUrlEndpoint}/${response.sid}`);
+            .switchMap((url) => this.urlShortenerService.shorten(url, invoice.dueDate))
+            .map((response) => response.shortenedUrl);
     }
 
     public getInvoiceTemplatePaymentLink(templateAndToken: InvoiceTemplateAndToken, formValue: any): Observable<string> {
+        this.prepareExpiresAtDateForTemplate(templateAndToken);
         return this.urlShortenerService
-            .shorten(this.prepareInvoiceTemplateUrl(formValue, templateAndToken))
-            .map((response) => `${this.configService.shortenUrlEndpoint}/${response.sid}`);
+            .shorten(this.prepareInvoiceTemplateUrl(formValue, templateAndToken), this.prepareExpiresAtDateForTemplate(templateAndToken))
+            .map((response) => response.shortenedUrl);
+    }
+
+    private prepareExpiresAtDateForTemplate(templateAndToken: InvoiceTemplateAndToken): any {
+        const lifetimeDuration = moment.duration(templateAndToken.invoiceTemplate.lifetime);
+        return moment(new Date()).add(lifetimeDuration).utc().format();
     }
 
     private prepareInvoiceUrl(formValue: any, invoice: Invoice, accessToken: string): string {
@@ -48,7 +55,7 @@ export class PaymentLinkService {
             .map((value: any, key: string) => `${key}=${encodeURIComponent(String(value))}`)
             .join('&')
             .value();
-        return `${this.configService.checkoutUrl}/html/payframe.html?${args}`;
+        return `${this.configService.checkoutUrl}/v1/checkout.html?${args}`;
     }
 
     private toInvoiceTemplatePaymentLinkArgs(formValue: any, shopID: string, templateID: string, accessToken: string): PaymentLinkArguments {

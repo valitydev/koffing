@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from './capi-http.service';
+import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 import { InvoiceParams } from './requests';
 import { InvoiceAndToken, InvoiceAccessToken, PaymentMethod } from './model';
@@ -12,7 +12,7 @@ export class InvoiceService {
     private endpoint = `${this.config.capiUrl}/processing/invoices`;
 
     constructor(
-        private http: CapiHttp,
+        private http: KoffingHttp,
         private config: ConfigService
     ) {}
 

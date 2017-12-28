@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from './capi-http.service';
+import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 import { Webhook } from './model';
 import { WebhookParams } from './requests';
@@ -12,7 +12,7 @@ export class WebhooksService {
     private endpoint = `${this.config.capiUrl}/processing/webhooks`;
 
     constructor(
-        private http: CapiHttp,
+        private http: KoffingHttp,
         private config: ConfigService
     ) { }
 

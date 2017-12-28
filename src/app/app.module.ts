@@ -2,7 +2,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { XHRBackend, RequestOptions, HttpModule } from '@angular/http';
 
 import { ConfigService } from 'koffing/backend/config.service';
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { KoffingHttp } from 'koffing/backend/koffing-http.service';
 import { HttpErrorBroadcaster } from 'koffing/broadcaster';
 import { ContainerComponent } from './root/components/container/container.component';
 import { RootModule } from './root/root.module';
@@ -14,12 +14,12 @@ import { RootModule } from './root/root.module';
     ],
     providers: [
         {
-            provide: CapiHttp,
+            provide: KoffingHttp,
             useFactory: (
                 backend: XHRBackend,
                 defaultOptions: RequestOptions,
                 httpErrorBroadcaster: HttpErrorBroadcaster
-            ) => new CapiHttp(backend, defaultOptions, httpErrorBroadcaster),
+            ) => new KoffingHttp(backend, defaultOptions, httpErrorBroadcaster),
             deps: [XHRBackend, RequestOptions, HttpErrorBroadcaster]
         },
         {

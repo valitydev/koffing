@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from './config.service';
 import { UrlShortenerResult } from './model';
+import { KoffingHttp } from './koffing-http.service';
 
 @Injectable()
 export class UrlShortenerService {
 
-    constructor(private http: Http,
+    constructor(private http: KoffingHttp,
                 private config: ConfigService) {
     }
 
-    public shorten(uri: string): Observable<UrlShortenerResult> {
-        return this.http.post(this.config.urlShortenerEndpoint, {uri})
+    public shorten(sourceUrl: string, expiresAt: string): Observable<UrlShortenerResult> {
+        return this.http.post(this.config.shortenUrlEndpoint, {sourceUrl, expiresAt})
             .map(res => res.json());
     }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from 'koffing/backend/capi-http.service';
+import { KoffingHttp } from 'koffing/backend/koffing-http.service';
 import { ConfigService } from './config.service';
 import { Contract } from './model';
 
@@ -11,7 +11,7 @@ export class ContractService {
     private endpoint: string = `${this.config.capiUrl}/processing/contracts`;
 
     constructor(
-        private http: CapiHttp,
+        private http: KoffingHttp,
         private config: ConfigService
     ) { }
 

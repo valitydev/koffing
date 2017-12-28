@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from './capi-http.service';
+import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 import { Event } from './model';
 
@@ -12,7 +12,7 @@ export class EventService {
     private endpoint: string = `${this.config.capiUrl}/processing/invoices`;
 
     constructor(
-        private http: CapiHttp,
+        private http: KoffingHttp,
         private config: ConfigService
     ) { }
 

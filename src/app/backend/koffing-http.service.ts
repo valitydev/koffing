@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpErrorBroadcaster } from 'koffing/broadcaster';
 import { AuthService } from 'koffing/auth/auth.service';
 
-export class CapiHttp extends Http {
+export class KoffingHttp extends Http {
 
     constructor(
         connectionBackend: ConnectionBackend,

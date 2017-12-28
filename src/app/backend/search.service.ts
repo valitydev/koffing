@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import { toString, forEach, isNumber, isDate } from 'lodash';
 
-import { CapiHttp } from './capi-http.service';
+import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 import {
     SearchInvoicesParams,
@@ -22,7 +22,7 @@ import {
 export class SearchService {
 
     constructor(
-        private http: CapiHttp,
+        private http: KoffingHttp,
         private config: ConfigService
     ) { }
 

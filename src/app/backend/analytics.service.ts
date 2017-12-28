@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { toString } from 'lodash';
 import { Observable } from 'rxjs/Observable';
 
-import { CapiHttp } from './capi-http.service';
+import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 import {
     PaymentMethodStat,
@@ -17,7 +17,7 @@ import {
 @Injectable()
 export class AnalyticsService {
 
-    constructor(private http: CapiHttp,
+    constructor(private http: KoffingHttp,
                 private config: ConfigService) {
     }
 
