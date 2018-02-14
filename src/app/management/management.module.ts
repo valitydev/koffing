@@ -17,6 +17,7 @@ import { ContractBindingDetailsComponent } from './claim-details/contract-bindin
 import { RevokeClaimComponent } from './claim-details/revoke-claim/revoke-claim.component';
 import { ModificationTypePipe } from './modification-type.pipe';
 import { ClaimModificationService } from './claim-modification.service';
+import { ManagementService } from './management.service';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { ClaimModificationService } from './claim-modification.service';
         ModificationTypePipe
     ],
     providers: [
-        ClaimModificationService
+        ClaimModificationService,
+        ManagementService
     ]
 })
 export class ManagementModule { }

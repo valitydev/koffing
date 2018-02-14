@@ -22,7 +22,8 @@
             .x_title
                 h5 Магазины
             .x_content
-                table.table.table-striped
+                kof-loading([isLoading]="isCreating")
+                table.table.table-striped(*ngIf="shops?.length > 0")
                     thead
                         tr
                             th Наименование
