@@ -7,6 +7,7 @@ export class ProviderNamePipe implements PipeTransform {
 
     private names = {
         euroset: 'Евросеть',
+        DigitalWalletDetailsQIWI: 'QIWI'
     };
 
     public transform(input: string): string {

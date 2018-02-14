@@ -14,4 +14,5 @@ export class PaymentLinkArguments {
     public paymentFlowHold?: boolean;
     public holdExpiration?: string;
     public terminals?: boolean;
+    public wallets?: boolean;
 }

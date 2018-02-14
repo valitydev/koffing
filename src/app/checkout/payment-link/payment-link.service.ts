@@ -92,6 +92,7 @@ export class PaymentLinkService {
             args.applePayTest = true;
         }
         args.terminals = formValue.terminals;
+        args.wallets = formValue.wallets;
         return args;
     }
 

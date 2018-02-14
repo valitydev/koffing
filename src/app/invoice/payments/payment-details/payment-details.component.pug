@@ -77,17 +77,32 @@ form.form-horizontal.form-label-left.css-form
                             label.col-sm-5 Метод оплаты:
                             .col-sm-7
                                 div {{payment.payer?.paymentToolDetails?.detailsType | kofPaymentToolDetailsType}}
+
                 .row
                     .col-xs-12(*ngIf="payment.payer?.paymentToolDetails?.detailsType === 'PaymentToolDetailsPaymentTerminal'")
                         .form-group
                             label.col-sm-5 Провайдер:
                             .col-sm-7
                                 div {{payment.payer?.paymentToolDetails?.provider | kofProviderName}}
+
+                    .col-xs-12(*ngIf="payment.payer?.paymentToolDetails?.detailsType === 'PaymentToolDetailsDigitalWallet'")
+                        .form-group
+                            label.col-sm-5 Провайдер:
+                            .col-sm-7
+                                div {{payment.payer?.paymentToolDetails?.digitalWalletDetailsType | kofProviderName}}
+
                     .col-xs-12(*ngIf="payment.payer?.paymentToolDetails?.detailsType === 'PaymentToolDetailsBankCard'")
                         .form-group
                             label.col-sm-5 Данные карты:
                             .col-sm-7
                                 div **** **** **** {{payment.payer?.paymentToolDetails?.cardNumberMask}} ({{payment.payer?.paymentToolDetails?.paymentSystem}})
+
+                    .col-xs-12(*ngIf="payment.payer?.paymentToolDetails?.detailsType === 'PaymentToolDetailsDigitalWallet'")
+                        .form-group
+                            label.col-sm-5 Данные кошелька:
+                            .col-sm-7
+                                div {{payment.payer?.paymentToolDetails?.phoneNumberMask}}
+
             div(*ngIf="payment.payer?.payerType === 'CustomerPayer'")
                 .row
                     .col-xs-12

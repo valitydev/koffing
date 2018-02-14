@@ -7,7 +7,8 @@ export class PaymentToolDetailsTypePipe implements PipeTransform {
 
     private names = {
         PaymentToolDetailsPaymentTerminal: 'Терминал',
-        PaymentToolDetailsBankCard: 'Банковская карта'
+        PaymentToolDetailsBankCard: 'Банковская карта',
+        PaymentToolDetailsDigitalWallet: 'Электронный кошелек'
     };
 
     public transform(input: string): string {

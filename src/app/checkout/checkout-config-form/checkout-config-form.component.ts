@@ -5,7 +5,11 @@ import { SelectItem } from 'koffing/common/select/select-item';
 import { HOLD_EXPIRATION } from 'koffing/backend/constants/hold-expiration';
 import { CheckoutConfigFormService } from './checkout-config-form.service';
 import { PaymentMethod } from 'koffing/backend/model/payment-method/payment-method';
-import { PaymentMethodTerminal } from 'koffing/backend/model/payment-method/payment-method-terminal';
+
+interface ConfigurablePaymentMethodInfo {
+    label: string;
+    formControlName: string;
+}
 
 @Component({
     selector: 'kof-checkout-config-form',
@@ -16,6 +20,8 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
 
     @Input()
     public methods: PaymentMethod[];
+
+    public configurableMethods: PaymentMethod[];
 
     public form: FormGroup;
 
@@ -31,14 +37,13 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
             new SelectItem(HOLD_EXPIRATION.capture, 'в пользу мерчанта')
         ];
         this.form = this.checkoutConfigFormService.form;
+
     }
 
     public ngOnChanges() {
         if (this.methods) {
-            const terminal = this.methods.find((method) => method.method === 'PaymentTerminal') as PaymentMethodTerminal;
-            if (terminal) {
-                this.additionalMethods = !!terminal.providers.find((provider) => provider === 'euroset');
-            }
+            this.configurableMethods = this.methods.filter((method) => method.method !== 'BankCard');
+            this.additionalMethods = this.methods.length > 1;
         }
     }
 
@@ -46,10 +51,25 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
         return this.form.value.holdExpiration === holdExpiration;
     }
 
-    public toggleTerminals() {
+    public getInfo(methodName: string): ConfigurablePaymentMethodInfo {
+        switch (methodName) {
+            case 'PaymentTerminal':
+                return {
+                    label: 'Терминалы "Евросеть"',
+                    formControlName: 'terminals'
+                };
+            case 'DigitalWallet':
+                return {
+                    label: 'QIWI кошелек',
+                    formControlName: 'wallets'
+                };
+        }
+    }
+
+    public toggleHolds() {
         this.form.patchValue({
-            paymentFlowHold: false,
-            terminals: !this.form.value.terminals
+            paymentFlowHold: false
         });
     }
+
 }
