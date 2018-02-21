@@ -1,4 +1,4 @@
-form([formGroup]="form", novalidate)
+form(*ngIf="form", [formGroup]="form", novalidate)
     .form-group
         .row
             .col-xs-12.col-sm-5
@@ -23,14 +23,14 @@ form([formGroup]="form", novalidate)
                 label.text-left Redirect URL после упешного завершения платежа:
             .col-xs-12.col-sm-7
                 input.form-control(type="text", formControlName="redirectUrl", placeholder="http(s)://example.com")
-    .form-group(*ngIf="additionalMethods")
+    .form-group(*ngIf="additionalMethodConfigs")
         .row
             .col-xs-12
                 label.text-left Дополнительные методы оплаты:
-            .col-xs-12.col-sm-6.col-md-4(*ngFor="let method of configurableMethods")
+            .col-xs-12.col-sm-6.col-md-4(*ngFor="let config of additionalMethodConfigs")
                 label.text-left
-                    input(type="checkbox", formControlName="{{getInfo(method.method).formControlName}}", (click)="toggleHolds()")
-                    | &nbsp;{{getInfo(method.method).label}}
+                    input(type="checkbox", formControlName="{{config.formControlName}}", (click)="toggleHolds()")
+                    | &nbsp;{{config.label}}
     div(*ngIf="!form.value.terminals && !form.value.wallets")
         .ln_solid
         .form-group

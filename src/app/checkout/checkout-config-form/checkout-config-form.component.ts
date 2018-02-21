@@ -21,49 +21,32 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
     @Input()
     public methods: PaymentMethod[];
 
-    public configurableMethods: PaymentMethod[];
+    public additionalMethodConfigs: ConfigurablePaymentMethodInfo[];
 
     public form: FormGroup;
 
     public holdExpirationItems: SelectItem[];
 
-    public additionalMethods: boolean = false;
-
     constructor(private checkoutConfigFormService: CheckoutConfigFormService) {}
 
     public ngOnInit() {
+        this.form = this.checkoutConfigFormService.form;
         this.holdExpirationItems = [
             new SelectItem(HOLD_EXPIRATION.cancel, 'в пользу плательщика'),
             new SelectItem(HOLD_EXPIRATION.capture, 'в пользу мерчанта')
         ];
-        this.form = this.checkoutConfigFormService.form;
 
     }
 
     public ngOnChanges() {
         if (this.methods) {
-            this.configurableMethods = this.methods.filter((method) => method.method !== 'BankCard');
-            this.additionalMethods = this.methods.length > 1;
+            this.additionalMethodConfigs = this.getAdditionalMethodsConfig(this.methods);
+            this.form.patchValue(this.toFormAdditionalMethodsValue(this.additionalMethodConfigs));
         }
     }
 
     public isSelected(holdExpiration: string): boolean {
         return this.form.value.holdExpiration === holdExpiration;
-    }
-
-    public getInfo(methodName: string): ConfigurablePaymentMethodInfo {
-        switch (methodName) {
-            case 'PaymentTerminal':
-                return {
-                    label: 'Терминалы "Евросеть"',
-                    formControlName: 'terminals'
-                };
-            case 'DigitalWallet':
-                return {
-                    label: 'QIWI кошелек',
-                    formControlName: 'wallets'
-                };
-        }
     }
 
     public toggleHolds() {
@@ -72,4 +55,27 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
         });
     }
 
+    private toFormAdditionalMethodsValue(config: ConfigurablePaymentMethodInfo[]): object {
+        return config.reduce((acc, current) => ({...acc, [current.formControlName]: true}), {});
+    }
+
+    private getAdditionalMethodsConfig(methods: PaymentMethod[]): ConfigurablePaymentMethodInfo[] {
+        const additionalMethods = methods.filter((method) => method.method !== 'BankCard');
+        return additionalMethods.map((item) => {
+            switch (item.method) {
+                case 'PaymentTerminal':
+                    return {
+                        label: 'Терминалы "Евросеть"',
+                        formControlName: 'terminals'
+                    };
+                case 'DigitalWallet':
+                    return {
+                        label: 'QIWI кошелек',
+                        formControlName: 'wallets'
+                    };
+                default:
+                    throw new Error('Unhandled PaymentMethod');
+            }
+        });
+    }
 }

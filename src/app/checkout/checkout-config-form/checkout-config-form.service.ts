@@ -18,10 +18,10 @@ export class CheckoutConfigFormService {
             description: [''],
             email: [''],
             redirectUrl: [''],
-            paymentFlowHold: [false, [Validators.required] ],
+            paymentFlowHold: [false, [Validators.required]],
             holdExpiration: [HOLD_EXPIRATION.cancel, [Validators.required]],
-            terminals: true,
-            wallets: true
+            wallets: null,
+            terminals: null
         });
     }
 }
