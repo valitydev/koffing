@@ -1,8 +1,9 @@
 import { Contractor } from './contractor';
+import {LegalEntityTypeEnum} from './legal-entity-type-enum';
 
 export abstract class LegalEntity extends Contractor {
 
-    public entityType: string;
+    public entityType: LegalEntityTypeEnum;
 
     constructor() {
         super();

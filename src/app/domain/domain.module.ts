@@ -15,6 +15,17 @@ import { ShopFormService } from './shop-form/shop-form.service';
 import { ContractFormService } from './contract-form/contract-form.service';
 import { PayoutToolFormService } from './payout-tool-form/payout-tool-form.service';
 import { BankAccountFormService } from './bank-account-form/bank-account-form.service';
+import { RussianContractFormComponent } from './contract-form/russian-contract-form/russian-contract-form.component';
+import { InternationalContractFormComponent } from './contract-form/international-contract-form/international-contract-form.component';
+import { InternationalContractFormService } from './contract-form/international-contract-form/international-contract-form.service';
+import { RussianContractFormService } from './contract-form/russian-contract-form/russian-contract-form.service';
+import { InternationalBankAccountFormService } from './bank-account-form/international-bank-account-form/international-bank-account-form.service';
+import { RussianBankAccountFormService } from './bank-account-form/russian-bank-account-form/russian-bank-account-form.service';
+import { InternationalBankAccountFormComponent } from './bank-account-form/international-bank-account-form/international-bank-account-form.component';
+import { RussianBankAccountFormComponent } from './bank-account-form/russian-bank-account-form/russian-bank-account-form.component';
+import { InternationalBankAccountDetailsComponent } from './international-bank-account-details/international-bank-account-details.component';
+import { RussianContractorDetailsComponent } from './contractor-details/russian-contractor-details/russian-contractor-details.component';
+import { InternationalContractorDetailsComponent } from './contractor-details/international-contractor-details/international-contractor-details.component';
 
 @NgModule({
     imports: [
@@ -26,29 +37,47 @@ import { BankAccountFormService } from './bank-account-form/bank-account-form.se
         ShopDetailsComponent,
         ContractDetailsComponent,
         ContractorDetailsComponent,
+        RussianContractorDetailsComponent,
+        InternationalContractorDetailsComponent,
         BankAccountDetailsComponent,
+        InternationalBankAccountDetailsComponent,
         PayoutToolDetailsComponent,
         ShopFormComponent,
         ContractFormComponent,
+        RussianContractFormComponent,
+        InternationalContractFormComponent,
         PayoutToolFormComponent,
         BankAccountFormComponent,
+        RussianContractFormComponent,
+        InternationalBankAccountFormComponent,
+        RussianBankAccountFormComponent
     ],
     exports: [
         ShopDetailsComponent,
         ContractDetailsComponent,
         ContractorDetailsComponent,
+        RussianContractorDetailsComponent,
+        InternationalContractorDetailsComponent,
         BankAccountDetailsComponent,
+        InternationalBankAccountDetailsComponent,
         PayoutToolDetailsComponent,
         ShopFormComponent,
         ContractFormComponent,
         PayoutToolFormComponent,
         BankAccountFormComponent,
+        RussianContractFormComponent,
+        InternationalBankAccountFormComponent,
+        RussianBankAccountFormComponent
     ],
     providers: [
         ShopFormService,
         ContractFormService,
         PayoutToolFormService,
         BankAccountFormService,
+        InternationalContractFormService,
+        RussianContractFormService,
+        InternationalBankAccountFormService,
+        RussianBankAccountFormService
     ]
 })
 export class DomainModule { }

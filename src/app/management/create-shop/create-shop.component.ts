@@ -20,6 +20,7 @@ export class CreateShopComponent implements OnInit {
     public contractForm = this.createShopService.contractForm;
     public payoutToolForm = this.createShopService.payoutToolForm;
     public shopForm = this.createShopService.shopForm;
+    public type: string;
     private changeSet: PartyModification[];
 
     constructor(
@@ -30,6 +31,7 @@ export class CreateShopComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
+        this.type = this.createShopService.type;
         this.createShopService.changeSetEmitter.subscribe((changeSet: PartyModification[]) => {
             if (changeSet) {
                 this.validStep = true;

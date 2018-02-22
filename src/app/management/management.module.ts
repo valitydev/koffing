@@ -18,6 +18,8 @@ import { RevokeClaimComponent } from './claim-details/revoke-claim/revoke-claim.
 import { ModificationTypePipe } from './modification-type.pipe';
 import { ClaimModificationService } from './claim-modification.service';
 import { ManagementService } from './management.service';
+import { InitCreateShopComponent } from './init-create-shop/init-create-shop.component';
+import { PaymentInstitutionService } from 'koffing/backend/payment-institution.service';
 
 @NgModule({
     imports: [
@@ -32,6 +34,7 @@ import { ManagementService } from './management.service';
     declarations: [
         ManagementComponent,
         CreateShopComponent,
+        InitCreateShopComponent,
         ClaimStatusPipe,
         ClaimDetailsComponent,
         ShopCreationDetailsComponent,
@@ -43,7 +46,8 @@ import { ManagementService } from './management.service';
     ],
     providers: [
         ClaimModificationService,
-        ManagementService
+        ManagementService,
+        PaymentInstitutionService
     ]
 })
 export class ManagementModule { }

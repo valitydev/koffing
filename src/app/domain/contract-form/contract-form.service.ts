@@ -1,60 +1,74 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
 
-import { ContractCreation, RussianLegalEntity } from 'koffing/backend';
-import { BankAccountFormService } from '../bank-account-form/bank-account-form.service';
+import { ContractCreation, RussianLegalEntity, InternationalLegalEntity, PaymentInstitution } from 'koffing/backend';
+import { BankAccountFormService } from 'koffing/domain';
+import { InternationalContractFormService } from './international-contract-form/international-contract-form.service';
+import { RussianContractFormService } from './russian-contract-form/russian-contract-form.service';
+import { PaymentInstitutionService } from 'koffing/backend/payment-institution.service';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class ContractFormService {
 
-    public form: FormGroup;
+    private paymentInstitutions: PaymentInstitution[];
 
-    constructor(
-        private fb: FormBuilder,
-        private bankAccountFormService: BankAccountFormService
-    ) { }
+    constructor(private bankAccountFormService: BankAccountFormService,
+                private internationalContractFormService: InternationalContractFormService,
+                private russianContractFormService: RussianContractFormService,
+                private paymentInstitutionService: PaymentInstitutionService) {
+    }
 
-    public initForm(): FormGroup {
-        return this.fb.group({
-            registeredName: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            registeredNumber: ['', [
-                Validators.required,
-                Validators.pattern(/^(\d{13}|\d{15})$/)
-            ]],
-            inn: ['', [
-                Validators.required,
-                Validators.pattern(/^(\d{10}|\d{12})$/)
-            ]],
-            postAddress: ['', [
-                Validators.required,
-                Validators.maxLength(1000)
-            ]],
-            actualAddress: ['', [
-                Validators.required,
-                Validators.maxLength(1000)
-            ]],
-            representativePosition: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            representativeFullName: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            representativeDocument: ['', [
-                Validators.required,
-                Validators.maxLength(1000)
-            ]],
-            bankAccount: this.bankAccountFormService.initForm()
+    public initForm(type: string): FormGroup {
+        switch (type) {
+            case 'resident':
+                return this.russianContractFormService.initForm(type);
+            case 'nonresident':
+                return this.internationalContractFormService.initForm(type);
+        }
+    }
+
+    public toContractCreation(contractForm: FormGroup, type: string): Observable<ContractCreation> {
+        return this.getPaymentInstitutions().map((paymentInstitutions: PaymentInstitution[]) => {
+            let contractor;
+            switch (type) {
+                case 'resident':
+                    contractor = new RussianLegalEntity(contractForm.value);
+                    break;
+                case 'nonresident':
+                    contractor = new InternationalLegalEntity(contractForm.value);
+                    break;
+            }
+            return new ContractCreation(uuid(), contractor, this.getPaymentInstitutionId(paymentInstitutions, type));
+        });
+
+    }
+
+    private getPaymentInstitutions(): Observable<PaymentInstitution[]> {
+        return Observable.create((observer: Observer<any>) => {
+            if (this.paymentInstitutions) {
+                observer.next(this.paymentInstitutions);
+            } else {
+                this.paymentInstitutionService.getPaymentInstitutions().subscribe((institutions) => {
+                    this.paymentInstitutions = institutions;
+                    observer.next(institutions);
+                });
+            }
         });
     }
 
-    public toContractCreation(contractForm: FormGroup): ContractCreation {
-        const contractor = new RussianLegalEntity(contractForm.value);
-        return new ContractCreation(uuid(), contractor);
+    // TODO fix it
+    private getPaymentInstitutionId(institutions: PaymentInstitution[], type: string): number {
+        const find = (rus: boolean) => institutions.find((paymentInstitution) =>
+            paymentInstitution.realm === 'live' &&
+            !!paymentInstitution.residences.find((residence) => rus ? residence === 'RUS' : residence !== 'RUS')).id;
+        switch (type) {
+            case 'resident':
+                return find(true);
+            case 'nonresident':
+                return find(false);
+        }
     }
 }

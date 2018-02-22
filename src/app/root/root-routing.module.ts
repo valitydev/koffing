@@ -19,6 +19,7 @@ import { ContractManageComponent } from 'koffing/shop-info/contract-manage/contr
 import { DocumentsComponent } from 'koffing/documents/documents.component';
 import { ReportsComponent } from 'koffing/documents/reports/reports.component';
 import { RegistryComponent } from 'koffing/documents/registry/registry.component';
+import { InitCreateShopComponent } from 'koffing/management/init-create-shop/init-create-shop.component';
 
 @NgModule({
     imports: [
@@ -38,6 +39,10 @@ import { RegistryComponent } from 'koffing/documents/registry/registry.component
                     },
                     {
                         path: 'shop/create',
+                        component: InitCreateShopComponent
+                    },
+                    {
+                        path: 'shop/create/:type',
                         component: CreateShopComponent
                     },
                     {
@@ -75,7 +80,7 @@ import { RegistryComponent } from 'koffing/documents/registry/registry.component
                         component: ShopInfoComponent
                     },
                     {
-                        path: 'contract',
+                        path: 'contract/:type',
                         component: ContractManageComponent
                     },
                     {

@@ -9,8 +9,8 @@
                 span.step_no 2
                 span.step_descr Средство вывода
 .ln_solid
-kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractForm")
-kof-payout-tool-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolForm", [bankAccount]="contractForm.value.bankAccount")
+kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractForm", [type]="type")
+kof-payout-tool-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolForm", [bankAccount]="contractForm.value.bankAccount", [type]="type")
 .ln_solid
 button.btn.btn-default(
     [disabled]="currentStep === step.contract",

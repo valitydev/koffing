@@ -1,0 +1,31 @@
+form.form-horizontal.form-label-left.css-form([formGroup]="form", novalidate)
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Держатель счёта
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="accountHolder")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Наименование юридического лица банковской организации
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="bankName")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Адрес юридического лица банковской организации
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="bankAddress")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left International Bank Account Number (IBAN)
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="iban")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Business Identifier Code (BIC)
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="bic")

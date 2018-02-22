@@ -1,0 +1,25 @@
+form.form-horizontal.form-label-left.css-form(*ngIf="form", [formGroup]="form", novalidate)
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Наименование
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="legalName")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Торговое наименование (если применимо)
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="tradingName")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Адрес места регистрации
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="registeredOffice")
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Адрес места нахождения (если отличается от регистрации)
+        .col-xs-12.col-sm-7
+            input.form-control.has-feedback-right(type="text", formControlName="principalPlaceOfBusiness")
+    .ln_solid
+    kof-bank-account-form([form]="bankAccountForm", [type]="type")

@@ -24,6 +24,7 @@ export class ContractCreateComponent implements OnInit {
     public step = CONTRACT_CREATION_STEP;
     public currentStep = CONTRACT_CREATION_STEP.contract;
     public validStep = false;
+    public type: string;
     private changeSet: PartyModification[] = [];
 
     constructor(private contractCreateService: ContractCreateService) {
@@ -40,6 +41,7 @@ export class ContractCreateComponent implements OnInit {
                 this.validStep = false;
             }
         });
+        this.type = this.contractCreateService.type;
     }
 
     public createAndBindContract() {

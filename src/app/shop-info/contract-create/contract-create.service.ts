@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { PartyModification, ShopContractBinding } from 'koffing/backend';
 import { ContractFormService, PayoutToolFormService } from 'koffing/domain';
 import { CONTRACT_CREATION_STEP } from './contract-creation-step';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class ContractCreateService {
@@ -12,17 +13,20 @@ export class ContractCreateService {
     public contractForm: FormGroup;
     public payoutToolForm: FormGroup;
     public changeSetEmitter: Subject<PartyModification[] | boolean> = new Subject();
+    public type: string;
     private changeSet: PartyModification[] = [];
     private contractID: string;
     private payoutToolID: string;
 
-    constructor(
-        private contractFormService: ContractFormService,
-        private payoutToolFormService: PayoutToolFormService
-    ) {
-        this.contractForm = this.contractFormService.initForm();
-        this.payoutToolForm = this.payoutToolFormService.initForm();
-        this.handleGroups();
+    constructor(private contractFormService: ContractFormService,
+                private route: ActivatedRoute,
+                private payoutToolFormService: PayoutToolFormService) {
+        this.route.params.subscribe((params) => {
+            this.contractForm = this.contractFormService.initForm(params.type);
+            this.payoutToolForm = this.payoutToolFormService.initForm(params.type);
+            this.handleGroups();
+            this.type = params.type;
+        });
     }
 
     public bindCreatedContract(shopID: string) {
@@ -34,12 +38,13 @@ export class ContractCreateService {
 
     private handleGroups() {
         this.handleStatus(this.contractForm, () => {
-            const contractCreation = this.contractFormService.toContractCreation(this.contractForm);
-            this.contractID = contractCreation.contractID;
-            this.changeSet[CONTRACT_CREATION_STEP.contract] = contractCreation;
+            this.contractFormService.toContractCreation(this.contractForm, this.type).subscribe((contractCreation) => {
+                this.contractID = contractCreation.contractID;
+                this.changeSet[CONTRACT_CREATION_STEP.contract] = contractCreation;
+            });
         });
         this.handleStatus(this.payoutToolForm, () => {
-            const payoutToolCreation = this.payoutToolFormService.toPayoutToolCreation(this.contractID, this.payoutToolForm);
+            const payoutToolCreation = this.payoutToolFormService.toPayoutToolCreation(this.contractID, this.payoutToolForm, this.type);
             this.payoutToolID = payoutToolCreation.payoutToolID;
             this.changeSet[CONTRACT_CREATION_STEP.payoutTool] = payoutToolCreation;
         });

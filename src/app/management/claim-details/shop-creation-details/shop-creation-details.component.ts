@@ -2,7 +2,9 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { last } from 'lodash';
 
 import {
-    BankAccount, Contractor, PartyModification, PayoutTool, PayoutToolDetailsBankAccount,
+    Contractor,
+    PartyModification,
+    PayoutTool,
     ShopCreation
 } from 'koffing/backend';
 import { ClaimDetailsService } from '../claim-details.service';

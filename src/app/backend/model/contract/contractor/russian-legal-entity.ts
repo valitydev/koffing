@@ -1,5 +1,6 @@
 import { LegalEntity } from './legal-entity';
-import { BankAccount } from '../../bank-account';
+import { BankAccount } from 'koffing/backend';
+import { LegalEntityTypeEnum } from './legal-entity-type-enum';
 
 export class RussianLegalEntity extends LegalEntity {
 
@@ -25,7 +26,7 @@ export class RussianLegalEntity extends LegalEntity {
         bankAccount: BankAccount
     }) {
         super();
-        this.entityType = 'RussianLegalEntity';
+        this.entityType = LegalEntityTypeEnum.RussianLegalEntity;
         this.registeredName = options.registeredName;
         this.registeredNumber = options.registeredNumber;
         this.inn = options.inn;

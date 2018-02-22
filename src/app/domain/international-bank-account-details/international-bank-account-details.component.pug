@@ -1,0 +1,26 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Держатель счета:
+        .col-xs-12.col-sm-8
+            div {{bankAccount?.accountHolder}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Наименование банка:
+        .col-xs-12.col-sm-8
+            div {{bankAccount?.bankName}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Адрес банка:
+        .col-xs-12.col-sm-8
+            div {{bankAccount?.bankAddress}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left International Bank Account Number (IBAN):
+        .col-xs-12.col-sm-8
+            div {{bankAccount?.iban}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Business Identifier Code (BIC):
+        .col-xs-12.col-sm-8
+            div {{bankAccount?.bic}}

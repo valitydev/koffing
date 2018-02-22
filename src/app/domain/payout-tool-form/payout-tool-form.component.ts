@@ -12,6 +12,9 @@ export class PayoutToolFormComponent implements OnInit {
     public form: FormGroup;
 
     @Input()
+    public type: string;
+
+    @Input()
     public bankAccount: BankAccount;
 
     public bankAccountForm: AbstractControl;

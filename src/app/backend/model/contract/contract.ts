@@ -10,4 +10,5 @@ export class Contract {
     public terminatedAt: string;
     public contractor: Contractor;
     public legalAgreement: LegalAgreement;
+    public paymentInstitutionID: number;
 }

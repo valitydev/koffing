@@ -1,0 +1,10 @@
+.row
+    .col-xs-12.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
+        .x_panel
+            .x_title
+                h5 Выберите тип юридического лица
+            .x_content
+                .btn-group
+                    label.btn.btn-default(*ngFor="let type of types")
+                        input(type="radio", value="type.value", name="entityType", hidden, (click)="next(type.value)")
+                        | {{type.label}}

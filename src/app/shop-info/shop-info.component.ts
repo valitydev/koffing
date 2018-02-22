@@ -8,6 +8,7 @@ import { ContractService } from 'koffing/backend/contract.service';
 import { PayoutToolService } from 'koffing/backend/payout-tool.service';
 import { MODIFICATION_TYPE } from 'koffing/management/modification-type';
 import { ShopInfoService } from './shop-info.service';
+import { RussianLegalEntity, InternationalLegalEntity, LegalEntityTypeEnum } from 'koffing/backend';
 
 @Component({
     templateUrl: 'shop-info.component.pug',
@@ -42,7 +43,7 @@ export class ShopInfoComponent implements OnInit {
     }
 
     public navigateToContractChange() {
-        this.router.navigate(['shop', this.shop.id, 'contract']);
+        this.router.navigate(['shop', this.shop.id, 'contract', this.getContractType(this.contract)]);
     }
 
     public activateShop() {
@@ -86,5 +87,15 @@ export class ShopInfoComponent implements OnInit {
             summary: '',
             detail: message
         });
+    }
+
+    private getContractType(contract: Contract): string {
+        const contractor = contract.contractor as RussianLegalEntity | InternationalLegalEntity;
+        switch (contractor.entityType) {
+            case LegalEntityTypeEnum.InternationalLegalEntity:
+                return 'nonresident';
+            case LegalEntityTypeEnum.RussianLegalEntity:
+                return 'resident';
+        }
     }
 }

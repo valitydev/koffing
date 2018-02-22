@@ -17,8 +17,8 @@
                                 span.step_no 3
                                 span.step_descr Данные магазина
                 .ln_solid
-                kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractForm")
-                kof-payout-tool-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolForm", [bankAccount]="contractForm.value.bankAccount")
+                kof-contract-form(*ngIf="currentStep === step.contract", [form]="contractForm", [type]="type")
+                kof-payout-tool-form(*ngIf="currentStep === step.payoutTool", [form]="payoutToolForm", [bankAccount]="contractForm.value.bankAccount", [type]="type")
                 kof-shop-form(*ngIf="currentStep === step.shop", [form]="shopForm")
                 .ln_solid
                 .row

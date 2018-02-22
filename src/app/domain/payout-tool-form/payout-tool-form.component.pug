@@ -7,4 +7,4 @@ div(*ngIf="bankAccount")
                 (change)="copyBankAccount(isCopyBankAccount)")
             span Использовать банковские реквизиты из контракта
     .ln_solid
-kof-bank-account-form([form]="bankAccountForm", [suggestionCssClass]="'payout-tool-suggestion'")
+kof-bank-account-form([form]="bankAccountForm", [type]="type")

@@ -33,7 +33,9 @@ export class InvoicePaymentLinkComponent implements OnInit {
         this.checkoutConfigForm = this.checkoutConfigFormService.form;
         this.checkoutConfigForm.valueChanges.subscribe(() => this.paymentLinkVisible = false);
         this.invoiceService.getInvoicePaymentMethods(this.invoice.id)
-            .subscribe((methods) => this.methods = methods);
+            .subscribe((methods) => {
+                this.methods = methods;
+            });
     }
 
     public copy() {
