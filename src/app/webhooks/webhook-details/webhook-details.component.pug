@@ -20,11 +20,10 @@ form.form-horizontal.form-label-left.css-form
         .col-xs-12.col-sm-4
             label.text-left Публичный ключ:
         .col-xs-12.col-sm-8
-            .input-group
-                input.form-control(type="text", #webhookPublicKey, readonly, [value]="webhook.publicKey")
-                span.input-group-btn
-                    button.btn.btn-default.btn-primary((click)="copy()")
-                        | Скопировать
+            textarea.form-control.key-textarea(#webhookPublicKey, readonly, [value]="webhook.publicKey", rows=10)
+        .col-xs-12.col-sm-4.col-sm-offset-8.text-right
+            button.btn.btn-default.btn-primary.copy-key-btn((click)="copy()")
+                | Скопировать ключ
     .ln_solid
     .form-group
         .col-xs-12

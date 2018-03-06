@@ -6,6 +6,7 @@ import { WebhooksService } from 'koffing/backend/webhooks.service';
 @Component({
     selector: 'kof-webhook-details',
     templateUrl: './webhook-details.component.pug',
+    styleUrls: ['./webhook-details.component.less']
 })
 export class WebhooksListDetailsComponent {
 
