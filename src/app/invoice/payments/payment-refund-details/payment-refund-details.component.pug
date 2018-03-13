@@ -1,0 +1,40 @@
+form.form-horizontal.form-label-left.css-form
+    .row
+        .col-xs-12.col-sm-6
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Идентификатор:
+                        .col-sm-7
+                            div {{refund.id}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Дата и время:
+                        .col-sm-7
+                            div {{refund.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Сумма возврата:
+                        .col-sm-7
+                            div {{refund.amount / 100}}
+        .col-xs-12.col-sm-6
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-3 Валюта:
+                        .col-sm-7
+                            div {{refund.currency}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-3 Причина:
+                        .col-sm-7
+                            div {{refund.reason}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-3 Статус:
+                        .col-sm-7
+                            div {{refund.status | kofRefundStatus}}

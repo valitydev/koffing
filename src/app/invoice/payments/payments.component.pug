@@ -1,5 +1,9 @@
 div(*ngFor="let payment of searchResult?.payments")
     kof-payment-details([payment]="payment")
+    kof-payment-refunds(
+        [invoice]="invoice",
+        [payment]="payment",
+    )
     .payment-actions.row(*ngIf="isHoldActionsAvailable(payment)")
         .col-xs-12
             kof-payment-capture(
@@ -7,12 +11,6 @@ div(*ngFor="let payment of searchResult?.payments")
                 [paymentID]="payment.id",
                 (onChangeStatus)="changeStatus($event, payment)")
             kof-payment-cancel(
-                [invoiceID]="invoice.id",
-                [paymentID]="payment.id",
-                (onChangeStatus)="changeStatus($event, payment)")
-    .payment-actions.row(*ngIf="isRefundActionAvailable(payment)")
-        .col-xs-12
-            kof-payment-refund(
                 [invoiceID]="invoice.id",
                 [paymentID]="payment.id",
                 (onChangeStatus)="changeStatus($event, payment)")

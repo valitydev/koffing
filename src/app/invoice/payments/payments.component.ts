@@ -41,10 +41,6 @@ export class PaymentsComponent implements OnChanges {
         return payment.status === PAYMENT_STATUS.processed;
     }
 
-    public isRefundActionAvailable(payment: Payment) {
-        return payment.status === PAYMENT_STATUS.captured;
-    }
-
     public changeStatus(status: string, payment: Payment) {
         payment.status = status;
         if (payment.status === PAYMENT_STATUS.captured) {

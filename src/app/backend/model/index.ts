@@ -43,3 +43,4 @@ export * from './webhook-scope';
 export * from './payout-search-result';
 export * from './invoice-cart';
 export * from './payment-institution';
+export * from './payment-refund';

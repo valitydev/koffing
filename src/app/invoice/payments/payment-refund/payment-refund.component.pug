@@ -1,24 +1,29 @@
 doctype html
-button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + paymentID + 'refund'")
+button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + paymentID + 'refund'", (click)="open()")
     | Совершить возврат платежа
 
 .modal.fade(tabindex="-1", role="dialog", id="{{paymentID}}refund", data-backdrop="false")
-    .modal-dialog.modal-sm
+    .modal-dialog.modal-md
         .modal-content
             .modal-header
                 h5.modal-title Возврат платежа
             .modal-body
-                form(name="refundForm", #refundForm="ngForm")
-                    label Причина совершения операции:
-                    input.form-control.input-sm([(ngModel)]="reason", name="reason", required)
+                form([formGroup]="form", novalidate)
+                    .form-group
+                        label Сумма возврата:
+                        input.form-control(formControlName="amount")
+                        span.helpBlock(*ngIf="account") Баланс основного счета: {{account.availableAmount / 100}}
+                    .form-group
+                        label Причина совершения операции:
+                        textarea.form-control(formControlName="reason", rows="5")
             .modal-footer
                 .btn-toolbar
                     .btn-group.btn-group-sm(*ngIf="!inProcess")
-                        button.btn.btn-default((click)="close()") Назад
+                        button.btn.btn-default((click)="close()") Отмена
                     .btn-group.btn-group-sm.pull-right
                         button.btn.btn-primary(
                             *ngIf="!inProcess",
-                            [disabled]="refundForm.invalid",
+                            [disabled]="!form.valid",
                             (click)="refundPayment()") Совершить возврат платежа
                         button.btn.btn-primary(*ngIf="inProcess", disabled="true")
                             i.fa.fa-cog.fa-spin.fa-1x.fa-fw

@@ -5,6 +5,8 @@ import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
 import { InvoiceParams } from './requests';
 import { InvoiceAndToken, InvoiceAccessToken, PaymentMethod } from './model';
+import { RefundParams } from 'koffing/backend/requests/refund-params';
+import { PaymentRefund } from 'koffing/backend/model';
 
 @Injectable()
 export class InvoiceService {
@@ -36,9 +38,14 @@ export class InvoiceService {
             .map((res) => null);
     }
 
-    public refundPayment(invoiceID: string, paymentID: string, reason: string): Observable<void> {
-        return this.http.post(`${this.endpoint}/${invoiceID}/payments/${paymentID}/refunds`, {reason})
-            .map((res) => null);
+    public refundPayment(invoiceID: string, paymentID: string, params: RefundParams): Observable<PaymentRefund> {
+        return this.http.post(`${this.endpoint}/${invoiceID}/payments/${paymentID}/refunds`, {...params})
+            .map((res) => res.json());
+    }
+
+    public getRefunds(invoiceID: string, paymentID: string): Observable<PaymentRefund[]> {
+        return this.http.get(`${this.endpoint}/${invoiceID}/payments/${paymentID}/refunds`)
+            .map(res => res.json());
     }
     
     public getInvoicePaymentMethods(invoiceID: string): Observable<PaymentMethod[]> {

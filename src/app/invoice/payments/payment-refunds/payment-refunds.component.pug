@@ -1,0 +1,30 @@
+.x_panel(*ngIf="refundTableItems?.length")
+    .x_title
+        label Возвраты
+    .x_content
+        table.table.table-striped
+            thead
+                tr
+                    th Дата и время
+                    th Сумма
+                    th Статус
+                    th
+            tbody(*ngFor="let item of refundTableItems")
+                tr
+                    td {{item.refund.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+                    td {{item.refund.amount / 100}} ₽
+                    td {{item.refund.status | kofRefundStatus}}
+                    td
+                        .pull-right
+                            button.btn.btn-xs.btn-default((click)="toggleRefundDetailsPanel(item)")
+                                | {{item.visible ? 'Скрыть' : 'Показать'}} детали
+                tr(*ngIf="item.visible")
+                    td.row(colspan="5")
+                        kof-refund-details([refund]="item.refund")
+.payment-actions.row(*ngIf="isRefundActionAvailable()")
+    .col-xs-12
+        kof-payment-refund(
+        [invoice]="invoice",
+        [paymentID]="payment.id",
+        [refunds]="refunds",
+        (onRefund)="onRefund()")

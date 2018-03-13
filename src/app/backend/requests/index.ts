@@ -8,3 +8,4 @@ export * from './search-payouts-params';
 export * from './webhook-params';
 export * from './search-report-params';
 export * from './get-payment-institutions-params';
+export * from './refund-params';

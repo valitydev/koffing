@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { clone, find } from 'lodash';
 
-import { Event, InvoiceChange, InvoiceStatusChanged, PaymentStatusChanged } from 'koffing/backend';
+import { Event, InvoiceChange, InvoiceStatusChanged, PaymentStatusChanged, RefundStatusChanged } from 'koffing/backend';
 import { EventService } from 'koffing/backend/event.service';
 
 @Injectable()
@@ -55,6 +55,12 @@ export class EventPollerService {
                 } else
                 if (expectedChange instanceof PaymentStatusChanged) {
                     const eventChange = change as PaymentStatusChanged;
+                    if (expectedChange.status === eventChange.status) {
+                        return true;
+                    }
+                }
+                if (expectedChange instanceof RefundStatusChanged) {
+                    const eventChange = change as RefundStatusChanged;
                     if (expectedChange.status === eventChange.status) {
                         return true;
                     }
