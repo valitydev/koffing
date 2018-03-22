@@ -1,0 +1,42 @@
+form.form-horizontal.form-label-left.css-form(*ngFor="let item of summary")
+    .row
+        .col-xs-12.col-sm-6
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Сумма:
+                        .col-sm-7
+                            div {{item.amount / 100}} {{item.currency}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Комиссия:
+                        .col-sm-7
+                            div {{item.fee / 100}} {{item.currency}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Дата и время первого подтверждения:
+                        .col-sm-7
+                            div {{item.fromTime | date: "dd.MM.yyyy HH:mm:ss"}}
+        .col-xs-12.col-sm-6
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Тип:
+                        .col-sm-7
+                            div {{item.type | kofPayoutType}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Кол-во операций этого типа:
+                        .col-sm-7
+                            div {{item.count}}
+            .row
+                .col-xs-12
+                    .form-group
+                        label.col-sm-5 Дата и время последнего подтверждения:
+                        .col-sm-7
+                            div {{item.toTime | date: "dd.MM.yyyy HH:mm:ss"}}
+        .col-xs-12
+            .ln_solid

@@ -4,8 +4,16 @@ table.table.table-striped
             th Идентификатор
             th Сумма к зачислению
             th Время создания
-    tbody(*ngFor="let payout of payouts | async")
+            th
+    tbody(*ngFor="let item of payoutListItems")
         tr
-            td {{payout.id}}
-            td {{payout.amount | kofRoubleCurrency}} ₽
-            td {{payout.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+            td {{item.payout.id}}
+            td {{item.payout.amount | kofRoubleCurrency}} ₽
+            td {{item.payout.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+            td
+                .pull-right(*ngIf="item.payout.payoutSummary")
+                    button.btn.btn-xs.btn-default((click)="togglePayoutDetailsPanel(item)")
+                        | {{item.visible ? 'Скрыть' : 'Показать'}} детали
+        tr(*ngIf="item.visible")
+            td.row(colspan="4")
+                kof-payout-summary([summary]="item.payout.payoutSummary")

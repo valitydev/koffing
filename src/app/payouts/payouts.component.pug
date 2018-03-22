@@ -6,7 +6,7 @@
             .x_content
                 kof-search-payouts-form((onReadyParams)="searchPayouts()")
                 .ln_solid
-                kof-search-payouts-result([payouts]="payouts")
+                kof-search-payouts-result(*ngIf="payouts", [payouts]="payouts")
                 kof-paginate(
                     [size]="totalCount",
                     [limit]="limit",

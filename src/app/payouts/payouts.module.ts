@@ -8,6 +8,8 @@ import { BackendModule } from 'koffing/backend/backend.module';
 import { PayoutsComponent } from './payouts.component';
 import { SearchPayoutsFormComponent } from './search-payouts-form/search-payouts-form.component';
 import { SearchPayoutsResultComponent } from './search-payouts-result/search-payouts-result.component';
+import { PayoutSummaryComponent } from './payout-summary/payout-summary.component';
+import { PayoutTypePipe } from './payout-type.pipe';
 
 @NgModule({
     imports: [
@@ -21,7 +23,9 @@ import { SearchPayoutsResultComponent } from './search-payouts-result/search-pay
     declarations: [
         PayoutsComponent,
         SearchPayoutsFormComponent,
-        SearchPayoutsResultComponent
+        SearchPayoutsResultComponent,
+        PayoutSummaryComponent,
+        PayoutTypePipe
     ]
 })
 export class PayoutsModule { }

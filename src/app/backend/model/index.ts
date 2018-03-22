@@ -41,6 +41,7 @@ export * from './url-shortener-response';
 export * from './webhook';
 export * from './webhook-scope';
 export * from './payout-search-result';
+export * from './payout-summary';
 export * from './invoice-cart';
 export * from './payment-institution';
 export * from './payment-refund';
