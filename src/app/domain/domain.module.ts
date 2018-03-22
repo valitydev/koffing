@@ -26,12 +26,14 @@ import { RussianBankAccountFormComponent } from './bank-account-form/russian-ban
 import { InternationalBankAccountDetailsComponent } from './international-bank-account-details/international-bank-account-details.component';
 import { RussianContractorDetailsComponent } from './contractor-details/russian-contractor-details/russian-contractor-details.component';
 import { InternationalContractorDetailsComponent } from './contractor-details/international-contractor-details/international-contractor-details.component';
+import { CommonModule } from '../common/common.module';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CommonModule
     ],
     declarations: [
         ShopDetailsComponent,

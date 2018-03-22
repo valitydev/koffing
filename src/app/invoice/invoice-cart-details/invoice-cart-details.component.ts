@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { InvoiceLine } from 'koffing/backend/model/invoice-cart/invoice-line';
+import { Invoice } from 'koffing/backend';
 
 @Component({
     selector: 'kof-invoice-line-details',
@@ -8,6 +8,5 @@ import { InvoiceLine } from 'koffing/backend/model/invoice-cart/invoice-line';
 export class InvoiceCartDetailsComponent {
 
     @Input()
-    public cart: InvoiceLine[];
-
+    public invoice: Invoice;
 }

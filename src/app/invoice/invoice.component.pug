@@ -16,7 +16,7 @@ kof-loading([isLoading]="!invoice && !invoiceNotFound")
             .x_title
                 h5 Корзина товаров или услуг
             .x_content
-                kof-invoice-line-details([cart]="invoice?.cart")
+                kof-invoice-line-details([invoice]="invoice")
         .x_panel
             .x_title
                 h5 Платежи

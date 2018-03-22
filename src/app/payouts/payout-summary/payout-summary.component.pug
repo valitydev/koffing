@@ -6,13 +6,13 @@ form.form-horizontal.form-label-left.css-form(*ngFor="let item of summary")
                     .form-group
                         label.col-sm-5 Сумма:
                         .col-sm-7
-                            div {{item.amount / 100}} {{item.currency}}
+                            div {{item.amount / 100}} {{item.currency | kofCurrency}}
             .row
                 .col-xs-12
                     .form-group
                         label.col-sm-5 Комиссия:
                         .col-sm-7
-                            div {{item.fee / 100}} {{item.currency}}
+                            div {{item.fee / 100}} {{item.currency | kofCurrency}}
             .row
                 .col-xs-12
                     .form-group

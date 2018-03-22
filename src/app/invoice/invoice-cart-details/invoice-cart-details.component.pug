@@ -6,10 +6,10 @@ table.table.table-striped
             th Сумма
             th Налог
             th Описание
-    tbody(*ngFor="let lineItem of cart")
+    tbody(*ngFor="let lineItem of invoice.cart")
         tr
-            td {{lineItem.price | kofRoubleCurrency}} ₽
+            td {{lineItem.price | kofRoubleCurrency}} {{invoice.currency | kofCurrency}}
             td {{lineItem.quantity}}
-            td {{lineItem.cost | kofRoubleCurrency}} ₽
+            td {{lineItem.cost | kofRoubleCurrency}} {{invoice.currency | kofCurrency}}
             td {{lineItem?.taxMode?.rate || 'без НДС'}}
             td {{lineItem.product}}

@@ -40,5 +40,5 @@ form([formGroup]="form", novalidate)
                                 i.fa.fa-trash
         .row
             .col-xs-12
-                label.text-left Итого товаров и услуг на сумму: {{ form.value.amount }} RUB
+                label.text-left Итого товаров и услуг на сумму: {{ form.value.amount }} {{form.value.currency | kofCurrency}}
                 button.btn.btn-default.pull-right(type="button", (click)="addProduct()") Добавить товар или услугу

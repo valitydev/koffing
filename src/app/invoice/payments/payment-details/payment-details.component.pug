@@ -24,13 +24,13 @@ form.form-horizontal.form-label-left.css-form
                     .form-group
                         label.col-sm-5 Сумма списания:
                         .col-sm-7
-                            div {{payment.amount | kofRoubleCurrency}} ₽
+                            div {{payment.amount | kofRoubleCurrency}} {{payment.currency | kofCurrency}}
             .row
                 .col-xs-12
                     .form-group
                         label.col-sm-5 Сумма к зачислению:
                         .col-sm-7
-                            div {{payment.amount - payment.fee | kofRoubleCurrency}} ₽
+                            div {{payment.amount - payment.fee | kofRoubleCurrency}} {{payment.currency | kofCurrency}}
             .row(*ngIf="payment.error")
                 .col-xs-12
                     .form-group

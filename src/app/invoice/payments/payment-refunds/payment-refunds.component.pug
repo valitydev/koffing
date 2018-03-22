@@ -12,7 +12,7 @@
             tbody(*ngFor="let item of refundTableItems")
                 tr
                     td {{item.refund.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
-                    td {{item.refund.amount / 100}} ₽
+                    td {{item.refund.amount / 100}} {{item.refund.currency | kofCurrency}}
                     td {{item.refund.status | kofRefundStatus}}
                     td
                         .pull-right

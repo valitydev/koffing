@@ -30,7 +30,8 @@ import { PaymentRefundsPipe } from 'koffing/invoice/payments/payment-refunds/pay
         ReactiveFormsModule,
         CommonModule,
         BackendModule,
-        CheckoutModule
+        CheckoutModule,
+        CommonModule
     ],
     declarations: [
         InvoiceComponent,

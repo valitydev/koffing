@@ -13,7 +13,7 @@ export class CreateInvoiceService {
         const params = new InvoiceParams();
         params.shopID = shopID;
         params.product = formValue.product;
-        params.currency = 'RUB';
+        params.currency = formValue.currency;
         params.dueDate = moment(formValue.dueDate).utc().format();
         params.description = formValue.description;
         params.metadata = {};

@@ -18,7 +18,7 @@ import { PayoutTypePipe } from './payout-type.pipe';
         ReactiveFormsModule,
         CalendarModule,
         CommonModule,
-        BackendModule,
+        BackendModule
     ],
     declarations: [
         PayoutsComponent,

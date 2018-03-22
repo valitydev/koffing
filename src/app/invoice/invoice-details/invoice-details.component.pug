@@ -33,7 +33,7 @@ form.form-horizontal.form-label-left.css-form
         .col-xs-12.col-sm-4
             label.text-left Стоимость:
         .col-xs-12.col-sm-8
-            div {{invoice?.amount | kofRoubleCurrency}} ₽
+            div {{invoice?.amount | kofRoubleCurrency}} {{invoice.currency | kofCurrency}}
     .form-group(*ngIf="invoice?.reason")
         .col-xs-12.col-sm-4
             label.text-left Причина отмены или погашения инвойса:

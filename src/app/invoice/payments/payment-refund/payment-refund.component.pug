@@ -9,10 +9,12 @@ button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + pay
                 h5.modal-title Возврат платежа
             .modal-body
                 form([formGroup]="form", novalidate)
-                    .form-group
-                        label Сумма возврата:
-                        input.form-control(formControlName="amount")
-                        span.helpBlock(*ngIf="account") Баланс основного счета: {{account.availableAmount / 100}}
+                    .row
+                        .col-xs-12
+                            .form-group
+                                label Сумма возврата:
+                                input.form-control(formControlName="amount")
+                                span.helpBlock(*ngIf="account") Баланс основного счета: {{account.availableAmount / 100}}
                     .form-group
                         label Причина совершения операции:
                         textarea.form-control(formControlName="reason", rows="5")
