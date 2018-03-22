@@ -36,12 +36,16 @@ export class PaymentRefundsComponent implements OnInit {
     }
 
     public isRefundActionAvailable(): boolean {
-        if (this.refunds) {
-            const totalRefunded = this.refunds.reduce((acc, current) => current.status === 'succeeded' ? acc + current.amount : acc, 0);
-            return totalRefunded < this.payment.amount - 1000;
-        } else {
-            return true;
+        let result: boolean = false;
+        if (this.payment.status === 'captured') {
+            if (this.refunds) {
+                const totalRefunded = this.refunds.reduce((acc, current) => current.status === 'succeeded' ? acc + current.amount : acc, 0);
+                result = totalRefunded < this.payment.amount - 1000;
+            } else {
+                result = true;
+            }
         }
+        return result;
     }
 
     private getRefunds() {

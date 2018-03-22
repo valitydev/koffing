@@ -32,11 +32,11 @@ export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit 
     public onRefund: EventEmitter<void> = new EventEmitter();
 
     public form: FormGroup;
-
+    public account: Account;
     public inProcess: boolean = false;
+
     private modalElement: any;
     private refundedAmount: number = 0;
-    private account: Account;
     private settlementID: number;
 
     constructor(private eventPollerService: EventPollerService,

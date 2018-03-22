@@ -14,7 +14,7 @@ button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + pay
                             .form-group
                                 label Сумма возврата:
                                 input.form-control(formControlName="amount")
-                                span.helpBlock(*ngIf="account") Баланс основного счета: {{account.availableAmount / 100}}
+                                span.helpBlock(*ngIf="account") Баланс основного счета: {{account.availableAmount / 100}} {{account.currency | kofCurrency}}
                     .form-group
                         label Причина совершения операции:
                         textarea.form-control(formControlName="reason", rows="5")
