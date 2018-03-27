@@ -15,8 +15,8 @@ export class PaymentRefundService {
                 Validators.required,
                 Validators.min(10), // TODO: минимальная сумма рефанда?
                 Validators.max(amount / 100),
-                Validators.max( availableAmount / 100),
-                Validators.pattern(/^\d+$/)]
+                Validators.max(availableAmount / 100),
+                Validators.pattern(/^\d+\.?\d*$/)]
             ],
             reason: ['']
         });
