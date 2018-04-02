@@ -15,7 +15,7 @@ export class InvoiceFormService {
         return this.form.get(this.cartControlName) as FormArray;
     }
 
-    constructor(private fb: FormBuilder,) {
+    constructor(private fb: FormBuilder) {
         this.form = this.initForm();
         this.initCart();
     }

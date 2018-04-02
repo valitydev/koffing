@@ -7,9 +7,9 @@ export class ContractPayoutToolCreation extends ContractModification {
     public currency: string;
     public details: PayoutToolDetails;
 
-    constructor(contractID: string, payoutToolID: string, details: PayoutToolDetails) {
+    constructor(currency: string, contractID: string, payoutToolID: string, details: PayoutToolDetails) {
         super();
-        this.currency = 'RUB';
+        this.currency = currency;
         this.contractModificationType = 'ContractPayoutToolCreation';
         this.contractID = contractID;
         this.payoutToolID = payoutToolID;

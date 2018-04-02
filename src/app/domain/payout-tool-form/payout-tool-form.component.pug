@@ -8,3 +8,11 @@ div(*ngIf="bankAccount")
             span Использовать банковские реквизиты из контракта
     .ln_solid
 kof-bank-account-form([form]="bankAccountForm", [type]="type")
+form.form-horizontal.form-label-left.css-form([formGroup]="form", novalidate)
+    .form-group
+        .col-xs-12.col-sm-5
+            label.text-left Валюта
+                span.highlighted  *
+        .col-xs-12.col-sm-7
+            input.form-control(type="text", formControlName="currency")
+            span.help-box Код валюты в формате <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank">ISO 4217</a>. Примеры: RUB, USD, EUR...
