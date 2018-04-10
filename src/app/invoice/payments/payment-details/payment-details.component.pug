@@ -36,7 +36,7 @@ form.form-horizontal.form-label-left.css-form
                     .form-group
                         label.col-sm-5 Сообщение об ошибке:
                         .col-sm-7
-                            div {{payment.error?.message}}
+                            div {{getMessage(payment.error)}}
             div(*ngIf="isFlowInformationAvailable(payment)")
                 .row
                     .col-xs-12

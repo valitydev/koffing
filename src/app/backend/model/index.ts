@@ -33,6 +33,7 @@ export * from './payment-method-stat';
 export * from './payment-rate-stat';
 export * from './payment-revenue-stat';
 export * from './payment-search-result';
+export * from './payment-error';
 export * from './payout';
 export * from './report';
 export * from './revenue';
