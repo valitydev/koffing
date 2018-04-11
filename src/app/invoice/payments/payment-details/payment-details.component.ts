@@ -50,12 +50,17 @@ export class PaymentDetailsComponent implements OnChanges {
 
     private mapErrors(error: PaymentError, dictionary: any, acc: string = ''): string {
         const {code} = error;
+        const getMessage = (messageObj: any, defaultMessage: string) => get(messageObj, 'message')
+            ? messageObj.message
+            : defaultMessage;
         const key = dictionary ? dictionary[code] : code;
         if (error.subError) {
-            const message = get(key, 'message') ? key.message : code;
+            const message = getMessage(key, code);
             return this.mapErrors(error.subError, key, acc.concat(acc === '' ? message : ` -> ${message}`));
         } else {
-            return acc === '' ? key : `${acc} -> ${key}.`;
+            const unkownPrefix = (dictionary && dictionary[code]) ? '' : 'Неизвестная ошибка: ';
+            const result = acc === '' ? getMessage(key, code) : `${acc} -> ${key}.`;
+            return unkownPrefix.concat(result);
         }
     }
 }
