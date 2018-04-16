@@ -84,7 +84,6 @@ export class RegistryDataService {
     private getRegistryItems(payments: Payment[], invoices: Invoice[]): RegistryItem[] {
         const registryItems: RegistryItem[] = [];
         payments.forEach((payment: Payment) => {
-            const foundInvoice = find(invoices, (invoice: Invoice) => invoice.id === payment.invoiceID);
             const registryItem = new RegistryItem();
             registryItem.invoiceID = `${payment.invoiceID}.${payment.id}`;
             registryItem.paymentDate = payment.createdAt;
@@ -96,8 +95,9 @@ export class RegistryDataService {
             } else {
                 registryItem.userEmail = '';
             }
-            registryItem.product = foundInvoice.product || '';
-            registryItem.description = foundInvoice.description || '';
+            const foundInvoice = find(invoices, (invoice: Invoice) => invoice.id === payment.invoiceID);
+            registryItem.product = (foundInvoice && foundInvoice.product) || '';
+            registryItem.description = (foundInvoice && foundInvoice.description) || '';
             registryItems.push(registryItem);
         });
         return registryItems;
