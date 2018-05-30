@@ -9,3 +9,4 @@ export * from './payment-flow';
 export * from './payment-method';
 export * from './payout-tool-type';
 export * from './report-type';
+export * from './token-provider';

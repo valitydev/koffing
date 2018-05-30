@@ -9,6 +9,7 @@ import { PAYMENT_STATUS_LABEL } from '../payment-status-label';
 import { PAYMENT_METHOD_LABEL } from '../payment-method-label';
 import { PAYMENT_FLOW_LABEL } from '../payment-flow-label';
 import { SearchFormService } from './search-form.service';
+import { TOKEN_PROVIDER_LABEL } from '../token-provider-label';
 
 @Component({
     selector: 'kof-search-form',
@@ -42,6 +43,7 @@ export class SearchFormComponent implements OnInit {
     public invoiceStatuses: SelectItem[];
     public paymentStatuses: SelectItem[];
     public paymentMethods: SelectItem[];
+    public tokenProviders: SelectItem[];
     public paymentFlows: SelectItem[];
     public additionalParamsVisible: boolean;
 
@@ -51,6 +53,7 @@ export class SearchFormComponent implements OnInit {
         this.invoiceStatuses = map(INVOICE_STATUS_LABEL, (name, key) => new SelectItem(key, name));
         this.paymentStatuses = map(PAYMENT_STATUS_LABEL, (name, key) => new SelectItem(key, name));
         this.paymentMethods = map(PAYMENT_METHOD_LABEL, (name, key) => new SelectItem(key, name));
+        this.tokenProviders = map(TOKEN_PROVIDER_LABEL, (name, key) => new SelectItem(key, name));
         this.paymentFlows = map(PAYMENT_FLOW_LABEL, (name, key) => new SelectItem(key, name));
 
         this.searchForm = this.searchFormService.searchForm;

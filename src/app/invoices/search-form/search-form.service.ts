@@ -77,6 +77,7 @@ export class SearchFormService {
             paymentFlow: '',
             fingerprint: '',
             customerID: '',
+            bankCardTokenProvider: '',
             invoicesWithPayments: this.defaultValues.invoicesWithPayments
         });
     }

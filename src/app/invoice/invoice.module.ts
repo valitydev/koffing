@@ -21,7 +21,8 @@ import { CustomerStatusPipe } from './payments/payment-details/customer-status.p
 import { PaymentRefundService } from './payments/payment-refund/payment-refund.service';
 import { PaymentRefundsComponent } from './payments/payment-refunds/payment-refunds.component';
 import { PaymentRefundDetailsComponent } from './payments/payment-refund-details/payment-refund-details.component';
-import { PaymentRefundsPipe } from 'koffing/invoice/payments/payment-refunds/payment-refunds.pipe';
+import { PaymentRefundsPipe } from './payments/payment-refunds/payment-refunds.pipe';
+import { PaymentToolDetailsTokenProviderPipe } from './payments/payment-details/payment-tool-details-token-provider.pipe';
 
 @NgModule({
     imports: [
@@ -48,6 +49,7 @@ import { PaymentRefundsPipe } from 'koffing/invoice/payments/payment-refunds/pay
         PaymentRefundDetailsComponent,
         PaymentRefundsPipe,
         PaymentToolDetailsTypePipe,
+        PaymentToolDetailsTokenProviderPipe,
         ProviderNamePipe,
         CustomerStatusPipe
     ],

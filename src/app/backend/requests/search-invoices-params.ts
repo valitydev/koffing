@@ -17,4 +17,5 @@ export class SearchInvoicesParams {
     public payerFingerprint?: string;
     public cardNumberMask?: string;
     public customerID?: string;
+    public bankCardTokenProvider?: string;
 }

@@ -22,6 +22,7 @@ export class InvoicesService {
         result.payerFingerprint = formParams.fingerprint;
         result.cardNumberMask = formParams.cardNumberMask;
         result.customerID = formParams.customerID;
+        result.bankCardTokenProvider = formParams.bankCardTokenProvider;
         return result;
     }
 }

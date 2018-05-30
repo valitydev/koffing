@@ -76,7 +76,9 @@ form.form-horizontal.form-label-left.css-form
                         .form-group
                             label.col-sm-5 Метод оплаты:
                             .col-sm-7
-                                div {{payment.payer?.paymentToolDetails?.detailsType | kofPaymentToolDetailsType}}
+                                div
+                                    | {{payment.payer?.paymentToolDetails?.detailsType | kofPaymentToolDetailsType}}
+                                    span(*ngIf="payment.payer?.paymentToolDetails?.tokenProvider") &nbsp;({{payment.payer.paymentToolDetails.tokenProvider | kofPaymentToolDetailsTokenProvider}})
 
                 .row
                     .col-xs-12(*ngIf="payment.payer?.paymentToolDetails?.detailsType === 'PaymentToolDetailsPaymentTerminal'")

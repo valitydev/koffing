@@ -46,6 +46,10 @@ form([formGroup]="searchForm", novalidate)
                 .form-group
                     label Метод оплаты:
                     kof-select(formControlName="paymentMethod", [items]="paymentMethods", [placeholder]="'Любой метод'")
+            .col-sm-3.col-xs-12(*ngIf="searchForm.value.paymentMethod === 'bankCard'")
+                .form-group
+                    label Провайдер токенов
+                    kof-select(formControlName="bankCardTokenProvider", [items]="tokenProviders", [placeholder]="'Любой провайдер'")
             .col-sm-3.col-xs-12
                 .form-group
                     label Тип проведения платежа:
