@@ -66,7 +66,7 @@ export class SearchFormService {
                 this.defaultValues.to,
                 Validators.required
             ],
-            cardNumberMask: ['', Validators.pattern(/^\d{4}$/)],
+            lastDigits: ['', Validators.pattern(/^\d{4}$/)],
             invoiceID: '',
             invoiceStatus: '',
             ip: '',

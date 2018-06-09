@@ -38,7 +38,7 @@ export class PaymentLinkService {
     }
 
     private prepareInvoiceUrl(formValue: any, invoice: Invoice, accessToken: string): string {
-        const args = this.toInvoicePaymentLinkArgs(formValue, invoice.shopID, invoice.id, accessToken);
+        const args = this.toInvoicePaymentLinkArgs(formValue, invoice.id, accessToken);
         return this.argsToUrl(args);
     }
 
@@ -46,7 +46,7 @@ export class PaymentLinkService {
         const shopID = templateAndToken.invoiceTemplate.shopID;
         const templateID = templateAndToken.invoiceTemplate.id;
         const accessToken = templateAndToken.invoiceTemplateAccessToken.payload;
-        const args = this.toInvoiceTemplatePaymentLinkArgs(formValue, shopID, templateID, accessToken);
+        const args = this.toInvoiceTemplatePaymentLinkArgs(formValue, templateID, accessToken);
         return this.argsToUrl(args);
     }
 
@@ -58,41 +58,35 @@ export class PaymentLinkService {
         return `${this.configService.checkoutUrl}/v1/checkout.html?${args}`;
     }
 
-    private toInvoiceTemplatePaymentLinkArgs(formValue: any, shopID: string, templateID: string, accessToken: string): PaymentLinkArguments {
+    private toInvoiceTemplatePaymentLinkArgs(formValue: any, templateID: string, accessToken: string): PaymentLinkArguments {
         const args = new PaymentLinkArguments();
         args.invoiceTemplateID = templateID;
         args.invoiceTemplateAccessToken = accessToken;
-        const commonArgs = this.toPaymentLinkArgs(formValue, shopID);
+        const commonArgs = this.toPaymentLinkArgs(formValue);
         return Object.assign(commonArgs, args);
     }
 
-    private toInvoicePaymentLinkArgs(formValue: any, shopID: string, invoiceID: string, accessToken: string): PaymentLinkArguments {
+    private toInvoicePaymentLinkArgs(formValue: any, invoiceID: string, accessToken: string): PaymentLinkArguments {
         const args = new PaymentLinkArguments();
         args.invoiceID = invoiceID;
         args.invoiceAccessToken = accessToken;
-        const commonArgs = this.toPaymentLinkArgs(formValue, shopID);
+        const commonArgs = this.toPaymentLinkArgs(formValue);
         return Object.assign(commonArgs, args);
     }
 
-    private toPaymentLinkArgs(formValue: any, shopID: string): PaymentLinkArguments {
+    private toPaymentLinkArgs(formValue: any): PaymentLinkArguments {
         const args = new PaymentLinkArguments();
         args.name = formValue.name || '';
         args.description = formValue.description || '';
-        args.payButtonLabel = formValue.payButtonLabel || '';
-        args.logo = formValue.logo || '';
         args.email = formValue.email || '';
         args.redirectUrl = formValue.redirectUrl || '';
-        args.popupMode = true;
         if (formValue.paymentFlowHold) {
             args.paymentFlowHold = formValue.paymentFlowHold;
             args.holdExpiration = formValue.holdExpiration;
         }
-        // TODO fix after real apple pay payments api capability
-        if (shopID === 'TEST') {
-            args.applePayTest = true;
-        }
         args.terminals = formValue.terminals;
         args.wallets = formValue.wallets;
+        args.bankCard = formValue.bankCard;
         return args;
     }
 

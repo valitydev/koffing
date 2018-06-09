@@ -67,7 +67,7 @@ export class InvoiceTemplateFormService {
         return this.fb.group({
             product: ['', [ Validators.required, Validators.maxLength(1000) ]],
             quantity: ['', [ Validators.required, Validators.min(1) ]],
-            price: ['', [ Validators.required, Validators.min(10) ]],
+            price: ['', [ Validators.required, Validators.min(1) ]],
             tax: ['']
         });
     }
@@ -95,12 +95,12 @@ export class InvoiceTemplateFormService {
             costGroup = this.fb.group({});
         } else if (costType === COST_TYPE.fixed) {
             costGroup = this.fb.group({
-                amount: ['', [Validators.required, Validators.min(10)]]
+                amount: ['', [Validators.required, Validators.min(1)]]
             });
         } else if (costType === COST_TYPE.range) {
             costGroup = this.fb.group({
-                lowerBound: ['', [Validators.required, Validators.min(10)]],
-                upperBound: ['', [Validators.required, Validators.min(10)]]
+                lowerBound: ['', [Validators.required, Validators.min(1)]],
+                upperBound: ['', [Validators.required, Validators.min(1)]]
             });
         }
         return costGroup;

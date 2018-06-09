@@ -1,9 +1,14 @@
+doctype html
 .row
     .col-xs-12.col-md-10.col-md-offset-1
         .x_panel
             .x_title
-                h5 Ваш приватный ключ для доступа к&nbsp;
-                    a(href="https://rbkmoney.github.io/api", target="_blank")
-                        u API
+                .row
+                    .col-md-6
+                        h5 Ваш приватный ключ для доступа к&nbsp;
+                            a(href="https://v1.api.developer.rbk.money", target="_blank")
+                                u API
+                    .col-md-6
+                        button.btn.btn-sm.btn-primary.pull-right((click)="copy()") Скопировать            
             .x_content
-                textarea.form-control(readonly, rows="20") {{privateToken}}
+                textarea.form-control(#privateTokenTextarea, readonly, rows="20") {{privateToken}}

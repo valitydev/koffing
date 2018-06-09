@@ -44,7 +44,8 @@ export class InvoicePaymentLinkComponent implements OnInit {
     }
 
     public generatePaymentLink() {
-        this.paymentLinkService.getInvoicePaymentLink(this.invoice, this.checkoutConfigForm.value).subscribe((paymentLink) => {
+        const value = this.checkoutConfigForm.getRawValue();
+        this.paymentLinkService.getInvoicePaymentLink(this.invoice, value).subscribe((paymentLink) => {
             this.paymentLink = paymentLink;
             this.paymentLinkVisible = true;
         });

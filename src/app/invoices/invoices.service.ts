@@ -20,7 +20,7 @@ export class InvoicesService {
         result.payerIP = formParams.ip;
         result.payerEmail = formParams.email;
         result.payerFingerprint = formParams.fingerprint;
-        result.cardNumberMask = formParams.cardNumberMask;
+        result.lastDigits = formParams.lastDigits;
         result.customerID = formParams.customerID;
         result.bankCardTokenProvider = formParams.bankCardTokenProvider;
         return result;

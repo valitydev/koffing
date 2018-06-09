@@ -26,12 +26,12 @@ form(*ngIf="form", [formGroup]="form", novalidate)
     .form-group(*ngIf="additionalMethodConfigs")
         .row
             .col-xs-12
-                label.text-left Дополнительные методы оплаты:
+                label.text-left Методы оплаты:
             .col-xs-12.col-sm-6.col-md-4(*ngFor="let config of additionalMethodConfigs")
                 label.text-left
-                    input(type="checkbox", formControlName="{{config.formControlName}}", (click)="toggleHolds()")
+                    input(type="checkbox", [formControlName]="config.formControlName", (click)="toggleHolds()")
                     | &nbsp;{{config.label}}
-    div(*ngIf="!form.value.terminals && !form.value.wallets")
+    div(*ngIf="isHoldAvailable")
         .ln_solid
         .form-group
             .row
@@ -48,4 +48,3 @@ form(*ngIf="form", [formGroup]="form", novalidate)
                         label.btn.btn-sm.btn-default(*ngFor="let holdExpirationItem of holdExpirationItems", [ngClass]="{'active': isSelected(holdExpirationItem.value)}")
                             input(type="radio", formControlName="holdExpiration", value="{{holdExpirationItem.value}}")
                             | {{holdExpirationItem.label}}
-

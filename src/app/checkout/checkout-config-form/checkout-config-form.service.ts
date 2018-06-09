@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { HOLD_EXPIRATION } from 'koffing/backend/constants/hold-expiration';
 
@@ -14,14 +14,15 @@ export class CheckoutConfigFormService {
 
     private initForm(): FormGroup {
         return this.fb.group({
-            name: ['', [Validators.maxLength(30)]],
+            name: [''],
             description: [''],
             email: [''],
             redirectUrl: [''],
             paymentFlowHold: [false, [Validators.required]],
             holdExpiration: [HOLD_EXPIRATION.cancel, [Validators.required]],
-            wallets: null,
-            terminals: null
+            bankCard: new FormControl({ value: true, disabled: true }),
+            wallets: false,
+            terminals: false,
         });
     }
 }

@@ -13,6 +13,8 @@ export class SearchPaymentsParams {
     public payerIP?: string;
     public payerFingerprint?: string;
     public customerID?: string;
-    public cardNumberMask?: string;
     public paymentAmount?: number;
+    public bin?: string;
+    public lastDigits?: string;
+    public bankCardTokenProvider?: 'applepay' | 'googlepay' | 'samsungpay';
 }

@@ -71,7 +71,7 @@ export class InvoiceFormService {
         return this.fb.group({
             product: ['', [Validators.required, Validators.maxLength(1000)]],
             quantity: ['', [Validators.required, Validators.min(1)]],
-            price: ['', [Validators.required, Validators.min(10)]],
+            price: ['', [Validators.required, Validators.min(1)]],
             tax: ['']
         });
     }

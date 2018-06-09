@@ -84,7 +84,10 @@ export class CreateWebhookService {
 
     private prepareForm(): FormGroup {
         return this.fb.group({
-            url: ['', Validators.required],
+            url: ['', [
+                Validators.required,
+                Validators.pattern(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/)
+            ]],
             eventTypes: this.fb.group(this.prepareEventTypesGroup(this.eventTypes)),
             topic: 'InvoicesTopic'
         });
