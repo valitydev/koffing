@@ -93,6 +93,12 @@ form.form-horizontal.form-label-left.css-form
                             .col-sm-7
                                 div {{payment.payer?.paymentToolDetails?.digitalWalletDetailsType | kofProviderName}}
 
+                    .col-xs-12(*ngIf="payment.shortID")
+                        .form-group
+                            label.col-sm-5 ID платежа провайдера:
+                            .col-sm-7
+                                div {{payment.shortID}}
+
                     .col-xs-12(*ngIf="payment.payer?.paymentToolDetails?.detailsType === 'PaymentToolDetailsBankCard'")
                         .form-group
                             label.col-sm-5 Данные карты:
