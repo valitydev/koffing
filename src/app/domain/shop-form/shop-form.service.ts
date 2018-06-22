@@ -17,7 +17,7 @@ export class ShopFormService {
         return this.fb.group({
             url: ['', [
                 Validators.required,
-                Validators.maxLength(1000)
+                Validators.pattern(/^(ftp|http|https)+(:\/\/)+([a-zа-я0-9]+(-[a-zа-я0-9]+)*\.)+[a-zа-я]{2,}$/)
             ]],
             name: ['', [
                 Validators.required,
