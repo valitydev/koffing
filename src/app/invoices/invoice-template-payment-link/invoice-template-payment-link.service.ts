@@ -17,13 +17,11 @@ import { CurrencyService } from 'koffing/common/currency.service';
 
 export class InvoiceTemplatePaymentLinkService {
 
-    public static currency: string = 'RUB';
-
-    public static toInvoiceTemplateParams(formValue: any, shopID: string): InvoiceTemplateParams {
+    public static toInvoiceTemplateParams(formValue: any, shopID: string, currency: string = 'RUB'): InvoiceTemplateParams {
         const params = new InvoiceTemplateParams();
         params.shopID = shopID;
         params.lifetime = this.toLifetimeInterval(formValue.lifetime);
-        params.details = this.toDetails(formValue.details, formValue.selectedTemplateType, formValue.selectedCostType);
+        params.details = this.toDetails(formValue.details, formValue.selectedTemplateType, formValue.selectedCostType, currency);
         if (formValue.description) {
             params.description = formValue.description;
         }
@@ -38,16 +36,16 @@ export class InvoiceTemplatePaymentLinkService {
         );
     }
 
-    private static toDetails(details: any, templateType: string, costType: string): InvoiceTemplateDetails {
+    private static toDetails(details: any, templateType: string, costType: string, currency: string): InvoiceTemplateDetails {
         if (templateType === TEMPLATE_TYPE.singleLine) {
-            return this.toSingleLine(details, costType);
+            return this.toSingleLine(details, costType, currency);
         }
         if (templateType === TEMPLATE_TYPE.multiLine) {
-            return this.toMultiLine(details);
+            return this.toMultiLine(details, currency);
         }
     }
 
-    private static toSingleLine(details: any, costType: string): InvoiceTemplateSingleLine {
+    private static toSingleLine(details: any, costType: string, currency: string): InvoiceTemplateSingleLine {
         let cost;
         switch (costType) {
             case COST_TYPE.unlim:
@@ -55,13 +53,13 @@ export class InvoiceTemplatePaymentLinkService {
                 break;
             case COST_TYPE.fixed:
                 const amount = CurrencyService.toMinor(details.cost.amount);
-                cost = new InvoiceTemplateLineCostFixed(amount, this.currency);
+                cost = new InvoiceTemplateLineCostFixed(amount, currency);
                 break;
             case COST_TYPE.range:
                 const lowerBound = CurrencyService.toMinor(details.cost.lowerBound);
                 const upperBound = CurrencyService.toMinor(details.cost.upperBound);
                 const range = new CostAmountRange(lowerBound, upperBound);
-                cost = new InvoiceTemplateLineCostRange(range, this.currency);
+                cost = new InvoiceTemplateLineCostRange(range, currency);
                 break;
         }
         const singleLine = new InvoiceTemplateSingleLine(details.product, cost);
@@ -71,7 +69,7 @@ export class InvoiceTemplatePaymentLinkService {
         return singleLine;
     }
 
-    private static toMultiLine(details: any) {
+    private static toMultiLine(details: any, currency: string) {
         const cart = details.cart.map((item: any) => {
             const invoiceLine = new InvoiceLine(item.product, item.quantity, CurrencyService.toMinor(item.price));
             if (item.tax) {
@@ -79,6 +77,6 @@ export class InvoiceTemplatePaymentLinkService {
             }
             return invoiceLine;
         });
-        return new InvoiceTemplateMultiLine(cart, this.currency);
+        return new InvoiceTemplateMultiLine(cart, currency);
     }
 }
