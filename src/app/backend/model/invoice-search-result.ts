@@ -1,6 +1,6 @@
 import { Invoice } from './invoice';
 
 export class InvoiceSearchResult {
-    public totalCount: number;
+    public continuationToken: string;
     public result: Invoice[];
 }

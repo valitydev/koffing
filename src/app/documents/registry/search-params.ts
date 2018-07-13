@@ -2,12 +2,12 @@ export class SearchParams {
     public fromTime: Date;
     public toTime: Date;
     public limit: number;
-    public offset?: number;
+    public continuationToken?: string;
 
-    constructor(fromTime: Date, toTime: Date, limit: number, offset?: number) {
+    constructor(fromTime: Date, toTime: Date, limit: number, continuationToken?: string) {
         this.fromTime = fromTime;
         this.toTime = toTime;
         this.limit = limit;
-        this.offset = offset || 0;
+        this.continuationToken = continuationToken;
     }
 }

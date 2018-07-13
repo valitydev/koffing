@@ -22,8 +22,7 @@ import { Registry } from './registry';
 import { RegistryItem } from './registry-item';
 import { InvoiceSearchResult } from 'koffing/backend/model/invoice-search-result';
 
-type SearchPaymentsFn = (shopID: string, paymentsParams: SearchPaymentsParams) => Observable<PaymentSearchResult>;
-type SearchInvoicesFn = (shopID: string, paymentsParams: SearchInvoicesParams) => Observable<InvoiceSearchResult>;
+type SearchFn<P, R> = (shopID: string, paymentsParams: P) => Observable<R>;
 
 @Injectable()
 export class RegistryDataService {
@@ -37,15 +36,12 @@ export class RegistryDataService {
 
     public getRegistry(shopID: string, fromTime: Date, toTime: Date): Observable<Registry> {
         const searchParams = new SearchParams(fromTime, toTime, this.limit);
-        const payments$ = this.loadAllData(this.searchService.searchPayments, this.searchService, shopID, searchParams);
-        const invoices$ = this.loadAllData(this.searchService.searchInvoices, this.searchService, shopID, searchParams);
+        const payments$ = this.loadAllData<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, searchParams);
+        const invoices$ = this.loadAllData<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, searchParams);
         const contracts$ = this.contractService.getContracts();
         const shop$ = this.shopService.getShopByID(shopID);
-        return Observable.forkJoin([payments$, invoices$, contracts$, shop$]).map((response) => {
-            const payments: any = response[0];
-            const invoices: any = response[1];
-            const contracts: any = response[2];
-            const shop: any = response[3];
+        return Observable.forkJoin([payments$, invoices$, contracts$, shop$]).map((response: any[]) => {
+            const [payments, invoices, contracts, shop] = response;
             const capturedPayments = filter(payments, (payment: Payment) => payment.status === PAYMENT_STATUS.captured);
             const refundedPayments = filter(payments, (payment: Payment) => payment.status === PAYMENT_STATUS.refunded);
             const capturedPaymentItems = this.getRegistryItems(capturedPayments, invoices);
@@ -55,26 +51,24 @@ export class RegistryDataService {
         });
     }
 
-    private loadAllData(fn: SearchPaymentsFn | SearchInvoicesFn, context: any, shopID: string, params: SearchParams): Observable<Payment[] | Invoice[]> {
-        return Observable.create((observer: Observer<Payment[] | Invoice[]>) => {
-            fn.apply(context, [shopID, params]).subscribe((response: any) => {
-                let searchData = response.result;
-                const countRequests = ceil(response.totalCount / params.limit);
-                if (countRequests > 1) {
-                    const streamRequests$ = [];
-                    for (let i = 1; i < countRequests; i++) {
-                        const modified = clone(params);
-                        modified.offset = params.limit * i;
-                        const request$ = fn.apply(context, [shopID, modified]);
-                        streamRequests$.push(request$);
-                    }
-                    Observable.forkJoin(streamRequests$).subscribe((streamData: any[]) => {
-                        streamData.forEach((data) => searchData = concat(searchData, data.result));
-                        observer.next(searchData);
-                        observer.complete();
-                    });
+    private loadAllData<P, R extends { continuationToken?: string, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: SearchParams): Observable<T[]> {
+        return Observable.create((observer: Observer<T[]>) => {
+            const request$ = fn.apply(context, [shopID, params]);
+            request$.subscribe((streamData: R) => {
+                if (streamData.continuationToken) {
+                    const nextParams = {
+                        ...params,
+                        continuationToken: streamData.continuationToken
+                    };
+                    this.loadAllData(fn, context, shopID, nextParams).subscribe(
+                        (result: T[]) => {
+                            const data = concat(streamData.result, result);
+                            observer.next(data);
+                            observer.complete();
+                        }
+                    );
                 } else {
-                    observer.next(searchData);
+                    observer.next(streamData.result);
                     observer.complete();
                 }
             });
