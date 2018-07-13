@@ -8,6 +8,7 @@ import { isUndefined } from 'lodash';
 
 import { SearchService } from 'koffing/backend/search.service';
 import { Invoice } from 'koffing/backend/model/invoice';
+import { InvoiceSearchResult } from 'koffing/backend';
 
 @Injectable()
 export class InvoiceService {
@@ -47,8 +48,8 @@ export class InvoiceService {
                     }
                     return isUndefined(this.invoice) && retries < searchRetries;
                 }))
-            .subscribe((searchResult) => {
-                if (searchResult.totalCount === 1) {
+            .subscribe((searchResult: InvoiceSearchResult) => {
+                if (searchResult.result && searchResult.result[0]) {
                     this.invoice = searchResult.result[0];
                     this.invoiceSubject.next(this.invoice);
                     this.invoiceSubject.complete();
