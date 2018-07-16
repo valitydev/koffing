@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
@@ -25,8 +25,8 @@ export class InvoicesComponent implements OnInit {
 
     public invoices: Subject<Invoice[]> = new Subject();
     public shopID: string;
-    public totalCount: number;
-    public offset: number = 0;
+    public continuationTokens: string[] = [];
+    public page: number = 0;
     public limit: number = 20;
     private searchForm: FormGroup;
 
@@ -45,24 +45,28 @@ export class InvoicesComponent implements OnInit {
         });
     }
 
+    public hasNext() {
+        return !!this.continuationTokens[this.page + 1];
+    }
+
     public onSearch() {
-        this.offset = 0;
         this.search();
     }
 
-    public onChangePage(offset: number) {
-        this.offset = offset;
-        this.search();
+    public onChangePage(num: number) {
+        this.search(num);
     }
 
     public onCreate(invoice: Invoice) {
         this.router.navigate(['shop', this.shopID, 'invoice', invoice.id]);
     }
 
-    private search() {
-        const request = this.invoicesService.toSearchParams(this.limit, this.offset, this.searchForm.value);
+    private search(num: number = 0) {
+        this.page += num;
+        const continuationToken = this.continuationTokens[this.page];
+        const request = this.invoicesService.toSearchParams(this.limit, continuationToken, this.searchForm.value);
         this.searchService.searchInvoices(this.shopID, request).subscribe((response) => {
-            this.totalCount = response.totalCount;
+            this.continuationTokens[this.page + 1] = response.continuationToken;
             this.invoices.next(response.result);
         });
     }

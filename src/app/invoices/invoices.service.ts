@@ -5,10 +5,10 @@ import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-p
 @Injectable()
 export class InvoicesService {
 
-    public toSearchParams(limit: number, offset: number, formParams: any): SearchInvoicesParams {
+    public toSearchParams(limit: number, continuationToken: string, formParams: any): SearchInvoicesParams {
         const result = new SearchInvoicesParams();
         result.limit = limit;
-        result.offset = offset;
+        result.continuationToken = continuationToken;
         result.fromTime = formParams.from;
         result.toTime = formParams.to;
         result.invoiceID = formParams.invoiceID;

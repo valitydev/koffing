@@ -16,6 +16,7 @@ import { PaginationPipe } from './paginate/pagination.pipe';
 import { InvoiceStatusPipe } from './invoice-statuses.pipe';
 import { PaymentStatusPipe } from './payment-statuses.pipe';
 import { CurrencyPipe } from 'koffing/common/currency.pipe';
+import { StepperComponent } from 'koffing/common/stepper/stepper.component';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { CurrencyPipe } from 'koffing/common/currency.pipe';
         PaginationPipe,
         InvoiceStatusPipe,
         PaymentStatusPipe,
-        CurrencyPipe
+        CurrencyPipe,
+        StepperComponent
     ],
     exports: [
         SelectComponent,
@@ -50,7 +52,8 @@ import { CurrencyPipe } from 'koffing/common/currency.pipe';
         PaginationPipe,
         InvoiceStatusPipe,
         PaymentStatusPipe,
-        CurrencyPipe
+        CurrencyPipe,
+        StepperComponent
     ],
     providers: [
         EventPollerService
