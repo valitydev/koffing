@@ -25,9 +25,9 @@ export class InvoicesComponent implements OnInit {
 
     public invoices: Subject<Invoice[]> = new Subject();
     public shopID: string;
-    public continuationTokens: string[] = [];
     public page: number = 0;
     public limit: number = 20;
+    private continuationTokens: string[] = [];
     private searchForm: FormGroup;
 
     constructor(private route: ActivatedRoute,
@@ -49,7 +49,13 @@ export class InvoicesComponent implements OnInit {
         return !!this.continuationTokens[this.page + 1];
     }
 
+    public reset() {
+        this.continuationTokens = [];
+        this.page = 0;
+    }
+
     public onSearch() {
+        this.reset();
         this.search();
     }
 

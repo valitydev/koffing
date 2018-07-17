@@ -20,4 +20,4 @@
                 .row
                     .col-xs-12
                         kof-search-result([invoices]="invoices")
-                        kof-stepper((onChange)="onChangePage($event)", [hasNext]="hasNext()")
+                        kof-stepper((onChange)="onChangePage($event)", [hasNext]="hasNext()", [page]="page + 1")

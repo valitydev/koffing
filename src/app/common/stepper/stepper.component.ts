@@ -9,14 +9,14 @@ export class StepperComponent {
     @Input()
     public hasNext: boolean;
 
-    @Output()
+    @Input()
     public page: number = 1;
 
     @Output()
     public onChange: EventEmitter<any> = new EventEmitter<any>();
 
     public hasPrevious() {
-        return this.page !== 1;
+        return this.page > 1;
     }
 
     public forward(event: MouseEvent) {
@@ -35,6 +35,5 @@ export class StepperComponent {
 
     public changePage(num: number) {
         this.onChange.emit(num);
-        this.page += num;
     }
 }
