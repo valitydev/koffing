@@ -6,41 +6,40 @@ import { SearchResult } from './search-result';
 import { SearchService } from 'koffing/backend/search.service';
 import { PaymentSearchResult } from 'koffing/backend/model/payment-search-result';
 import { SearchPaymentsParams } from 'koffing/backend/requests/search-payments-params';
+import { Payment } from 'koffing/backend';
 
 @Injectable()
 export class PaymentsService {
 
+    public payments: Payment[] = [];
+
     private limit = 3;
 
-    private detailedRequestLimit = this.limit;
+    private continuationToken: string;
 
     constructor(private searchService: SearchService) {
     }
 
     public search(shopID: string, invoiceID: string): Observable<SearchResult> {
-        const request = this.toSearchParams(invoiceID, this.detailedRequestLimit);
+        const request = this.toSearchParams(invoiceID, this.limit, this.continuationToken);
         return this.searchService.searchPayments(shopID, request)
-            .map((paymentResult) => this.toSearchResult(paymentResult, this.detailedRequestLimit))
-            .do((paymentResult) => {
-                if (paymentResult.isNextAvailable) {
-                    this.detailedRequestLimit += this.limit;
-                }
-            });
+            .map((paymentResult) => this.toSearchResult(paymentResult));
     }
 
-    private toSearchResult(paymentSearchResult: PaymentSearchResult, limit: number): SearchResult {
+    private toSearchResult(paymentSearchResult: PaymentSearchResult): SearchResult {
         const searchResult = new SearchResult();
-        searchResult.payments = paymentSearchResult.result;
-        searchResult.totalCount = paymentSearchResult.totalCount;
-        searchResult.isNextAvailable = (paymentSearchResult.totalCount > limit);
+        this.payments = this.payments.concat(paymentSearchResult.result);
+        searchResult.payments = this.payments;
+        this.continuationToken = paymentSearchResult.continuationToken;
+        searchResult.isNextAvailable = !!paymentSearchResult.continuationToken;
         return searchResult;
     }
 
-    private toSearchParams(invoiceID: string, limit: number): SearchPaymentsParams {
+    private toSearchParams(invoiceID: string, limit: number, continuationToken?: string): SearchPaymentsParams {
         const result = new SearchPaymentsParams();
         result.invoiceID = invoiceID;
         result.limit = limit;
-        result.offset = 0;
+        result.continuationToken = continuationToken;
         result.fromTime = moment().subtract(1, 'year').startOf('day').toDate();
         result.toTime = moment().endOf('day').toDate();
         return result;

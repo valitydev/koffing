@@ -2,7 +2,7 @@ export class SearchPaymentsParams {
     public fromTime: Date;
     public toTime: Date;
     public limit: number;
-    public offset?: number;
+    public continuationToken?: string;
     public paymentStatus?: string;
     public paymentFlow?: 'instant' | 'hold';
     public paymentMethod?: 'bankCard' | 'paymentTerminal';

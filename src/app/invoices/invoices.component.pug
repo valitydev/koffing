@@ -20,9 +20,4 @@
                 .row
                     .col-xs-12
                         kof-search-result([invoices]="invoices")
-                        kof-paginate(
-                            [size]="totalCount",
-                            [limit]="limit",
-                            [offset]="offset",
-                            [pagesOnScreen]="10",
-                            (onChange)="onChangePage($event)")
+                        kof-stepper((onChange)="onChangePage($event)", [hasNext]="hasNext()", [page]="page + 1")

@@ -2,7 +2,7 @@ export class SearchInvoicesParams {
     public fromTime: Date;
     public toTime: Date;
     public limit: number;
-    public offset?: number;
+    public continuationToken?: string;
     public invoiceID?: string;
     public invoiceAmount?: number;
     public invoiceStatus?: string;

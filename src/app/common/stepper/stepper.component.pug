@@ -1,0 +1,10 @@
+.row(*ngIf="hasPrevious() || hasNext")
+    .col-md-10.pull-right
+        .dataTables_paginate.paging_simple_numbers
+            ul.pagination.custom_pagination
+                li.paginate_button.previous((click)="back($event)",*ngIf="hasPrevious()")
+                    a.fa.fa-chevron-left(href="")
+                li.paginate_button((click)="stay($event)",[ngClass]="active")
+                    a(href="") {{page}}
+                li.paginate_button.next((click)="forward($event)",*ngIf="hasNext")
+                    a.fa.fa-chevron-right(href="")
