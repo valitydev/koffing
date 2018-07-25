@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
 import { EventPollerService } from 'koffing/common/event-poller.service';
-import { Invoice, PaymentRefund, RefundParams } from 'koffing/backend';
+import { Invoice, PaymentRefund, Account } from 'koffing/backend';
 import { InvoiceService } from 'koffing/backend/invoice.service';
 import { PaymentRefundService } from './payment-refund.service';
 import { RefundStatusChanged } from 'koffing/backend/model/event/refund-status.changed';
 import { REFUND_STATUS } from 'koffing/backend/constants/refund-status';
 import { ShopService } from 'koffing/backend/shop.service';
 import { AccountsService } from 'koffing/backend/accounts.service';
-import { Account } from 'koffing/backend/model';
+import { toMinor } from 'koffing/common/amount-utils';
 
 @Component({
     selector: 'kof-payment-refund',
@@ -51,9 +51,9 @@ export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit 
         this.form = this.paymentRefundService.initForm(this.invoice.amount);
         this.route.parent.params.switchMap((params) =>
             this.shopService.getShopByID(params.shopID)).subscribe((shop) => {
-            this.settlementID = shop.account.settlementID;
-            this.setAccount();
-        });
+                this.settlementID = shop.account.settlementID;
+                this.setAccount();
+            });
     }
 
     public ngOnChanges() {
@@ -79,11 +79,12 @@ export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit 
 
     public refundPayment() {
         this.inProcess = true;
+        const { value: { reason, amount } } = this.form;
         const refundParams = {
-            reason: this.form.value.reason || '',
-            amount: this.form.value.amount * 100,
+            reason: reason || '',
+            amount: toMinor(amount),
             currency: this.account.currency
-        } as RefundParams;
+        };
         this.invoiceService.refundPayment(this.invoice.id, this.paymentID, refundParams).subscribe((refund) => {
             const expectedChange = new RefundStatusChanged(REFUND_STATUS.succeeded, this.paymentID, refund.id);
             this.eventPollerService.startPolling(this.invoice.id, expectedChange).subscribe(() => {

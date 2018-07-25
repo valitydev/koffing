@@ -8,6 +8,7 @@ form([formGroup]="form", novalidate)
                 [maxDate]="form.controls.toTime.value",
                 dateFormat = "dd.mm.yy",
                 readonlyInput="true",
+                showTime="true",
                 (onSelect)="emitDate()")
         .col-xs-6
             .ui-calendar.search-form
@@ -16,4 +17,5 @@ form([formGroup]="form", novalidate)
                 [minDate]="form.controls.fromTime.value",
                 dateFormat = "dd.mm.yy",
                 readonlyInput="true",
+                showTime="true",
                 (onSelect)="emitDate()")

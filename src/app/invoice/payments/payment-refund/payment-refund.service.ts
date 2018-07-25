@@ -1,5 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { toDisplayAmount } from 'koffing/common/amount-utils';
 
 @Injectable()
 export class PaymentRefundService {
@@ -10,14 +11,16 @@ export class PaymentRefundService {
     }
 
     public initForm(amount: number, availableAmount: number = 0): FormGroup {
+        const displayAmount = toDisplayAmount(amount);
+        const displayAvailableAmount = toDisplayAmount(availableAmount);
         return this.fb.group({
             amount: [
-                amount / 100, [
+                displayAmount, [
                     Validators.required,
                     Validators.min(1),
-                    Validators.max(amount / 100),
-                    Validators.max(availableAmount / 100),
-                    Validators.pattern(/^\d+\.?\d*$/)
+                    Validators.max(displayAmount),
+                    Validators.max(displayAvailableAmount),
+                    Validators.pattern(/^\d+(\.\d{1,2})?$/)
                 ]
             ],
             reason: ['']
