@@ -17,7 +17,6 @@ interface FormControls {
 export class ManagePaymentMethodsService {
 
     public getAdditionalMethodsConfig(methods: PaymentMethod[]): PaymentMethodInfo[] {
-        console.dir(methods);
         return methods.map((item) => {
             switch (item.method) {
                 case 'BankCard':
