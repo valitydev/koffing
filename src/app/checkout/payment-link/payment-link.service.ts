@@ -87,6 +87,9 @@ export class PaymentLinkService {
         args.terminals = formValue.terminals;
         args.wallets = formValue.wallets;
         args.bankCard = formValue.bankCard;
+        args.applePay = formValue.applePay;
+        args.googlePay = formValue.googlePay;
+        args.samsungPay = formValue.samsungPay;
         return args;
     }
 
