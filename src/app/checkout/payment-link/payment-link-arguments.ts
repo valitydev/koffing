@@ -12,4 +12,7 @@ export class PaymentLinkArguments {
     public terminals?: boolean;
     public wallets?: boolean;
     public bankCard?: boolean;
+    public applePay?: boolean;
+    public googlePay?: boolean;
+    public samsungPay?: boolean;
 }

@@ -2,6 +2,7 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
 import { PaymentMethod, PaymentMethodBankCard } from 'koffing/backend/model';
+import { TOKEN_PROVIDER } from 'koffing/backend';
 
 export interface PaymentMethodInfo {
     label: string;
@@ -16,15 +17,32 @@ interface FormControls {
 export class ManagePaymentMethodsService {
 
     public getAdditionalMethodsConfig(methods: PaymentMethod[]): PaymentMethodInfo[] {
-        return methods.filter((item) => {
-            if (item.method === 'BankCard') {
-                const bankCard = item as PaymentMethodBankCard;
-                return !bankCard.tokenProviders;
-            }
-            return true;
-        }).map((item) => {
+        return methods.map((item) => {
             switch (item.method) {
                 case 'BankCard':
+                    const bankCard = item as PaymentMethodBankCard;
+                    if (Array.isArray(bankCard.tokenProviders) && bankCard.tokenProviders.length) {
+                        switch (bankCard.tokenProviders[0]) {
+                            case TOKEN_PROVIDER.applepay:
+                                return {
+                                    label: 'Apple pay',
+                                    formControlName: 'applePay',
+                                    order: 4
+                                };
+                            case TOKEN_PROVIDER.googlepay:
+                                return {
+                                    label: 'Google pay',
+                                    formControlName: 'googlePay',
+                                    order: 5
+                                };
+                            case TOKEN_PROVIDER.samsungpay:
+                                return {
+                                    label: 'Samsung pay',
+                                    formControlName: 'samsungPay',
+                                    order: 6
+                                };
+                        }
+                    }
                     return {
                         label: 'Банковская карта',
                         formControlName: 'bankCard',

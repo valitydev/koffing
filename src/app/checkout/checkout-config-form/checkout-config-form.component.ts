@@ -36,13 +36,11 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
             new SelectItem(HOLD_EXPIRATION.cancel, 'в пользу плательщика'),
             new SelectItem(HOLD_EXPIRATION.capture, 'в пользу мерчанта')
         ];
+        this.updateMethods();
     }
 
     public ngOnChanges() {
-        if (this.methods) {
-            this.additionalMethodConfigs = this.managePaymentMethodsService.getAdditionalMethodsConfig(this.methods);
-            this.managePaymentMethodsService.handleAdditionalMethods(this.additionalMethodConfigs, this.form);
-        }
+        this.updateMethods();
     }
 
     public isSelected(holdExpiration: string): boolean {
@@ -55,8 +53,15 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
         });
     }
 
+    private updateMethods() {
+        if (this.form && this.methods) {
+            this.additionalMethodConfigs = this.managePaymentMethodsService.getAdditionalMethodsConfig(this.methods);
+            this.managePaymentMethodsService.handleAdditionalMethods(this.additionalMethodConfigs, this.form);
+        }
+    }
+
     private handleHoldAvailable() {
-        const { bankCard, terminals, wallets } = this.form.getRawValue();
-        this.isHoldAvailable = bankCard && !terminals && !wallets;
+        const { bankCard, terminals, wallets, applePay, googlePay, samsungPay } = this.form.getRawValue();
+        this.isHoldAvailable = (bankCard || applePay || googlePay || samsungPay) && !(terminals || wallets);
     }
 }

@@ -23,6 +23,9 @@ export class CheckoutConfigFormService {
             bankCard: new FormControl({ value: true, disabled: true }),
             wallets: false,
             terminals: false,
+            applePay: false,
+            googlePay: false,
+            samsungPay: false
         });
     }
 }
