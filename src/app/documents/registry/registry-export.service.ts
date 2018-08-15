@@ -4,7 +4,8 @@ import * as moment from 'moment';
 
 import { CurrencyService } from 'koffing/common/currency.service';
 import { Registry } from './registry';
-import { RegistryItem } from './registry-item';
+import { PaymentRegistryItem } from './payment-registry-item';
+import { RefundRegistryItem } from './refund-registry-item';
 import { Workbook } from './excel/workbook';
 import { ExcelService } from './excel/excel.service';
 import { WorksheetProperties } from './worksheet-properties';
@@ -92,9 +93,9 @@ export class RegistryExportService {
         return header;
     }
 
-    private createCapturedPaymentsBody(registryItems: RegistryItem[]): object {
+    private createCapturedPaymentsBody(registryItems: PaymentRegistryItem[]): object {
         const offsetRow = this.capturedPaymentsWorksheet.headerSizes.rows;
-        const arrayOfArrays = map(registryItems, (item: RegistryItem, index) => ([
+        const arrayOfArrays = map(registryItems, (item: PaymentRegistryItem, index) => ([
             index + 1,
             moment(item.paymentDate).format('DD.MM.YY HH:mm:ss'),
             item.invoiceID,
@@ -129,32 +130,25 @@ export class RegistryExportService {
             s: {alignment: {horizontal: 'center', vertical: 'center'}}
         };
         header['A7'] = {v: '№ п/п', s: {font: {bold: true}, border: this.cellBorder}};
-        header['B7'] = {v: 'Дата платежа', s: {font: {bold: true}, border: this.cellBorder}};
+        header['B7'] = {v: 'Дата возврата', s: {font: {bold: true}, border: this.cellBorder}};
         header['C7'] = {v: 'ID инвойса и платежа', s: {font: {bold: true}, border: this.cellBorder}};
         header['D7'] = {v: 'Возвращено, руб.', s: {font: {bold: true}, border: this.cellBorder}};
-        header['E7'] = {v: 'Наименование товара', s: {font: {bold: true}, border: this.cellBorder}};
-        header['F7'] = {
-            v: 'Описание предоставленных товаров или услуг',
-            s: {font: {bold: true}, border: this.cellBorder}
-        };
         header['!ref'] = this.excelService.getEncodeRange(this.capturedPaymentsWorksheet.headerSizes.rows, this.capturedPaymentsWorksheet.headerSizes.columns);
-        header['!cols'] = [{wch: 10}, {wch: 18}, {wch: 20}, {wch: 18}, {wch: 30}, {wch: 50}];
+        header['!cols'] = [{wch: 10}, {wch: 18}, {wch: 20}, {wch: 18}];
         header['!merges'] = [
-            {s: {r: 0, c: 0}, e: {r: 0, c: 5}},
-            {s: {r: 5, c: 0}, e: {r: 5, c: 5}}
+            {s: {r: 0, c: 0}, e: {r: 0, c: 3}},
+            {s: {r: 5, c: 0}, e: {r: 5, c: 3}}
         ];
         return header;
     }
 
-    private createRefundedPaymentsBody(registryItems: RegistryItem[]): object {
+    private createRefundedPaymentsBody(registryItems: RefundRegistryItem[]): object {
         const offsetRow = this.capturedPaymentsWorksheet.headerSizes.rows;
-        const arrayOfArrays = map(registryItems, (item: RegistryItem, index) => ([
+        const arrayOfArrays = map(registryItems, (item: RefundRegistryItem, index) => ([
             index + 1,
-            moment(item.paymentDate).format('DD.MM.YY HH:mm:ss'),
+            moment(item.refundDate).format('DD.MM.YY HH:mm:ss'),
             item.invoiceID,
-            CurrencyService.toMajor(item.amount),
-            item.product,
-            item.description
+            CurrencyService.toMajor(item.amount)
         ]));
         return this.excelService.worksheetFromArrayOfArrays(arrayOfArrays, offsetRow, {border: this.cellBorder});
     }

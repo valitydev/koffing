@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { find, ceil, concat, clone } from 'lodash';
+import { find, ceil, concat, clone, get } from 'lodash';
 import { Observable, Observer } from 'rxjs';
 
 import {
@@ -21,7 +21,8 @@ import { ContractService } from 'koffing/backend/contract.service';
 import { SearchService } from 'koffing/backend/search.service';
 import { SearchParams } from './search-params';
 import { Registry } from './registry';
-import { RegistryItem } from './registry-item';
+import { PaymentRegistryItem } from './payment-registry-item';
+import { RefundRegistryItem } from './refund-registry-item';
 import { InvoiceSearchResult } from 'koffing/backend/model/invoice-search-result';
 import { SearchRefundsParams } from 'koffing/backend/requests';
 
@@ -58,8 +59,8 @@ export class RegistryDataService {
         const shop$ = this.shopService.getShopByID(shopID);
         return Observable.forkJoin([payments$, refunds$, invoices$, contracts$, shop$]).map((response: any[]) => {
             const [payments, refunds, invoices, contracts, shop] = response;
-            const capturedPaymentItems = this.getRegistryItems(payments, invoices);
-            const refundedPaymentItems = this.getRegistryItems(refunds, invoices);
+            const capturedPaymentItems = this.getPaymentRegistryItems(payments, invoices);
+            const refundedPaymentItems = this.getRefundRegistryItems(refunds);
             const client = this.getClient(shop, contracts);
             return new Registry(fromTime, toTime, client, capturedPaymentItems, refundedPaymentItems);
         });
@@ -112,26 +113,27 @@ export class RegistryDataService {
         });
     }
 
-    private getRegistryItems(payments: Payment[], invoices: Invoice[]): RegistryItem[] {
-        const registryItems: RegistryItem[] = [];
-        payments.forEach((payment: Payment) => {
-            const registryItem = new RegistryItem();
-            registryItem.invoiceID = `${payment.invoiceID}.${payment.id}`;
-            registryItem.paymentDate = payment.createdAt;
-            registryItem.amount = payment.amount;
-            registryItem.fee = payment.fee;
-            if (payment.payer && payment.payer.payerType === 'PaymentResourcePayer') {
-                const payer = payment.payer as PaymentResourcePayer;
-                registryItem.userEmail = payer.contactInfo.email;
-            } else {
-                registryItem.userEmail = '';
-            }
-            const foundInvoice = find(invoices, (invoice: Invoice) => invoice.id === payment.invoiceID);
-            registryItem.product = (foundInvoice && foundInvoice.product) || '';
-            registryItem.description = (foundInvoice && foundInvoice.description) || '';
-            registryItems.push(registryItem);
+    private getPaymentRegistryItems(payments: Payment[], invoices: Invoice[]): PaymentRegistryItem[] {
+        return payments.map((payment) => {
+            const invoice = find(invoices, ({id}) => id === payment.invoiceID);
+            return {
+                invoiceID: `${payment.invoiceID}.${payment.id}`,
+                paymentDate: payment.statusChangedAt,
+                amount: payment.amount,
+                fee: payment.fee,
+                userEmail: payment.payer.payerType === 'PaymentResourcePayer' ? (payment.payer as PaymentResourcePayer).contactInfo.email : '',
+                product: get(invoice, 'product', ''),
+                description: get(invoice, 'description', ''),
+            };
         });
-        return registryItems;
+    }
+
+    private getRefundRegistryItems(refunds: Refund[]): RefundRegistryItem[] {
+        return refunds.map((refund) => ({
+            invoiceID: `${refund.invoiceID}.${refund.paymentID}`,
+            refundDate: refund.createdAt,
+            amount: refund.amount
+        }));
     }
 
     private getClient(shop: Shop, contracts: Contract[]): string {

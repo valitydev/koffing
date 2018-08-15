@@ -18,4 +18,5 @@ export class Payment {
     public geoLocationInfo: GeoLocationInfo;
     public payer: Payer;
     public shortID: string;
+    public statusChangedAt: string;
 }
