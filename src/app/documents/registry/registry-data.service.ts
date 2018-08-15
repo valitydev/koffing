@@ -66,20 +66,20 @@ export class RegistryDataService {
         });
     }
 
-    private loadAllDataParallel<P extends {fromTime: Date, toTime: Date}, R extends { continuationToken?: string, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P, countRequests: number = 1): Observable<T[]> {
-        const streamRequests$: any[] = [];
+    private loadAllDataParallel<Params extends { fromTime: Date, toTime: Date }, Result extends { continuationToken?: string, result: Item[] }, Item>(fn: SearchFn<Params, Result>, context: any, shopID: string, params: Params, countRequests: number = 1): Observable<Item[]> {
+        const streamRequests$: Array<Observable<Item[]>> = [];
         const intervalMs = Math.floor((params.toTime.getTime() - params.fromTime.getTime()) / countRequests / 1000) * 1000;
         for (let i = 1, lastToTime = params.fromTime; i <= countRequests; i++) {
             const nextParams = Object.assign({}, params, {});
             nextParams.fromTime = lastToTime;
             nextParams.toTime = i === countRequests ? params.toTime : new Date(lastToTime.getTime() + intervalMs);
             lastToTime = nextParams.toTime;
-            const request$ = this.loadAllData(fn, context, shopID, nextParams);
+            const request$ = this.loadAllData<Params, Result, Item>(fn, context, shopID, nextParams);
             streamRequests$.push(request$);
         }
-        let searchData: any[] = [];
-        return Observable.create((observer: Observer<R[]>) => {
-            Observable.forkJoin(streamRequests$).subscribe((streamData: any[]) => {
+        let searchData: Item[] = [];
+        return Observable.create((observer: Observer<Item[]>) => {
+            Observable.forkJoin(streamRequests$).subscribe((streamData: Item[][]) => {
                 streamData.forEach((data) => searchData = concat(searchData, data));
                 observer.next(searchData);
                 observer.complete();
@@ -87,14 +87,14 @@ export class RegistryDataService {
         });
     }
 
-    private loadAllData<P extends {fromTime: Date, toTime: Date}, R extends { continuationToken?: string, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P): Observable<T[]> {
-        return Observable.create((observer: Observer<T[]>) => {
+    private loadAllData<Params extends { fromTime: Date, toTime: Date }, Result extends { continuationToken?: string, result: Item[] }, Item>(fn: SearchFn<Params, Result>, context: any, shopID: string, params: Params): Observable<Item[]> {
+        return Observable.create((observer: Observer<Item[]>) => {
             const request$ = fn.apply(context, [shopID, params]);
-            request$.subscribe((streamData: R) => {
+            request$.subscribe((streamData: Result) => {
                 if (streamData.continuationToken) {
-                    const nextParams: P = Object.assign({}, params, {continuationToken: streamData.continuationToken});
+                    const nextParams: Params = Object.assign({}, params, {continuationToken: streamData.continuationToken});
                     this.loadAllData(fn, context, shopID, nextParams).subscribe(
-                        (result: T[]) => {
+                        (result: Item[]) => {
                             const data = concat(streamData.result, result);
                             observer.next(data);
                             observer.complete();
@@ -108,19 +108,19 @@ export class RegistryDataService {
         });
     }
 
-    private loadAllOffsetData<P extends { offset?: number, limit: number }, R extends { totalCount: number, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P): Observable<T[]> {
-        return Observable.create((observer: Observer<R>) => {
-            fn.apply(context, [shopID, params]).subscribe((response: any) => {
-                let searchData = response.result;
+    private loadAllOffsetData<Params extends { offset?: number, limit: number }, Result extends { totalCount: number, result: Item[] }, Item>(fn: SearchFn<Params, Result>, context: any, shopID: string, params: Params): Observable<Item[]> {
+        return Observable.create((observer: Observer<Item[]>) => {
+            fn.apply(context, [shopID, params]).subscribe((response: Result) => {
+                let searchData: Item[] = response.result;
                 const countRequests = ceil(response.totalCount / params.limit);
                 if (countRequests > 1) {
-                    const streamRequests$ = [];
+                    const streamRequests$: Array<Observable<Result>> = [];
                     for (let i = 1; i < countRequests; i++) {
                         const nextParams = Object.assign({}, params, {offset: params.limit * i});
                         const request$ = fn.apply(context, [shopID, nextParams]);
                         streamRequests$.push(request$);
                     }
-                    Observable.forkJoin(streamRequests$).subscribe((streamData: any[]) => {
+                    Observable.forkJoin(streamRequests$).subscribe((streamData: Result[]) => {
                         streamData.forEach((data) => searchData = concat(searchData, data.result));
                         observer.next(searchData);
                         observer.complete();
