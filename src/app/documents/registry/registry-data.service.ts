@@ -52,9 +52,9 @@ export class RegistryDataService {
             refundStatus: 'succeeded'
         };
         const invoicesSearchParams = new SearchParams(fromTime, toTime, this.limit);
-        const payments$ = this.loadAllData<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, paymentsSearchParams);
+        const payments$ = this.loadAllDataParallel<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, paymentsSearchParams, 3);
         const refunds$ = this.loadAllOffsetData<SearchRefundsParams, RefundsSearchResult, Refund>(this.searchService.searchRefunds, this.searchService, shopID, refundsSearchParams);
-        const invoices$ = this.loadAllData<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, invoicesSearchParams);
+        const invoices$ = this.loadAllDataParallel<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, invoicesSearchParams, 3);
         const contracts$ = this.contractService.getContracts();
         const shop$ = this.shopService.getShopByID(shopID);
         return Observable.forkJoin([payments$, refunds$, invoices$, contracts$, shop$]).map((response: any[]) => {
@@ -66,7 +66,31 @@ export class RegistryDataService {
         });
     }
 
-    private loadAllData<P, R extends { continuationToken?: string, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P): Observable<T[]> {
+    private loadAllDataParallel<P extends {fromTime: Date, toTime: Date}, R extends { continuationToken?: string, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P, countRequests: number = 1): Observable<T[]> {
+        const streamRequests$: any[] = [];
+        console.dir((params.toTime.getTime() - params.fromTime.getTime()) / countRequests);
+        const intervalMs = Math.floor((params.toTime.getTime() - params.fromTime.getTime()) / countRequests / 1000) * 1000;
+        console.dir(intervalMs);
+        for (let i = 1, lastToTime = params.fromTime; i <= countRequests; i++) {
+            console.dir(i);
+            const nextParams = Object.assign({}, params, {});
+            nextParams.fromTime = lastToTime;
+            nextParams.toTime = i === countRequests ? params.toTime : new Date(lastToTime.getTime() + intervalMs);
+            lastToTime = nextParams.toTime;
+            const request$ = this.loadAllData(fn, context, shopID, nextParams);
+            streamRequests$.push(request$);
+        }
+        let searchData: any[] = [];
+        return Observable.create((observer: Observer<R[]>) => {
+            Observable.forkJoin(streamRequests$).subscribe((streamData: any[]) => {
+                streamData.forEach((data) => searchData = concat(searchData, data));
+                observer.next(searchData);
+                observer.complete();
+            });
+        });
+    }
+
+    private loadAllData<P extends {fromTime: Date, toTime: Date}, R extends { continuationToken?: string, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P): Observable<T[]> {
         return Observable.create((observer: Observer<T[]>) => {
             const request$ = fn.apply(context, [shopID, params]);
             request$.subscribe((streamData: R) => {
@@ -88,7 +112,7 @@ export class RegistryDataService {
     }
 
     private loadAllOffsetData<P extends { offset?: number, limit: number }, R extends { totalCount: number, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P): Observable<T[]> {
-        return Observable.create((observer: Observer<Payment[] | Invoice[]>) => {
+        return Observable.create((observer: Observer<R>) => {
             fn.apply(context, [shopID, params]).subscribe((response: any) => {
                 let searchData = response.result;
                 const countRequests = ceil(response.totalCount / params.limit);
