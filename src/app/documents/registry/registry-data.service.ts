@@ -114,8 +114,13 @@ export class RegistryDataService {
     }
 
     private getPaymentRegistryItems(payments: Payment[], invoices: Invoice[]): PaymentRegistryItem[] {
+        // optimization: get 'map-object'[key] much faster than 'array'.find({id} => id === key)
+        const invoicesObject: { [id: string]: Invoice } = invoices.reduce((map, invoice) => {
+            map[invoice.id] = invoice;
+            return map;
+        }, {});
         return payments.map((payment) => {
-            const invoice = find(invoices, ({id}) => id === payment.invoiceID);
+            const invoice = invoicesObject[payment.invoiceID];
             return {
                 invoiceID: `${payment.invoiceID}.${payment.id}`,
                 paymentDate: payment.statusChangedAt || payment.createdAt,
