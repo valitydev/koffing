@@ -52,9 +52,9 @@ export class RegistryDataService {
             refundStatus: 'succeeded'
         };
         const invoicesSearchParams = new SearchParams(fromTime, toTime, this.limit);
-        const payments$ = this.loadAllDataParallel<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, paymentsSearchParams, 3);
+        const payments$ = this.loadAllDataParallel<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, paymentsSearchParams, 5);
         const refunds$ = this.loadAllOffsetData<SearchRefundsParams, RefundsSearchResult, Refund>(this.searchService.searchRefunds, this.searchService, shopID, refundsSearchParams);
-        const invoices$ = this.loadAllDataParallel<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, invoicesSearchParams, 3);
+        const invoices$ = this.loadAllDataParallel<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, invoicesSearchParams, 5);
         const contracts$ = this.contractService.getContracts();
         const shop$ = this.shopService.getShopByID(shopID);
         return Observable.forkJoin([payments$, refunds$, invoices$, contracts$, shop$]).map((response: any[]) => {
@@ -68,11 +68,8 @@ export class RegistryDataService {
 
     private loadAllDataParallel<P extends {fromTime: Date, toTime: Date}, R extends { continuationToken?: string, result: T[] }, T>(fn: SearchFn<P, R>, context: any, shopID: string, params: P, countRequests: number = 1): Observable<T[]> {
         const streamRequests$: any[] = [];
-        console.dir((params.toTime.getTime() - params.fromTime.getTime()) / countRequests);
         const intervalMs = Math.floor((params.toTime.getTime() - params.fromTime.getTime()) / countRequests / 1000) * 1000;
-        console.dir(intervalMs);
         for (let i = 1, lastToTime = params.fromTime; i <= countRequests; i++) {
-            console.dir(i);
             const nextParams = Object.assign({}, params, {});
             nextParams.fromTime = lastToTime;
             nextParams.toTime = i === countRequests ? params.toTime : new Date(lastToTime.getTime() + intervalMs);
