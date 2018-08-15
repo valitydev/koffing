@@ -118,7 +118,7 @@ export class RegistryDataService {
             const invoice = find(invoices, ({id}) => id === payment.invoiceID);
             return {
                 invoiceID: `${payment.invoiceID}.${payment.id}`,
-                paymentDate: payment.statusChangedAt,
+                paymentDate: payment.statusChangedAt || payment.createdAt,
                 amount: payment.amount,
                 fee: payment.fee,
                 userEmail: payment.payer.payerType === 'PaymentResourcePayer' ? (payment.payer as PaymentResourcePayer).contactInfo.email : '',
