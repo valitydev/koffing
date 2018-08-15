@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { find, ceil, concat, clone, get } from 'lodash';
+import { find, ceil, concat, get } from 'lodash';
 import { Observable, Observer } from 'rxjs';
 
 import {
@@ -116,9 +116,8 @@ export class RegistryDataService {
                 if (countRequests > 1) {
                     const streamRequests$ = [];
                     for (let i = 1; i < countRequests; i++) {
-                        const modified = clone(params);
-                        modified.offset = params.limit * i;
-                        const request$ = fn.apply(context, [shopID, modified]);
+                        const nextParams = Object.assign({}, params, {offset: params.limit * i});
+                        const request$ = fn.apply(context, [shopID, nextParams]);
                         streamRequests$.push(request$);
                     }
                     Observable.forkJoin(streamRequests$).subscribe((streamData: any[]) => {
