@@ -124,14 +124,13 @@ export class RegistryExportService {
         header['B7'] = {v: 'Дата платежа', s: {font: {bold: true}, border: this.cellBorder}};
         header['C7'] = {v: 'ID инвойса и платежа', s: {font: {bold: true}, border: this.cellBorder}};
         header['D7'] = {v: 'Возвращено, руб.', s: {font: {bold: true}, border: this.cellBorder}};
-        header['E7'] = {v: 'Email плательщика', s: {font: {bold: true}, border: this.cellBorder}};
-        header['F7'] = {v: 'Наименование товара', s: {font: {bold: true}, border: this.cellBorder}};
-        header['G7'] = {v: 'Описание предоставленных товаров или услуг', s: {font: {bold: true}, border: this.cellBorder}};
+        header['E7'] = {v: 'Наименование товара', s: {font: {bold: true}, border: this.cellBorder}};
+        header['F7'] = {v: 'Описание предоставленных товаров или услуг', s: {font: {bold: true}, border: this.cellBorder}};
         header['!ref'] = this.excelService.getEncodeRange(this.capturedPaymentsWorksheet.headerSizes.rows, this.capturedPaymentsWorksheet.headerSizes.columns);
-        header['!cols'] = [{wch: 10}, {wch: 18}, {wch: 20}, {wch: 18}, {wch: 30}, {wch: 30}, {wch: 50}];
+        header['!cols'] = [{wch: 10}, {wch: 18}, {wch: 20}, {wch: 18}, {wch: 30}, {wch: 50}];
         header['!merges'] = [
-            {s: {r: 0, c: 0}, e: {r: 0, c: 6}},
-            {s: {r: 5, c: 0}, e: {r: 5, c: 6}}
+            {s: {r: 0, c: 0}, e: {r: 0, c: 5}},
+            {s: {r: 5, c: 0}, e: {r: 5, c: 5}}
         ];
         return header;
     }
@@ -144,7 +143,6 @@ export class RegistryExportService {
             row.push(moment(item.paymentDate).format('DD.MM.YY HH:mm:ss'));
             row.push(item.invoiceID);
             row.push(CurrencyService.toMajor(item.amount));
-            row.push(item.userEmail);
             row.push(item.product);
             row.push(item.description);
             return row;
