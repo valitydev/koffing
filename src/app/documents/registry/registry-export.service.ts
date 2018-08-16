@@ -4,7 +4,8 @@ import * as moment from 'moment';
 
 import { CurrencyService } from 'koffing/common/currency.service';
 import { Registry } from './registry';
-import { RegistryItem } from './registry-item';
+import { PaymentRegistryItem } from './payment-registry-item';
+import { RefundRegistryItem } from './refund-registry-item';
 import { Workbook } from './excel/workbook';
 import { ExcelService } from './excel/excel.service';
 import { WorksheetProperties } from './worksheet-properties';
@@ -26,10 +27,12 @@ export class RegistryExportService {
         top: {style: 'thin', color: {auto: 1}},
         bottom: {style: 'thin', color: {auto: 1}}
     };
+    private alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     constructor(
         private excelService: ExcelService
-    ) { }
+    ) {
+    }
 
     public exportRegistryToXLSX(registry: Registry) {
         const workbook = this.createWorkbookFromRegistry(registry);
@@ -58,47 +61,37 @@ export class RegistryExportService {
     }
 
     private createCapturedPaymentsHeader(registry: Registry): object {
-        const header = {};
-        header['A1'] = {
-            v: `Успешные платежи за период ${this.getStringifyDateInterval(registry.fromTime, registry.toTime)}`,
-            s: {alignment: {horizontal: 'center', vertical: 'center'}, font: {bold: true}}
-        };
-        header['A3'] = {v: 'НКО:', s: {font: {bold: true}}};
-        header['B3'] = {v: 'НКО «ЭПС» (ООО)'};
-        header['A4'] = {v: 'Клиент:', s: {font: {bold: true}}};
-        header['B4'] = {v: registry.client};
-        header['A6'] = {v: 'Выполнено переводов в пользу клиента за период:', s: {alignment: {horizontal: 'center', vertical: 'center'}}};
-        header['A7'] = {v: '№ п/п', s: {font: {bold: true}, border: this.cellBorder}};
-        header['B7'] = {v: 'Дата платежа', s: {font: {bold: true}, border: this.cellBorder}};
-        header['C7'] = {v: 'ID инвойса и платежа', s: {font: {bold: true}, border: this.cellBorder}};
-        header['D7'] = {v: 'Принято, руб.', s: {font: {bold: true}, border: this.cellBorder}};
-        header['E7'] = {v: 'К зачислению, руб.', s: {font: {bold: true}, border: this.cellBorder}};
-        header['F7'] = {v: 'Email плательщика', s: {font: {bold: true}, border: this.cellBorder}};
-        header['G7'] = {v: 'Наименование товара', s: {font: {bold: true}, border: this.cellBorder}};
-        header['H7'] = {v: 'Описание предоставленных товаров или услуг', s: {font: {bold: true}, border: this.cellBorder}};
-        header['!ref'] = this.excelService.getEncodeRange(this.capturedPaymentsWorksheet.headerSizes.rows, this.capturedPaymentsWorksheet.headerSizes.columns);
-        header['!cols'] = [{wch: 10}, {wch: 18}, {wch: 20}, {wch: 18}, {wch: 18}, {wch: 30}, {wch: 30}, {wch: 50}];
-        header['!merges'] = [
-            {s: {r: 0, c: 0}, e: {r: 0, c: 7}},
-            {s: {r: 5, c: 0}, e: {r: 5, c: 7}}
-        ];
-        return header;
+        return this.createHeader({
+                title: 'Успешные платежи за период',
+                header: 'Выполнено переводов в пользу клиента за период:',
+                client: registry.client
+            },
+            registry,
+            [10, 18, 20, 18, 18, 30, 30, 50],
+            [
+                '№ п/п',
+                'Дата платежа',
+                'ID инвойса и платежа',
+                'Принято, руб.',
+                'К зачислению, руб.',
+                'Email плательщика',
+                'Наименование товара',
+                'Описание предоставленных товаров или услуг'
+            ]);
     }
 
-    private createCapturedPaymentsBody(registryItems: RegistryItem[]): object {
+    private createCapturedPaymentsBody(registryItems: PaymentRegistryItem[]): object {
         const offsetRow = this.capturedPaymentsWorksheet.headerSizes.rows;
-        const arrayOfArrays = map(registryItems, (item: RegistryItem, index) => {
-            const row = [];
-            row.push(index + 1);
-            row.push(moment(item.paymentDate).format('DD.MM.YY HH:mm:ss'));
-            row.push(item.invoiceID);
-            row.push(CurrencyService.toMajor(item.amount));
-            row.push(CurrencyService.toMajor(item.amount - (item.fee || 0)));
-            row.push(item.userEmail);
-            row.push(item.product);
-            row.push(item.description);
-            return row;
-        });
+        const arrayOfArrays = map(registryItems, (item: PaymentRegistryItem, index) => ([
+            index + 1,
+            moment(item.paymentDate).format('DD.MM.YY HH:mm:ss'),
+            item.invoiceID,
+            CurrencyService.toMajor(item.amount),
+            CurrencyService.toMajor(item.amount - (item.fee || 0)),
+            item.userEmail,
+            item.product,
+            item.description
+        ]));
         return this.excelService.worksheetFromArrayOfArrays(arrayOfArrays, offsetRow, {border: this.cellBorder});
     }
 
@@ -110,45 +103,55 @@ export class RegistryExportService {
     }
 
     private createRefundedPaymentsHeader(registry: Registry): object {
-        const header = {};
-        header['A1'] = {
-            v: `Возвраты за период ${this.getStringifyDateInterval(registry.fromTime, registry.toTime)}`,
-            s: {alignment: {horizontal: 'center', vertical: 'center'}, font: {bold: true}}
-        };
-        header['A3'] = {v: 'НКО:', s: {font: {bold: true}}};
-        header['B3'] = {v: 'НКО «ЭПС» (ООО)'};
-        header['A4'] = {v: 'Клиент:', s: {font: {bold: true}}};
-        header['B4'] = {v: registry.client};
-        header['A6'] = {v: 'Выполнено возвратов за период:', s: {alignment: {horizontal: 'center', vertical: 'center'}}};
-        header['A7'] = {v: '№ п/п', s: {font: {bold: true}, border: this.cellBorder}};
-        header['B7'] = {v: 'Дата платежа', s: {font: {bold: true}, border: this.cellBorder}};
-        header['C7'] = {v: 'ID инвойса и платежа', s: {font: {bold: true}, border: this.cellBorder}};
-        header['D7'] = {v: 'Возвращено, руб.', s: {font: {bold: true}, border: this.cellBorder}};
-        header['E7'] = {v: 'Email плательщика', s: {font: {bold: true}, border: this.cellBorder}};
-        header['F7'] = {v: 'Наименование товара', s: {font: {bold: true}, border: this.cellBorder}};
-        header['G7'] = {v: 'Описание предоставленных товаров или услуг', s: {font: {bold: true}, border: this.cellBorder}};
-        header['!ref'] = this.excelService.getEncodeRange(this.capturedPaymentsWorksheet.headerSizes.rows, this.capturedPaymentsWorksheet.headerSizes.columns);
-        header['!cols'] = [{wch: 10}, {wch: 18}, {wch: 20}, {wch: 18}, {wch: 30}, {wch: 30}, {wch: 50}];
-        header['!merges'] = [
-            {s: {r: 0, c: 0}, e: {r: 0, c: 6}},
-            {s: {r: 5, c: 0}, e: {r: 5, c: 6}}
-        ];
-        return header;
+        return this.createHeader({
+                title: 'Возвраты за период',
+                header: 'Выполнено возвратов за период:',
+                client: registry.client
+            }, registry,
+            [10, 18, 20, 18],
+            ['№ п/п', 'Дата возврата', 'ID инвойса и платежа', 'Возвращено, руб.']);
     }
 
-    private createRefundedPaymentsBody(registryItems: RegistryItem[]): object {
+    private createHeader(titles: { title: string, header: string, client: string }, interval: { fromTime: Date, toTime: Date }, colWidths: number[], tableHeader: string[]) {
+        const tableHeaderLastColNum = tableHeader.length - 1;
+        return {
+            'A1': {
+                v: `${titles.title} с ${this.getStringifyDateInterval(interval.fromTime, interval.toTime)}`,
+                s: {alignment: {horizontal: 'center', vertical: 'center'}, font: {bold: true}}
+            },
+            'A3': {v: 'НКО:', s: {font: {bold: true}}},
+            'B3': {v: 'НКО «ЭПС» (ООО)'},
+            'A4': {v: 'Клиент:', s: {font: {bold: true}}},
+            'B4': {v: titles.client},
+            'A6': {
+                v: titles.header,
+                s: {alignment: {horizontal: 'center', vertical: 'center'}}
+            },
+            ...this.createTableHeader(tableHeader, 7),
+            '!ref': this.excelService.getEncodeRange(this.capturedPaymentsWorksheet.headerSizes.rows, this.capturedPaymentsWorksheet.headerSizes.columns),
+            '!cols': colWidths.map(width => ({wch: width})),
+            '!merges': [
+                {s: {r: 0, c: 0}, e: {r: 0, c: tableHeaderLastColNum}},
+                {s: {r: 5, c: 0}, e: {r: 5, c: tableHeaderLastColNum}}
+            ]
+        };
+    }
+
+    private createTableHeader(tableHeader: string[], rowNum: number): object {
+        const style = {font: {bold: true}, border: this.cellBorder};
+        const tableHeaderObject: object = {};
+        tableHeader.forEach((item, idx) => tableHeaderObject[this.alphabet[idx] + rowNum] = {v: item, s: style});
+        return tableHeaderObject;
+    }
+
+    private createRefundedPaymentsBody(registryItems: RefundRegistryItem[]): object {
         const offsetRow = this.capturedPaymentsWorksheet.headerSizes.rows;
-        const arrayOfArrays = map(registryItems, (item: RegistryItem, index) => {
-            const row = [];
-            row.push(index + 1);
-            row.push(moment(item.paymentDate).format('DD.MM.YY HH:mm:ss'));
-            row.push(item.invoiceID);
-            row.push(CurrencyService.toMajor(item.amount));
-            row.push(item.userEmail);
-            row.push(item.product);
-            row.push(item.description);
-            return row;
-        });
+        const arrayOfArrays = map(registryItems, (item: RefundRegistryItem, index) => ([
+            index + 1,
+            moment(item.refundDate).format('DD.MM.YY HH:mm:ss'),
+            item.invoiceID,
+            CurrencyService.toMajor(item.amount)
+        ]));
         return this.excelService.worksheetFromArrayOfArrays(arrayOfArrays, offsetRow, {border: this.cellBorder});
     }
 }

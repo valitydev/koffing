@@ -1,4 +1,4 @@
-export class RegistryItem {
+export class PaymentRegistryItem {
     public paymentDate: string;
     public invoiceID: string;
     public amount: number;
