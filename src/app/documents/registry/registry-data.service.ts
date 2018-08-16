@@ -67,8 +67,12 @@ export class RegistryDataService {
     }
 
     private loadAllDataParallel<Params extends { fromTime: Date, toTime: Date }, Result extends { continuationToken?: string, result: Item[] }, Item>(fn: SearchFn<Params, Result>, context: any, shopID: string, params: Params, countRequests: number = 1): Observable<Item[]> {
+        const fullIntervalMs = params.toTime.getTime() - params.fromTime.getTime();
+        if (fullIntervalMs < 24 * 60 * 60 * 1000 || fullIntervalMs < countRequests * 1000) {
+            countRequests = 1;
+        }
+        const intervalMs = Math.floor(fullIntervalMs / countRequests / 1000) * 1000;
         const streamRequests$: Array<Observable<Item[]>> = [];
-        const intervalMs = Math.floor((params.toTime.getTime() - params.fromTime.getTime()) / countRequests / 1000) * 1000;
         for (let i = 1, lastToTime = params.fromTime; i <= countRequests; i++) {
             const nextParams = Object.assign({}, params, {});
             nextParams.fromTime = lastToTime;
