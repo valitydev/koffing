@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { find, ceil, concat, get } from 'lodash';
+import { ceil, concat, get } from 'lodash';
 import { Observable, Observer } from 'rxjs';
 
 import {
     PAYMENT_STATUS,
-    Shop,
-    Contract,
     Invoice,
     Payment,
     RussianLegalEntity,
@@ -55,14 +53,19 @@ export class RegistryDataService {
         const payments$ = this.loadAllDataParallel<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, paymentsSearchParams, 5);
         const refunds$ = this.loadAllOffsetData<SearchRefundsParams, RefundsSearchResult, Refund>(this.searchService.searchRefunds, this.searchService, shopID, refundsSearchParams);
         const invoices$ = this.loadAllDataParallel<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, invoicesSearchParams, 5);
-        const contracts$ = this.contractService.getContracts();
         const shop$ = this.shopService.getShopByID(shopID);
-        return Observable.forkJoin([payments$, refunds$, invoices$, contracts$, shop$]).map((response: any[]) => {
-            const [payments, refunds, invoices, contracts, shop] = response;
-            const capturedPaymentItems = this.getPaymentRegistryItems(payments, invoices);
-            const refundedPaymentItems = this.getRefundRegistryItems(refunds);
-            const client = this.getClient(shop, contracts);
-            return new Registry(fromTime, toTime, client, capturedPaymentItems, refundedPaymentItems);
+        return Observable.create((observer: Observer<Registry>) => {
+            Observable.forkJoin([payments$, refunds$, invoices$, shop$]).subscribe((response: any[]) => {
+                const [payments, refunds, invoices, shop] = response;
+                const contract$ = this.contractService.getContractByID(shop.contractID);
+                return contract$.subscribe((contract) => {
+                    const {registeredName: client} = contract.contractor as RussianLegalEntity;
+                    const capturedPaymentItems = this.getPaymentRegistryItems(payments, invoices);
+                    const refundedPaymentItems = this.getRefundRegistryItems(refunds);
+                    observer.next(new Registry(fromTime, toTime, client, capturedPaymentItems, refundedPaymentItems));
+                    observer.complete();
+                });
+            });
         });
     }
 
@@ -163,15 +166,5 @@ export class RegistryDataService {
             refundDate: refund.createdAt,
             amount: refund.amount
         }));
-    }
-
-    private getClient(shop: Shop, contracts: Contract[]): string {
-        let client = '';
-        const activeContract = find(contracts, (contract: Contract) => contract.id === shop.contractID);
-        if (activeContract.contractor) {
-            const legalEntity = activeContract.contractor as RussianLegalEntity;
-            client = legalEntity.registeredName;
-        }
-        return client;
     }
 }
