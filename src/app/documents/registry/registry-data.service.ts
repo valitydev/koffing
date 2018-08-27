@@ -50,9 +50,9 @@ export class RegistryDataService {
             refundStatus: 'succeeded'
         };
         const invoicesSearchParams = new SearchParams(fromTime, toTime, this.limit);
-        const payments$ = this.loadAllDataParallel<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, paymentsSearchParams, 5);
+        const payments$ = this.loadAllData<SearchPaymentsParams, PaymentSearchResult, Payment>(this.searchService.searchPayments, this.searchService, shopID, paymentsSearchParams);
         const refunds$ = this.loadAllOffsetData<SearchRefundsParams, RefundsSearchResult, Refund>(this.searchService.searchRefunds, this.searchService, shopID, refundsSearchParams);
-        const invoices$ = this.loadAllDataParallel<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, invoicesSearchParams, 5);
+        const invoices$ = this.loadAllData<SearchInvoicesParams, InvoiceSearchResult, Invoice>(this.searchService.searchInvoices, this.searchService, shopID, invoicesSearchParams);
         const shop$ = this.shopService.getShopByID(shopID);
         return Observable.create((observer: Observer<Registry>) => {
             Observable.forkJoin([payments$, refunds$, invoices$, shop$]).subscribe((response: any[]) => {
@@ -69,6 +69,7 @@ export class RegistryDataService {
         });
     }
 
+    // problem with parallel load - some "payments" may not load
     private loadAllDataParallel<Params extends { fromTime: Date, toTime: Date }, Result extends { continuationToken?: string, result: Item[] }, Item>(fn: SearchFn<Params, Result>, context: any, shopID: string, params: Params, countRequests: number = 1): Observable<Item[]> {
         const fullIntervalMs = params.toTime.getTime() - params.fromTime.getTime();
         if (fullIntervalMs < 24 * 60 * 60 * 1000 || fullIntervalMs < countRequests * 1000) {
