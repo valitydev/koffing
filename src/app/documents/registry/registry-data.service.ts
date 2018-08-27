@@ -69,7 +69,7 @@ export class RegistryDataService {
         });
     }
 
-    // problem with parallel load - some "payments" may not load
+    // problem with parallel load - some payments may not load (because of historicity, both parts may not contain payment)
     private loadAllDataParallel<Params extends { fromTime: Date, toTime: Date }, Result extends { continuationToken?: string, result: Item[] }, Item>(fn: SearchFn<Params, Result>, context: any, shopID: string, params: Params, countRequests: number = 1): Observable<Item[]> {
         const fullIntervalMs = params.toTime.getTime() - params.fromTime.getTime();
         if (fullIntervalMs < 24 * 60 * 60 * 1000 || fullIntervalMs < countRequests * 1000) {
