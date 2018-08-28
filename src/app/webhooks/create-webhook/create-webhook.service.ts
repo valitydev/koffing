@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { forEach, mapValues, map } from 'lodash';
+import { isURL } from 'validator';
 
 import { EventTypePresent } from '../create-webhook/event-type-present';
 import { WebhooksService } from 'koffing/backend/webhooks.service';
@@ -86,7 +87,7 @@ export class CreateWebhookService {
         return this.fb.group({
             url: ['', [
                 Validators.required,
-                Validators.pattern(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/)
+                (c: AbstractControl) => isURL(c.value, {protocols: ['http', 'https'], require_protocol: true}) ? null : {isURL: true}
             ]],
             eventTypes: this.fb.group(this.prepareEventTypesGroup(this.eventTypes)),
             topic: 'InvoicesTopic'

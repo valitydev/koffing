@@ -1,6 +1,7 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
+import { isURL } from 'validator';
 
 import { ShopCreation, ShopDetails, ShopLocationUrl } from 'koffing/backend';
 
@@ -17,7 +18,7 @@ export class ShopFormService {
         return this.fb.group({
             url: ['', [
                 Validators.required,
-                Validators.pattern(/^(ftp|http|https)+(:\/\/)+([a-zа-я0-9]+(-[a-zа-я0-9]+)*\.)+[a-zа-я]{2,}$/)
+                (c: AbstractControl) => isURL(c.value, {protocols: ['http', 'https'], require_protocol: true}) ? null : {isURL: true}
             ]],
             name: ['', [
                 Validators.required,
