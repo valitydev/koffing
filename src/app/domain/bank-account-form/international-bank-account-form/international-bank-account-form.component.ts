@@ -18,6 +18,8 @@ export class InternationalBankAccountFormComponent implements AfterViewInit, OnI
     @Input()
     public suggestionCssClass: string;
 
+    public formsClasses: {[name: string]: string} = {};
+
     constructor(
         private suggestionsService: SuggestionsService,
         private route: ActivatedRoute) { }
@@ -26,10 +28,18 @@ export class InternationalBankAccountFormComponent implements AfterViewInit, OnI
         this.route.params.subscribe((params) => {
             this.type = params.type;
         });
+        this.updateFormClasses();
+        this.form.valueChanges.subscribe(this.updateFormClasses.bind(this));
     }
 
     public ngAfterViewInit() {
         this.initBankSuggestions();
+    }
+
+    private updateFormClasses() {
+        for (const name of Object.keys(this.form.controls)) {
+            this.formsClasses[name] = 'form-group' + (this.form.controls[name].invalid ? ' has-error' : '');
+        }
     }
 
     private initBankSuggestions() {
@@ -45,10 +55,9 @@ export class InternationalBankAccountFormComponent implements AfterViewInit, OnI
     private toFormValue(suggestion: BankSuggestion): any {
         const value: any = {};
         if (suggestion) {
-            value.bankName = suggestion.unrestricted_value;
+            value.bankDetailsName = suggestion.unrestricted_value;
             if (suggestion.data) {
-                value.bankPostAccount = suggestion.data.correspondent_account;
-                value.bankBik = suggestion.data.bic;
+                value.bankDetailsBIC = suggestion.data.bic;
             }
         }
         return value;

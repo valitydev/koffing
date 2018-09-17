@@ -1,8 +1,9 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
+import { camelCase } from 'lodash';
 
-import { PayoutToolDetailsBankAccount, ContractPayoutToolCreation, PayoutToolDetailsInternationalBankAccount } from 'koffing/backend';
+import { ContractPayoutToolCreation, PayoutToolDetailsBankAccount } from 'koffing/backend';
 import { BankAccountFormService } from 'koffing/domain';
 
 @Injectable()
@@ -30,7 +31,22 @@ export class PayoutToolFormService {
             case 'resident':
                 return new ContractPayoutToolCreation(payoutTool.value.currency, contractID, uuid(), new PayoutToolDetailsBankAccount(payoutTool.value.bankAccount));
             case 'nonresident':
-                return new ContractPayoutToolCreation(payoutTool.value.currency, contractID, uuid(), new PayoutToolDetailsInternationalBankAccount(payoutTool.value.bankAccount));
+                return new ContractPayoutToolCreation(payoutTool.value.currency, contractID, uuid(), {
+                    number: payoutTool.value.bankAccount.number,
+                    iban: payoutTool.value.bankAccount.iban,
+                    bankDetails: this.getPrefixedWithoutPrefix(payoutTool.value.bankAccount, 'bankDetails'),
+                    correspondentBankAccount: this.getPrefixedWithoutPrefix(payoutTool.value.bankAccount, 'correspondentBankAccount')
+                } as any);
         }
+    }
+
+    private getPrefixedWithoutPrefix(params: object, prefix: string = '') {
+        const result: object = {};
+        for (const name of Object.keys(params)) {
+            if (name.indexOf(prefix) === 0) {
+                result[camelCase(name.slice(prefix.length))] = params[name];
+            }
+        }
+        return result;
     }
 }

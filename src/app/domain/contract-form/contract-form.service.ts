@@ -2,13 +2,14 @@ import { FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
 
-import { ContractCreation, RussianLegalEntity, InternationalLegalEntity, PaymentInstitution } from 'koffing/backend';
+import { ContractCreation, InternationalLegalEntity, PaymentInstitution, RussianLegalEntity } from 'koffing/backend';
 import { BankAccountFormService } from 'koffing/domain';
 import { InternationalContractFormService } from './international-contract-form/international-contract-form.service';
 import { RussianContractFormService } from './russian-contract-form/russian-contract-form.service';
 import { PaymentInstitutionService } from 'koffing/backend/payment-institution.service';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { camelCase } from 'lodash';
 
 @Injectable()
 export class ContractFormService {
@@ -38,7 +39,14 @@ export class ContractFormService {
                     contractor = new RussianLegalEntity(contractForm.value);
                     break;
                 case 'nonresident':
-                    contractor = new InternationalLegalEntity(contractForm.value);
+                    contractor = new InternationalLegalEntity({
+                        ...contractForm.value, bankAccount: {
+                            number: contractForm.value.bankAccount.number,
+                            iban: contractForm.value.bankAccount.iban,
+                            bankDetails: this.getPrefixedWithoutPrefix(contractForm.value.bankAccount, 'bankDetails'),
+                            correspondentBankAccount: this.getPrefixedWithoutPrefix(contractForm.value.bankAccount, 'correspondentBankAccount')
+                        }
+                    });
                     break;
             }
             return new ContractCreation(uuid(), contractor, this.getPaymentInstitutionId(paymentInstitutions, type));
@@ -70,5 +78,15 @@ export class ContractFormService {
             case 'nonresident':
                 return find(false);
         }
+    }
+
+    private getPrefixedWithoutPrefix(params: object, prefix: string = '') {
+        const result: object = {};
+        for (const name of Object.keys(params)) {
+            if (name.indexOf(prefix) === 0) {
+                result[camelCase(name.slice(prefix.length))] = params[name];
+            }
+        }
+        return result;
     }
 }

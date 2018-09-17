@@ -6,30 +6,24 @@ export class InternationalBankAccountFormService {
 
     public form: FormGroup;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder) {
+    }
 
     public initForm(): FormGroup {
-        return this.fb.group({
-            accountHolder: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            bankName: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            bankAddress: ['', [
-                Validators.required,
-                Validators.maxLength(150)
-            ]],
-            iban: ['', [
-                Validators.required,
-                Validators.pattern(/^[A-Z0-9]{3,34}$/)
-            ]],
-            bic: ['', [
-                Validators.required,
-                Validators.pattern(/^([A-Z0-9]{8}|[A-Z0-9]{11})$/)
-            ]]
-        });
+        const bank = {
+            BIC: ['', [Validators.pattern(/^([A-Z0-9]{8}|[A-Z0-9]{11})$/)]],
+            ABARTN: ['', [Validators.pattern(/^[0-9]{9}$/)]],
+            Name: ['', [Validators.maxLength(100)]],
+            CountryCode: ['', [Validators.pattern(/^[A-Z]{2}$/)]],
+            Address: ['', [Validators.maxLength(1000)]],
+        };
+        const controlsConfig = {
+            number: ['', [Validators.pattern(/^[0-9A-Z]{8,40}$/)]],
+            iban: ['', [Validators.pattern(/^[A-Z0-9]{14,35}$/)]],
+        };
+        for (const param of Object.keys(bank)) {
+            controlsConfig['bankDetails' + param] = controlsConfig['correspondentBankAccount' + param] = bank[param];
+        }
+        return this.fb.group(controlsConfig);
     }
 }
