@@ -31,22 +31,15 @@ export class ContractFormService {
         }
     }
 
-    public toContractCreation(contractForm: FormGroup, type: string): Observable<ContractCreation> {
+    public toContractCreation(contractFormData: any, type: string): Observable<ContractCreation> {
         return this.getPaymentInstitutions().map((paymentInstitutions: PaymentInstitution[]) => {
             let contractor;
             switch (type) {
                 case 'resident':
-                    contractor = new RussianLegalEntity(contractForm.value);
+                    contractor = new RussianLegalEntity(contractFormData);
                     break;
                 case 'nonresident':
-                    contractor = new InternationalLegalEntity({
-                        ...contractForm.value, bankAccount: {
-                            number: contractForm.value.bankAccount.number,
-                            iban: contractForm.value.bankAccount.iban,
-                            bankDetails: this.getPrefixedWithoutPrefix(contractForm.value.bankAccount, 'bankDetails'),
-                            correspondentBankAccount: this.getPrefixedWithoutPrefix(contractForm.value.bankAccount, 'correspondentBankAccount')
-                        }
-                    });
+                    contractor = new InternationalLegalEntity(contractFormData);
                     break;
             }
             return new ContractCreation(uuid(), contractor, this.getPaymentInstitutionId(paymentInstitutions, type));
@@ -78,15 +71,5 @@ export class ContractFormService {
             case 'nonresident':
                 return find(false);
         }
-    }
-
-    private getPrefixedWithoutPrefix(params: object, prefix: string = '') {
-        const result: object = {};
-        for (const name of Object.keys(params)) {
-            if (name.indexOf(prefix) === 0) {
-                result[camelCase(name.slice(prefix.length))] = params[name];
-            }
-        }
-        return result;
     }
 }

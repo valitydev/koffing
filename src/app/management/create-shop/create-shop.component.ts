@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/primeng';
 
 import { ClaimService } from 'koffing/backend/claim.service';
 import { PartyModification } from 'koffing/backend';
@@ -21,6 +22,7 @@ export class CreateShopComponent implements OnInit {
     public payoutToolForm = this.createShopService.payoutToolForm;
     public shopForm = this.createShopService.shopForm;
     public type: string;
+    public msgs: Message[] = [];
     private changeSet: PartyModification[];
 
     constructor(
@@ -28,7 +30,8 @@ export class CreateShopComponent implements OnInit {
         private createShopService: CreateShopService,
         private router: Router,
         private breadcrumbBroadcaster: BreadcrumbBroadcaster
-    ) { }
+    ) {
+    }
 
     public ngOnInit() {
         this.type = this.createShopService.type;
@@ -44,8 +47,14 @@ export class CreateShopComponent implements OnInit {
     }
 
     public next() {
-        this.currentStep = this.currentStep + 1;
-        this.validStep = this.isValid();
+        const possibility = this.createShopService.getNextPossibility(this.currentStep);
+        if (possibility === true) {
+            this.currentStep = this.currentStep + 1;
+            this.validStep = this.isValid();
+            this.msgs = [];
+        } else {
+            this.msgs = [{severity: 'warn', summary: possibility.summary, detail: possibility.detail}];
+        }
     }
 
     public prev() {

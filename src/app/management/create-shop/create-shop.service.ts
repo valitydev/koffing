@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 import { ContractFormService, PayoutToolFormService, ShopFormService } from 'koffing/domain';
 import { PartyModification } from 'koffing/backend';
 import { ShopCreationStep } from './shop-creation-step';
+import { camelCase } from 'lodash';
 
 @Injectable()
 export class CreateShopService {
@@ -32,23 +33,75 @@ export class CreateShopService {
         });
     }
 
-    private handleGroups() {
+    public getBankAccountPossibility(bankAccountSource: any): true | { summary: string; detail: string } {
+        const bankAccount = this.getNonresidentBankAccount(bankAccountSource);
+        if (!bankAccount.iban) {
+            const details = bankAccount.bankDetails;
+            if (!(details.bic || details.abartn || details.name && details.countryCode && details.address)) {
+                return {
+                    summary: 'В данных международной банковской организации не заполнены все поля',
+                    detail: 'Необходимо заполнить либо IBAN, либо BIC, либо ABA RTN, либо наименование, страну и адрес'
+                };
+            }
+        }
+        return true;
+    }
 
+    public getNextPossibility(step: number): true | { summary: string; detail: string } {
+        switch (step) {
+            case ShopCreationStep.payoutTool:
+                return this.getBankAccountPossibility(this.payoutToolForm.value.bankAccount);
+            case ShopCreationStep.contract:
+                return this.getBankAccountPossibility(this.contractForm.value.bankAccount);
+        }
+        return true;
+    }
+
+    private handleGroups() {
         this.handleStatus(this.contractForm, () => {
-            this.contractFormService.toContractCreation(this.contractForm, this.type).subscribe((contractCreation) => {
+            const {value} = this.contractForm;
+            const contractFormData = this.type === 'nonresident' ? {
+                ...value,
+                bankAccount: this.getNonresidentBankAccount(value.bankAccount)
+            } : value;
+            console.dir(contractFormData);
+            this.contractFormService.toContractCreation(contractFormData, this.type).subscribe((contractCreation) => {
                 this.contractID = contractCreation.contractID;
                 this.changeSet[ShopCreationStep.contract] = contractCreation;
             });
         });
-
         this.handleStatus(this.payoutToolForm, () => {
-            const payoutToolCreation = this.payoutToolFormService.toPayoutToolCreation(this.contractID, this.payoutToolForm, this.type);
+            const {value} = this.payoutToolForm;
+            const payoutToolFormData = this.type === 'nonresident' ? {
+                ...value,
+                bankAccount: this.getNonresidentBankAccount(value.bankAccount)
+            } : value;
+            const payoutToolCreation = this.payoutToolFormService.toPayoutToolCreation(this.contractID, payoutToolFormData, this.type);
             this.payoutToolID = payoutToolCreation.payoutToolID;
             this.changeSet[ShopCreationStep.payoutTool] = payoutToolCreation;
         });
         this.handleStatus(this.shopForm, () => {
             this.changeSet[ShopCreationStep.shop] = this.shopFormService.toShopCreation(this.contractID, this.payoutToolID, this.shopForm);
         });
+    }
+
+    private getNonresidentBankAccount(bankAccount: any) {
+        return {
+            number: bankAccount.number,
+            iban: bankAccount.iban,
+            bankDetails: this.getPrefixedWithoutPrefix(bankAccount, 'bankDetails'),
+            correspondentBankAccount: this.getPrefixedWithoutPrefix(bankAccount, 'correspondentBankAccount')
+        };
+    }
+
+    private getPrefixedWithoutPrefix(params: object, prefix: string = '') {
+        const result: any = {};
+        for (const name of Object.keys(params)) {
+            if (name.indexOf(prefix) === 0) {
+                result[camelCase(name.slice(prefix.length))] = params[name];
+            }
+        }
+        return result;
     }
 
     private handleStatus(group: FormGroup, doHandler: any) {
