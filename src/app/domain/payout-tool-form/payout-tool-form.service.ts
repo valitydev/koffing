@@ -1,7 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
-import { camelCase } from 'lodash';
 
 import { ContractPayoutToolCreation, PayoutToolDetailsBankAccount } from 'koffing/backend';
 import { BankAccountFormService } from 'koffing/domain';

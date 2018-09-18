@@ -9,7 +9,6 @@ import { RussianContractFormService } from './russian-contract-form/russian-cont
 import { PaymentInstitutionService } from 'koffing/backend/payment-institution.service';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { camelCase } from 'lodash';
 
 @Injectable()
 export class ContractFormService {

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { camelCase } from 'lodash';
 
 import { ContractFormService, PayoutToolFormService, ShopFormService } from 'koffing/domain';
 import { PartyModification } from 'koffing/backend';
 import { ShopCreationStep } from './shop-creation-step';
-import { camelCase } from 'lodash';
 
 @Injectable()
 export class CreateShopService {
