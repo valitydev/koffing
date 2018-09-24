@@ -2,7 +2,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
 
-import { ContractPayoutToolCreation, PayoutToolDetailsBankAccount } from 'koffing/backend';
+import {
+    ContractPayoutToolCreation,
+    PayoutToolDetailsBankAccount,
+    PayoutToolDetailsInternationalBankAccount
+} from 'koffing/backend';
 import { BankAccountFormService } from 'koffing/domain';
 
 @Injectable()
@@ -31,7 +35,7 @@ export class PayoutToolFormService {
             case 'resident':
                 return new ContractPayoutToolCreation(payoutToolData.currency, contractID, uuid(), new PayoutToolDetailsBankAccount(payoutToolData.bankAccount));
             case 'nonresident':
-                return new ContractPayoutToolCreation(payoutToolData.currency, contractID, uuid(), payoutToolData.bankAccount);
+                return new ContractPayoutToolCreation(payoutToolData.currency, contractID, uuid(), new PayoutToolDetailsInternationalBankAccount(payoutToolData.bankAccount));
         }
     }
 }
