@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { pickBy } from 'lodash';
 
 import { ContractFormService, PayoutToolFormService, ShopFormService } from 'koffing/domain';
 import { PartyModification } from 'koffing/backend';
@@ -83,18 +84,20 @@ export class CreateShopService {
         });
     }
 
-    private getNonresidentBankAccount({correspondentBankAccount, ...bankAccount}: any) {
+    private getNonresidentBankAccount({correspondentBankAccount: correspondentBankAccountSrc, ...bankAccount}: any): any {
+        const correspondentBankAccount = this.getNonresidentBankAccountPart(correspondentBankAccountSrc);
         return {
             ...this.getNonresidentBankAccountPart(bankAccount),
-            correspondentBankAccount: this.getNonresidentBankAccountPart(correspondentBankAccount)
+            ...(Object.keys(correspondentBankAccount).length ? {correspondentBankAccount} : {})
         };
     }
 
-    private getNonresidentBankAccountPart({number: n, iban, ...bankDetails}: any) {
+    private getNonresidentBankAccountPart({number: n, iban, ...bankDetailsSrc}: any) {
+        const bankDetails = pickBy(bankDetailsSrc, (v) => !!v);
         return {
-            number: n,
-            iban,
-            bankDetails
+            ...(n ? {number: n} : {}),
+            ...(iban ? {iban} : {}),
+            ...(Object.keys(bankDetails).length ? {bankDetails} : {})
         };
     }
 
