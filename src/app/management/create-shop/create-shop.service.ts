@@ -37,7 +37,7 @@ export class CreateShopService {
         const bankAccount = this.getNonresidentBankAccount(bankAccountSource);
         if (!bankAccount.iban) {
             const { bankDetails } = bankAccount;
-            if (!bankDetails || !(bankDetails.bic || bankDetails.abaRtn || bankDetails.name && bankDetails.countryCode && bankDetails.address)) {
+            if (!bankDetails || !(bankDetails.bic || bankDetails.abartn || bankDetails.name && bankDetails.countryCode && bankDetails.address)) {
                 return {
                     summary: 'В данных международной банковской организации не заполнены все поля',
                     detail: 'Необходимо заполнить либо IBAN, либо BIC, либо ABA RTN, либо наименование, страну и адрес'
