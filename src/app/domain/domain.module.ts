@@ -27,6 +27,7 @@ import { InternationalBankAccountDetailsComponent } from './international-bank-a
 import { RussianContractorDetailsComponent } from './contractor-details/russian-contractor-details/russian-contractor-details.component';
 import { InternationalContractorDetailsComponent } from './contractor-details/international-contractor-details/international-contractor-details.component';
 import { CommonModule } from '../common/common.module';
+import { InternationalBankAccountPartFormComponent } from './bank-account-form/international-bank-account-part-form/international-bank-account-part-form.component';
 
 @NgModule({
     imports: [
@@ -52,6 +53,7 @@ import { CommonModule } from '../common/common.module';
         BankAccountFormComponent,
         RussianContractFormComponent,
         InternationalBankAccountFormComponent,
+        InternationalBankAccountPartFormComponent,
         RussianBankAccountFormComponent
     ],
     exports: [

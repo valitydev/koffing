@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
-import { camelCase } from 'lodash';
 
 import { ContractFormService, PayoutToolFormService, ShopFormService } from 'koffing/domain';
 import { PartyModification } from 'koffing/backend';
@@ -36,8 +35,8 @@ export class CreateShopService {
     public getBankAccountPossibility(bankAccountSource: any): true | { summary: string; detail: string } {
         const bankAccount = this.getNonresidentBankAccount(bankAccountSource);
         if (!bankAccount.iban) {
-            const details = bankAccount.bankDetails;
-            if (!(details.bic || details.abartn || details.name && details.countryCode && details.address)) {
+            const { bankDetails } = bankAccount;
+            if (!bankDetails || !(bankDetails.bic || bankDetails.abaRtn || bankDetails.name && bankDetails.countryCode && bankDetails.address)) {
                 return {
                     summary: 'В данных международной банковской организации не заполнены все поля',
                     detail: 'Необходимо заполнить либо IBAN, либо BIC, либо ABA RTN, либо наименование, страну и адрес'
@@ -64,7 +63,6 @@ export class CreateShopService {
                 ...value,
                 bankAccount: this.getNonresidentBankAccount(value.bankAccount)
             } : value;
-            console.dir(contractFormData);
             this.contractFormService.toContractCreation(contractFormData, this.type).subscribe((contractCreation) => {
                 this.contractID = contractCreation.contractID;
                 this.changeSet[ShopCreationStep.contract] = contractCreation;
@@ -85,23 +83,19 @@ export class CreateShopService {
         });
     }
 
-    private getNonresidentBankAccount(bankAccount: any) {
+    private getNonresidentBankAccount({correspondentBankAccount, ...bankAccount}: any) {
         return {
-            number: bankAccount.number,
-            iban: bankAccount.iban,
-            bankDetails: this.getPrefixedWithoutPrefix(bankAccount, 'bankDetails'),
-            correspondentBankAccount: this.getPrefixedWithoutPrefix(bankAccount, 'correspondentBankAccount')
+            ...this.getNonresidentBankAccountPart(bankAccount),
+            correspondentBankAccount: this.getNonresidentBankAccountPart(correspondentBankAccount)
         };
     }
 
-    private getPrefixedWithoutPrefix(params: object, prefix: string = '') {
-        const result: any = {};
-        for (const name of Object.keys(params)) {
-            if (name.indexOf(prefix) === 0) {
-                result[camelCase(name.slice(prefix.length))] = params[name];
-            }
-        }
-        return result;
+    private getNonresidentBankAccountPart({number: n, iban, ...bankDetails}: any) {
+        return {
+            number: n,
+            iban,
+            bankDetails
+        };
     }
 
     private handleStatus(group: FormGroup, doHandler: any) {
