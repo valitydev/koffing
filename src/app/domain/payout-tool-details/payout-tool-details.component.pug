@@ -6,4 +6,8 @@ form.form-horizontal.form-label-left.css-form
             div {{payoutTool?.currency}}
     kof-bank-account-details(*ngIf="payoutTool?.details?.detailsType === 'PayoutToolDetailsBankAccount'", [bankAccount]="payoutTool.details")
     kof-international-bank-account-details(*ngIf="payoutTool?.details?.detailsType === 'PayoutToolDetailsInternationalBankAccount'", [bankAccount]="payoutTool.details")
-    kof-international-bank-account-details(*ngIf="payoutTool?.details?.detailsType === 'PayoutToolDetailsInternationalBankAccount' && payoutTool?.details?.correspondentBankAccount", [bankAccount]="payoutTool.details.correspondentBankAccount")
+    div(*ngIf="payoutTool?.details?.detailsType === 'PayoutToolDetailsInternationalBankAccount' && payoutTool?.details?.correspondentBankAccount")
+        .form-group
+            .col-sm-12
+                label.text-left КОРРЕСПОНДЕНТСКИЙ СЧЁТ
+        kof-international-bank-account-details([bankAccount]="payoutTool.details.correspondentBankAccount")
