@@ -1,23 +1,21 @@
-import { InternationalBankAccount } from 'koffing/backend/model/international-bank-account';
+import { InternationalBank } from 'koffing/backend/model/international-bank';
 import { applyMixins } from 'koffing/backend/helpers/applyMixins';
 import { PayoutToolDetails } from './payout-tool-details';
 
-export class PayoutToolDetailsInternationalBankAccount implements PayoutToolDetails, InternationalBankAccount {
-    public detailsType: string;
-    public accountHolder: string;
-    public bankName: string;
-    public bankAddress: string;
+export class PayoutToolDetailsInternationalBankAccount extends PayoutToolDetails {
+    public number: string;
     public iban: string;
-    public bic: string;
+    public bankDetails: InternationalBank;
+    public correspondentBankAccount: InternationalBank;
 
-    constructor(options: InternationalBankAccount) {
+    constructor(options: PayoutToolDetailsInternationalBankAccount) {
+        super();
         this.detailsType = 'PayoutToolDetailsInternationalBankAccount';
-        this.accountHolder = options.accountHolder;
-        this.bankName = options.bankName;
-        this.bankAddress = options.bankAddress;
-        this.bic = options.bic;
+        this.number = options.number;
         this.iban = options.iban;
+        this.bankDetails = options.bankDetails;
+        this.correspondentBankAccount = options.correspondentBankAccount;
     }
 }
 
-applyMixins(PayoutToolDetailsInternationalBankAccount, [PayoutToolDetails, InternationalBankAccount]);
+applyMixins(PayoutToolDetailsInternationalBankAccount, [PayoutToolDetails, InternationalBank]);

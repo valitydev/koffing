@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { InternationalBankAccount } from 'koffing/backend';
+import { InternationalBank } from 'koffing/backend';
 
 @Component({
     selector: 'kof-international-bank-account-details',
@@ -8,6 +8,6 @@ import { InternationalBankAccount } from 'koffing/backend';
 export class InternationalBankAccountDetailsComponent {
 
     @Input()
-    public bankAccount: InternationalBankAccount;
+    public bankAccount: InternationalBank;
 
 }

@@ -14,7 +14,7 @@ export * from './payment-method';
 export * from './access-token';
 export * from './account';
 export * from './bank-account';
-export * from './international-bank-account';
+export * from './international-bank';
 export * from './client-info';
 export * from './contact-info';
 export * from './conversion';

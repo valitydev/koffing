@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
 
-import { ContractCreation, RussianLegalEntity, InternationalLegalEntity, PaymentInstitution } from 'koffing/backend';
+import { ContractCreation, InternationalLegalEntity, PaymentInstitution, RussianLegalEntity } from 'koffing/backend';
 import { BankAccountFormService } from 'koffing/domain';
 import { InternationalContractFormService } from './international-contract-form/international-contract-form.service';
 import { RussianContractFormService } from './russian-contract-form/russian-contract-form.service';
@@ -30,15 +30,15 @@ export class ContractFormService {
         }
     }
 
-    public toContractCreation(contractForm: FormGroup, type: string): Observable<ContractCreation> {
+    public toContractCreation(contractFormData: any, type: string): Observable<ContractCreation> {
         return this.getPaymentInstitutions().map((paymentInstitutions: PaymentInstitution[]) => {
             let contractor;
             switch (type) {
                 case 'resident':
-                    contractor = new RussianLegalEntity(contractForm.value);
+                    contractor = new RussianLegalEntity(contractFormData);
                     break;
                 case 'nonresident':
-                    contractor = new InternationalLegalEntity(contractForm.value);
+                    contractor = new InternationalLegalEntity(contractFormData);
                     break;
             }
             return new ContractCreation(uuid(), contractor, this.getPaymentInstitutionId(paymentInstitutions, type));

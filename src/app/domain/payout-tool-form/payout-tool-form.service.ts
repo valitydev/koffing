@@ -2,7 +2,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import * as uuid from 'uuid/v4';
 
-import { PayoutToolDetailsBankAccount, ContractPayoutToolCreation, PayoutToolDetailsInternationalBankAccount } from 'koffing/backend';
+import {
+    ContractPayoutToolCreation,
+    PayoutToolDetailsBankAccount,
+    PayoutToolDetailsInternationalBankAccount
+} from 'koffing/backend';
 import { BankAccountFormService } from 'koffing/domain';
 
 @Injectable()
@@ -13,7 +17,8 @@ export class PayoutToolFormService {
     constructor(
         private fb: FormBuilder,
         private bankAccountFormService: BankAccountFormService
-    ) { }
+    ) {
+    }
 
     public initForm(type: string): FormGroup {
         return this.fb.group({
@@ -25,12 +30,12 @@ export class PayoutToolFormService {
         });
     }
 
-    public toPayoutToolCreation(contractID: string, payoutTool: FormGroup, type: string): ContractPayoutToolCreation {
+    public toPayoutToolCreation(contractID: string, payoutToolData: any, type: string): ContractPayoutToolCreation {
         switch (type) {
             case 'resident':
-                return new ContractPayoutToolCreation(payoutTool.value.currency, contractID, uuid(), new PayoutToolDetailsBankAccount(payoutTool.value.bankAccount));
+                return new ContractPayoutToolCreation(payoutToolData.currency, contractID, uuid(), new PayoutToolDetailsBankAccount(payoutToolData.bankAccount));
             case 'nonresident':
-                return new ContractPayoutToolCreation(payoutTool.value.currency, contractID, uuid(), new PayoutToolDetailsInternationalBankAccount(payoutTool.value.bankAccount));
+                return new ContractPayoutToolCreation(payoutToolData.currency, contractID, uuid(), new PayoutToolDetailsInternationalBankAccount(payoutToolData.bankAccount));
         }
     }
 }

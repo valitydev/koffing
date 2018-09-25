@@ -4,32 +4,21 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class InternationalBankAccountFormService {
 
-    public form: FormGroup;
+    public forms: FormGroup[];
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder) {
+    }
 
     public initForm(): FormGroup {
-        return this.fb.group({
-            accountHolder: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            bankName: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            bankAddress: ['', [
-                Validators.required,
-                Validators.maxLength(150)
-            ]],
-            iban: ['', [
-                Validators.required,
-                Validators.pattern(/^[A-Z0-9]{3,34}$/)
-            ]],
-            bic: ['', [
-                Validators.required,
-                Validators.pattern(/^([A-Z0-9]{8}|[A-Z0-9]{11})$/)
-            ]]
-        });
+        const controlsConfig = {
+            number: ['', [Validators.pattern(/^[0-9A-Z]{8,40}$/)]],
+            iban: ['', [Validators.pattern(/^[A-Z0-9]{14,35}$/)]],
+            bic: ['', [Validators.pattern(/^([A-Z0-9]{8}|[A-Z0-9]{11})$/)]],
+            abartn: ['', [Validators.pattern(/^[0-9]{9}$/)]],
+            name: ['', [Validators.maxLength(100)]],
+            countryCode: ['', [Validators.pattern(/^[A-Z]{3}$/)]],
+            address: ['', [Validators.maxLength(1000)]],
+        };
+        return this.fb.group({...controlsConfig, correspondentBankAccount: this.fb.group(controlsConfig)});
     }
 }

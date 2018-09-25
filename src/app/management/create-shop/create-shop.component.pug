@@ -34,3 +34,4 @@
                             *ngIf="currentStep === step.shop",
                             [disabled]="!validStep",
                             (click)="createClaim()") Создать заявку
+p-growl([(value)]="msgs" life="60000")
