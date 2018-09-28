@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { get } from 'lodash';
 
-import { Report } from 'src/app/backend';
+import { Report } from 'koffing/backend';
 import { ReportTableItem } from './report-item';
 import { ReportsFilter } from '../reports-filter';
 

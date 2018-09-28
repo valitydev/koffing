@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 
-import { Report, ReportType, SearchReportParams } from 'koffing/backend';
+import { Report, SearchReportParams } from 'koffing/backend';
 import { DateRange } from 'koffing/common/date-range/date-range';
 import { SearchService } from 'koffing/backend/search.service';
 import { ReportsFilter } from './reports-filter';

@@ -17,7 +17,8 @@ import {
     InvoiceSearchResult,
     PaymentSearchResult,
     PayoutSearchResult,
-    RefundsSearchResult, Report
+    RefundsSearchResult,
+    Report
 } from './model';
 
 @Injectable()
