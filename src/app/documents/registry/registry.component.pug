@@ -1,9 +1,0 @@
-.row
-    .col-xs-12.col-sm-6
-        kof-date-range((onSelect)="selectDateRange($event)")
-.row
-    .col-xs-12
-        button.btn.btn-default([disabled]="isLoading", (click)="exportRegistryToXLSX()")
-            i.fa.fa-cog.fa-spin.fa-1x.fa-fw(*ngIf="isLoading")
-            span Скачать как Excel-файл
-            

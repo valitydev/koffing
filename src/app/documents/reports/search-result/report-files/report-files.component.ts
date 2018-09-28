@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DownloadService } from 'koffing/backend/download.service';
-import { FileMeta } from 'koffing/backend';
+import { DownloadService } from 'src/app/backend/download.service';
+import { FileMeta } from 'src/app/backend/index';
 
 @Component({
     selector: 'kof-report-files',

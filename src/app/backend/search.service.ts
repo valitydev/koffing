@@ -17,7 +17,7 @@ import {
     InvoiceSearchResult,
     PaymentSearchResult,
     PayoutSearchResult,
-    RefundsSearchResult
+    RefundsSearchResult, Report
 } from './model';
 
 @Injectable()
@@ -52,7 +52,7 @@ export class SearchService {
             .map((res) => res.json());
     }
 
-    public getReports(shopID: string, reportParams: SearchReportParams): Observable<any> { // todo type
+    public getReports(shopID: string, reportParams: SearchReportParams): Observable<Report[]> {
         const search = this.toSearchParams(reportParams);
         return this.http.get(`${this.config.capiUrl}/shops/${shopID}/reports`, {search})
             .map((res) => res.json());

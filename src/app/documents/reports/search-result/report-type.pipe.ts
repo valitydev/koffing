@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { REPORT_TYPE } from 'koffing/backend';
+import { REPORT_TYPE } from 'src/app/backend/index';
 
 @Pipe({
     name: 'kofReportType'

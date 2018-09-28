@@ -4,14 +4,12 @@ table.table.table-striped
             th Идентификатор
             th.hidden-xs Временной интервал
             th Время создания
-            th.hidden-xs Тип отчета
             th
-    tbody(*ngFor="let item of reportItems")
+    tbody(*ngFor="let item of filtered(reportItems)")
         tr
             td {{item.report.id}}
             td.hidden-xs {{item.report.fromTime | date: "dd.MM.yyyy"}} - {{item.report.toTime | date: "dd.MM.yyyy"}}
             td {{item.report.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
-            td.hidden-xs {{item.report.type | kofReportType}}
             td
                 .pull-right
                     button.btn.btn-xs.btn-default((click)="toggleFilesPanel(item)")

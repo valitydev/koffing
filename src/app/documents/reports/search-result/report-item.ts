@@ -1,4 +1,4 @@
-import { Report } from 'koffing/backend';
+import { Report } from 'src/app/backend/index';
 
 export class ReportTableItem {
 

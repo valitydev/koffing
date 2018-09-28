@@ -17,9 +17,9 @@ import { InvoiceComponent } from 'koffing/invoice/invoice.component';
 import { ShopInfoComponent } from 'koffing/shop-info/shop-info.component';
 import { ContractManageComponent } from 'koffing/shop-info/contract-manage/contract-manage.component';
 import { DocumentsComponent } from 'koffing/documents/documents.component';
-import { ReportsComponent } from 'koffing/documents/reports/reports.component';
-import { RegistryComponent } from 'koffing/documents/registry/registry.component';
 import { InitCreateShopComponent } from 'koffing/management/init-create-shop/init-create-shop.component';
+import { ReportsComponent } from 'koffing/documents/reports/reports.component';
+import { ReportType } from 'koffing/backend';
 
 @NgModule({
     imports: [
@@ -89,16 +89,12 @@ import { InitCreateShopComponent } from 'koffing/management/init-create-shop/ini
                         children: [
                             {
                                 path: '',
-                                redirectTo: 'reports',
+                                redirectTo: 'reports/' + ReportType.provisionOfService,
                                 pathMatch: 'full'
                             },
                             {
-                                path: 'reports',
+                                path: 'reports/:type',
                                 component: ReportsComponent
-                            },
-                            {
-                                path: 'registry',
-                                component: RegistryComponent
                             }
                         ]
                     },
@@ -122,4 +118,5 @@ import { InitCreateShopComponent } from 'koffing/management/init-create-shop/ini
         RouterModule
     ]
 })
-export class RootRoutingModule { }
+export class RootRoutingModule {
+}

@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { get } from 'lodash';
 
-import { Report } from 'koffing/backend';
+import { Report } from 'src/app/backend';
 import { ReportTableItem } from './report-item';
+import { ReportsFilter } from '../reports-filter';
 
 @Component({
     selector: 'kof-search-reports-result',
@@ -12,6 +14,9 @@ export class SearchReportsResultComponent implements OnInit {
 
     @Input()
     public reports$: Observable<Report[]>;
+
+    @Input()
+    public filter: ReportsFilter;
 
     public reportItems: ReportTableItem[];
 
@@ -23,5 +28,11 @@ export class SearchReportsResultComponent implements OnInit {
 
     public toggleFilesPanel(item: ReportTableItem) {
         item.isVisible = !item.isVisible;
+    }
+
+    public filtered(reports: ReportTableItem[]): ReportTableItem[] {
+        return this.filter && reports
+            ? reports.filter((report) => get(report, this.filter.path) === this.filter.value)
+            : reports;
     }
 }
