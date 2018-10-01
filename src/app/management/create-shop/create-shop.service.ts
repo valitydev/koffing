@@ -48,11 +48,13 @@ export class CreateShopService {
     }
 
     public getNextPossibility(step: number): true | { summary: string; detail: string } {
-        switch (step) {
-            case ShopCreationStep.payoutTool:
-                return this.getBankAccountPossibility(this.payoutToolForm.value.bankAccount);
-            case ShopCreationStep.contract:
-                return this.getBankAccountPossibility(this.contractForm.value.bankAccount);
+        if (this.type === 'nonresident') {
+            switch (step) {
+                case ShopCreationStep.payoutTool:
+                    return this.getBankAccountPossibility(this.payoutToolForm.value.bankAccount);
+                case ShopCreationStep.contract:
+                    return this.getBankAccountPossibility(this.contractForm.value.bankAccount);
+            }
         }
         return true;
     }
