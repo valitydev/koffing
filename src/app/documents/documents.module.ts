@@ -8,8 +8,10 @@ import { DocumentsComponent } from './documents.component';
 import { SearchReportsResultComponent } from './reports/search-result/search-reports-result.component';
 import { ReportFilesComponent } from './reports/search-result/report-files/report-files.component';
 import { ReportsComponent } from './reports/reports.component';
+import { ReportsService } from 'koffing/backend/reports.service';
 
 @NgModule({
+    providers: [ReportsService],
     imports: [
         RouterModule,
         BrowserModule,

@@ -1,5 +1,5 @@
 import { Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 import { HttpErrorBroadcaster } from 'koffing/broadcaster';
 import { AuthService } from 'koffing/auth/auth.service';
@@ -63,7 +63,7 @@ export class KoffingHttp extends Http {
             observer.next();
             observer.complete();
         });
-        const requestObservable: Observable<Response> = Observable.create((observer: any) => {
+        const requestObservable: Observable<Response> = Observable.create((observer: Observer<any>) => {
             let result: any;
             if (body) {
                 result = f.apply(this, [url, body, options]);
@@ -75,6 +75,7 @@ export class KoffingHttp extends Http {
                 observer.complete();
             }, (error: any) => {
                 this.httpErrorBroadcaster.fire(error.status);
+                observer.error(error);
             });
         });
         return <Observable<Response>> Observable
