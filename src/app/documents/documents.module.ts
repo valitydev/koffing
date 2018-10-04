@@ -9,6 +9,7 @@ import { SearchReportsResultComponent } from './reports/search-result/search-rep
 import { ReportFilesComponent } from './reports/search-result/report-files/report-files.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ReportsService } from 'koffing/backend/reports.service';
+import { ReportStatusPipe } from './reports/search-result/report-status.pipe';
 
 @NgModule({
     providers: [ReportsService],
@@ -22,7 +23,8 @@ import { ReportsService } from 'koffing/backend/reports.service';
         DocumentsComponent,
         SearchReportsResultComponent,
         ReportFilesComponent,
-        ReportsComponent
+        ReportsComponent,
+        ReportStatusPipe
     ]
 })
 export class DocumentsModule { }

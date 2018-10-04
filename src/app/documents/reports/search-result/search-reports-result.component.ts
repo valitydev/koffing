@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { get } from 'lodash';
 
-import { Report } from 'koffing/backend';
+import { Report, ReportStatus } from 'koffing/backend';
 import { ReportTableItem } from './report-item';
 import { ReportsFilter } from '../reports-filter';
 
@@ -19,6 +19,7 @@ export class SearchReportsResultComponent implements OnInit {
     public filter: ReportsFilter;
 
     public reportItems: ReportTableItem[];
+    public reportStatuses = ReportStatus;
 
     public ngOnInit() {
         this.reports$.subscribe((reports) => {

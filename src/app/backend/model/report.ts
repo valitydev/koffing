@@ -5,6 +5,11 @@ export enum ReportType {
     paymentRegistry = 'paymentRegistry'
 }
 
+export enum ReportStatus {
+    pending = 'pending',
+    created = 'created'
+}
+
 export class Report {
     public id: number;
     public createdAt: string;
@@ -12,4 +17,5 @@ export class Report {
     public toTime: string;
     public type: ReportType;
     public files: FileMeta[];
+    public status: ReportStatus;
 }
