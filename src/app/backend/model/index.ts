@@ -48,3 +48,4 @@ export * from './payment-institution';
 export * from './payment-refund';
 export * from './refunds-search-result';
 export * from './refund';
+export * from './report-link';

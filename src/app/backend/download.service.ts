@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ResponseContentType } from '@angular/http';
 
 import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
+import { ReportLink } from 'koffing/backend/model';
 
 @Injectable()
 export class DownloadService {
@@ -13,9 +13,8 @@ export class DownloadService {
         private config: ConfigService
     ) { }
 
-    public downloadReport(shopID: string, reportID: number, fileID: string): Observable<Blob> {
-        return this.http.get(`${this.config.capiUrl}/shops/${shopID}/reports/${reportID}/files/${fileID}/download`, {
-            responseType: ResponseContentType.Blob
-        }).map((response) => response.blob());
+    public downloadReport(shopID: string, reportID: number, fileID: string): Observable<ReportLink> {
+        return this.http.get(`${this.config.capiUrl}/shops/${shopID}/reports/${reportID}/files/${fileID}/download`)
+            .map((response) => response.json());
     }
 }

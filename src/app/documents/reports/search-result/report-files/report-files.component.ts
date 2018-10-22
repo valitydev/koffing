@@ -31,17 +31,16 @@ export class ReportFilesComponent implements OnInit {
 
     public downloadFile(fileID: string, fileName: string) {
         this.downloadService.downloadReport(this.shopID, this.reportID, fileID)
-            .subscribe((file: Blob) => this.download(fileName, file));
+            .subscribe((reportLink) => this.download(fileName, reportLink.url));
     }
 
-    private download(fileName: string, file: Blob) {
+    private download(fileName: string, url: string) {
         const a: any = document.createElement('a');
         document.body.appendChild(a);
         a.style = 'display: none';
-        const url = window.URL.createObjectURL(file);
         a.href = url;
         a.download = fileName;
         a.click();
-        window.URL.revokeObjectURL(url);
+        a.parentNode.removeChild(a);
     }
 }
