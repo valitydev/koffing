@@ -4,11 +4,13 @@
             .x_title
                 h5 Действия
             .x_content
-                .row
+                .row(*ngIf="shop")
                     .col-xs-12.col-sm-6.col-md-3
-                        kof-create-invoice([shopID]="shopID", (onCreate)="onCreate($event)")
+                        kof-create-invoice([shopID]="shop.id", [shopCurrency]="shop.account.currency", (onCreate)="onCreate($event)")
                     .col-xs-12.col-sm-6.col-md-3
-                        kof-invoice-template-payment-link([shopID]="shopID")
+                        kof-invoice-template-payment-link([shopID]="shop.id", [settlementID]="shop.account.settlementID")
+                .row(*ngIf="!shop")
+                    .col-xs-12 Загрузка...
         .x_panel
             .x_title
                 h5 Поиск инвойсов

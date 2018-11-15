@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { last } from 'lodash';
 
-import { Contractor, PartyModification, PayoutTool, Shop} from 'koffing/backend';
+import { Contractor, PartyModification, PayoutTool, Shop } from 'koffing/backend';
 import { ShopService } from 'koffing/backend/shop.service';
 import { ClaimDetailsService } from '../claim-details.service';
 

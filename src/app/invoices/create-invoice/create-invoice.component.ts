@@ -5,8 +5,6 @@ import { Invoice } from 'koffing/backend/model/invoice';
 import { InvoiceService } from 'koffing/backend/invoice.service';
 import { CreateInvoiceService } from './create-invoice.service';
 import { InvoiceFormService } from 'koffing/invoices/invoice-form/invoice-form.service';
-import { ActivatedRoute } from '@angular/router';
-import { ShopService } from 'koffing/backend/shop.service';
 
 @Component({
     selector: 'kof-create-invoice',
@@ -18,6 +16,9 @@ export class CreateInvoiceComponent implements OnInit {
     @Input()
     public shopID: string;
 
+    @Input()
+    public shopCurrency: string;
+
     @Output()
     public onCreate: EventEmitter<Invoice> = new EventEmitter();
 
@@ -25,10 +26,8 @@ export class CreateInvoiceComponent implements OnInit {
 
     constructor(
         private invoiceService: InvoiceService,
-        private invoiceFormService: InvoiceFormService,
-        private route: ActivatedRoute,
-        private shopService: ShopService
-    ) { }
+        private invoiceFormService: InvoiceFormService
+    ) {}
 
     public ngOnInit() {
         this.invoiceForm = this.invoiceFormService.form;
@@ -44,10 +43,6 @@ export class CreateInvoiceComponent implements OnInit {
     }
 
     public setDefaultFormValues() {
-        this.route.parent.params.switchMap((params) =>
-            this.shopService.getShopByID(params.shopID)).subscribe((shop) => {
-            this.invoiceFormService.setDefaultValues({currency: shop.account.currency});
-        });
-
+        this.invoiceFormService.setDefaultValues({currency: this.shopCurrency});
     }
 }

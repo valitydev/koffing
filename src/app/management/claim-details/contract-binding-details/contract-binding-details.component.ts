@@ -26,7 +26,7 @@ export class ContractBindingDetailsComponent implements OnChanges {
         private payoutToolService: PayoutToolService,
         private shopService: ShopService,
         private claimDetailsService: ClaimDetailsService
-    ) { }
+    ) {}
 
     public ngOnChanges() {
         const bindings = this.claimDetailsService.toContractBinding(this.partyModifications);

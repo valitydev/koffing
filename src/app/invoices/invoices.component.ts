@@ -9,6 +9,8 @@ import { InvoiceFormService } from 'koffing/invoices/invoice-form/invoice-form.s
 import { InvoiceTemplateFormService } from 'koffing/invoices/invoice-template-form/invoice-template-form.service';
 import { InvoicesService } from 'koffing/invoices/invoices.service';
 import { SearchFormService } from 'koffing/invoices/search-form/search-form.service';
+import { Shop } from 'koffing/backend';
+import { ShopService } from 'koffing/backend/shop.service';
 
 @Component({
     templateUrl: 'invoices.component.pug',
@@ -24,7 +26,7 @@ import { SearchFormService } from 'koffing/invoices/search-form/search-form.serv
 export class InvoicesComponent implements OnInit {
 
     public invoices: Subject<Invoice[]> = new Subject();
-    public shopID: string;
+    public shop: Shop;
     public page: number = 0;
     public limit: number = 20;
     private continuationTokens: string[] = [];
@@ -34,15 +36,18 @@ export class InvoicesComponent implements OnInit {
                 private router: Router,
                 private searchService: SearchService,
                 private invoicesService: InvoicesService,
-                private searchFormService: SearchFormService) {
+                private searchFormService: SearchFormService,
+                private shopService: ShopService) {
     }
 
     public ngOnInit() {
         this.searchForm = this.searchFormService.searchForm;
-        this.route.parent.params.subscribe((params) => {
-            this.shopID = params['shopID'];
-            this.search();
-        });
+        this.route.parent.params
+            .switchMap((params) => this.shopService.getShopByID(params['shopID']))
+            .subscribe((shop) => {
+                this.shop = shop;
+                this.search();
+            });
     }
 
     public hasNext() {
@@ -64,14 +69,14 @@ export class InvoicesComponent implements OnInit {
     }
 
     public onCreate(invoice: Invoice) {
-        this.router.navigate(['shop', this.shopID, 'invoice', invoice.id]);
+        this.router.navigate(['shop', this.shop.id, 'invoice', invoice.id]);
     }
 
     private search(num: number = 0) {
         this.page += num;
         const continuationToken = this.continuationTokens[this.page];
         const request = this.invoicesService.toSearchParams(this.limit, continuationToken, this.searchForm.value);
-        this.searchService.searchInvoices(this.shopID, request).subscribe((response) => {
+        this.searchService.searchInvoices(this.shop.id, request).subscribe((response) => {
             this.continuationTokens[this.page + 1] = response.continuationToken;
             this.invoices.next(response.result);
         });
