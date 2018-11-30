@@ -10,3 +10,4 @@ export * from './payment-method';
 export * from './payout-tool-type';
 export * from './report-type';
 export * from './token-provider';
+export * from './withdrawal-status';

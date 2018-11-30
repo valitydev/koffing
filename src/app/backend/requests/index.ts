@@ -11,3 +11,5 @@ export * from './search-report-params';
 export * from './get-payment-institutions-params';
 export * from './refund-params';
 export * from './create-report-params';
+export * from './search-wallet-withdrawals';
+export * from './search-wallets-params';

@@ -1,0 +1,41 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group(*ngIf="withdrawal?.id")
+        .col-xs-12.col-sm-4
+            label.text-left Идентификатор вывода:
+        .col-xs-12.col-sm-8
+            div {{withdrawal?.id}}
+    .form-group(*ngIf="withdrawal?.status")
+        .col-xs-12.col-sm-4
+            label.text-left Статус:
+        .col-xs-12.col-sm-8
+            div.label.label-default([ngClass]="getLabelClass(withdrawal?.status)") {{withdrawal?.status | kofWithdrawalStatus}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Идентификатор кошелька:
+        .col-xs-12.col-sm-8
+            div {{withdrawal?.wallet}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Идентификатор приёмника денежных средств:
+        .col-xs-12.col-sm-8
+            div {{withdrawal?.destination}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Дата и время создания:
+        .col-xs-12.col-sm-8
+            div {{withdrawal?.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Объем выводимых средств:
+        .col-xs-12.col-sm-8
+            div {{withdrawal?.body.amount | kofRoubleCurrency}} {{withdrawal.body.currency | kofCurrency}}
+    .form-group(*ngIf="withdrawal?.fee")
+        .col-xs-12.col-sm-4
+            label.text-left Коммисия:
+        .col-xs-12.col-sm-8
+            div {{withdrawal?.fee.amount | kofRoubleCurrency}} {{withdrawal.fee.currency | kofCurrency}}
+    .form-group(*ngIf="withdrawal?.failure")
+        .col-xs-12.col-sm-4
+            label.text-left Причина ошибки:
+        .col-xs-12.col-sm-8
+            div {{withdrawal.failure.code}}

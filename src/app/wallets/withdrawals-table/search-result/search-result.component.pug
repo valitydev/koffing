@@ -1,0 +1,18 @@
+table.table.table-striped
+    thead
+        tr
+            th Идентификатор
+            th Сумма вывода
+            th Дата создания
+            th Статус
+            th
+    tbody(*ngFor="let withdrawal of withdrawals | async")
+        tr
+            td {{withdrawal.id}}
+            td {{withdrawal.body.amount | kofRoubleCurrency}} {{withdrawal.body.currency | kofCurrency}}
+            td {{withdrawal.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+            td
+                span.label.label-default([ngClass]="getLabelClass(withdrawal.status)") {{withdrawal.status | kofWithdrawalStatus}}
+            td
+                .pull-right
+                    button.btn.btn-xs.btn-default((click)="gotToWithdrawalDetails(withdrawal.id)") Детали

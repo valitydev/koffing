@@ -1,0 +1,16 @@
+kof-loading([isLoading]="!withdrawal && !withdrawalNotFound")
+.row(*ngIf="withdrawal || withdrawalNotFound")
+    .col-xs-12.col-md-10.col-md-offset-1(*ngIf="!withdrawalNotFound")
+        .x_panel
+            .x_title
+                .row
+                    .col-xs-6
+                        h5 Вывод
+                    .col-xs-6
+                        button.btn.btn-default.btn-sm.pull-right((click)="back()") Назад
+            .x_content
+                kof-withdrawal-details([withdrawal]="withdrawal")
+    .col-xs-12.col-md-6.col-md-offset-3(*ngIf="withdrawalNotFound")
+        .x_panel
+            .x_content
+                h5.text-center Вывод не найден

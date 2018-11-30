@@ -15,8 +15,9 @@ import { PaginateComponent } from './paginate/paginate.component';
 import { PaginationPipe } from './paginate/pagination.pipe';
 import { InvoiceStatusPipe } from './invoice-statuses.pipe';
 import { PaymentStatusPipe } from './payment-statuses.pipe';
-import { CurrencyPipe } from 'koffing/common/currency.pipe';
-import { StepperComponent } from 'koffing/common/stepper/stepper.component';
+import { CurrencyPipe } from './currency.pipe';
+import { StepperComponent } from './stepper/stepper.component';
+import { WithdrawalStatusPipe } from './withdrawal-status.pipe';
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ import { StepperComponent } from 'koffing/common/stepper/stepper.component';
         InvoiceStatusPipe,
         PaymentStatusPipe,
         CurrencyPipe,
+        WithdrawalStatusPipe,
         StepperComponent
     ],
     exports: [
@@ -53,6 +55,7 @@ import { StepperComponent } from 'koffing/common/stepper/stepper.component';
         InvoiceStatusPipe,
         PaymentStatusPipe,
         CurrencyPipe,
+        WithdrawalStatusPipe,
         StepperComponent
     ],
     providers: [

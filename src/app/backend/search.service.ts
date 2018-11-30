@@ -11,14 +11,19 @@ import {
     SearchPaymentsParams,
     SearchPayoutsParams,
     SearchReportParams,
-    SearchRefundsParams
+    SearchRefundsParams,
+    SearchWalletWithdrawals,
+    SearchWalletsParams
 } from './requests';
 import {
     InvoiceSearchResult,
     PaymentSearchResult,
     PayoutSearchResult,
     RefundsSearchResult,
-    Report
+    Report,
+    WalletsSearchResult,
+    Withdrawal,
+    WithdrawalSearchResult
 } from './model';
 
 @Injectable()
@@ -31,25 +36,25 @@ export class SearchService {
 
     public searchInvoices(shopID: string, invoiceParams: SearchInvoicesParams): Observable<InvoiceSearchResult> {
         const search = this.toSearchParams(invoiceParams);
-        return this.http.get(`${this.getEndpoint(shopID)}/invoices`, {search})
+        return this.http.get(`${this.getCapiEndpoint(shopID)}/invoices`, {search})
             .map((res) => res.json());
     }
 
     public searchPayments(shopID: string, paymentsParams: SearchPaymentsParams): Observable<PaymentSearchResult> {
         const search = this.toSearchParams(paymentsParams);
-        return this.http.get(`${this.getEndpoint(shopID)}/payments`, {search})
+        return this.http.get(`${this.getCapiEndpoint(shopID)}/payments`, {search})
             .map((res) => res.json());
     }
 
     public searchRefunds(shopID: string, refundsParams: SearchRefundsParams): Observable<RefundsSearchResult> {
         const search = this.toSearchParams(refundsParams);
-        return this.http.get(`${this.getEndpoint(shopID)}/refunds`, {search})
+        return this.http.get(`${this.getCapiEndpoint(shopID)}/refunds`, {search})
             .map((res) => res.json());
     }
 
     public searchPayouts(shopID: string, payoutsParams: SearchPayoutsParams): Observable<PayoutSearchResult> {
         const search = this.toSearchParams(payoutsParams);
-        return this.http.get(`${this.getEndpoint(shopID)}/payouts`, {search})
+        return this.http.get(`${this.getCapiEndpoint(shopID)}/payouts`, {search})
             .map((res) => res.json());
     }
 
@@ -59,7 +64,24 @@ export class SearchService {
             .map((res) => res.json());
     }
 
-    private getEndpoint(shopID: string): string {
+    public searchWalletWithdrawals(withdrawalsParams: SearchWalletWithdrawals): Observable<WithdrawalSearchResult> {
+        const search = this.toSearchParams(withdrawalsParams);
+        return this.http.get(`${this.config.wapiUrl}/withdrawals`, {search})
+            .map((res) => res.json());
+    }
+
+    public searchWalletWithdrawal(withdrawalID: string): Observable<Withdrawal> {
+        return this.http.get(`${this.config.wapiUrl}/withdrawals/${withdrawalID}`)
+                   .map((res) => res.json());
+    }
+
+    public searchWallets(walletsParams: SearchWalletsParams): Observable<WalletsSearchResult> {
+        const search = this.toSearchParams(walletsParams);
+        return this.http.get(`${this.config.wapiUrl}/wallets`, {search})
+            .map((res) => res.json());
+    }
+
+    private getCapiEndpoint(shopID: string): string {
         return `${this.config.capiUrl}/analytics/shops/${shopID}`;
     }
 
