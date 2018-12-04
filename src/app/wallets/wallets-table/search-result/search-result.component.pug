@@ -12,7 +12,7 @@ table.table.table-striped
             td {{item.id}}
             td {{item.name}}
             td {{item.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
-            td {{item.account.available.amount}} {{item.account.available.currency | kofCurrency}}
-            td {{item.account.own.amount}} {{item.account.own.currency | kofCurrency}}
+            td {{item.account.available.amount | kofRoubleCurrency}} {{item.account.available.currency | kofCurrency}}
+            td {{item.account.own.amount | kofRoubleCurrency}} {{item.account.own.currency | kofCurrency}}
             td
                 span.label.label-default([ngClass]="getLabelClass(item.isBlocked)") {{getStatus(item.isBlocked)}}
