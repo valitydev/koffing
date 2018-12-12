@@ -3,4 +3,5 @@ export class AuthInfo {
     public email: string = '';
     public token: string = '';
     public authUrl: string = '';
+    public partyId: string = '';
 }

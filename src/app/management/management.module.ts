@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GrowlModule } from 'primeng/primeng';
+import { DialogModule, GrowlModule } from 'primeng/primeng';
 
 import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
@@ -31,7 +31,8 @@ import { PaymentInstitutionService } from 'koffing/backend/payment-institution.s
         BackendModule,
         DomainModule,
         SuggestionsModule,
-        GrowlModule
+        GrowlModule,
+        DialogModule
     ],
     declarations: [
         ManagementComponent,

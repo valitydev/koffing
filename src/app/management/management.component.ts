@@ -8,39 +8,52 @@ import { BreadcrumbBroadcaster } from 'koffing/broadcaster';
 import { ClaimModificationService } from './claim-modification.service';
 import { Observable } from 'rxjs/Observable';
 import { ManagementService } from './management.service';
+import { AuthService } from 'koffing/auth/auth.service';
+import { WarningsService } from 'koffing/backend/warnings.service';
 
 @Component({
-    templateUrl: 'management.component.pug'
+    templateUrl: 'management.component.pug',
+    providers: [WarningsService]
 })
 export class ManagementComponent implements OnInit {
 
     public claims: Claim[];
-
     public shops: Shop[];
-
     public isCreating: boolean = false;
+    public partyId: string;
+
+    public displayWarning = false;
+    public displayWarningDetails = false;
 
     constructor(private claimService: ClaimService,
                 private router: Router,
                 private shopService: ShopService,
                 private claimModificationService: ClaimModificationService,
                 private managementService: ManagementService,
-                private breadcrumbBroadcaster: BreadcrumbBroadcaster) {
+                private breadcrumbBroadcaster: BreadcrumbBroadcaster,
+                private warningsService: WarningsService) {
     }
 
     public ngOnInit() {
         Observable.zip(
             this.claimService.getClaims(CLAIM_STATUS.pending),
-            this.shopService.getShops()
+            this.shopService.getShops(),
+            this.warningsService.loginWarnings
         ).subscribe((response) => {
             this.claims = response[0];
             this.shops = response[1];
+            this.displayWarning = response[2].filter((warning) => warning === this.partyId).length > 0;
 
             if (this.shops.length === 0) {
                 this.createTestShop();
             }
         });
         this.breadcrumbBroadcaster.fire([]);
+        this.partyId = AuthService.getAccountInfo().partyId;
+    }
+
+    public toggleWarningDetails() {
+        this.displayWarningDetails = !this.displayWarningDetails;
     }
 
     public getModificationType(claim: Claim) {

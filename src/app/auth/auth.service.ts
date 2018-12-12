@@ -31,6 +31,7 @@ export class AuthService {
             result.email = this.authInstance.tokenParsed.email;
             result.token = this.authInstance.token;
             result.authUrl = this.authInstance.authServerUrl;
+            result.partyId = this.authInstance.tokenParsed.sub;
         }
         return result;
     }
