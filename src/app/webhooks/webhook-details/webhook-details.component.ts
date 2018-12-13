@@ -2,6 +2,7 @@ import { Component, Input, ElementRef, ViewChild, EventEmitter, Output } from '@
 
 import { Webhook } from 'koffing/backend/model/webhook';
 import { WebhooksService } from 'koffing/backend/webhooks.service';
+import { copy } from 'koffing/common/copy';
 
 @Component({
     selector: 'kof-webhook-details',
@@ -22,8 +23,7 @@ export class WebhooksListDetailsComponent {
     constructor(private webhooksService: WebhooksService) { }
 
     public copy() {
-        this.webhookPublicKey.nativeElement.select();
-        document.execCommand('copy');
+        copy(this.webhookPublicKey.nativeElement);
     }
 
     public deleteWebhook() {
