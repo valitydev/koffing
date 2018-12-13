@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 
 import { AuthService } from 'koffing/auth/auth.service';
+import { copy } from 'koffing/common/copy';
 
 @Component({
     selector: 'kof-offline-token',
@@ -18,7 +19,6 @@ export class TokenComponent implements OnInit {
     }
 
     public copy() {
-        this.privateTokenTextarea.nativeElement.select();
-        document.execCommand('copy');
+        copy(this.privateTokenTextarea.nativeElement);
     }
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { PaymentMethod, InvoiceTemplateAndToken } from 'koffing/backend';
+import { InvoiceTemplateAndToken, PaymentMethod } from 'koffing/backend';
 import { InvoiceTemplateService } from 'koffing/backend/invoice-template.service';
 import { PaymentLinkService } from 'koffing/checkout/payment-link/payment-link.service';
 import { CheckoutConfigFormService } from 'koffing/checkout/checkout-config-form/checkout-config-form.service';
@@ -9,6 +9,7 @@ import { InvoiceTemplateFormService } from '../invoice-template-form/invoice-tem
 import { InvoiceTemplatePaymentLinkService } from './invoice-template-payment-link.service';
 import { PAYMENT_LINK_CREATION_STEP } from './invoice-template-payment-link-step';
 import { AccountsService } from 'koffing/backend/accounts.service';
+import { copy } from 'koffing/common/copy';
 
 @Component({
     selector: 'kof-invoice-template-payment-link',
@@ -56,8 +57,7 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
     }
 
     public copy() {
-        this.paymentLinkInput.nativeElement.select();
-        document.execCommand('copy');
+        copy(this.paymentLinkInput.nativeElement);
     }
 
     public createInvoiceTemplate() {

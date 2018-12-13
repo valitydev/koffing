@@ -6,6 +6,7 @@ import { CheckoutConfigFormService } from 'koffing/checkout/checkout-config-form
 import { PaymentLinkService } from 'koffing/checkout/payment-link/payment-link.service';
 import { InvoiceService } from 'koffing/backend/invoice.service';
 import { PaymentMethod } from 'koffing/backend/model/payment-method/payment-method';
+import { copy } from 'koffing/common/copy';
 
 @Component({
     selector: 'kof-invoice-payment-link',
@@ -39,8 +40,7 @@ export class InvoicePaymentLinkComponent implements OnInit {
     }
 
     public copy() {
-        this.paymentLinkInput.nativeElement.select();
-        document.execCommand('copy');
+        copy(this.paymentLinkInput.nativeElement);
     }
 
     public generatePaymentLink() {
