@@ -1,3 +1,4 @@
+import { Withdrawal } from './../../backend/model/wallets/withdrawal';
 import { Injectable } from '@angular/core';
 
 import { SearchWalletWithdrawals } from 'koffing/backend';
@@ -13,6 +14,7 @@ export class WithdrawalTableService {
         result.walletID = formParams.walletID;
         result.identityID = formParams.identityID;
         result.destinationID = formParams.destinationID;
+        result.withdrawalID = formParams.withdrawalID;
         result.status = formParams.status;
         result.createdAtFrom = formParams.createdAtFrom;
         result.createdAtTo = formParams.createdAtTo;

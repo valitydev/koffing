@@ -4,6 +4,7 @@ export class SearchWalletWithdrawals {
     public walletID: string;
     public identityID: string;
     public destinationID: string;
+    public withdrawalID: string;
     public status: WithdrawalStatus;
     public createdAtFrom: string;
     public createdAtTo: string;

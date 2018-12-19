@@ -12,7 +12,7 @@ export class SearchFormService {
     private shopID: string;
     private urlDateFormat = 'YYYY-MM-DD';
     private defaultValues: any;
-    private mainSearchFields = ['walletID', 'identityID', 'status'];
+    private mainSearchFields = ['walletID', 'identityID', 'status', 'withdrawalID'];
 
     constructor(private fb: FormBuilder,
                 private router: Router,
@@ -57,6 +57,7 @@ export class SearchFormService {
             walletID: '',
             identityID: '',
             destinationID: '',
+            withdrawalID: '',
             status: '',
             createdAtFrom: moment().subtract(1, 'month').startOf('day').toDate(),
             createdAtTo:  moment().endOf('day').toDate(),
