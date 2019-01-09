@@ -1,3 +1,4 @@
 .row
     .col-xs-12
         kof-wallet-search-result([searchWalletsResult]="wallets")
+        kof-stepper((onChange)="onChangePage($event)", [hasNext]="hasNext()", [page]="page + 1")

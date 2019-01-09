@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
 
 import { WithdrawalTableService } from './withdrawal-table.service';
 import { SearchService } from 'koffing/backend/search.service';

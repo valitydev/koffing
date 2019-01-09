@@ -1,18 +1,21 @@
-table.table.table-striped
-    thead
-        tr
-            th ID кошелька
-            th Название
-            th Дата создания
-            th Доступно средств
-            th Собственных средств
-            th Статус
-    tbody(*ngFor="let item of walletTableItems")
-        tr
-            td {{item.id}}
-            td {{item.name}}
-            td {{item.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
-            td {{item.account.available.amount | kofRoubleCurrency}} {{item.account.available.currency | kofCurrency}}
-            td {{item.account.own.amount | kofRoubleCurrency}} {{item.account.own.currency | kofCurrency}}
-            td
-                span.label.label-default([ngClass]="getLabelClass(item.isBlocked)") {{getStatus(item.isBlocked)}}
+div.table-container(*ngIf="!isLoading")
+    table.table.table-striped
+        thead
+            tr
+                th ID кошелька
+                th Название
+                th Дата создания
+                th Доступно средств
+                th Собственных средств
+                th Статус
+        tbody(*ngFor="let item of walletTableItems")
+            tr
+                td {{item.id}}
+                td {{item.name}}
+                td {{item.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+                td {{item.account.available.amount | kofRoubleCurrency}} {{item.account.available.currency | kofCurrency}}
+                td {{item.account.own.amount | kofRoubleCurrency}} {{item.account.own.currency | kofCurrency}}
+                td
+                    span.label.label-default([ngClass]="getLabelClass(item.isBlocked)") {{getStatus(item.isBlocked)}}
+div.loading-panel(*ngIf="isLoading")
+    a.fa.fa-cog.fa-spin.fa-fw.loading_spinner
