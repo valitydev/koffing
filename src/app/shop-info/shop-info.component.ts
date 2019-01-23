@@ -73,7 +73,7 @@ export class ShopInfoComponent implements OnInit {
             this.contract = contract;
         });
     }
-
+    
     private loadPayoutTool(contractID: string, payoutToolID: string) {
         this.payoutToolService.getPayoutToolByID(contractID, payoutToolID).subscribe((payoutTool) => {
             this.payoutTool = payoutTool;

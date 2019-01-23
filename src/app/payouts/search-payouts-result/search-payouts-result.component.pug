@@ -11,7 +11,7 @@ table.table.table-striped
             td {{item.payout.amount | kofRoubleCurrency}} {{item.payout.currency | kofCurrency}}
             td {{item.payout.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
             td
-                .pull-right(*ngIf="item.payout.payoutSummary")
+                .pull-right(*ngIf="item.payout.payoutSummary.lenght > 0")
                     button.btn.btn-xs.btn-default((click)="togglePayoutDetailsPanel(item)")
                         | {{item.visible ? 'Скрыть' : 'Показать'}} детали
         tr(*ngIf="item.visible")

@@ -10,6 +10,8 @@ import { SearchPayoutsFormComponent } from './search-payouts-form/search-payouts
 import { SearchPayoutsResultComponent } from './search-payouts-result/search-payouts-result.component';
 import { PayoutSummaryComponent } from './payout-summary/payout-summary.component';
 import { PayoutTypePipe } from './payout-type.pipe';
+import { CreateWalletPayoutComponent } from './create-wallet-payout/create-wallet-payout.component';
+import { WalletPayoutFormComponent } from './ wallet-payout-form/wallet-payout-form.component';
 
 @NgModule({
     imports: [
@@ -21,6 +23,8 @@ import { PayoutTypePipe } from './payout-type.pipe';
         BackendModule
     ],
     declarations: [
+        CreateWalletPayoutComponent,
+        WalletPayoutFormComponent,
         PayoutsComponent,
         SearchPayoutsFormComponent,
         SearchPayoutsResultComponent,

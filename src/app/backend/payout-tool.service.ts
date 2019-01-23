@@ -3,7 +3,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { KoffingHttp } from './koffing-http.service';
 import { ConfigService } from './config.service';
-import { PayoutTool } from './model';
+import { PayoutTool, Payout } from './model';
+import { CreatePayoutParams } from './requests/create-payout-request';
 
 @Injectable()
 export class PayoutToolService {
@@ -19,6 +20,10 @@ export class PayoutToolService {
 
     public getPayoutToolByID(contractID: string, payoutToolID: string): Observable<PayoutTool> {
         return this.http.get(`${this.getEndpoint(contractID)}/${payoutToolID}`).map((res) => res.json());
+    }
+
+    public createPayout(body: CreatePayoutParams): Observable<Payout> {
+        return this.http.post(`${this.config.capiUrl}/processing/payouts`, body).map((res) => res.json());
     }
 
     private getEndpoint(contractID: string): string {
