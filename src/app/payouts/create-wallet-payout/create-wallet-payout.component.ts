@@ -37,9 +37,8 @@ export class CreateWalletPayoutComponent implements OnInit {
 
     public createPayout() {
         const bodyPayout = CreateWalletPayoutService.getCreatePayoutParams(this.walletPayoutForm.value, this.shopID);
-        const payout = this.payoutToolService.createPayout(bodyPayout);
-        payout.subscribe((res) => {
-            console.info(res);
+        this.payoutToolService.createPayout(bodyPayout).subscribe((res) => {
+            console.info('payout created');
         });
     }
 
