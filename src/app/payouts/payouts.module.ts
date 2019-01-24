@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/primeng';
+import { CalendarModule, GrowlModule } from 'primeng/primeng';
 
 import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
@@ -10,6 +10,8 @@ import { SearchPayoutsFormComponent } from './search-payouts-form/search-payouts
 import { SearchPayoutsResultComponent } from './search-payouts-result/search-payouts-result.component';
 import { PayoutSummaryComponent } from './payout-summary/payout-summary.component';
 import { PayoutTypePipe } from './payout-type.pipe';
+import { CreateWalletPayoutComponent } from './create-wallet-payout/create-wallet-payout.component';
+import { WalletPayoutFormComponent } from './ wallet-payout-form/wallet-payout-form.component';
 
 @NgModule({
     imports: [
@@ -18,9 +20,12 @@ import { PayoutTypePipe } from './payout-type.pipe';
         ReactiveFormsModule,
         CalendarModule,
         CommonModule,
-        BackendModule
+        BackendModule,
+        GrowlModule
     ],
     declarations: [
+        CreateWalletPayoutComponent,
+        WalletPayoutFormComponent,
         PayoutsComponent,
         SearchPayoutsFormComponent,
         SearchPayoutsResultComponent,

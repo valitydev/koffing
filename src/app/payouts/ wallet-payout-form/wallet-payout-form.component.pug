@@ -1,0 +1,16 @@
+form([formGroup]="walletPayoutForm", novalidate)
+    .row
+        .col-sm-3.col-xs-12
+            .form-group
+                label Кошелек: 
+                    span.highlighted &nbsp;*
+                kof-select(
+                    [items]="payoutTools",
+                    [placeholder]="'Выберите кошелек'",
+                    formControlName="payoutTool",
+                    (onChange)="walletSelected($event)")
+        .col-sm-3.col-xs-12
+            .form-group
+                label Сумма списания:
+                    span.highlighted &nbsp;*
+                input.form-control(type="number", formControlName="amount")

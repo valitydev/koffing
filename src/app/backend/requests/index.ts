@@ -13,3 +13,4 @@ export * from './refund-params';
 export * from './create-report-params';
 export * from './search-wallet-withdrawals';
 export * from './search-wallets-params';
+export * from './create-payout-request';

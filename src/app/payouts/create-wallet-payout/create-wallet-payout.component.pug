@@ -1,0 +1,18 @@
+doctype html
+button.btn.btn-default.btn-block(data-toggle="modal", [attr.data-target]="'#createInvoice'")
+    | Создать выплату на кошелек
+
+.modal.fade(tabindex="-1", role="dialog", id="createInvoice", data-backdrop="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header
+                button.close(data-dismiss="modal", aria-label="Close", (click)="setDefaultFormValues()")
+                    span(aria-hidden="true") &times;
+                h4.modal-title
+                    | Создание выплаты на кошелек
+            .modal-body
+                kof-wallet-payout-form([shop]="shop")
+            .modal-footer
+                button.btn.btn-primary.pull-right(data-dismiss="modal", [disabled]="walletPayoutForm.invalid", (click)="createPayout()")
+                    | Создать выплату на кошелек
+p-growl([(value)]="messages" life="3000")

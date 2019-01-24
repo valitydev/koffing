@@ -7,11 +7,12 @@ import { SearchService } from 'koffing/backend/search.service';
 import { PayoutsService } from 'koffing/payouts/payouts.service';
 import { SearchPayoutsFormService } from './search-payouts-form/search-payouts-form.service';
 import { Payout } from 'koffing/backend/model/payout';
+import { WalletPayoutFormService } from './ wallet-payout-form/wallet-payout-form.service';
 
 @Component({
     templateUrl: 'payouts.component.pug',
     styleUrls: ['payouts.component.less'],
-    providers: [PayoutsService, SearchPayoutsFormService],
+    providers: [PayoutsService, SearchPayoutsFormService, WalletPayoutFormService],
     encapsulation: ViewEncapsulation.None
 })
 export class PayoutsComponent implements OnInit {
