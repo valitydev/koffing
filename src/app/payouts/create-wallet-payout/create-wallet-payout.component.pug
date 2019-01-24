@@ -15,3 +15,4 @@ button.btn.btn-default.btn-block(data-toggle="modal", [attr.data-target]="'#crea
             .modal-footer
                 button.btn.btn-primary.pull-right(data-dismiss="modal", [disabled]="walletPayoutForm.invalid", (click)="createPayout()")
                     | Создать выплату на кошелек
+p-growl([(value)]="messages" life="3000")

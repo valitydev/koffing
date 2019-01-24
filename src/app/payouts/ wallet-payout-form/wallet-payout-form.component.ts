@@ -42,7 +42,6 @@ export class WalletPayoutFormComponent implements OnInit {
 
     private walletSelected(value: string) {
         const currency = this.wallets.find((element) => element.id === value).currency;
-        console.info(this.walletPayoutForm);
         this.walletPayoutForm.patchValue({ currency });
     }
 }

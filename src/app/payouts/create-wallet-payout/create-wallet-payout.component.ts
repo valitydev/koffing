@@ -7,6 +7,7 @@ import { Shop } from 'koffing/backend';
 import { Observable } from '../../../../node_modules/rxjs';
 import { PayoutToolService } from 'koffing/backend/payout-tool.service';
 import { CreateWalletPayoutService } from 'koffing/payouts/create-wallet-payout/create-wallet-payout.service';
+import { Message } from 'primeng/primeng';
 
 @Component({
     selector: 'kof-create-wallet-payout',
@@ -19,6 +20,7 @@ export class CreateWalletPayoutComponent implements OnInit {
     public walletPayoutForm: FormGroup;
 
     private shopID: string;
+    private messages: Message[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -38,7 +40,7 @@ export class CreateWalletPayoutComponent implements OnInit {
     public createPayout() {
         const bodyPayout = CreateWalletPayoutService.getCreatePayoutParams(this.walletPayoutForm.value, this.shopID);
         this.payoutToolService.createPayout(bodyPayout).subscribe((res) => {
-            console.info('payout created');
+            this.messages = [{ detail: `Заявка на выплату создана` }];
         });
     }
 

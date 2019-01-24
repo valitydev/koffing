@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/primeng';
+import { CalendarModule, GrowlModule } from 'primeng/primeng';
 
 import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
@@ -20,7 +20,8 @@ import { WalletPayoutFormComponent } from './ wallet-payout-form/wallet-payout-f
         ReactiveFormsModule,
         CalendarModule,
         CommonModule,
-        BackendModule
+        BackendModule,
+        GrowlModule
     ],
     declarations: [
         CreateWalletPayoutComponent,
