@@ -3,7 +3,8 @@ table.table.table-striped
         tr
             th ID выплаты
             th Сумма вывода
-            th Сумма с комиссией
+            th Комиссия
+            th Сумма списания
             th Дата создания
             th Статус
             th
@@ -11,7 +12,8 @@ table.table.table-striped
         tr
             td {{withdrawal.id}}
             td {{withdrawal.body.amount | kofRoubleCurrency}} {{withdrawal.body.currency | kofCurrency}}
-            td {{withdrawal.body.amount - withdrawal.fee.amount | kofRoubleCurrency}} {{withdrawal.body.currency | kofCurrency}}
+            td {{withdrawal.fee.amount | kofRoubleCurrency }} {{withdrawal.fee.currency | kofCurrency }}
+            td {{withdrawal.body.amount + withdrawal.fee.amount | kofRoubleCurrency}} {{withdrawal.body.currency | kofCurrency}}
             td {{withdrawal.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
             td
                 span.label.label-default([ngClass]="getLabelClass(withdrawal.status)") {{withdrawal.status | kofWithdrawalStatus}}
