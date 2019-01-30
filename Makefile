@@ -35,7 +35,7 @@ submodules: $(SUBTARGETS)
 init:
 	npm install
 
-build:
+build: check
 	npm run build
 
 clean:
@@ -46,3 +46,6 @@ clean:
 
 test: .state
 	docker run --rm $(SERVICE_IMAGE_NAME):$(shell cat .state) nginx -T -c /etc/nginx/nginx.conf
+
+check:
+	npm run check
