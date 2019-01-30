@@ -1,6 +1,6 @@
 {
     "rulesDirectory": ["node_modules/codelyzer"],
-    "extends": "tslint:recommended",
+    "extends": ["tslint:recommended", "tslint-config-prettier"],
     "rules": {
         "quotemark": [true, "single"],
         "trailing-comma": false,
