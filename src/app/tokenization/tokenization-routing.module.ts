@@ -12,8 +12,6 @@ import { TokenComponent } from './components/token/token.component';
             }
         ])
     ],
-    exports: [
-        RouterModule
-    ]
+    exports: [RouterModule]
 })
-export class TokenizationRoutingModule { }
+export class TokenizationRoutingModule {}

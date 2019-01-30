@@ -9,7 +9,6 @@ import { InvoiceService } from 'koffing/backend/invoice.service';
     templateUrl: './payment-cancel.component.pug'
 })
 export class PaymentCancelComponent implements AfterViewInit {
-
     @Input()
     public invoiceID: string;
 
@@ -28,7 +27,7 @@ export class PaymentCancelComponent implements AfterViewInit {
     constructor(
         private eventPollerService: EventPollerService,
         private invoiceService: InvoiceService
-    ) { }
+    ) {}
 
     public ngAfterViewInit() {
         this.modalElement = jQuery(`#${this.paymentID}cancel`);
@@ -40,13 +39,20 @@ export class PaymentCancelComponent implements AfterViewInit {
 
     public cancelPayment() {
         this.inProcess = true;
-        this.invoiceService.cancelPayment(this.invoiceID, this.paymentID, this.reason).subscribe(() => {
-            const expectedChange = new PaymentStatusChanged(PAYMENT_STATUS.cancelled, this.paymentID);
-            this.eventPollerService.startPolling(this.invoiceID, expectedChange).subscribe(() => {
-                this.inProcess = false;
-                this.onChangeStatus.emit(PAYMENT_STATUS.cancelled);
-                this.close();
+        this.invoiceService
+            .cancelPayment(this.invoiceID, this.paymentID, this.reason)
+            .subscribe(() => {
+                const expectedChange = new PaymentStatusChanged(
+                    PAYMENT_STATUS.cancelled,
+                    this.paymentID
+                );
+                this.eventPollerService
+                    .startPolling(this.invoiceID, expectedChange)
+                    .subscribe(() => {
+                        this.inProcess = false;
+                        this.onChangeStatus.emit(PAYMENT_STATUS.cancelled);
+                        this.close();
+                    });
             });
-        });
     }
 }

@@ -1,5 +1,4 @@
 export class SelectItem {
-
     public value: any;
     public label: any;
 
@@ -7,5 +6,4 @@ export class SelectItem {
         this.value = value;
         this.label = label;
     }
-
 }

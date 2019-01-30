@@ -13,7 +13,6 @@ import { TOPIC_TYPES } from 'koffing/webhooks/topic-types';
 
 @Injectable()
 export class CreateWebhookService {
-
     public createWebhookGroup: FormGroup;
 
     public invoiceEventTypes: EventTypePresent[];
@@ -24,31 +23,54 @@ export class CreateWebhookService {
 
     private eventTypes: EventTypePresent[] = [
         new EventTypePresent('InvoiceCreated', 'создан новый инвойс', 'InvoicesTopic'),
-        new EventTypePresent('InvoicePaid', 'инвойс перешел в состояние "Оплачен"', 'InvoicesTopic'),
-        new EventTypePresent('InvoiceCancelled', 'инвойс отменен по истечению срока давности', 'InvoicesTopic'),
+        new EventTypePresent(
+            'InvoicePaid',
+            'инвойс перешел в состояние "Оплачен"',
+            'InvoicesTopic'
+        ),
+        new EventTypePresent(
+            'InvoiceCancelled',
+            'инвойс отменен по истечению срока давности',
+            'InvoicesTopic'
+        ),
         new EventTypePresent('InvoiceFulfilled', 'инвойс успешно погашен', 'InvoicesTopic'),
         new EventTypePresent('PaymentStarted', 'создан платеж', 'InvoicesTopic'),
         new EventTypePresent('PaymentProcessed', 'платеж в обработке', 'InvoicesTopic'),
         new EventTypePresent('PaymentCaptured', 'платеж успешно завершен', 'InvoicesTopic'),
         new EventTypePresent('PaymentCancelled', 'платеж успешно отменен', 'InvoicesTopic'),
         new EventTypePresent('PaymentRefunded', 'платеж успешно возвращен', 'InvoicesTopic'),
-        new EventTypePresent('PaymentFailed', 'при проведении платежа возникла ошибка', 'InvoicesTopic'),
+        new EventTypePresent(
+            'PaymentFailed',
+            'при проведении платежа возникла ошибка',
+            'InvoicesTopic'
+        ),
         new EventTypePresent('CustomerCreated', 'плательщик создан', 'CustomersTopic'),
         new EventTypePresent('CustomerDeleted', 'плательщик удален', 'CustomersTopic'),
         new EventTypePresent('CustomerReady', 'плательщик готов', 'CustomersTopic'),
-        new EventTypePresent('CustomerBindingStarted', 'привязка к плательщику запущена', 'CustomersTopic'),
-        new EventTypePresent('CustomerBindingSucceeded', 'привязка к плательщику успешно завершена', 'CustomersTopic'),
-        new EventTypePresent('CustomerBindingFailed', 'привязка к плательщику завершена с неудачей', 'CustomersTopic')
+        new EventTypePresent(
+            'CustomerBindingStarted',
+            'привязка к плательщику запущена',
+            'CustomersTopic'
+        ),
+        new EventTypePresent(
+            'CustomerBindingSucceeded',
+            'привязка к плательщику успешно завершена',
+            'CustomersTopic'
+        ),
+        new EventTypePresent(
+            'CustomerBindingFailed',
+            'привязка к плательщику завершена с неудачей',
+            'CustomersTopic'
+        )
     ];
 
-    constructor(private fb: FormBuilder,
-                private webhooksService: WebhooksService) {
+    constructor(private fb: FormBuilder, private webhooksService: WebhooksService) {
         this.createWebhookGroup = this.prepareForm();
         this.createWebhookGroup.controls.eventTypes.setValidators(this.eventTypesValidator);
-        this.invoiceEventTypes = this.eventTypes.filter((type) => type.topic === 'InvoicesTopic');
-        this.customerEventTypes = this.eventTypes.filter((type) => type.topic === 'CustomersTopic');
+        this.invoiceEventTypes = this.eventTypes.filter(type => type.topic === 'InvoicesTopic');
+        this.customerEventTypes = this.eventTypes.filter(type => type.topic === 'CustomersTopic');
         this.topicItems = map(TOPIC_TYPES, (value, key) => {
-            return {value: key, label: value};
+            return { value: key, label: value };
         });
     }
 
@@ -85,10 +107,16 @@ export class CreateWebhookService {
 
     private prepareForm(): FormGroup {
         return this.fb.group({
-            url: ['', [
-                Validators.required,
-                (c: AbstractControl) => isURL(c.value, {protocols: ['http', 'https'], require_protocol: true}) ? null : {isURL: true}
-            ]],
+            url: [
+                '',
+                [
+                    Validators.required,
+                    (c: AbstractControl) =>
+                        isURL(c.value, { protocols: ['http', 'https'], require_protocol: true })
+                            ? null
+                            : { isURL: true }
+                ]
+            ],
             eventTypes: this.fb.group(this.prepareEventTypesGroup(this.eventTypes)),
             topic: 'InvoicesTopic'
         });
@@ -96,7 +124,7 @@ export class CreateWebhookService {
 
     private prepareEventTypesGroup(eventTypes: EventTypePresent[]): FormGroup {
         const controls = {};
-        eventTypes.forEach((eventTypePresent) => {
+        eventTypes.forEach(eventTypePresent => {
             controls[eventTypePresent.name] = [false];
         });
         return controls as FormGroup;
@@ -104,6 +132,6 @@ export class CreateWebhookService {
 
     private eventTypesValidator(control: FormControl): { [key: string]: any } {
         const valid = Object.values(control.value).some((value: any) => value === true);
-        return valid ? null : {eventType: 'need some event type checked'};
+        return valid ? null : { eventType: 'need some event type checked' };
     }
 }

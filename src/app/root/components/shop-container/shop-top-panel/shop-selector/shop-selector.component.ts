@@ -10,7 +10,6 @@ import { SelectItem } from './select-item';
     providers: [ShopSelectorService]
 })
 export class ShopSelectorComponent implements OnInit {
-
     public selectorItems: SelectItem[];
 
     private selectedShopID: string;
@@ -27,7 +26,7 @@ export class ShopSelectorComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.shopSelectorService.getSelectorItems().subscribe((items) => {
+        this.shopSelectorService.getSelectorItems().subscribe(items => {
             this.selectorItems = items;
             this.selectedShopID = this.shopSelectorService.getActiveShopID();
         });

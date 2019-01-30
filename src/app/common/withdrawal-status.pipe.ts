@@ -5,7 +5,6 @@ import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
     name: 'kofWithdrawalStatus'
 })
 export class WithdrawalStatusPipe implements PipeTransform {
-
     public transform(input: WithdrawalStatus): string {
         switch (input) {
             case WithdrawalStatus.Succeeded:

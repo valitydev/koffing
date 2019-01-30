@@ -7,13 +7,11 @@ import { Account } from './model';
 
 @Injectable()
 export class AccountsService {
-
-    constructor(
-        private http: KoffingHttp,
-        private config: ConfigService
-    ) { }
+    constructor(private http: KoffingHttp, private config: ConfigService) {}
 
     public getAccountByID(accountID: number): Observable<Account> {
-        return this.http.get(`${this.config.capiUrl}/processing/accounts/${accountID}`).map(res => res.json());
+        return this.http
+            .get(`${this.config.capiUrl}/processing/accounts/${accountID}`)
+            .map(res => res.json());
     }
 }

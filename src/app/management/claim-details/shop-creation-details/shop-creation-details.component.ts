@@ -1,12 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { last } from 'lodash';
 
-import {
-    Contractor,
-    PartyModification,
-    PayoutTool,
-    ShopCreation
-} from 'koffing/backend';
+import { Contractor, PartyModification, PayoutTool, ShopCreation } from 'koffing/backend';
 import { ClaimDetailsService } from '../claim-details.service';
 
 @Component({
@@ -14,7 +9,6 @@ import { ClaimDetailsService } from '../claim-details.service';
     templateUrl: 'shop-creation-details.component.pug'
 })
 export class ShopCreationDetailsComponent implements OnChanges {
-
     @Input()
     public partyModifications: PartyModification[];
 
@@ -27,9 +21,13 @@ export class ShopCreationDetailsComponent implements OnChanges {
     public ngOnChanges() {
         const shopCreations = this.claimDetailsService.toShopCreation(this.partyModifications);
         this.shopCreation = last(shopCreations);
-        const contractCreations = this.claimDetailsService.toContractCreations(this.partyModifications);
+        const contractCreations = this.claimDetailsService.toContractCreations(
+            this.partyModifications
+        );
         this.contractor = last(contractCreations).contractor;
-        const payoutToolCreation = last(this.claimDetailsService.toContractPayoutToolCreations(this.partyModifications));
+        const payoutToolCreation = last(
+            this.claimDetailsService.toContractPayoutToolCreations(this.partyModifications)
+        );
         this.payoutTool.currency = payoutToolCreation.currency;
         this.payoutTool.details = payoutToolCreation.details;
     }

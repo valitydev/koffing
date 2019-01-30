@@ -6,7 +6,6 @@ import { FormGroup } from '@angular/forms';
     templateUrl: 'contract-form.component.pug'
 })
 export class ContractFormComponent {
-
     @Input()
     public type: string;
 

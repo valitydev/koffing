@@ -3,11 +3,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class InternationalBankAccountFormService {
-
     public forms: FormGroup[];
 
-    constructor(private fb: FormBuilder) {
-    }
+    constructor(private fb: FormBuilder) {}
 
     public initForm(): FormGroup {
         const controlsConfig = {
@@ -17,8 +15,11 @@ export class InternationalBankAccountFormService {
             abartn: ['', [Validators.pattern(/^[0-9]{9}$/)]],
             name: ['', [Validators.maxLength(100)]],
             countryCode: ['', [Validators.pattern(/^[A-Z]{3}$/)]],
-            address: ['', [Validators.maxLength(1000)]],
+            address: ['', [Validators.maxLength(1000)]]
         };
-        return this.fb.group({...controlsConfig, correspondentBankAccount: this.fb.group(controlsConfig)});
+        return this.fb.group({
+            ...controlsConfig,
+            correspondentBankAccount: this.fb.group(controlsConfig)
+        });
     }
 }

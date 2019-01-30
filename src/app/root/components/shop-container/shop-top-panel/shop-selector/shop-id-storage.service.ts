@@ -2,7 +2,6 @@ import { find } from 'lodash';
 import { Shop } from 'koffing/backend';
 
 export class ShopIDStorage {
-
     public static key: string = 'activeShop';
 
     public static set(shopID: string) {
@@ -16,6 +15,6 @@ export class ShopIDStorage {
 
     public static isAvailable(shops: Shop[]) {
         const id = this.get();
-        return id ? !!find(shops, (shop) => id === shop.id) : false;
+        return id ? !!find(shops, shop => id === shop.id) : false;
     }
 }

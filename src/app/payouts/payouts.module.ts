@@ -33,4 +33,4 @@ import { WalletPayoutFormComponent } from './ wallet-payout-form/wallet-payout-f
         PayoutTypePipe
     ]
 })
-export class PayoutsModule { }
+export class PayoutsModule {}

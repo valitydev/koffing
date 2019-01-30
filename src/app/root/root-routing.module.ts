@@ -124,9 +124,6 @@ import { WithdrawalComponent } from 'koffing/withdrawal/withdrawal.component';
             }
         ])
     ],
-    exports: [
-        RouterModule
-    ]
+    exports: [RouterModule]
 })
-export class RootRoutingModule {
-}
+export class RootRoutingModule {}

@@ -5,21 +5,21 @@ import { SuggestionSettings } from 'koffing/suggestions/classes/suggestion-setti
 
 @Injectable()
 export class SuggestionsService {
+    constructor(private config: ConfigService) {}
 
-    constructor(
-        private config: ConfigService
-    ) { }
-    
     public initBankSuggestions(selector: string, callback: (suggestion: SuggestionsTypes) => void) {
         this.init(SuggestionSettings.bankType, selector, callback);
     }
-    
-    public initContractorSuggestions(selector: string, callback: (suggestion: SuggestionsTypes) => void) {
+
+    public initContractorSuggestions(
+        selector: string,
+        callback: (suggestion: SuggestionsTypes) => void
+    ) {
         this.init(SuggestionSettings.partyType, selector, callback);
     }
 
     private init(type: string, selector: string, callback: (suggestion: SuggestionsTypes) => void) {
-        (<JQuerySuggestions> $(selector)).suggestions(<SuggestionsParams> {
+        (<JQuerySuggestions>$(selector)).suggestions(<SuggestionsParams>{
             serviceUrl: SuggestionSettings.serviceUrl,
             token: this.config.suggestionsToken,
             type,
@@ -29,5 +29,4 @@ export class SuggestionsService {
             onSelect: callback
         });
     }
-
 }

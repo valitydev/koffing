@@ -10,18 +10,22 @@ import { DateRange } from './date-range';
     encapsulation: ViewEncapsulation.None
 })
 export class DateRangeComponent implements OnInit {
-
     @Output()
     public onSelect = new EventEmitter<DateRange>();
 
     public form: FormGroup;
 
     private defaultValues = {
-        fromTime: moment().subtract(1, 'month').startOf('day').toDate(),
-        toTime: moment().endOf('day').toDate(),
+        fromTime: moment()
+            .subtract(1, 'month')
+            .startOf('day')
+            .toDate(),
+        toTime: moment()
+            .endOf('day')
+            .toDate()
     };
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder) {}
 
     public ngOnInit() {
         this.form = this.initForm();

@@ -6,7 +6,6 @@ import { PayoutSummary } from 'koffing/backend';
     templateUrl: 'payout-summary.component.pug'
 })
 export class PayoutSummaryComponent {
-
     @Input()
     public summary: PayoutSummary[];
 }

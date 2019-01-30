@@ -7,10 +7,7 @@ import { ToggleMenuBroadcaster } from 'koffing/broadcaster';
     templateUrl: 'shop-top-panel.component.pug'
 })
 export class ShopTopPanelComponent {
-
-    constructor(
-        private toggleMenuBroadcaster: ToggleMenuBroadcaster
-    ) { }
+    constructor(private toggleMenuBroadcaster: ToggleMenuBroadcaster) {}
 
     public toggleMenu() {
         this.toggleMenuBroadcaster.fire();

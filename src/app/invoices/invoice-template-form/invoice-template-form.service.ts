@@ -6,7 +6,6 @@ import { COST_TYPE, TEMPLATE_TYPE, InvoiceLine } from 'koffing/backend';
 
 @Injectable()
 export class InvoiceTemplateFormService {
-
     public form: FormGroup;
 
     get details(): FormGroup {
@@ -16,11 +15,14 @@ export class InvoiceTemplateFormService {
     constructor(private fb: FormBuilder) {
         this.form = this.initForm();
         this.form.controls.lifetime.setValidators(this.lifetimeValidator);
-        this.form.controls.selectedTemplateType.valueChanges.subscribe((templateType) => {
-            this.form.setControl('details', this.getTemplateGroup(templateType, this.form.value.selectedCostType));
+        this.form.controls.selectedTemplateType.valueChanges.subscribe(templateType => {
+            this.form.setControl(
+                'details',
+                this.getTemplateGroup(templateType, this.form.value.selectedCostType)
+            );
             this.subscribeCartValueChanges(this.details);
         });
-        this.form.controls.selectedCostType.valueChanges.subscribe((costType) => {
+        this.form.controls.selectedCostType.valueChanges.subscribe(costType => {
             this.details.setControl('cost', this.getCostGroup(costType));
         });
     }
@@ -55,7 +57,9 @@ export class InvoiceTemplateFormService {
         if (details.controls.cart) {
             const cart = details.controls.cart as FormArray;
             const cartAmount = details.controls.cartAmount as FormControl;
-            cart.valueChanges.subscribe((cartValue) => cartAmount.patchValue(this.calculateCartAmount(cartValue)));
+            cart.valueChanges.subscribe(cartValue =>
+                cartAmount.patchValue(this.calculateCartAmount(cartValue))
+            );
         }
     }
 
@@ -65,9 +69,9 @@ export class InvoiceTemplateFormService {
 
     private getProduct(): FormGroup {
         return this.fb.group({
-            product: ['', [ Validators.required, Validators.maxLength(1000) ]],
-            quantity: ['', [ Validators.required, Validators.min(1) ]],
-            price: ['', [ Validators.required, Validators.min(1) ]],
+            product: ['', [Validators.required, Validators.maxLength(1000)]],
+            quantity: ['', [Validators.required, Validators.min(1)]],
+            price: ['', [Validators.required, Validators.min(1)]],
             tax: ['']
         });
     }
@@ -108,6 +112,6 @@ export class InvoiceTemplateFormService {
 
     private lifetimeValidator(control: FormControl): { [key: string]: any } {
         const valid = Object.values(control.value).some((value: any) => value > 0);
-        return valid ? null : {lifetime: 'need some days, month or years value'};
+        return valid ? null : { lifetime: 'need some days, month or years value' };
     }
 }

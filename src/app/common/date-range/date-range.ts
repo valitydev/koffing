@@ -1,5 +1,4 @@
 export class DateRange {
-
     public fromTime: Date;
     public toTime: Date;
 

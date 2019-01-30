@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofReportStatus'
 })
 export class ReportStatusPipe implements PipeTransform {
-
     private STATUSES = {
         pending: 'В процессе формирования',
         created: 'Сформирован'

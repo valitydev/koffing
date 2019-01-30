@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './sidebar.component.pug',
     styleUrls: ['sidebar.component.less']
 })
-export class SidebarComponent { }
+export class SidebarComponent {}

@@ -11,7 +11,6 @@ import { Shop, PayoutTool } from 'koffing/backend';
     templateUrl: 'wallet-payout-form.component.pug'
 })
 export class WalletPayoutFormComponent implements OnInit {
-
     @Input()
     public shop: Observable<Shop>;
 
@@ -23,13 +22,19 @@ export class WalletPayoutFormComponent implements OnInit {
 
     constructor(
         private walletPayoutFormService: WalletPayoutFormService,
-        private payoutToolService: PayoutToolService) { }
+        private payoutToolService: PayoutToolService
+    ) {}
 
     public ngOnInit() {
         this.shop.subscribe(shop => {
-            this.payoutToolService.getPayoutTools(shop.contractID).subscribe((tools) => {
-                this.wallets = tools.filter((tool) => tool.details.detailsType === 'PayoutToolDetailsWalletInfo');
-                const items = this.wallets.map((wallet) => new SelectItem(wallet.id, `${wallet.details.walletID} (${wallet.currency})`));
+            this.payoutToolService.getPayoutTools(shop.contractID).subscribe(tools => {
+                this.wallets = tools.filter(
+                    tool => tool.details.detailsType === 'PayoutToolDetailsWalletInfo'
+                );
+                const items = this.wallets.map(
+                    wallet =>
+                        new SelectItem(wallet.id, `${wallet.details.walletID} (${wallet.currency})`)
+                );
                 this.payoutTools = items;
             });
         });
@@ -41,7 +46,7 @@ export class WalletPayoutFormComponent implements OnInit {
     }
 
     private walletSelected(value: string) {
-        const currency = this.wallets.find((element) => element.id === value).currency;
+        const currency = this.wallets.find(element => element.id === value).currency;
         this.walletPayoutForm.patchValue({ currency });
     }
 }

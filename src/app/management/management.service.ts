@@ -7,12 +7,11 @@ import { ShopService } from 'koffing/backend/shop.service';
 
 @Injectable()
 export class ManagementService {
-    constructor(private claimService: ClaimService,
-                private shopService: ShopService) {
-    }
+    constructor(private claimService: ClaimService, private shopService: ShopService) {}
 
     public createTestShop(): Observable<Shop[]> {
-        return this.claimService.createClaim(testShopClaimChangeset())
+        return this.claimService
+            .createClaim(testShopClaimChangeset())
             .switchMap(() => this.shopService.getShops());
     }
 }

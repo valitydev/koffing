@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofRefundStatus'
 })
 export class PaymentRefundsPipe implements PipeTransform {
-
     public transform(status: string): string {
         switch (status) {
             case 'pending':

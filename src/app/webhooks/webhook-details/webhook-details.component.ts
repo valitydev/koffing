@@ -10,7 +10,6 @@ import { copy } from 'koffing/common/copy';
     styleUrls: ['./webhook-details.component.less']
 })
 export class WebhooksListDetailsComponent {
-
     @Input()
     public webhook: Webhook;
 
@@ -20,7 +19,7 @@ export class WebhooksListDetailsComponent {
     @ViewChild('webhookPublicKey')
     public webhookPublicKey: ElementRef;
 
-    constructor(private webhooksService: WebhooksService) { }
+    constructor(private webhooksService: WebhooksService) {}
 
     public copy() {
         copy(this.webhookPublicKey.nativeElement);

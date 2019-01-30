@@ -12,29 +12,38 @@ import * as moment from 'moment';
 
 @Injectable()
 export class PaymentLinkService {
-
-    constructor(private configService: ConfigService,
-                private urlShortenerService: UrlShortenerService,
-                private invoiceService: InvoiceService) {
-    }
+    constructor(
+        private configService: ConfigService,
+        private urlShortenerService: UrlShortenerService,
+        private invoiceService: InvoiceService
+    ) {}
 
     public getInvoicePaymentLink(invoice: Invoice, formValue: any): Observable<string> {
         return this.createInvoiceAccessToken(invoice.id)
-            .map((accessToken) => this.prepareInvoiceUrl(formValue, invoice, accessToken))
-            .switchMap((url) => this.urlShortenerService.shorten(url, invoice.dueDate))
-            .map((response) => response.shortenedUrl);
+            .map(accessToken => this.prepareInvoiceUrl(formValue, invoice, accessToken))
+            .switchMap(url => this.urlShortenerService.shorten(url, invoice.dueDate))
+            .map(response => response.shortenedUrl);
     }
 
-    public getInvoiceTemplatePaymentLink(templateAndToken: InvoiceTemplateAndToken, formValue: any): Observable<string> {
+    public getInvoiceTemplatePaymentLink(
+        templateAndToken: InvoiceTemplateAndToken,
+        formValue: any
+    ): Observable<string> {
         this.prepareExpiresAtDateForTemplate(templateAndToken);
         return this.urlShortenerService
-            .shorten(this.prepareInvoiceTemplateUrl(formValue, templateAndToken), this.prepareExpiresAtDateForTemplate(templateAndToken))
-            .map((response) => response.shortenedUrl);
+            .shorten(
+                this.prepareInvoiceTemplateUrl(formValue, templateAndToken),
+                this.prepareExpiresAtDateForTemplate(templateAndToken)
+            )
+            .map(response => response.shortenedUrl);
     }
 
     private prepareExpiresAtDateForTemplate(templateAndToken: InvoiceTemplateAndToken): any {
         const lifetimeDuration = moment.duration(templateAndToken.invoiceTemplate.lifetime);
-        return moment(new Date()).add(lifetimeDuration).utc().format();
+        return moment(new Date())
+            .add(lifetimeDuration)
+            .utc()
+            .format();
     }
 
     private prepareInvoiceUrl(formValue: any, invoice: Invoice, accessToken: string): string {
@@ -58,7 +67,11 @@ export class PaymentLinkService {
         return `${this.configService.checkoutUrl}/v1/checkout.html?${args}`;
     }
 
-    private toInvoiceTemplatePaymentLinkArgs(formValue: any, templateID: string, accessToken: string): PaymentLinkArguments {
+    private toInvoiceTemplatePaymentLinkArgs(
+        formValue: any,
+        templateID: string,
+        accessToken: string
+    ): PaymentLinkArguments {
         const args = new PaymentLinkArguments();
         args.invoiceTemplateID = templateID;
         args.invoiceTemplateAccessToken = accessToken;
@@ -66,7 +79,11 @@ export class PaymentLinkService {
         return Object.assign(commonArgs, args);
     }
 
-    private toInvoicePaymentLinkArgs(formValue: any, invoiceID: string, accessToken: string): PaymentLinkArguments {
+    private toInvoicePaymentLinkArgs(
+        formValue: any,
+        invoiceID: string,
+        accessToken: string
+    ): PaymentLinkArguments {
         const args = new PaymentLinkArguments();
         args.invoiceID = invoiceID;
         args.invoiceAccessToken = accessToken;
@@ -94,6 +111,8 @@ export class PaymentLinkService {
     }
 
     private createInvoiceAccessToken(invoiceID: string): Observable<string> {
-        return this.invoiceService.createInvoiceAccessToken(invoiceID).map((response) => response.payload);
+        return this.invoiceService
+            .createInvoiceAccessToken(invoiceID)
+            .map(response => response.payload);
     }
 }

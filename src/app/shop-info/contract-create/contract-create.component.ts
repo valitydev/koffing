@@ -12,7 +12,6 @@ import { CONTRACT_CREATION_STEP } from './contract-creation-step';
     providers: [ContractCreateService]
 })
 export class ContractCreateComponent implements OnInit {
-
     @Input()
     public shopID: string;
 
@@ -31,7 +30,7 @@ export class ContractCreateComponent implements OnInit {
         this.contractForm = this.contractCreateService.contractForm;
         this.payoutToolForm = this.contractCreateService.payoutToolForm;
     }
-    
+
     public ngOnInit() {
         this.contractCreateService.changeSetEmitter.subscribe((changeSet: PartyModification[]) => {
             if (changeSet) {

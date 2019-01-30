@@ -10,12 +10,7 @@ import { WebhookStatusPipe } from './webhook-status.pipe';
 import { WebhookTopicPipe } from './webhook-topic.pipe';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CommonModule
-    ],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule],
     declarations: [
         WebhooksComponent,
         WebhooksListDetailsComponent,
@@ -24,4 +19,4 @@ import { WebhookTopicPipe } from './webhook-topic.pipe';
         WebhookTopicPipe
     ]
 })
-export class WebhooksModule { }
+export class WebhooksModule {}

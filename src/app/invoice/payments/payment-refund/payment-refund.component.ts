@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
@@ -18,7 +26,6 @@ import { toMinor } from 'koffing/common/amount-utils';
     styleUrls: ['payment-refund.component.less']
 })
 export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit {
-
     @Input()
     public invoice: Invoice;
 
@@ -39,21 +46,23 @@ export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit 
     private refundedAmount: number = 0;
     private settlementID: number;
 
-    constructor(private eventPollerService: EventPollerService,
-                private invoiceService: InvoiceService,
-                private paymentRefundService: PaymentRefundService,
-                private route: ActivatedRoute,
-                private shopService: ShopService,
-                private accountService: AccountsService) {
-    }
+    constructor(
+        private eventPollerService: EventPollerService,
+        private invoiceService: InvoiceService,
+        private paymentRefundService: PaymentRefundService,
+        private route: ActivatedRoute,
+        private shopService: ShopService,
+        private accountService: AccountsService
+    ) {}
 
     public ngOnInit() {
         this.form = this.paymentRefundService.initForm(this.invoice.amount);
-        this.route.parent.params.switchMap((params) =>
-            this.shopService.getShopByID(params.shopID)).subscribe((shop) => {
-            this.settlementID = shop.account.settlementID;
-            this.setAccount();
-        });
+        this.route.parent.params
+            .switchMap(params => this.shopService.getShopByID(params.shopID))
+            .subscribe(shop => {
+                this.settlementID = shop.account.settlementID;
+                this.setAccount();
+            });
     }
 
     public ngOnChanges() {
@@ -61,7 +70,10 @@ export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit 
             this.setAccount();
         }
         if (this.refunds) {
-            this.refundedAmount = this.refunds.reduce((acc, current) => current.status === 'succeeded' ? acc + current.amount : acc, 0);
+            this.refundedAmount = this.refunds.reduce(
+                (acc, current) => (current.status === 'succeeded' ? acc + current.amount : acc),
+                0
+            );
         }
     }
 
@@ -70,7 +82,10 @@ export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit 
     }
 
     public open() {
-        this.form = this.paymentRefundService.initForm(this.invoice.amount - this.refundedAmount, this.account.availableAmount);
+        this.form = this.paymentRefundService.initForm(
+            this.invoice.amount - this.refundedAmount,
+            this.account.availableAmount
+        );
     }
 
     public close() {
@@ -79,23 +94,35 @@ export class PaymentRefundComponent implements OnInit, OnChanges, AfterViewInit 
 
     public refundPayment() {
         this.inProcess = true;
-        const {value: {reason, amount}} = this.form;
+        const {
+            value: { reason, amount }
+        } = this.form;
         const refundParams = {
             reason: reason || '',
             amount: toMinor(amount),
             currency: this.account.currency
         };
-        this.invoiceService.refundPayment(this.invoice.id, this.paymentID, refundParams).subscribe((refund) => {
-            const expectedChange = new RefundStatusChanged(REFUND_STATUS.succeeded, this.paymentID, refund.id);
-            this.eventPollerService.startPolling(this.invoice.id, expectedChange).subscribe(() => {
-                this.inProcess = false;
-                this.onRefund.emit();
-                this.close();
+        this.invoiceService
+            .refundPayment(this.invoice.id, this.paymentID, refundParams)
+            .subscribe(refund => {
+                const expectedChange = new RefundStatusChanged(
+                    REFUND_STATUS.succeeded,
+                    this.paymentID,
+                    refund.id
+                );
+                this.eventPollerService
+                    .startPolling(this.invoice.id, expectedChange)
+                    .subscribe(() => {
+                        this.inProcess = false;
+                        this.onRefund.emit();
+                        this.close();
+                    });
             });
-        });
     }
 
     private setAccount() {
-        this.accountService.getAccountByID(this.settlementID).subscribe((account) => this.account = account);
+        this.accountService
+            .getAccountByID(this.settlementID)
+            .subscribe(account => (this.account = account));
     }
 }

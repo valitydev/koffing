@@ -3,16 +3,17 @@ import { AuthInfo } from './auth-info';
 declare const Keycloak: any;
 
 export class AuthService {
-
     public static authInstance: any;
 
     public static init(): Promise<any> {
         const auth: any = new Keycloak('authConfig.json');
         return new Promise((resolve, reject) => {
-            auth.init({onLoad: 'login-required'}).success(() => {
-                this.authInstance = auth;
-                resolve();
-            }).error(() => reject());
+            auth.init({ onLoad: 'login-required' })
+                .success(() => {
+                    this.authInstance = auth;
+                    resolve();
+                })
+                .error(() => reject());
         });
     }
 

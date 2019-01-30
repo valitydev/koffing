@@ -15,7 +15,6 @@ import { RussianLegalEntity, InternationalLegalEntity, LegalEntityTypeEnum } fro
     providers: [ShopInfoService]
 })
 export class ShopInfoComponent implements OnInit {
-
     public shop: Shop;
     public contract: Contract;
     public payoutTool: PayoutTool;
@@ -30,20 +29,27 @@ export class ShopInfoComponent implements OnInit {
         private contractService: ContractService,
         private payoutToolService: PayoutToolService,
         private shopInfoService: ShopInfoService
-    ) { }
+    ) {}
 
     public ngOnInit() {
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             const shopID = params['shopID'];
             this.loadShop(shopID);
-            this.shopInfoService.checkExistenceClaim(shopID, MODIFICATION_TYPE.ShopContractBinding).subscribe((isExist) => {
-                this.isDisabledContractChange = isExist;
-            });
+            this.shopInfoService
+                .checkExistenceClaim(shopID, MODIFICATION_TYPE.ShopContractBinding)
+                .subscribe(isExist => {
+                    this.isDisabledContractChange = isExist;
+                });
         });
     }
 
     public navigateToContractChange() {
-        this.router.navigate(['shop', this.shop.id, 'contract', this.getContractType(this.contract)]);
+        this.router.navigate([
+            'shop',
+            this.shop.id,
+            'contract',
+            this.getContractType(this.contract)
+        ]);
     }
 
     public activateShop() {
@@ -61,7 +67,7 @@ export class ShopInfoComponent implements OnInit {
     }
 
     private loadShop(shopID: string) {
-        this.shopService.getShopByID(shopID).subscribe((shop) => {
+        this.shopService.getShopByID(shopID).subscribe(shop => {
             this.shop = shop;
             this.loadContract(shop.contractID);
             this.loadPayoutTool(shop.contractID, shop.payoutToolID);
@@ -69,13 +75,13 @@ export class ShopInfoComponent implements OnInit {
     }
 
     private loadContract(contractID: string) {
-        this.contractService.getContractByID(contractID).subscribe((contract) => {
+        this.contractService.getContractByID(contractID).subscribe(contract => {
             this.contract = contract;
         });
     }
-    
+
     private loadPayoutTool(contractID: string, payoutToolID: string) {
-        this.payoutToolService.getPayoutToolByID(contractID, payoutToolID).subscribe((payoutTool) => {
+        this.payoutToolService.getPayoutToolByID(contractID, payoutToolID).subscribe(payoutTool => {
             this.payoutTool = payoutTool;
         });
     }

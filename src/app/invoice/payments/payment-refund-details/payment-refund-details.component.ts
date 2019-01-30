@@ -6,7 +6,6 @@ import { PaymentRefund } from 'koffing/backend';
     templateUrl: 'payment-refund-details.component.pug'
 })
 export class PaymentRefundDetailsComponent {
-
     @Input()
     public refund: PaymentRefund;
 }

@@ -6,12 +6,9 @@ module.exports = {
     devtool: 'inline-source-map',
 
     resolve: {
-        modules: [
-            path.join(__dirname, 'src'),
-            'node_modules'
-        ],
+        modules: [path.join(__dirname, 'src'), 'node_modules'],
         alias: {
-            'koffing': __dirname + '/../src/app'
+            koffing: __dirname + '/../src/app'
         },
         extensions: ['.ts', '.js']
     },

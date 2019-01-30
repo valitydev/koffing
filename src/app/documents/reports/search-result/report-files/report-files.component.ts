@@ -9,7 +9,6 @@ import { FileMeta } from 'koffing/backend';
     templateUrl: 'report-files.component.pug'
 })
 export class ReportFilesComponent implements OnInit {
-
     @Input()
     public files: FileMeta[];
 
@@ -18,20 +17,18 @@ export class ReportFilesComponent implements OnInit {
 
     private shopID: string;
 
-    constructor(
-        private route: ActivatedRoute,
-        private downloadService: DownloadService) {
-    }
+    constructor(private route: ActivatedRoute, private downloadService: DownloadService) {}
 
     public ngOnInit() {
-        this.route.parent.parent.params.subscribe((params) => {
+        this.route.parent.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
     }
 
     public downloadFile(fileID: string, fileName: string) {
-        this.downloadService.downloadReport(this.shopID, this.reportID, fileID)
-            .subscribe((reportLink) => this.download(fileName, reportLink.url));
+        this.downloadService
+            .downloadReport(this.shopID, this.reportID, fileID)
+            .subscribe(reportLink => this.download(fileName, reportLink.url));
     }
 
     private download(fileName: string, url: string) {

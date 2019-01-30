@@ -8,7 +8,6 @@ import { CalculatePagesService } from './calculate-pages.service';
     templateUrl: 'paginate.component.pug'
 })
 export class PaginateComponent implements OnChanges {
-
     @Input()
     public size: number;
 
@@ -59,7 +58,7 @@ export class PaginateComponent implements OnChanges {
     }
 
     public pageOffset() {
-        const currentPageIndex = (this.offset / this.limit);
+        const currentPageIndex = this.offset / this.limit;
         const offset = _.round(this.pagesOnScreen / 2);
         return currentPageIndex > offset ? currentPageIndex - offset : 0;
     }

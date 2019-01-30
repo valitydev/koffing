@@ -11,8 +11,6 @@ import { AnalyticsComponent } from './analytics.component';
             }
         ])
     ],
-    exports: [
-        RouterModule
-    ]
+    exports: [RouterModule]
 })
-export class AnalyticsRoutingModule { }
+export class AnalyticsRoutingModule {}

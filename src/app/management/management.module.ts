@@ -47,10 +47,6 @@ import { PaymentInstitutionService } from 'koffing/backend/payment-institution.s
         RevokeClaimComponent,
         ModificationTypePipe
     ],
-    providers: [
-        ClaimModificationService,
-        ManagementService,
-        PaymentInstitutionService
-    ]
+    providers: [ClaimModificationService, ManagementService, PaymentInstitutionService]
 })
-export class ManagementModule { }
+export class ManagementModule {}

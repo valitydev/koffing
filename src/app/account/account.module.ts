@@ -6,13 +6,7 @@ import { AccountRoutingModule } from './account-routing.module';
 import { CommonModule } from 'koffing/common/common.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        AccountRoutingModule,
-        BrowserModule
-    ],
-    declarations: [
-        AccountComponent
-    ]
+    imports: [CommonModule, AccountRoutingModule, BrowserModule],
+    declarations: [AccountComponent]
 })
-export class AccountModule { }
+export class AccountModule {}

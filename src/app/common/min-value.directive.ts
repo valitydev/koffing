@@ -3,14 +3,15 @@ import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn } from '@angular
 
 @Directive({
     selector: '[kofMin][formControlName],[kofMin][formControl],[kofMin][ngModel]',
-    providers: [{
-        provide: NG_VALIDATORS,
-        useExisting: MinValueValidatorDirective,
-        multi: true
-    }]
+    providers: [
+        {
+            provide: NG_VALIDATORS,
+            useExisting: MinValueValidatorDirective,
+            multi: true
+        }
+    ]
 })
 export class MinValueValidatorDirective implements Validator, OnChanges {
-
     @Input()
     public kofMin: string;
 
@@ -33,7 +34,7 @@ export class MinValueValidatorDirective implements Validator, OnChanges {
     private prepareValidatorFn(mn: number): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
             const v = +control.value;
-            return (v < mn ? {min: {minValue: mn, actualValue: v}} : null);
+            return v < mn ? { min: { minValue: mn, actualValue: v } } : null;
         };
     }
 }

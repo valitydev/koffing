@@ -8,13 +8,9 @@ import { InvoicesComponent } from './invoices.component';
             {
                 path: 'invoices',
                 component: InvoicesComponent
-            },
+            }
         ])
     ],
-    exports: [
-        RouterModule
-    ]
+    exports: [RouterModule]
 })
-export class InvoicesRoutingModule {
-
-}
+export class InvoicesRoutingModule {}

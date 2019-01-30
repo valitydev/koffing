@@ -6,8 +6,11 @@ import { toMinor } from 'koffing/common/amount-utils';
 
 @Injectable()
 export class WithdrawalTableService {
-
-    public toSearchParams(limit: number, continuationToken: string, formParams: any): SearchWalletWithdrawals {
+    public toSearchParams(
+        limit: number,
+        continuationToken: string,
+        formParams: any
+    ): SearchWalletWithdrawals {
         const result = new SearchWalletWithdrawals();
         result.limit = limit;
         result.continuationToken = continuationToken;

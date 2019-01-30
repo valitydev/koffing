@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     templateUrl: 'wallets.component.pug',
     styleUrls: ['wallets.component.less']
 })
-export class WalletsComponent {
-}
+export class WalletsComponent {}

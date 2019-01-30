@@ -10,7 +10,6 @@ import { ClaimDetailsService } from '../claim-details.service';
     templateUrl: 'contract-creation-details.component.pug'
 })
 export class ContractCreationDetailsComponent implements OnChanges {
-
     @Input()
     public partyModifications: PartyModification[];
 
@@ -21,16 +20,21 @@ export class ContractCreationDetailsComponent implements OnChanges {
     constructor(
         private shopService: ShopService,
         private claimDetailsService: ClaimDetailsService
-    ) { }
+    ) {}
 
     public ngOnChanges() {
-        const contractBinding = last(this.claimDetailsService.toContractBinding(this.partyModifications));
-        this.shopService.getShopByID(contractBinding.shopID).subscribe((shop) => this.shop = shop);
-        const contractCreation = last(this.claimDetailsService.toContractCreations(this.partyModifications));
+        const contractBinding = last(
+            this.claimDetailsService.toContractBinding(this.partyModifications)
+        );
+        this.shopService.getShopByID(contractBinding.shopID).subscribe(shop => (this.shop = shop));
+        const contractCreation = last(
+            this.claimDetailsService.toContractCreations(this.partyModifications)
+        );
         this.contractor = contractCreation.contractor;
-        const payoutToolCreation = last(this.claimDetailsService.toContractPayoutToolCreations(this.partyModifications));
+        const payoutToolCreation = last(
+            this.claimDetailsService.toContractPayoutToolCreations(this.partyModifications)
+        );
         this.payoutTool.currency = payoutToolCreation.currency;
         this.payoutTool.details = payoutToolCreation.details;
-
     }
 }

@@ -14,7 +14,6 @@ import { ReportsService } from 'koffing/backend/reports.service';
     styleUrls: ['./reports.component.less']
 })
 export class ReportsComponent implements OnInit {
-
     public reports$: Subject<Report[]> = new Subject();
     public filter: ReportsFilter;
     public isLoading = false;
@@ -28,21 +27,20 @@ export class ReportsComponent implements OnInit {
         private route: ActivatedRoute,
         private searchService: SearchService,
         private reportsService: ReportsService
-    ) {
-    }
+    ) {}
 
     public ngOnInit() {
-        this.route.params.subscribe((params) => {
+        this.route.params.subscribe(params => {
             this.reportType = params['type'];
             this.filter = {
                 path: 'report.type',
                 value: params['type']
             };
         });
-        this.route.parent.parent.params.subscribe((params) => {
+        this.route.parent.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
-        this.dateRange.subscribe((dateRange) => dateRange ? this.getReports(dateRange) : null);
+        this.dateRange.subscribe(dateRange => (dateRange ? this.getReports(dateRange) : null));
     }
 
     public selectDateRange(dateRange: DateRange) {
@@ -51,20 +49,30 @@ export class ReportsComponent implements OnInit {
 
     public createReports() {
         this.isLoading = true;
-        this.reportsService.createReport(this.shopID, {...this.dateRange.getValue(), reportType: this.reportType})
-            .subscribe(() => {
-                this.isLoading = false;
-                this.getReports(this.dateRange.getValue());
-            }, (e) => this.failed(e));
+        this.reportsService
+            .createReport(this.shopID, {
+                ...this.dateRange.getValue(),
+                reportType: this.reportType
+            })
+            .subscribe(
+                () => {
+                    this.isLoading = false;
+                    this.getReports(this.dateRange.getValue());
+                },
+                e => this.failed(e)
+            );
     }
 
     private getReports(dateRange: DateRange) {
         const params = new SearchReportParams(dateRange.fromTime, dateRange.toTime);
         this.isLoading = true;
-        this.searchService.getReports(this.shopID, params).subscribe((reports) => {
-            this.isLoading = false;
-            this.reports$.next(reports);
-        }, (e) => this.failed(e));
+        this.searchService.getReports(this.shopID, params).subscribe(
+            reports => {
+                this.isLoading = false;
+                this.reports$.next(reports);
+            },
+            e => this.failed(e)
+        );
     }
 
     private failed(e: any) {

@@ -7,30 +7,32 @@ import { ShopCreation, ShopDetails, ShopLocationUrl } from 'koffing/backend';
 
 @Injectable()
 export class ShopFormService {
-
     public form: FormGroup;
 
-    constructor(
-        private fb: FormBuilder,
-    ) { }
+    constructor(private fb: FormBuilder) {}
 
     public initForm(): FormGroup {
         return this.fb.group({
-            url: ['', [
-                Validators.required,
-                (c: AbstractControl) => isURL(c.value, {protocols: ['http', 'https'], require_protocol: true}) ? null : {isURL: true}
-            ]],
-            name: ['', [
-                Validators.required,
-                Validators.maxLength(100)
-            ]],
-            description: ['', [
-                Validators.maxLength(1000)
-            ]]
+            url: [
+                '',
+                [
+                    Validators.required,
+                    (c: AbstractControl) =>
+                        isURL(c.value, { protocols: ['http', 'https'], require_protocol: true })
+                            ? null
+                            : { isURL: true }
+                ]
+            ],
+            name: ['', [Validators.required, Validators.maxLength(100)]],
+            description: ['', [Validators.maxLength(1000)]]
         });
     }
 
-    public toShopCreation(contractID: string, payoutToolID: string, shopForm: FormGroup): ShopCreation {
+    public toShopCreation(
+        contractID: string,
+        payoutToolID: string,
+        shopForm: FormGroup
+    ): ShopCreation {
         const shop = shopForm.value;
         return new ShopCreation({
             shopID: uuid(),

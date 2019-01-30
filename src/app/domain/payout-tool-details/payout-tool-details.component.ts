@@ -6,8 +6,6 @@ import { PayoutTool } from 'koffing/backend';
     templateUrl: 'payout-tool-details.component.pug'
 })
 export class PayoutToolDetailsComponent {
-
     @Input()
     public payoutTool: PayoutTool;
-
 }

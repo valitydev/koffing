@@ -12,7 +12,6 @@ import { InvoiceFormService } from 'koffing/invoices/invoice-form/invoice-form.s
     encapsulation: ViewEncapsulation.None
 })
 export class CreateInvoiceComponent implements OnInit {
-
     @Input()
     public shopID: string;
 
@@ -36,13 +35,13 @@ export class CreateInvoiceComponent implements OnInit {
 
     public createInvoice() {
         const params = CreateInvoiceService.toInvoiceParams(this.invoiceForm.value, this.shopID);
-        this.invoiceService.createInvoice(params).subscribe((invoiceAndToken) => {
+        this.invoiceService.createInvoice(params).subscribe(invoiceAndToken => {
             this.setDefaultFormValues();
             this.onCreate.emit(invoiceAndToken.invoice);
         });
     }
 
     public setDefaultFormValues() {
-        this.invoiceFormService.setDefaultValues({currency: this.shopCurrency});
+        this.invoiceFormService.setDefaultValues({ currency: this.shopCurrency });
     }
 }

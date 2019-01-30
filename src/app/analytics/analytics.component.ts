@@ -16,10 +16,14 @@ import { AnalyticsService } from 'koffing/analytics/analytics.service';
     providers: [AnalyticsService]
 })
 export class AnalyticsComponent implements OnInit {
-
     public shopID: string;
-    public fromTime: Date = moment().subtract(1, 'day').startOf('day').toDate();
-    public toTime: Date = moment().endOf('day').toDate();
+    public fromTime: Date = moment()
+        .subtract(1, 'day')
+        .startOf('day')
+        .toDate();
+    public toTime: Date = moment()
+        .endOf('day')
+        .toDate();
     public profit: number = 0;
 
     public panelData: Subject<PanelData> = new Subject();
@@ -32,11 +36,12 @@ export class AnalyticsComponent implements OnInit {
     public loadStatistic: Subject<null> = new Subject();
     private requestCount = 5;
 
-    constructor(private route: ActivatedRoute,
-                private accountsService: AccountsService,
-                private shopService: ShopService,
-                private analyticsService: AnalyticsService) {
-    }
+    constructor(
+        private route: ActivatedRoute,
+        private accountsService: AccountsService,
+        private shopService: ShopService,
+        private analyticsService: AnalyticsService
+    ) {}
 
     public ngOnInit() {
         this.route.parent.params.subscribe((params: Params) => {
@@ -62,21 +67,23 @@ export class AnalyticsComponent implements OnInit {
     }
 
     private loadPaymentMethod(shopID: string, fromTime: Date, toTime: Date) {
-        this.analyticsService.getPaymentMethodChartData(shopID, fromTime, toTime).subscribe((data) => {
-            this.paymentMethodChartData.next(data);
-            this.loadStatistic.next();
-        });
+        this.analyticsService
+            .getPaymentMethodChartData(shopID, fromTime, toTime)
+            .subscribe(data => {
+                this.paymentMethodChartData.next(data);
+                this.loadStatistic.next();
+            });
     }
 
     private loadRate(shopID: string, from: Date, to: Date) {
-        this.analyticsService.getUniqueCount(shopID, from, to).subscribe((count) => {
-            this.panelData.next({uniqueCount: count});
+        this.analyticsService.getUniqueCount(shopID, from, to).subscribe(count => {
+            this.panelData.next({ uniqueCount: count });
             this.loadStatistic.next();
         });
     }
 
     private loadConversionStat(shopID: string, from: Date, to: Date) {
-        this.analyticsService.getPaymentConversionData(shopID, from, to).subscribe((data) => {
+        this.analyticsService.getPaymentConversionData(shopID, from, to).subscribe(data => {
             this.panelData.next({
                 successfulCount: data.paymentCount.successfulCount,
                 unfinishedCount: data.paymentCount.unfinishedCount
@@ -87,14 +94,14 @@ export class AnalyticsComponent implements OnInit {
     }
 
     private loadGeoChartData(shopID: string, from: Date, to: Date) {
-        this.analyticsService.getPaymentGeoChartData(shopID, from, to).subscribe((data) => {
+        this.analyticsService.getPaymentGeoChartData(shopID, from, to).subscribe(data => {
             this.geoChartData.next(data);
             this.loadStatistic.next();
         });
     }
 
     private loadRevenueStat(shopID: string, from: Date, to: Date) {
-        this.analyticsService.getPaymentRevenueData(shopID, from, to).subscribe((data) => {
+        this.analyticsService.getPaymentRevenueData(shopID, from, to).subscribe(data => {
             this.profit = data.profit;
             this.revenueChartData.next(data.revenueChartData);
             this.loadStatistic.next();
@@ -102,9 +109,9 @@ export class AnalyticsComponent implements OnInit {
     }
 
     private loadAccounts(shopID: string) {
-        this.shopService.getShopByID(shopID).subscribe((shop) => {
-            this.accountsService.getAccountByID(shop.account.settlementID).subscribe((account) => {
-                this.panelData.next({settlementBalance: account.ownAmount});
+        this.shopService.getShopByID(shopID).subscribe(shop => {
+            this.accountsService.getAccountByID(shop.account.settlementID).subscribe(account => {
+                this.panelData.next({ settlementBalance: account.ownAmount });
                 this.loadStatistic.next();
             });
         });

@@ -17,9 +17,12 @@ import { TOKEN_PROVIDER_LABEL } from '../token-provider-label';
     styleUrls: ['search-form.component.less'],
     animations: [
         trigger('flyInOut', [
-            state('in', style({
-                opacity: 1
-            })),
+            state(
+                'in',
+                style({
+                    opacity: 1
+                })
+            ),
             transition('void => *', [
                 style({
                     opacity: 0
@@ -27,15 +30,17 @@ import { TOKEN_PROVIDER_LABEL } from '../token-provider-label';
                 animate('0.1s ease-in')
             ]),
             transition('* => void', [
-                animate('0.1s ease-out', style({
-                    opacity: 0
-                }))
+                animate(
+                    '0.1s ease-out',
+                    style({
+                        opacity: 0
+                    })
+                )
             ])
         ])
     ]
 })
 export class SearchFormComponent implements OnInit {
-
     @Output()
     public onSearch: EventEmitter<void> = new EventEmitter<void>();
 
@@ -58,7 +63,7 @@ export class SearchFormComponent implements OnInit {
 
         this.searchForm = this.searchFormService.searchForm;
         this.searchForm.valueChanges
-            .filter((value) => this.searchForm.status === 'VALID')
+            .filter(value => this.searchForm.status === 'VALID')
             .debounceTime(300)
             .subscribe(() => this.onSearch.emit());
         this.additionalParamsVisible = this.searchFormService.hasFormAdditionalParams();

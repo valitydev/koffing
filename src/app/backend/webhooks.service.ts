@@ -8,13 +8,9 @@ import { WebhookParams } from './requests';
 
 @Injectable()
 export class WebhooksService {
-
     private endpoint = `${this.config.capiUrl}/processing/webhooks`;
 
-    constructor(
-        private http: KoffingHttp,
-        private config: ConfigService
-    ) { }
+    constructor(private http: KoffingHttp, private config: ConfigService) {}
 
     public createWebhook(params: WebhookParams): Observable<Webhook> {
         return this.http.post(this.endpoint, params).map(res => res.json());

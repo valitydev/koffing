@@ -8,11 +8,10 @@ import { Subscription } from 'rxjs/Subscription';
     templateUrl: 'shop-container.component.pug'
 })
 export class ShopContainerComponent implements OnInit, OnDestroy {
-
     public isSidebarOpened: boolean;
     private toggleMenuSubscription: Subscription;
 
-    constructor(private toggleMenuBroadcaster: ToggleMenuBroadcaster) { }
+    constructor(private toggleMenuBroadcaster: ToggleMenuBroadcaster) {}
 
     public ngOnInit() {
         this.isSidebarOpened = SidebarStateService.isOpened();
@@ -24,10 +23,9 @@ export class ShopContainerComponent implements OnInit, OnDestroy {
     }
 
     private registerToggleMenuBroadcast() {
-        this.toggleMenuSubscription = this.toggleMenuBroadcaster.on()
-            .subscribe(() => {
-                SidebarStateService.toggleState();
-                this.isSidebarOpened = SidebarStateService.isOpened();
-            });
+        this.toggleMenuSubscription = this.toggleMenuBroadcaster.on().subscribe(() => {
+            SidebarStateService.toggleState();
+            this.isSidebarOpened = SidebarStateService.isOpened();
+        });
     }
 }

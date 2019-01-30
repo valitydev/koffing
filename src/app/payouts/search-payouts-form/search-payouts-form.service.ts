@@ -6,26 +6,26 @@ import { mapValues, isEqual } from 'lodash';
 
 @Injectable()
 export class SearchPayoutsFormService {
-
     public form: FormGroup;
     private shopID: string;
     private defaultValues = {
-        from: moment().subtract(1, 'month').startOf('day').toDate(),
-        to: moment().endOf('day').toDate(),
+        from: moment()
+            .subtract(1, 'month')
+            .startOf('day')
+            .toDate(),
+        to: moment()
+            .endOf('day')
+            .toDate(),
         payoutID: ''
     };
 
-    constructor(
-        private fb: FormBuilder,
-        private router: Router,
-        private route: ActivatedRoute
-    ) {
+    constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
         this.form = this.initForm();
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
-        this.route.queryParams.subscribe((queryParams) => this.updateFormValue(queryParams));
-        this.form.valueChanges.subscribe((values) => this.updateQueryParams(values));
+        this.route.queryParams.subscribe(queryParams => this.updateFormValue(queryParams));
+        this.form.valueChanges.subscribe(values => this.updateQueryParams(values));
     }
 
     public initForm(): FormGroup {
@@ -46,11 +46,11 @@ export class SearchPayoutsFormService {
 
     private updateQueryParams(value: any) {
         const queryParams = this.formValueToQueryParams(value);
-        this.router.navigate(['shop', this.shopID, 'payouts'], {queryParams});
+        this.router.navigate(['shop', this.shopID, 'payouts'], { queryParams });
     }
 
     private formValueToQueryParams(formValue: any): Params {
-        const mapped = mapValues(formValue, (value) => isEqual(value, '') ? null : value);
+        const mapped = mapValues(formValue, value => (isEqual(value, '') ? null : value));
         const urlDateFormat = 'YYYY-MM-DD';
         return {
             ...mapped,
@@ -62,8 +62,12 @@ export class SearchPayoutsFormService {
     private queryParamsToFormValue(params: Params): any {
         return {
             ...params,
-            from: moment(params.from).startOf('day').toDate(),
-            to: moment(params.to).endOf('day').toDate()
+            from: moment(params.from)
+                .startOf('day')
+                .toDate(),
+            to: moment(params.to)
+                .endOf('day')
+                .toDate()
         };
     }
 }

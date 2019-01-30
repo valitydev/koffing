@@ -7,7 +7,6 @@ import { InvoiceLine } from 'koffing/backend/model/invoice-cart/invoice-line';
 
 @Injectable()
 export class InvoiceFormService {
-
     public form: FormGroup;
     private cartControlName: string = 'cart';
 
@@ -35,7 +34,9 @@ export class InvoiceFormService {
         this.form.patchValue({
             product: '',
             description: '',
-            dueDate: moment().add(1, 'd').toDate(),
+            dueDate: moment()
+                .add(1, 'd')
+                .toDate(),
             currency: '',
             ...params
         });
@@ -48,16 +49,13 @@ export class InvoiceFormService {
             description: ['', [Validators.maxLength(1000)]],
             dueDate: ['', [Validators.required]],
             amount: [''],
-            currency: ['', [
-                Validators.required,
-                Validators.pattern(/[A-Z]{3}$/)]
-            ]
+            currency: ['', [Validators.required, Validators.pattern(/[A-Z]{3}$/)]]
         });
     }
 
     private initCart() {
         this.form.setControl(this.cartControlName, this.fb.array([]));
-        this.form.controls.cart.valueChanges.subscribe((cart) => this.calculateCartAmount(cart));
+        this.form.controls.cart.valueChanges.subscribe(cart => this.calculateCartAmount(cart));
         this.addProduct();
     }
 

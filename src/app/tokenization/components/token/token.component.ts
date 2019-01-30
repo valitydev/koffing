@@ -5,10 +5,9 @@ import { copy } from 'koffing/common/copy';
 
 @Component({
     selector: 'kof-offline-token',
-    templateUrl: './token.component.pug',
+    templateUrl: './token.component.pug'
 })
 export class TokenComponent implements OnInit {
-
     public privateToken: string;
 
     @ViewChild('privateTokenTextarea')

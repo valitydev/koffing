@@ -5,7 +5,6 @@ import { MODIFICATION_TYPE } from './modification-type';
     name: 'kofClaimModificationType'
 })
 export class ModificationTypePipe implements PipeTransform {
-
     private MODIFICATION_NAMES = {
         [MODIFICATION_TYPE.ShopCreation]: 'Создание магазина',
         [MODIFICATION_TYPE.ContractCreation]: 'Создание контракта',

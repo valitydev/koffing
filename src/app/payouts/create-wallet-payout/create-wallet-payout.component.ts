@@ -15,7 +15,6 @@ import { Message } from 'primeng/primeng';
     encapsulation: ViewEncapsulation.None
 })
 export class CreateWalletPayoutComponent implements OnInit {
-
     public shop: Observable<Shop>;
     public walletPayoutForm: FormGroup;
 
@@ -27,10 +26,10 @@ export class CreateWalletPayoutComponent implements OnInit {
         private shopService: ShopService,
         private walletPayoutFormService: WalletPayoutFormService,
         private payoutToolService: PayoutToolService
-    ) { }
+    ) {}
 
     public ngOnInit() {
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
             this.loadShop(this.shopID);
         });
@@ -38,8 +37,11 @@ export class CreateWalletPayoutComponent implements OnInit {
     }
 
     public createPayout() {
-        const bodyPayout = CreateWalletPayoutService.getCreatePayoutParams(this.walletPayoutForm.value, this.shopID);
-        this.payoutToolService.createPayout(bodyPayout).subscribe((res) => {
+        const bodyPayout = CreateWalletPayoutService.getCreatePayoutParams(
+            this.walletPayoutForm.value,
+            this.shopID
+        );
+        this.payoutToolService.createPayout(bodyPayout).subscribe(res => {
             this.messages = [{ detail: `Заявка на выплату создана` }];
         });
     }

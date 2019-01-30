@@ -4,7 +4,6 @@ import { Broadcaster } from './broadcaster.service';
 
 @Injectable()
 export class ToggleMenuBroadcaster {
-
     constructor(private broadcaster: Broadcaster) {}
 
     public fire() {

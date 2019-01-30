@@ -3,14 +3,15 @@ import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn } from '@angular
 
 @Directive({
     selector: '[kofMax][formControlName],[kofMax][formControl],[kofMax][ngModel]',
-    providers: [{
-        provide: NG_VALIDATORS,
-        useExisting: MaxValueValidatorDirective,
-        multi: true
-    }]
+    providers: [
+        {
+            provide: NG_VALIDATORS,
+            useExisting: MaxValueValidatorDirective,
+            multi: true
+        }
+    ]
 })
 export class MaxValueValidatorDirective implements Validator, OnChanges {
-
     @Input()
     public kofMax: string;
 
@@ -33,7 +34,7 @@ export class MaxValueValidatorDirective implements Validator, OnChanges {
     private prepareValidatorFn(mx: number): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
             const v = +control.value;
-            return (v > mx ? {max: {maxValue: mx, actualValue: v}} : null);
+            return v > mx ? { max: { maxValue: mx, actualValue: v } } : null;
         };
     }
 }

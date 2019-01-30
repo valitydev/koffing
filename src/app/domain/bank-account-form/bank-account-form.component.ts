@@ -6,7 +6,6 @@ import { FormGroup } from '@angular/forms';
     templateUrl: 'bank-account-form.component.pug'
 })
 export class BankAccountFormComponent {
-
     @Input()
     public type: string;
 

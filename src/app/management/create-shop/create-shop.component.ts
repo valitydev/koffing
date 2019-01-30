@@ -14,7 +14,6 @@ import { ShopCreationStep } from './shop-creation-step';
     providers: [CreateShopService]
 })
 export class CreateShopComponent implements OnInit {
-
     public validStep = false;
     public step = ShopCreationStep;
     public currentStep = ShopCreationStep.contract;
@@ -30,8 +29,7 @@ export class CreateShopComponent implements OnInit {
         private createShopService: CreateShopService,
         private router: Router,
         private breadcrumbBroadcaster: BreadcrumbBroadcaster
-    ) {
-    }
+    ) {}
 
     public ngOnInit() {
         this.type = this.createShopService.type;
@@ -43,7 +41,7 @@ export class CreateShopComponent implements OnInit {
                 this.validStep = false;
             }
         });
-        this.breadcrumbBroadcaster.fire([{label: 'Создание магазина'}]);
+        this.breadcrumbBroadcaster.fire([{ label: 'Создание магазина' }]);
     }
 
     public next() {
@@ -53,7 +51,9 @@ export class CreateShopComponent implements OnInit {
             this.validStep = this.isValid();
             this.msgs = [];
         } else {
-            this.msgs = [{severity: 'warn', summary: possibility.summary, detail: possibility.detail}];
+            this.msgs = [
+                { severity: 'warn', summary: possibility.summary, detail: possibility.detail }
+            ];
         }
     }
 
@@ -63,12 +63,10 @@ export class CreateShopComponent implements OnInit {
     }
 
     public createClaim() {
-        this.claimService.createClaim(this.changeSet).subscribe(() =>
-            this.router.navigate(['/']));
+        this.claimService.createClaim(this.changeSet).subscribe(() => this.router.navigate(['/']));
     }
 
     private isValid(): boolean {
         return Boolean(this.changeSet[this.currentStep]);
     }
-
 }

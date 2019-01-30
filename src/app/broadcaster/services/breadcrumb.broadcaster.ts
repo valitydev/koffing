@@ -5,7 +5,6 @@ import { BreadcrumbConfig } from './breadcrumb-config';
 
 @Injectable()
 export class BreadcrumbBroadcaster {
-
     constructor(private broadcaster: Broadcaster) {}
 
     public fire(config: BreadcrumbConfig[]) {

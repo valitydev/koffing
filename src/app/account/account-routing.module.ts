@@ -17,8 +17,6 @@ import { AccountComponent } from './account.component';
             }
         ])
     ],
-    exports: [
-        RouterModule
-    ]
+    exports: [RouterModule]
 })
 export class AccountRoutingModule {}

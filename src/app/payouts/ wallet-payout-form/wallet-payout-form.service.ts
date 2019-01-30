@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class WalletPayoutFormService {
-
     public walletPayoutForm: FormGroup;
 
     constructor(private fb: FormBuilder) {
@@ -26,5 +25,4 @@ export class WalletPayoutFormService {
             currency: ['']
         });
     }
-
 }

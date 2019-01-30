@@ -9,21 +9,19 @@ import { InvoiceService } from './invoice.service';
     providers: [InvoiceService]
 })
 export class InvoiceComponent implements OnInit {
-
     public invoice: Invoice;
 
     public invoiceNotFound: boolean = false;
 
     private hasProcessedPayment: boolean = false;
 
-    constructor(private invoiceService: InvoiceService) {
-    }
+    constructor(private invoiceService: InvoiceService) {}
 
     public ngOnInit() {
-        this.invoiceService.invoiceSubject
-            .subscribe(
-                (invoice: Invoice) => this.invoice = invoice,
-                () => this.invoiceNotFound = true);
+        this.invoiceService.invoiceSubject.subscribe(
+            (invoice: Invoice) => (this.invoice = invoice),
+            () => (this.invoiceNotFound = true)
+        );
     }
 
     public onProcessedPayment(processed: boolean) {
@@ -31,7 +29,11 @@ export class InvoiceComponent implements OnInit {
     }
 
     public isPaymentLinkAvailable() {
-        return this.invoice && this.invoice.status === INVOICE_STATUS.unpaid && !this.hasProcessedPayment;
+        return (
+            this.invoice &&
+            this.invoice.status === INVOICE_STATUS.unpaid &&
+            !this.hasProcessedPayment
+        );
     }
 
     public back() {

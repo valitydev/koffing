@@ -8,17 +8,16 @@ import { Claim } from 'koffing/backend';
     templateUrl: 'revoke-claim.component.pug'
 })
 export class RevokeClaimComponent {
-
     @Input()
     public claim: Claim;
 
     public reason: string;
 
-    constructor(private claimService: ClaimService,
-                private router: Router) {}
+    constructor(private claimService: ClaimService, private router: Router) {}
 
     public revokeClaim(reason: string) {
-        this.claimService.revokeClaimByID(this.claim.id, this.claim.revision, reason)
+        this.claimService
+            .revokeClaimByID(this.claim.id, this.claim.revision, reason)
             .subscribe(() => this.router.navigate(['/']));
     }
 }

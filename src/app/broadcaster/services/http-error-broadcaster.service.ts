@@ -4,7 +4,6 @@ import { Broadcaster } from './broadcaster.service';
 
 @Injectable()
 export class HttpErrorBroadcaster {
-
     constructor(private broadcaster: Broadcaster) {}
 
     public fire(status: number) {

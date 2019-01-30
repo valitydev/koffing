@@ -8,7 +8,6 @@ import { LineChartData } from 'koffing/analytics/stats-data/line-chart-data';
     templateUrl: './line-chart.component.pug'
 })
 export class LineChartComponent implements OnInit {
-
     @Input()
     public chartData: Observable<LineChartData>;
 
@@ -23,28 +22,34 @@ export class LineChartComponent implements OnInit {
             }
         },
         scales: {
-            yAxes: [{
-                stacked: true
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 11
+            yAxes: [
+                {
+                    stacked: true
                 }
-            }]
+            ],
+            xAxes: [
+                {
+                    ticks: {
+                        fontSize: 11
+                    }
+                }
+            ]
         },
         legend: {
             display: false
         }
     };
 
-    public chartColors = [{
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: '#73879C',
-        pointBackgroundColor: '#73879C',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#79909c',
-        pointHoverBorderColor: '#fff',
-    }];
+    public chartColors = [
+        {
+            backgroundColor: 'rgba(148,159,177,0.2)',
+            borderColor: '#73879C',
+            pointBackgroundColor: '#73879C',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#79909c',
+            pointHoverBorderColor: '#fff'
+        }
+    ];
 
     public ngOnInit() {
         this.chartData.subscribe((chartData: LineChartData) => {

@@ -53,8 +53,6 @@ import { PaymentToolDetailsTokenProviderPipe } from './payments/payment-details/
         ProviderNamePipe,
         CustomerStatusPipe
     ],
-    providers: [
-        PaymentRefundService
-    ]
+    providers: [PaymentRefundService]
 })
-export class InvoiceModule { }
+export class InvoiceModule {}

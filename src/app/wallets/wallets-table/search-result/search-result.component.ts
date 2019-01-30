@@ -12,22 +12,20 @@ import { WalletService } from 'koffing/backend/wallet.service';
     providers: [WalletService]
 })
 export class SearchResultComponent implements OnInit {
-
     public walletTableItems: WalletTableItem[] = [];
     public isLoading = false;
 
     @Input()
     private searchWalletsResult: Observable<Wallet[]>;
 
-    constructor(private walletService: WalletService) {
-    }
+    constructor(private walletService: WalletService) {}
 
     public ngOnInit() {
-        this.searchWalletsResult.subscribe((wallets) => {
+        this.searchWalletsResult.subscribe(wallets => {
             this.walletTableItems = [];
             this.isLoading = true;
-            wallets.forEach((wallet) => {
-                this.walletService.getWalletAccount(wallet.id).subscribe((account) => {
+            wallets.forEach(wallet => {
+                this.walletService.getWalletAccount(wallet.id).subscribe(account => {
                     this.walletTableItems.push({
                         ...wallet,
                         account

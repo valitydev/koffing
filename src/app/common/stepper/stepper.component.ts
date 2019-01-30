@@ -5,7 +5,6 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
     templateUrl: 'stepper.component.pug'
 })
 export class StepperComponent {
-
     @Input()
     public hasNext: boolean;
 

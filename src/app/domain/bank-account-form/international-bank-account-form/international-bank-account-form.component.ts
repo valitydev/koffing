@@ -9,16 +9,15 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: 'international-bank-account-form.component.pug'
 })
 export class InternationalBankAccountFormComponent implements OnInit {
-
     @Input()
     public form: FormGroup;
 
     public type: string;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute) {}
 
     public ngOnInit() {
-        this.route.params.subscribe((params) => {
+        this.route.params.subscribe(params => {
             this.type = params.type;
         });
     }

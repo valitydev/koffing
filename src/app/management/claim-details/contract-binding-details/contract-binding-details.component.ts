@@ -13,7 +13,6 @@ import { ClaimDetailsService } from '../claim-details.service';
     templateUrl: 'contract-binding-details.component.pug'
 })
 export class ContractBindingDetailsComponent implements OnChanges {
-
     @Input()
     public partyModifications: PartyModification[];
 
@@ -33,9 +32,12 @@ export class ContractBindingDetailsComponent implements OnChanges {
         const contractBinding = last(bindings);
         Observable.zip(
             this.contractService.getContractByID(contractBinding.contractID),
-            this.payoutToolService.getPayoutToolByID(contractBinding.contractID, contractBinding.payoutToolID),
+            this.payoutToolService.getPayoutToolByID(
+                contractBinding.contractID,
+                contractBinding.payoutToolID
+            ),
             this.shopService.getShopByID(contractBinding.shopID)
-        ).subscribe((response) => {
+        ).subscribe(response => {
             this.contract = response[0];
             this.payoutTool = response[1];
             this.shop = response[2];

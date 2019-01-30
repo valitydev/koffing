@@ -6,8 +6,6 @@ import { InternationalBank } from 'koffing/backend';
     templateUrl: 'international-bank-account-details.component.pug'
 })
 export class InternationalBankAccountDetailsComponent {
-
     @Input()
     public bankAccount: InternationalBank;
-
 }

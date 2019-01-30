@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofClaimStatus'
 })
 export class ClaimStatusPipe implements PipeTransform {
-
     private STATUSES = {
         ClaimAccepted: 'Подтверждена',
         ClaimDenied: 'Отклонена',

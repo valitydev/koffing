@@ -13,16 +13,16 @@ import { SearchFormService } from './search-form/search-form.service';
     providers: [WithdrawalTableService, SearchFormService]
 })
 export class WithdrawalsTableComponent {
-
     public page: number = 0;
     public limit: number = 20;
     public withdrawals: Subject<Withdrawal[]> = new Subject();
     private continuationTokens: string[] = [];
     private formValue: any;
 
-    constructor(private withdrawalTableService: WithdrawalTableService,
-                private searchService: SearchService) {
-    }
+    constructor(
+        private withdrawalTableService: WithdrawalTableService,
+        private searchService: SearchService
+    ) {}
 
     public reset() {
         this.continuationTokens = [];
@@ -46,8 +46,12 @@ export class WithdrawalsTableComponent {
     private search(num: number = 0) {
         this.page += num;
         const continuationToken = this.continuationTokens[this.page];
-        const request = this.withdrawalTableService.toSearchParams(this.limit, continuationToken, this.formValue);
-        this.searchService.searchWalletWithdrawals(request).subscribe((response) => {
+        const request = this.withdrawalTableService.toSearchParams(
+            this.limit,
+            continuationToken,
+            this.formValue
+        );
+        this.searchService.searchWalletWithdrawals(request).subscribe(response => {
             this.continuationTokens[this.page + 1] = response.continuationToken;
             this.withdrawals.next(response.result);
         });

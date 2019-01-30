@@ -16,7 +16,6 @@ import { WarningsService } from 'koffing/backend/warnings.service';
     providers: [WarningsService]
 })
 export class ManagementComponent implements OnInit {
-
     public claims: Claim[];
     public shops: Shop[];
     public isCreating: boolean = false;
@@ -25,24 +24,26 @@ export class ManagementComponent implements OnInit {
     public displayWarning = false;
     public displayWarningDetails = false;
 
-    constructor(private claimService: ClaimService,
-                private router: Router,
-                private shopService: ShopService,
-                private claimModificationService: ClaimModificationService,
-                private managementService: ManagementService,
-                private breadcrumbBroadcaster: BreadcrumbBroadcaster,
-                private warningsService: WarningsService) {
-    }
+    constructor(
+        private claimService: ClaimService,
+        private router: Router,
+        private shopService: ShopService,
+        private claimModificationService: ClaimModificationService,
+        private managementService: ManagementService,
+        private breadcrumbBroadcaster: BreadcrumbBroadcaster,
+        private warningsService: WarningsService
+    ) {}
 
     public ngOnInit() {
         Observable.zip(
             this.claimService.getClaims(CLAIM_STATUS.pending),
             this.shopService.getShops(),
             this.warningsService.loginWarnings
-        ).subscribe((response) => {
+        ).subscribe(response => {
             this.claims = response[0];
             this.shops = response[1];
-            this.displayWarning = response[2].filter((warning) => warning === this.partyId).length > 0;
+            this.displayWarning =
+                response[2].filter(warning => warning === this.partyId).length > 0;
 
             if (this.shops.length === 0) {
                 this.createTestShop();
@@ -61,9 +62,11 @@ export class ManagementComponent implements OnInit {
     }
 
     public getShopName(claim: Claim) {
-        const details = this.claimModificationService.getRelatedShopDetails(claim.changeset, this.shops);
+        const details = this.claimModificationService.getRelatedShopDetails(
+            claim.changeset,
+            this.shops
+        );
         return details.name;
-
     }
 
     public createShop() {
@@ -72,7 +75,7 @@ export class ManagementComponent implements OnInit {
 
     public createTestShop() {
         this.isCreating = true;
-        this.managementService.createTestShop().subscribe((shops) => {
+        this.managementService.createTestShop().subscribe(shops => {
             this.shops = shops;
             this.isCreating = false;
         });

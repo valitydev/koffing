@@ -9,7 +9,6 @@ import { PanelData } from 'koffing/analytics/statistic-panel/panel-data';
     templateUrl: './statistic-panel.component.pug'
 })
 export class StatisticPanelComponent implements OnInit {
-
     @Input()
     public data: Observable<PanelData>;
 

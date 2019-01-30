@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofPayoutType'
 })
 export class PayoutTypePipe implements PipeTransform {
-
     public transform(type: string): string {
         switch (type) {
             case 'payment':

@@ -17,7 +17,6 @@ import { copy } from 'koffing/common/copy';
     providers: [InvoiceTemplateService]
 })
 export class InvoiceTemplatePaymentLinkComponent implements OnInit {
-
     @Input()
     public shopID: string;
 
@@ -38,15 +37,16 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
 
     private invoiceTemplateAndToken: InvoiceTemplateAndToken;
 
-    constructor(private accountsService: AccountsService,
-                private invoiceTemplateService: InvoiceTemplateService,
-                private invoiceTemplateFormService: InvoiceTemplateFormService,
-                private checkoutConfigFormService: CheckoutConfigFormService,
-                private paymentLinkService: PaymentLinkService) {
-    }
+    constructor(
+        private accountsService: AccountsService,
+        private invoiceTemplateService: InvoiceTemplateService,
+        private invoiceTemplateFormService: InvoiceTemplateFormService,
+        private checkoutConfigFormService: CheckoutConfigFormService,
+        private paymentLinkService: PaymentLinkService
+    ) {}
 
     public ngOnInit() {
-        this.accountsService.getAccountByID(this.settlementID).subscribe((account) => {
+        this.accountsService.getAccountByID(this.settlementID).subscribe(account => {
             this.currency = account.currency;
         });
         this.invoiceTemplateForm = this.invoiceTemplateFormService.form;
@@ -61,17 +61,27 @@ export class InvoiceTemplatePaymentLinkComponent implements OnInit {
     }
 
     public createInvoiceTemplate() {
-        const params = InvoiceTemplatePaymentLinkService.toInvoiceTemplateParams(this.invoiceTemplateForm.value, this.shopID, this.currency);
-        this.invoiceTemplateService.createInvoiceTemplate(params).subscribe((response) => {
+        const params = InvoiceTemplatePaymentLinkService.toInvoiceTemplateParams(
+            this.invoiceTemplateForm.value,
+            this.shopID,
+            this.currency
+        );
+        this.invoiceTemplateService.createInvoiceTemplate(params).subscribe(response => {
             this.invoiceTemplateAndToken = response;
-            this.invoiceTemplateService.getInvoiceTemplatePaymentMethods(response.invoiceTemplate.id).subscribe((methods) => this.methods = methods);
+            this.invoiceTemplateService
+                .getInvoiceTemplatePaymentMethods(response.invoiceTemplate.id)
+                .subscribe(methods => (this.methods = methods));
             this.currentStep = this.currentStep + 1;
         });
     }
 
     public generatePaymentLink() {
-        this.paymentLinkService.getInvoiceTemplatePaymentLink(this.invoiceTemplateAndToken, this.checkoutConfigForm.value)
-            .subscribe((paymentLink) => {
+        this.paymentLinkService
+            .getInvoiceTemplatePaymentLink(
+                this.invoiceTemplateAndToken,
+                this.checkoutConfigForm.value
+            )
+            .subscribe(paymentLink => {
                 this.paymentLink = paymentLink;
                 this.paymentLinkVisible = true;
             });

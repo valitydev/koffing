@@ -6,13 +6,7 @@ import { WithdrawalComponent } from './withdrawal.component';
 import { WithdrawalDetailsComponent } from './withdrawal-details/withdrawal-details.component';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        CommonModule,
-    ],
-    declarations: [
-        WithdrawalComponent,
-        WithdrawalDetailsComponent
-    ]
+    imports: [BrowserModule, CommonModule],
+    declarations: [WithdrawalComponent, WithdrawalDetailsComponent]
 })
-export class WithdrawalModule { }
+export class WithdrawalModule {}

@@ -13,12 +13,7 @@ import { ReportStatusPipe } from './reports/search-result/report-status.pipe';
 
 @NgModule({
     providers: [ReportsService],
-    imports: [
-        RouterModule,
-        BrowserModule,
-        CommonModule,
-        BackendModule
-    ],
+    imports: [RouterModule, BrowserModule, CommonModule, BackendModule],
     declarations: [
         DocumentsComponent,
         SearchReportsResultComponent,
@@ -27,4 +22,4 @@ import { ReportStatusPipe } from './reports/search-result/report-status.pipe';
         ReportStatusPipe
     ]
 })
-export class DocumentsModule { }
+export class DocumentsModule {}

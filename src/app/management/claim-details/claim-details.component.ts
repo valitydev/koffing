@@ -13,7 +13,6 @@ import { MODIFICATION_TYPE } from '../modification-type';
     providers: [ClaimDetailsService]
 })
 export class ClaimDetailsComponent implements OnInit {
-
     public claim: Claim;
     public modificationType: string;
     public MODIFICATION_TYPE = MODIFICATION_TYPE;
@@ -24,15 +23,17 @@ export class ClaimDetailsComponent implements OnInit {
         private claimService: ClaimService,
         private breadcrumbBroadcaster: BreadcrumbBroadcaster,
         private claimModificationService: ClaimModificationService
-    ) { }
+    ) {}
 
     public ngOnInit() {
         const claimID = this.route.snapshot.params['claimID'];
-        this.claimService.getClaimByID(claimID).subscribe((claim) => {
+        this.claimService.getClaimByID(claimID).subscribe(claim => {
             this.claim = claim;
-            this.modificationType = this.claimModificationService.getModificationType(claim.changeset);
+            this.modificationType = this.claimModificationService.getModificationType(
+                claim.changeset
+            );
         });
-        this.breadcrumbBroadcaster.fire([{label: 'Детали заявки'}]);
+        this.breadcrumbBroadcaster.fire([{ label: 'Детали заявки' }]);
     }
 
     public back() {

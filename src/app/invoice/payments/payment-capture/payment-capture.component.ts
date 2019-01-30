@@ -9,7 +9,6 @@ import { InvoiceService } from 'koffing/backend/invoice.service';
     templateUrl: './payment-capture.component.pug'
 })
 export class PaymentCaptureComponent implements AfterViewInit {
-
     @Input()
     public invoiceID: string;
 
@@ -28,7 +27,7 @@ export class PaymentCaptureComponent implements AfterViewInit {
     constructor(
         private eventPollerService: EventPollerService,
         private invoiceService: InvoiceService
-    ) { }
+    ) {}
 
     public ngAfterViewInit() {
         this.modalElement = jQuery(`#${this.paymentID}capture`);
@@ -40,13 +39,20 @@ export class PaymentCaptureComponent implements AfterViewInit {
 
     public capturePayment() {
         this.inProcess = true;
-        this.invoiceService.capturePayment(this.invoiceID, this.paymentID, this.reason).subscribe(() => {
-            const expectedChange = new PaymentStatusChanged(PAYMENT_STATUS.captured, this.paymentID);
-            this.eventPollerService.startPolling(this.invoiceID, expectedChange).subscribe(() => {
-                this.inProcess = false;
-                this.onChangeStatus.emit(PAYMENT_STATUS.captured);
-                this.close();
+        this.invoiceService
+            .capturePayment(this.invoiceID, this.paymentID, this.reason)
+            .subscribe(() => {
+                const expectedChange = new PaymentStatusChanged(
+                    PAYMENT_STATUS.captured,
+                    this.paymentID
+                );
+                this.eventPollerService
+                    .startPolling(this.invoiceID, expectedChange)
+                    .subscribe(() => {
+                        this.inProcess = false;
+                        this.onChangeStatus.emit(PAYMENT_STATUS.captured);
+                        this.close();
+                    });
             });
-        });
     }
 }

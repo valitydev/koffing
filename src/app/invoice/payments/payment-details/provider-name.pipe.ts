@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofProviderName'
 })
 export class ProviderNamePipe implements PipeTransform {
-
     private names = {
         euroset: 'Евросеть',
         DigitalWalletDetailsQIWI: 'QIWI'

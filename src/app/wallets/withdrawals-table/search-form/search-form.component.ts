@@ -13,7 +13,6 @@ import { WITHDRAWAL_STATUS_LABEL } from '../../withdrawal-status-label';
     styleUrls: ['search-form.component.less']
 })
 export class SearchFormComponent implements OnInit {
-
     @Output()
     public onSearch: EventEmitter<any> = new EventEmitter<any>();
 
@@ -21,17 +20,19 @@ export class SearchFormComponent implements OnInit {
     public additionalParamsVisible: boolean;
     public withdrawalStatuses: SelectItem[];
 
-    constructor(private searchFormService: SearchFormService) {
-    }
+    constructor(private searchFormService: SearchFormService) {}
 
     public ngOnInit() {
-        this.withdrawalStatuses = map(WITHDRAWAL_STATUS_LABEL, (name, key) => new SelectItem(key, name));
+        this.withdrawalStatuses = map(
+            WITHDRAWAL_STATUS_LABEL,
+            (name, key) => new SelectItem(key, name)
+        );
         this.searchForm = this.searchFormService.searchForm;
         this.onSearch.emit(this.searchForm.value);
         this.searchForm.valueChanges
             .filter(() => this.searchForm.status === 'VALID')
             .debounceTime(300)
-            .subscribe((value) => this.onSearch.emit(value));
+            .subscribe(value => this.onSearch.emit(value));
         this.additionalParamsVisible = this.searchFormService.hasFormAdditionalParams();
     }
 

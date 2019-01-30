@@ -2,7 +2,6 @@ import { ContractModification } from './contract-modification';
 import { Contractor } from '../../../contract/contractor/contractor';
 
 export class ContractCreation extends ContractModification {
-
     public contractor: Contractor;
     public paymentInstitutionID: number;
 

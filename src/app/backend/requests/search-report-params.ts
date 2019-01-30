@@ -1,5 +1,4 @@
 export class SearchReportParams {
-
     public fromTime: Date;
     public toTime: Date;
 

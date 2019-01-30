@@ -10,20 +10,19 @@ import { Payment } from 'koffing/backend';
 
 @Injectable()
 export class PaymentsService {
-
     public payments: Payment[] = [];
 
     private limit = 3;
 
     private continuationToken: string;
 
-    constructor(private searchService: SearchService) {
-    }
+    constructor(private searchService: SearchService) {}
 
     public search(shopID: string, invoiceID: string): Observable<SearchResult> {
         const request = this.toSearchParams(invoiceID, this.limit, this.continuationToken);
-        return this.searchService.searchPayments(shopID, request)
-            .map((paymentResult) => this.toSearchResult(paymentResult));
+        return this.searchService
+            .searchPayments(shopID, request)
+            .map(paymentResult => this.toSearchResult(paymentResult));
     }
 
     private toSearchResult(paymentSearchResult: PaymentSearchResult): SearchResult {
@@ -35,13 +34,22 @@ export class PaymentsService {
         return searchResult;
     }
 
-    private toSearchParams(invoiceID: string, limit: number, continuationToken?: string): SearchPaymentsParams {
+    private toSearchParams(
+        invoiceID: string,
+        limit: number,
+        continuationToken?: string
+    ): SearchPaymentsParams {
         const result = new SearchPaymentsParams();
         result.invoiceID = invoiceID;
         result.limit = limit;
         result.continuationToken = continuationToken;
-        result.fromTime = moment().subtract(1, 'year').startOf('day').toDate();
-        result.toTime = moment().endOf('day').toDate();
+        result.fromTime = moment()
+            .subtract(1, 'year')
+            .startOf('day')
+            .toDate();
+        result.toTime = moment()
+            .endOf('day')
+            .toDate();
         return result;
     }
 }

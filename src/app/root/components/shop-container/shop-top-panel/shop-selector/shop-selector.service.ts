@@ -9,12 +9,13 @@ import { ShopIDStorage } from './shop-id-storage.service';
 
 @Injectable()
 export class ShopSelectorService {
-
     private shops: Shop[];
 
-    constructor(private shopService: ShopService,
-                private route: ActivatedRoute,
-                private router: Router) {}
+    constructor(
+        private shopService: ShopService,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
 
     public getSelectorItems(): Observable<SelectItem[]> {
         return this.shopService.getShops().map((shops: Shop[]) => {
@@ -37,7 +38,7 @@ export class ShopSelectorService {
     }
 
     private toSelectorItems(shops: Shop[]): SelectItem[] {
-        return shops.map((shop) => new SelectItem(shop.id, shop.details.name));
+        return shops.map(shop => new SelectItem(shop.id, shop.details.name));
     }
 
     private getFromStorage(shops: Shop[]) {

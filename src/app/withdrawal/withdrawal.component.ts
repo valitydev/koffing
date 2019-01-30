@@ -8,19 +8,17 @@ import { WithdrawalService } from './withdrawal.service';
     providers: [WithdrawalService]
 })
 export class WithdrawalComponent implements OnInit {
-
     public withdrawal: Withdrawal;
 
     public withdrawalNotFound: boolean = false;
 
-    constructor(private withdrawalService: WithdrawalService) {
-    }
+    constructor(private withdrawalService: WithdrawalService) {}
 
     public ngOnInit() {
-        this.withdrawalService.withdrawalSubject
-            .subscribe(
-                (withdrawal: Withdrawal) => this.withdrawal = withdrawal,
-                () => this.withdrawalNotFound = true);
+        this.withdrawalService.withdrawalSubject.subscribe(
+            (withdrawal: Withdrawal) => (this.withdrawal = withdrawal),
+            () => (this.withdrawalNotFound = true)
+        );
     }
 
     public back() {

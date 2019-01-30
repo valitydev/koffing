@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 
 export class CalculatePagesService {
-
     public static initPages(itemsSize: number, itemsLimit: number, itemsOffset: number): any[] {
         const size = this.initParam(itemsSize);
         const limit = this.initParam(itemsLimit);
@@ -28,6 +27,6 @@ export class CalculatePagesService {
             return 0;
         }
         const res = size / limit;
-        return (size % limit > 0) ? res + 1 : res;
+        return size % limit > 0 ? res + 1 : res;
     }
 }

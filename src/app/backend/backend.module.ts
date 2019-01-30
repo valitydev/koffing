@@ -37,4 +37,4 @@ import { DownloadService } from './download.service';
         DownloadService
     ]
 })
-export class BackendModule { }
+export class BackendModule {}
