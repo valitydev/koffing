@@ -3,7 +3,6 @@ import { SearchPayoutsParams } from 'koffing/backend/requests/search-payouts-par
 
 @Injectable()
 export class PayoutsService {
-
     public toSearchParams(limit: number, offset: number, formValue: any): SearchPayoutsParams {
         const result = new SearchPayoutsParams();
         result.limit = limit;

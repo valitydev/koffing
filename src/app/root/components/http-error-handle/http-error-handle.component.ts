@@ -9,21 +9,17 @@ import { HttpErrorBroadcaster } from 'koffing/broadcaster';
     templateUrl: 'http-error-handle.component.pug'
 })
 export class HttpErrorHandleComponent implements OnInit {
-
     public messages: Message[] = [];
     public lifeTime: number = 60000;
 
-    constructor(
-        private router: Router,
-        private httpErrorBroadcaster: HttpErrorBroadcaster
-    ) { }
+    constructor(private router: Router, private httpErrorBroadcaster: HttpErrorBroadcaster) {}
 
     public ngOnInit() {
-        this.router.events.subscribe(() => this.messages = []);
+        this.router.events.subscribe(() => (this.messages = []));
 
         this.httpErrorBroadcaster.on().subscribe((status: any) => {
             let message: string = '';
-            if (status === 0 || status >= 500 && status < 600) {
+            if (status === 0 || (status >= 500 && status < 600)) {
                 message = 'Произошла ошибка на сервере. Повторите действие позже.';
             }
             this.messages.push({

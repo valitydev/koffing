@@ -16,57 +16,84 @@ import {
 
 @Injectable()
 export class AnalyticsService {
+    constructor(private http: KoffingHttp, private config: ConfigService) {}
 
-    constructor(private http: KoffingHttp,
-                private config: ConfigService) {
-    }
-
-    public getPaymentMethodStats(shopID: string, from: Date, to: Date, splitUnit?: string, splitSize?: number, paymentMethod?: string): Observable<PaymentMethodStat[]> {
+    public getPaymentMethodStats(
+        shopID: string,
+        from: Date,
+        to: Date,
+        splitUnit?: string,
+        splitSize?: number,
+        paymentMethod?: string
+    ): Observable<PaymentMethodStat[]> {
         const search = new URLSearchParams();
         search.set('fromTime', this.toUTC(from));
         search.set('toTime', this.toUTC(to));
         search.set('splitUnit', splitUnit || 'minute');
         search.set('splitSize', this.getSplitSize(splitSize));
         search.set('paymentMethod', paymentMethod || 'bankCard');
-        return this.http.get(`${this.getEndpoint(shopID, 'customers')}/payment_method`, {search})
-            .map((res) => res.json());
+        return this.http
+            .get(`${this.getEndpoint(shopID, 'customers')}/payment_method`, { search })
+            .map(res => res.json());
     }
 
     public getPaymentRateStats(shopID: string, from: Date, to: Date): Observable<PaymentRateStat> {
         const search = new URLSearchParams();
         search.set('fromTime', this.toUTC(from));
         search.set('toTime', this.toUTC(to));
-        return this.http.get(`${this.getEndpoint(shopID, 'customers')}/rate`, {search})
-            .map((res) => res.json());
+        return this.http
+            .get(`${this.getEndpoint(shopID, 'customers')}/rate`, { search })
+            .map(res => res.json());
     }
 
-    public getPaymentConversionStats(shopID: string, from: Date, to: Date, splitUnit?: string, splitSize?: number): Observable<PaymentConversionStat[]> {
+    public getPaymentConversionStats(
+        shopID: string,
+        from: Date,
+        to: Date,
+        splitUnit?: string,
+        splitSize?: number
+    ): Observable<PaymentConversionStat[]> {
         const search = new URLSearchParams();
         search.set('fromTime', this.toUTC(from));
         search.set('toTime', this.toUTC(to));
         search.set('splitUnit', splitUnit || 'minute');
         search.set('splitSize', this.getSplitSize(splitSize));
-        return this.http.get(`${this.getEndpoint(shopID, 'payments')}/conversion`, {search})
-            .map((res) => res.json());
+        return this.http
+            .get(`${this.getEndpoint(shopID, 'payments')}/conversion`, { search })
+            .map(res => res.json());
     }
 
-    public getPaymentGeoStats(shopID: string, from: Date, to: Date, splitUnit?: string, splitSize?: number): Observable<PaymentGeoStat[]> {
+    public getPaymentGeoStats(
+        shopID: string,
+        from: Date,
+        to: Date,
+        splitUnit?: string,
+        splitSize?: number
+    ): Observable<PaymentGeoStat[]> {
         const search = new URLSearchParams();
         search.set('fromTime', this.toUTC(from));
         search.set('toTime', this.toUTC(to));
         search.set('splitUnit', splitUnit || 'day');
         search.set('splitSize', this.getSplitSize(splitSize));
-        return this.http.get(`${this.getEndpoint(shopID, 'payments')}/geo`, {search})
-            .map((res) => res.json());
+        return this.http
+            .get(`${this.getEndpoint(shopID, 'payments')}/geo`, { search })
+            .map(res => res.json());
     }
 
-    public getPaymentRevenueStats(shopID: string, from: Date, to: Date, splitUnit?: string, splitSize?: number): Observable<PaymentRevenueStat[]> {
+    public getPaymentRevenueStats(
+        shopID: string,
+        from: Date,
+        to: Date,
+        splitUnit?: string,
+        splitSize?: number
+    ): Observable<PaymentRevenueStat[]> {
         const search = new URLSearchParams();
         search.set('fromTime', this.toUTC(from));
         search.set('toTime', this.toUTC(to));
         search.set('splitUnit', splitUnit || 'minute');
         search.set('splitSize', this.getSplitSize(splitSize));
-        return this.http.get(`${this.getEndpoint(shopID, 'payments')}/revenue`, {search})
+        return this.http
+            .get(`${this.getEndpoint(shopID, 'payments')}/revenue`, { search })
             .map(res => res.json());
     }
 
@@ -75,7 +102,9 @@ export class AnalyticsService {
     }
 
     private toUTC(date: Date): string {
-        return moment(date).utc().format();
+        return moment(date)
+            .utc()
+            .format();
     }
 
     private getSplitSize(splitSize: number) {

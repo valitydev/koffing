@@ -9,19 +9,18 @@ import { Router } from '@angular/router';
     styleUrls: ['init-create-shop.component.less']
 })
 export class InitCreateShopComponent implements OnInit {
-
     public types: SelectItem[] = [
-        {value: LegalEntityTypeEnum.RussianLegalEntity, label: 'Ведущее деятельность под юрисдикцией РФ'},
-        {value: LegalEntityTypeEnum.InternationalLegalEntity, label: 'Международное'}
+        {
+            value: LegalEntityTypeEnum.RussianLegalEntity,
+            label: 'Ведущее деятельность под юрисдикцией РФ'
+        },
+        { value: LegalEntityTypeEnum.InternationalLegalEntity, label: 'Международное' }
     ];
 
-    constructor(
-        private breadcrumbBroadcaster: BreadcrumbBroadcaster,
-        private router: Router
-    ) { }
+    constructor(private breadcrumbBroadcaster: BreadcrumbBroadcaster, private router: Router) {}
 
     public ngOnInit() {
-        this.breadcrumbBroadcaster.fire([{label: 'Создание магазина'}]);
+        this.breadcrumbBroadcaster.fire([{ label: 'Создание магазина' }]);
     }
 
     public next(entityType: LegalEntityTypeEnum) {

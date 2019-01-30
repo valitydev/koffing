@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonConfig = require('./webpack.common.js');
 const helpers = require('./helpers');
 
-const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+const ENV = (process.env.NODE_ENV = process.env.ENV = 'production');
 
 module.exports = webpackMerge(commonConfig, {
     output: {
@@ -27,7 +27,7 @@ module.exports = webpackMerge(commonConfig, {
         new ExtractTextPlugin('[name].[hash].css'),
         new webpack.DefinePlugin({
             'process.env': {
-                'ENV': JSON.stringify(ENV)
+                ENV: JSON.stringify(ENV)
             }
         }),
         new webpack.LoaderOptionsPlugin({

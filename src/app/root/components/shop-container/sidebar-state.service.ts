@@ -1,5 +1,4 @@
 export class SidebarStateService {
-
     public static isOpened(): boolean {
         return Boolean(localStorage.getItem(this.key));
     }
@@ -13,5 +12,4 @@ export class SidebarStateService {
     }
 
     private static key: string = 'isSidebarOpened';
-
 }

@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: 'russian-contract-form.component.pug'
 })
 export class RussianContractFormComponent implements OnInit, AfterViewInit {
-
     @Input()
     public form: FormGroup;
 
@@ -18,12 +17,10 @@ export class RussianContractFormComponent implements OnInit, AfterViewInit {
 
     public bankAccountForm: AbstractControl;
 
-    constructor(
-        private suggestionsService: SuggestionsService,
-        private route: ActivatedRoute) { }
+    constructor(private suggestionsService: SuggestionsService, private route: ActivatedRoute) {}
 
     public ngOnInit() {
-        this.route.params.subscribe((params) => {
+        this.route.params.subscribe(params => {
             this.type = params.type;
         });
         this.bankAccountForm = this.form.get('bankAccount');
@@ -35,7 +32,10 @@ export class RussianContractFormComponent implements OnInit, AfterViewInit {
 
     private initContractorSuggestions() {
         const selector = '.contractor-suggestions';
-        this.suggestionsService.initContractorSuggestions(selector, this.handleContractor.bind(this));
+        this.suggestionsService.initContractorSuggestions(
+            selector,
+            this.handleContractor.bind(this)
+        );
     }
 
     private handleContractor(suggestion: OgranizationSuggestion) {

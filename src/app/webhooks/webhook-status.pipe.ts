@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofWebhookStatus'
 })
 export class WebhookStatusPipe implements PipeTransform {
-
     public transform(active: boolean): string {
         return active ? 'Активен' : 'Неактивен';
     }

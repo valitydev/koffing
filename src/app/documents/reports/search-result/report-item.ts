@@ -1,7 +1,6 @@
 import { Report } from 'koffing/backend';
 
 export class ReportTableItem {
-
     public report: Report;
     public isVisible: boolean;
 

@@ -36,4 +36,4 @@ import { InvoiceTemplateFormComponent } from './invoice-template-form/invoice-te
         InvoiceTemplateFormComponent
     ]
 })
-export class InvoicesModule { }
+export class InvoicesModule {}

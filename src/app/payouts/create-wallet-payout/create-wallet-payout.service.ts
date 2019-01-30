@@ -2,7 +2,6 @@ import { CreatePayoutParams } from 'koffing/backend';
 import * as uuid from 'uuid/v4';
 
 export class CreateWalletPayoutService {
-
     public static getCreatePayoutParams(formValue: any, shopID: string): CreatePayoutParams {
         const params = new CreatePayoutParams();
         params.id = uuid();

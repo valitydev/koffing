@@ -10,7 +10,6 @@ import { DateRange } from './date-range';
     encapsulation: ViewEncapsulation.None
 })
 export class DateRangeSelectorComponent {
-
     @Input()
     public from: Date;
 
@@ -27,11 +26,15 @@ export class DateRangeSelectorComponent {
     public onSelect = new EventEmitter<DateRange>();
 
     public selectFrom() {
-        this.from = moment(this.from).startOf('day').toDate();
+        this.from = moment(this.from)
+            .startOf('day')
+            .toDate();
     }
 
     public selectTo() {
-        this.to = moment(this.to).endOf('day').toDate();
+        this.to = moment(this.to)
+            .endOf('day')
+            .toDate();
     }
 
     public select() {

@@ -6,28 +6,30 @@ import { mapValues, isEqual, chain, keys, difference } from 'lodash';
 
 @Injectable()
 export class SearchFormService {
-
     public searchForm: FormGroup;
 
     private shopID: string;
 
     private defaultValues = {
-        from: moment().subtract(1, 'month').startOf('day').toDate(),
-        to: moment().endOf('day').toDate(),
+        from: moment()
+            .subtract(1, 'month')
+            .startOf('day')
+            .toDate(),
+        to: moment()
+            .endOf('day')
+            .toDate(),
         invoicesWithPayments: true
     };
 
     private mainSearchFields = ['invoiceID', 'invoiceStatus', 'paymentStatus'];
 
-    constructor(private fb: FormBuilder,
-                private router: Router,
-                private route: ActivatedRoute) {
+    constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
         this.searchForm = this.initForm();
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
-        this.route.queryParams.subscribe((queryParams) => this.updateFormValue(queryParams));
-        this.searchForm.valueChanges.subscribe((values) => this.updateQueryParams(values));
+        this.route.queryParams.subscribe(queryParams => this.updateFormValue(queryParams));
+        this.searchForm.valueChanges.subscribe(values => this.updateQueryParams(values));
     }
 
     public reset() {
@@ -36,8 +38,8 @@ export class SearchFormService {
 
     public hasFormAdditionalParams(): boolean {
         const formFields = chain(this.searchForm.getRawValue())
-            .map((value: string, key: string) => isEqual(value, '') ? null : key)
-            .filter((mapped) => mapped !== null)
+            .map((value: string, key: string) => (isEqual(value, '') ? null : key))
+            .filter(mapped => mapped !== null)
             .value();
         const defaultFields = keys(this.defaultValues);
         return difference(formFields, defaultFields, this.mainSearchFields).length > 0;
@@ -53,19 +55,13 @@ export class SearchFormService {
 
     private updateQueryParams(value: any) {
         const queryParams = this.formValueToQueryParams(value);
-        this.router.navigate(['shop', this.shopID, 'invoices'], {queryParams});
+        this.router.navigate(['shop', this.shopID, 'invoices'], { queryParams });
     }
 
     private initForm(): FormGroup {
         return this.fb.group({
-            from: [
-                this.defaultValues.from,
-                Validators.required
-            ],
-            to: [
-                this.defaultValues.to,
-                Validators.required
-            ],
+            from: [this.defaultValues.from, Validators.required],
+            to: [this.defaultValues.to, Validators.required],
             lastDigits: ['', Validators.pattern(/^\d{4}$/)],
             invoiceID: '',
             invoiceStatus: '',
@@ -83,20 +79,24 @@ export class SearchFormService {
     }
 
     private formValueToQueryParams(formValue: any): Params {
-        const mapped = mapValues(formValue, (value) => isEqual(value, '') ? null : value);
+        const mapped = mapValues(formValue, value => (isEqual(value, '') ? null : value));
         const urlDateFormat = 'YYYY-MM-DD';
         return {
             ...mapped,
             from: moment(formValue.from).format(urlDateFormat),
-            to: moment(formValue.to).format(urlDateFormat),
+            to: moment(formValue.to).format(urlDateFormat)
         };
     }
 
     private queryParamsToFormValue(params: Params): any {
         return {
             ...params,
-            from: moment(params.from).startOf('day').toDate(),
-            to: moment(params.to).endOf('day').toDate(),
+            from: moment(params.from)
+                .startOf('day')
+                .toDate(),
+            to: moment(params.to)
+                .endOf('day')
+                .toDate(),
             invoicesWithPayments: params.invoicesWithPayments === 'true'
         };
     }

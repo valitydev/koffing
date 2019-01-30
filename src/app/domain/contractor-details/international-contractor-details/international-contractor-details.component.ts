@@ -6,7 +6,6 @@ import { Contractor } from 'koffing/backend';
     templateUrl: 'international-contractor-details.component.pug'
 })
 export class InternationalContractorDetailsComponent {
-
     @Input()
     public contractor: Contractor;
 }

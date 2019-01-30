@@ -10,7 +10,6 @@ import { PayoutTableItem } from '../payout-table-item';
     templateUrl: 'search-payouts-result.component.pug'
 })
 export class SearchPayoutsResultComponent implements OnInit {
-
     @Input()
     public payouts: Observable<Payout[]>;
 
@@ -18,10 +17,10 @@ export class SearchPayoutsResultComponent implements OnInit {
 
     private shopID: string;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute) {}
 
     public ngOnInit() {
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
             this.prepareTableItems();
         });
@@ -32,8 +31,8 @@ export class SearchPayoutsResultComponent implements OnInit {
     }
 
     private prepareTableItems() {
-        this.payouts.subscribe((payouts) => {
-            this.payoutListItems = payouts.map((payout) => ({
+        this.payouts.subscribe(payouts => {
+            this.payoutListItems = payouts.map(payout => ({
                 visible: false,
                 payout
             }));

@@ -10,11 +10,11 @@ export class InternationalLegalEntity extends LegalEntity {
     public bankAccount: BankAccount;
 
     constructor(options: {
-        legalName: string,
-        registeredOffice: string,
-        tradingName?: string,
-        principalPlaceOfBusiness?: string
-        bankAccount: BankAccount
+        legalName: string;
+        registeredOffice: string;
+        tradingName?: string;
+        principalPlaceOfBusiness?: string;
+        bankAccount: BankAccount;
     }) {
         super();
         this.entityType = LegalEntityTypeEnum.InternationalLegalEntity;

@@ -15,60 +15,64 @@ interface FormControls {
 
 @Injectable()
 export class ManagePaymentMethodsService {
-
     public getAdditionalMethodsConfig(methods: PaymentMethod[]): PaymentMethodInfo[] {
-        return methods.map((item) => {
-            switch (item.method) {
-                case 'BankCard':
-                    const bankCard = item as PaymentMethodBankCard;
-                    if (Array.isArray(bankCard.tokenProviders) && bankCard.tokenProviders.length) {
-                        switch (bankCard.tokenProviders[0]) {
-                            case TOKEN_PROVIDER.applepay:
-                                return {
-                                    label: 'Apple pay',
-                                    formControlName: 'applePay',
-                                    order: 4
-                                };
-                            case TOKEN_PROVIDER.googlepay:
-                                return {
-                                    label: 'Google pay',
-                                    formControlName: 'googlePay',
-                                    order: 5
-                                };
-                            case TOKEN_PROVIDER.samsungpay:
-                                return {
-                                    label: 'Samsung pay',
-                                    formControlName: 'samsungPay',
-                                    order: 6
-                                };
+        return methods
+            .map(item => {
+                switch (item.method) {
+                    case 'BankCard':
+                        const bankCard = item as PaymentMethodBankCard;
+                        if (
+                            Array.isArray(bankCard.tokenProviders) &&
+                            bankCard.tokenProviders.length
+                        ) {
+                            switch (bankCard.tokenProviders[0]) {
+                                case TOKEN_PROVIDER.applepay:
+                                    return {
+                                        label: 'Apple pay',
+                                        formControlName: 'applePay',
+                                        order: 4
+                                    };
+                                case TOKEN_PROVIDER.googlepay:
+                                    return {
+                                        label: 'Google pay',
+                                        formControlName: 'googlePay',
+                                        order: 5
+                                    };
+                                case TOKEN_PROVIDER.samsungpay:
+                                    return {
+                                        label: 'Samsung pay',
+                                        formControlName: 'samsungPay',
+                                        order: 6
+                                    };
+                            }
                         }
-                    }
-                    return {
-                        label: 'Банковская карта',
-                        formControlName: 'bankCard',
-                        order: 1
-                    };
-                case 'DigitalWallet':
-                    return {
-                        label: 'QIWI кошелек',
-                        formControlName: 'wallets',
-                        order: 2
-                    };
-                case 'PaymentTerminal':
-                    return {
-                        label: 'Терминалы "Евросеть"',
-                        formControlName: 'terminals',
-                        order: 3
-                    };
-                default:
-                    throw new Error('Unhandled PaymentMethod');
-            }
-        }).sort((item) => item.order);
+                        return {
+                            label: 'Банковская карта',
+                            formControlName: 'bankCard',
+                            order: 1
+                        };
+                    case 'DigitalWallet':
+                        return {
+                            label: 'QIWI кошелек',
+                            formControlName: 'wallets',
+                            order: 2
+                        };
+                    case 'PaymentTerminal':
+                        return {
+                            label: 'Терминалы "Евросеть"',
+                            formControlName: 'terminals',
+                            order: 3
+                        };
+                    default:
+                        throw new Error('Unhandled PaymentMethod');
+                }
+            })
+            .sort(item => item.order);
     }
 
     public handleAdditionalMethods(info: PaymentMethodInfo[], form: FormGroup) {
         const controlsMap = this.infoToControlMap(info, form.controls);
-        form.valueChanges.subscribe((values) => {
+        form.valueChanges.subscribe(values => {
             const activityMap = this.infoToActivityMap(info, values);
             this.disable(activityMap, controlsMap);
         });
@@ -78,9 +82,12 @@ export class ManagePaymentMethodsService {
         });
     }
 
-    private infoToControlMap(info: PaymentMethodInfo[], controls: FormControls): Map<string, AbstractControl> {
+    private infoToControlMap(
+        info: PaymentMethodInfo[],
+        controls: FormControls
+    ): Map<string, AbstractControl> {
         const result = new Map<string, AbstractControl>();
-        info.forEach((item) => {
+        info.forEach(item => {
             result.set(item.formControlName, controls[item.formControlName]);
         });
         return result;
@@ -88,7 +95,7 @@ export class ManagePaymentMethodsService {
 
     private infoToActivityMap(info: PaymentMethodInfo[], formValues: any): Map<string, boolean> {
         const result = new Map<string, boolean>();
-        info.forEach((item) => {
+        info.forEach(item => {
             result.set(item.formControlName, formValues[item.formControlName]);
         });
         return result;
@@ -115,7 +122,10 @@ export class ManagePaymentMethodsService {
         }
     }
 
-    private excludeInitiator(initiatorControlName: string, controls: Map<string, AbstractControl>): AbstractControl[] {
+    private excludeInitiator(
+        initiatorControlName: string,
+        controls: Map<string, AbstractControl>
+    ): AbstractControl[] {
         const result: AbstractControl[] = [];
         controls.forEach((value, key) => {
             if (key !== initiatorControlName) {
@@ -127,7 +137,7 @@ export class ManagePaymentMethodsService {
 
     private enable(controls: AbstractControl[], value: boolean) {
         if (value) {
-            controls.forEach((control) => control.disabled && control.enable());
+            controls.forEach(control => control.disabled && control.enable());
         }
     }
 }

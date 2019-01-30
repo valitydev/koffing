@@ -7,13 +7,12 @@ import { CategoryService } from 'koffing/backend/category.service';
     templateUrl: 'shop-details.component.pug'
 })
 export class ShopDetailsComponent implements OnChanges {
-
     @Input()
     public shop: Shop;
 
     public category: Category;
 
-    constructor(private categoryService: CategoryService) { }
+    constructor(private categoryService: CategoryService) {}
 
     public ngOnChanges() {
         if (this.shop && this.shop.categoryID) {
@@ -23,18 +22,26 @@ export class ShopDetailsComponent implements OnChanges {
 
     public getShopLabel(): string {
         if (this.shop) {
-            return this.shop.isBlocked ? 'label-danger' : this.shop.isSuspended ? 'label-warning' : 'label-success';
+            return this.shop.isBlocked
+                ? 'label-danger'
+                : this.shop.isSuspended
+                ? 'label-warning'
+                : 'label-success';
         }
     }
 
     public getShopStatus(): string {
         if (this.shop) {
-            return this.shop.isBlocked ? 'Заблокирован' : this.shop.isSuspended ? 'Заморожен' : 'Активен';
+            return this.shop.isBlocked
+                ? 'Заблокирован'
+                : this.shop.isSuspended
+                ? 'Заморожен'
+                : 'Активен';
         }
     }
 
     private loadCategory(categoryID: number) {
-        this.categoryService.getCategoryByID(categoryID).subscribe((category) => {
+        this.categoryService.getCategoryByID(categoryID).subscribe(category => {
             this.category = category;
         });
     }

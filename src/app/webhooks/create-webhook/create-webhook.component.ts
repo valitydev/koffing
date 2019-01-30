@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import { CreateWebhookService } from './create-webhook.service';
 import { EventTypePresent } from './event-type-present';
@@ -12,8 +12,7 @@ import { TopicItem } from './topic-item';
     styleUrls: ['create-webhook.component.less'],
     providers: [CreateWebhookService]
 })
-export class CreateWebhookComponent implements OnInit  {
-
+export class CreateWebhookComponent implements OnInit {
     public shopID: string;
 
     public form: FormGroup;
@@ -24,12 +23,14 @@ export class CreateWebhookComponent implements OnInit  {
 
     public topicItems: TopicItem[];
 
-    constructor(private router: Router,
-                private route: ActivatedRoute,
-                private createWebhookService: CreateWebhookService) {}
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private createWebhookService: CreateWebhookService
+    ) {}
 
     public ngOnInit() {
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
         this.form = this.createWebhookService.createWebhookGroup;
@@ -47,8 +48,7 @@ export class CreateWebhookComponent implements OnInit  {
     }
 
     public createWebhook() {
-        this.createWebhookService.createWebhook(this.shopID)
-            .subscribe(() => this.goBack());
+        this.createWebhookService.createWebhook(this.shopID).subscribe(() => this.goBack());
     }
 
     public selectTopic() {

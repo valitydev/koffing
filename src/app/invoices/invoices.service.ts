@@ -4,8 +4,11 @@ import { SearchInvoicesParams } from 'koffing/backend/requests/search-invoices-p
 
 @Injectable()
 export class InvoicesService {
-
-    public toSearchParams(limit: number, continuationToken: string, formParams: any): SearchInvoicesParams {
+    public toSearchParams(
+        limit: number,
+        continuationToken: string,
+        formParams: any
+    ): SearchInvoicesParams {
         const result = new SearchInvoicesParams();
         result.limit = limit;
         result.continuationToken = continuationToken;

@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: 'payout-tool-create.component.pug'
 })
 export class PayoutToolCreateComponent implements OnInit {
-
     @Input()
     public contractID: string;
 
@@ -21,19 +20,24 @@ export class PayoutToolCreateComponent implements OnInit {
 
     public payoutToolForm: FormGroup;
 
-    constructor(private payoutToolFormService: PayoutToolFormService,
-                private route: ActivatedRoute) {
-    }
+    constructor(
+        private payoutToolFormService: PayoutToolFormService,
+        private route: ActivatedRoute
+    ) {}
 
     public ngOnInit() {
-        this.route.params.subscribe((params) => {
+        this.route.params.subscribe(params => {
             this.payoutToolForm = this.payoutToolFormService.initForm(params.type);
             this.type = params.type;
         });
     }
 
     public createPayoutTool() {
-        const payoutToolCreation = this.payoutToolFormService.toPayoutToolCreation(this.contractID, this.payoutToolForm, this.type);
+        const payoutToolCreation = this.payoutToolFormService.toPayoutToolCreation(
+            this.contractID,
+            this.payoutToolForm,
+            this.type
+        );
         this.onCreate.emit(payoutToolCreation);
     }
 }

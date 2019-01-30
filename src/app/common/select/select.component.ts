@@ -7,14 +7,15 @@ import { SelectItem } from './select-item';
     selector: 'kof-select',
     templateUrl: 'select.component.pug',
     styleUrls: ['select.component.less'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: SelectComponent,
-        multi: true
-    }]
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: SelectComponent,
+            multi: true
+        }
+    ]
 })
 export class SelectComponent {
-
     @Input()
     public items: SelectItem[];
     @Input()
@@ -57,5 +58,4 @@ export class SelectComponent {
     public registerOnTouched(fn: any) {
         this.onTouchedCallback = fn;
     }
-
 }

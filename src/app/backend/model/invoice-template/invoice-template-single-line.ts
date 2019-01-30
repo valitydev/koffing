@@ -3,7 +3,6 @@ import { InvoiceTemplateLineCost } from './invoice-template-line-cost';
 import { InvoiceLineTaxMode } from '../invoice-cart/invoice-line-tax-mode';
 
 export class InvoiceTemplateSingleLine extends InvoiceTemplateDetails {
-
     public product: string;
     public price: InvoiceTemplateLineCost;
     public taxMode?: InvoiceLineTaxMode;

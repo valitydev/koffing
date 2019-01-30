@@ -10,11 +10,7 @@ import { LocationName } from './model';
 
 @Injectable()
 export class LocationService {
-
-    constructor(
-        private http: KoffingHttp,
-        private config: ConfigService
-    ) { }
+    constructor(private http: KoffingHttp, private config: ConfigService) {}
 
     public getLocationsNames(geoIDs: string[], language?: string): Observable<LocationName[]> {
         if (isNil(geoIDs) || geoIDs.length === 0) {
@@ -26,6 +22,8 @@ export class LocationService {
         const search = new URLSearchParams();
         search.set('geoIDs', geoIDs.join(','));
         search.set('language', language || 'ru');
-        return this.http.get(`${this.config.capiUrl}/reference/geo/location/names`, {search}).map((res) => res.json());
+        return this.http
+            .get(`${this.config.capiUrl}/reference/geo/location/names`, { search })
+            .map(res => res.json());
     }
 }

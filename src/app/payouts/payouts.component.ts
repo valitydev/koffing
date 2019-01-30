@@ -16,7 +16,6 @@ import { WalletPayoutFormService } from './ wallet-payout-form/wallet-payout-for
     encapsulation: ViewEncapsulation.None
 })
 export class PayoutsComponent implements OnInit {
-
     public payouts: Subject<Payout[]> = new Subject();
     public shopID: string;
     public totalCount: number;
@@ -24,11 +23,12 @@ export class PayoutsComponent implements OnInit {
     private offset: number = 0;
     private searchForm: FormGroup;
 
-    constructor(private route: ActivatedRoute,
-                private searchService: SearchService,
-                private payoutsService: PayoutsService,
-                private searchPayoutsFormService: SearchPayoutsFormService) {
-    }
+    constructor(
+        private route: ActivatedRoute,
+        private searchService: SearchService,
+        private payoutsService: PayoutsService,
+        private searchPayoutsFormService: SearchPayoutsFormService
+    ) {}
 
     public ngOnInit() {
         this.searchForm = this.searchPayoutsFormService.form;
@@ -49,8 +49,12 @@ export class PayoutsComponent implements OnInit {
     }
 
     public loadPayouts() {
-        const params = this.payoutsService.toSearchParams(this.limit, this.offset, this.searchForm.value);
-        this.searchService.searchPayouts(this.shopID, params).subscribe((response) => {
+        const params = this.payoutsService.toSearchParams(
+            this.limit,
+            this.offset,
+            this.searchForm.value
+        );
+        this.searchService.searchPayouts(this.shopID, params).subscribe(response => {
             this.totalCount = response.totalCount;
             this.payouts.next(response.result);
         });

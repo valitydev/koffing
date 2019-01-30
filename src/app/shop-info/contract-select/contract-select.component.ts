@@ -11,7 +11,6 @@ import { Contract } from 'koffing/backend';
     styleUrls: ['contract-select.component.less']
 })
 export class ContractSelectComponent implements OnChanges {
-
     @Input()
     public currentContractID: string;
 
@@ -22,27 +21,40 @@ export class ContractSelectComponent implements OnChanges {
     public contracts: Contract[];
     public contractItems: SelectItem[];
 
-    constructor(private contractService: ContractService) { }
-    
+    constructor(private contractService: ContractService) {}
+
     public ngOnChanges() {
         this.contractService.getContracts().subscribe((contracts: Contract[]) => {
             this.contracts = contracts;
-            const currentContract = find(this.contracts, (contract: Contract) => contract.id === this.currentContractID);
-            this.contractItems = this.getContractItems(this.contracts, currentContract ? currentContract.id : '');
+            const currentContract = find(
+                this.contracts,
+                (contract: Contract) => contract.id === this.currentContractID
+            );
+            this.contractItems = this.getContractItems(
+                this.contracts,
+                currentContract ? currentContract.id : ''
+            );
             this.select(currentContract ? currentContract.id : this.contractItems[0].value);
         });
     }
 
     public select(contractID: string) {
         this.selectedContractID = contractID;
-        const selectedContract = find(this.contracts, (contract: Contract) => contract.id === contractID);
+        const selectedContract = find(
+            this.contracts,
+            (contract: Contract) => contract.id === contractID
+        );
         this.onSelect.emit(selectedContract);
     }
 
     private getContractItems(contracts: Contract[], currentContractID?: string): SelectItem[] {
         const result = chain(contracts)
-            .filter((contract: Contract) => contract.id !== 'TEST' && contract.id !== currentContractID)
-            .map((contract: Contract, index) => new SelectItem(contract.id, `Контракт ${index + 1}`))
+            .filter(
+                (contract: Contract) => contract.id !== 'TEST' && contract.id !== currentContractID
+            )
+            .map(
+                (contract: Contract, index) => new SelectItem(contract.id, `Контракт ${index + 1}`)
+            )
             .push(new SelectItem('', 'Новый контракт'))
             .value();
         if (currentContractID) {

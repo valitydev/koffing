@@ -8,21 +8,9 @@ import { CheckoutConfigFormComponent } from './checkout-config-form/checkout-con
 import { PaymentLinkService } from './payment-link/payment-link.service';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BackendModule
-    ],
-    declarations: [
-        CheckoutConfigFormComponent
-    ],
-    providers: [
-        CheckoutConfigFormService,
-        PaymentLinkService
-    ],
-    exports: [
-        CheckoutConfigFormComponent
-    ]
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, BackendModule],
+    declarations: [CheckoutConfigFormComponent],
+    providers: [CheckoutConfigFormService, PaymentLinkService],
+    exports: [CheckoutConfigFormComponent]
 })
-export class CheckoutModule { }
+export class CheckoutModule {}

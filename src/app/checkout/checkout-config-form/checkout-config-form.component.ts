@@ -13,7 +13,6 @@ import { PaymentMethodInfo, ManagePaymentMethodsService } from './manage-payment
     providers: [ManagePaymentMethodsService]
 })
 export class CheckoutConfigFormComponent implements OnInit, OnChanges {
-
     @Input()
     public methods: PaymentMethod[];
 
@@ -25,9 +24,10 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
 
     public isHoldAvailable: boolean = true;
 
-    constructor(private checkoutConfigFormService: CheckoutConfigFormService,
-                private managePaymentMethodsService: ManagePaymentMethodsService) {
-    }
+    constructor(
+        private checkoutConfigFormService: CheckoutConfigFormService,
+        private managePaymentMethodsService: ManagePaymentMethodsService
+    ) {}
 
     public ngOnInit() {
         this.form = this.checkoutConfigFormService.form;
@@ -55,13 +55,26 @@ export class CheckoutConfigFormComponent implements OnInit, OnChanges {
 
     private updateMethods() {
         if (this.form && this.methods) {
-            this.additionalMethodConfigs = this.managePaymentMethodsService.getAdditionalMethodsConfig(this.methods);
-            this.managePaymentMethodsService.handleAdditionalMethods(this.additionalMethodConfigs, this.form);
+            this.additionalMethodConfigs = this.managePaymentMethodsService.getAdditionalMethodsConfig(
+                this.methods
+            );
+            this.managePaymentMethodsService.handleAdditionalMethods(
+                this.additionalMethodConfigs,
+                this.form
+            );
         }
     }
 
     private handleHoldAvailable() {
-        const { bankCard, terminals, wallets, applePay, googlePay, samsungPay } = this.form.getRawValue();
-        this.isHoldAvailable = (bankCard || applePay || googlePay || samsungPay) && !(terminals || wallets);
+        const {
+            bankCard,
+            terminals,
+            wallets,
+            applePay,
+            googlePay,
+            samsungPay
+        } = this.form.getRawValue();
+        this.isHoldAvailable =
+            (bankCard || applePay || googlePay || samsungPay) && !(terminals || wallets);
     }
 }

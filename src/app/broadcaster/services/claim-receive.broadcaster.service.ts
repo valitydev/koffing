@@ -4,7 +4,6 @@ import { Broadcaster } from './broadcaster.service';
 
 @Injectable()
 export class ClaimReceiveBroadcaster {
-
     constructor(private broadcaster: Broadcaster) {}
 
     public fire() {

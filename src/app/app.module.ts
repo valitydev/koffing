@@ -8,10 +8,7 @@ import { ContainerComponent } from './root/components/container/container.compon
 import { RootModule } from './root/root.module';
 
 @NgModule({
-    imports: [
-        HttpModule,
-        RootModule
-    ],
+    imports: [HttpModule, RootModule],
     providers: [
         {
             provide: KoffingHttp,
@@ -31,4 +28,4 @@ import { RootModule } from './root/root.module';
     ],
     bootstrap: [ContainerComponent]
 })
-export class AppModule { }
+export class AppModule {}

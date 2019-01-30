@@ -12,13 +12,7 @@ import { CommonModule } from 'koffing/common/common.module';
 import { BackendModule } from 'koffing/backend/backend.module';
 
 @NgModule({
-    imports: [
-        AnalyticsRoutingModule,
-        BrowserModule,
-        FormsModule,
-        CommonModule,
-        BackendModule
-    ],
+    imports: [AnalyticsRoutingModule, BrowserModule, FormsModule, CommonModule, BackendModule],
     declarations: [
         AnalyticsComponent,
         BaseChartDirective,
@@ -27,4 +21,4 @@ import { BackendModule } from 'koffing/backend/backend.module';
         StatisticPanelComponent
     ]
 })
-export class AnalyticsModule { }
+export class AnalyticsModule {}

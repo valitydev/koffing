@@ -12,7 +12,6 @@ import { InvoiceTemplateFormService } from './invoice-template-form.service';
     styleUrls: ['./invoice-template-form.component.less']
 })
 export class InvoiceTemplateFormComponent implements OnInit {
-
     @Input()
     public form: FormGroup;
 
@@ -20,7 +19,7 @@ export class InvoiceTemplateFormComponent implements OnInit {
     public templateTypeItems: SelectItem[];
     public invoiceLineTaxItems: SelectItem[];
 
-    constructor(private invoiceTemplateFormService: InvoiceTemplateFormService) { }
+    constructor(private invoiceTemplateFormService: InvoiceTemplateFormService) {}
 
     public ngOnInit() {
         this.costTypesItems = [
@@ -32,7 +31,10 @@ export class InvoiceTemplateFormComponent implements OnInit {
             new SelectItem(TEMPLATE_TYPE.singleLine, 'Одиночная позиция'),
             new SelectItem(TEMPLATE_TYPE.multiLine, 'Корзина товаров')
         ];
-        this.invoiceLineTaxItems = map(INVOICE_LINE_TAX_VAT_RATES, (value) => new SelectItem(value, value));
+        this.invoiceLineTaxItems = map(
+            INVOICE_LINE_TAX_VAT_RATES,
+            value => new SelectItem(value, value)
+        );
     }
 
     public isSelectedCostType(costType: string): boolean {

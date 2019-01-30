@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofPaymentToolDetailsType'
 })
 export class PaymentToolDetailsTypePipe implements PipeTransform {
-
     private names = {
         PaymentToolDetailsPaymentTerminal: 'Терминал',
         PaymentToolDetailsBankCard: 'Банковская карта',

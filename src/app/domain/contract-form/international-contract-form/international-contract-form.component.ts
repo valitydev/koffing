@@ -6,7 +6,6 @@ import { FormGroup, AbstractControl } from '@angular/forms';
     templateUrl: 'international-contract-form.component.pug'
 })
 export class InternationalContractFormComponent implements OnInit {
-
     @Input()
     public form: FormGroup;
 

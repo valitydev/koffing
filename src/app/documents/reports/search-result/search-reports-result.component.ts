@@ -11,7 +11,6 @@ import { ReportsFilter } from '../reports-filter';
     templateUrl: 'search-reports-result.component.pug'
 })
 export class SearchReportsResultComponent implements OnInit {
-
     @Input()
     public reports$: Observable<Report[]>;
 
@@ -22,8 +21,8 @@ export class SearchReportsResultComponent implements OnInit {
     public reportStatuses = ReportStatus;
 
     public ngOnInit() {
-        this.reports$.subscribe((reports) => {
-            this.reportItems = reports.map((report) => new ReportTableItem(report, false));
+        this.reports$.subscribe(reports => {
+            this.reportItems = reports.map(report => new ReportTableItem(report, false));
         });
     }
 
@@ -33,7 +32,7 @@ export class SearchReportsResultComponent implements OnInit {
 
     public filtered(reports: ReportTableItem[]): ReportTableItem[] {
         return this.filter && reports
-            ? reports.filter((report) => get(report, this.filter.path) === this.filter.value)
+            ? reports.filter(report => get(report, this.filter.path) === this.filter.value)
             : reports;
     }
 }

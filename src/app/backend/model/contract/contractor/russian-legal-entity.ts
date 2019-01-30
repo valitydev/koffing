@@ -3,7 +3,6 @@ import { BankAccount } from 'koffing/backend';
 import { LegalEntityTypeEnum } from './legal-entity-type-enum';
 
 export class RussianLegalEntity extends LegalEntity {
-
     public registeredName: string;
     public registeredNumber: string;
     public inn: string;
@@ -15,15 +14,15 @@ export class RussianLegalEntity extends LegalEntity {
     public bankAccount: BankAccount;
 
     constructor(options: {
-        registeredName: string,
-        registeredNumber: string,
-        inn: string,
-        actualAddress: string,
-        postAddress: string,
-        representativePosition: string,
-        representativeFullName: string,
-        representativeDocument: string,
-        bankAccount: BankAccount
+        registeredName: string;
+        registeredNumber: string;
+        inn: string;
+        actualAddress: string;
+        postAddress: string;
+        representativePosition: string;
+        representativeFullName: string;
+        representativeDocument: string;
+        bankAccount: BankAccount;
     }) {
         super();
         this.entityType = LegalEntityTypeEnum.RussianLegalEntity;

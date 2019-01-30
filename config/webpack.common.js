@@ -8,28 +8,25 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        'polyfills': './src/polyfills.ts',
-        'vendor': './src/vendor.ts',
-        'vendorjs': [
+        polyfills: './src/polyfills.ts',
+        vendor: './src/vendor.ts',
+        vendorjs: [
             './node_modules/jquery/dist/jquery.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
             './node_modules/keycloak-js/dist/keycloak.js',
             './node_modules/suggestions-jquery/dist/js/jquery.suggestions.js',
             './node_modules/xlsx-style/dist/xlsx.core.min.js'
         ],
-        'app': './src/main.ts'
+        app: './src/main.ts'
     },
 
     resolve: {
-        modules: [
-            path.join(__dirname, 'src'),
-            'node_modules'
-        ],
+        modules: [path.join(__dirname, 'src'), 'node_modules'],
         alias: {
-            'Keycloak': 'keycloak-js/dist/keycloak.js',
-            'jquery': 'jquery/dist/jquery',
-            'suggestions': 'suggestions-jquery/dist/js/jquery.suggestions.js',
-            'koffing': __dirname + '/../src/app'
+            Keycloak: 'keycloak-js/dist/keycloak.js',
+            jquery: 'jquery/dist/jquery',
+            suggestions: 'suggestions-jquery/dist/js/jquery.suggestions.js',
+            koffing: __dirname + '/../src/app'
         },
         extensions: ['.ts', '.js']
     },
@@ -55,12 +52,18 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
-                use: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader?sourceMap'})
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader?sourceMap'
+                })
             },
             {
                 test: /\.less$/,
                 exclude: helpers.root('src', 'app'),
-                use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader?sourceMap', 'less-loader']})
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader?sourceMap', 'less-loader']
+                })
             },
             {
                 test: /\.less$/,
@@ -107,8 +110,10 @@ module.exports = {
             filename: 'index.html',
             template: 'src/index.pug'
         }),
-        new CopyWebpackPlugin([{
-            from: 'config/runtime'
-        }])
+        new CopyWebpackPlugin([
+            {
+                from: 'config/runtime'
+            }
+        ])
     ]
 };

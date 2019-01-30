@@ -11,7 +11,6 @@ import { PayoutTool } from 'koffing/backend';
     styleUrls: ['payout-tool-select.component.less']
 })
 export class PayoutToolSelectComponent implements OnChanges {
-
     @Input()
     public contractID: string;
 
@@ -25,27 +24,49 @@ export class PayoutToolSelectComponent implements OnChanges {
     public payoutTools: PayoutTool[];
     public payoutToolItems: SelectItem[];
 
-    constructor(private payoutToolService: PayoutToolService) { }
-    
+    constructor(private payoutToolService: PayoutToolService) {}
+
     public ngOnChanges() {
-        this.payoutToolService.getPayoutTools(this.contractID).subscribe((payoutTools: PayoutTool[]) => {
-            this.payoutTools = payoutTools;
-            const currentPayoutTool = find(this.payoutTools, (payoutTool: PayoutTool) => payoutTool.id === this.currentPayoutToolID);
-            this.payoutToolItems = this.getPayoutToolItems(this.payoutTools, currentPayoutTool ? currentPayoutTool.id : '');
-            this.select(currentPayoutTool ? currentPayoutTool.id : this.payoutToolItems[0].value);
-        });
+        this.payoutToolService
+            .getPayoutTools(this.contractID)
+            .subscribe((payoutTools: PayoutTool[]) => {
+                this.payoutTools = payoutTools;
+                const currentPayoutTool = find(
+                    this.payoutTools,
+                    (payoutTool: PayoutTool) => payoutTool.id === this.currentPayoutToolID
+                );
+                this.payoutToolItems = this.getPayoutToolItems(
+                    this.payoutTools,
+                    currentPayoutTool ? currentPayoutTool.id : ''
+                );
+                this.select(
+                    currentPayoutTool ? currentPayoutTool.id : this.payoutToolItems[0].value
+                );
+            });
     }
 
     public select(payoutToolID: string) {
         this.selectedPayoutToolID = payoutToolID;
-        const selectedPayoutTool = find(this.payoutTools, (payoutTool: PayoutTool) => payoutTool.id === payoutToolID);
+        const selectedPayoutTool = find(
+            this.payoutTools,
+            (payoutTool: PayoutTool) => payoutTool.id === payoutToolID
+        );
         this.onSelect.emit(selectedPayoutTool);
     }
 
-    public getPayoutToolItems(payoutTools: PayoutTool[], currentPayoutToolID?: string): SelectItem[] {
+    public getPayoutToolItems(
+        payoutTools: PayoutTool[],
+        currentPayoutToolID?: string
+    ): SelectItem[] {
         const result = chain(payoutTools)
-            .filter((payoutTool: PayoutTool) => payoutTool.id !== 'TEST' && payoutTool.id !== currentPayoutToolID)
-            .map((payoutTool: PayoutTool, index) => new SelectItem(payoutTool.id, `Средство вывода ${index + 1}`))
+            .filter(
+                (payoutTool: PayoutTool) =>
+                    payoutTool.id !== 'TEST' && payoutTool.id !== currentPayoutToolID
+            )
+            .map(
+                (payoutTool: PayoutTool, index) =>
+                    new SelectItem(payoutTool.id, `Средство вывода ${index + 1}`)
+            )
             .push(new SelectItem('', 'Новое средство вывода'))
             .value();
         if (currentPayoutToolID) {

@@ -9,18 +9,17 @@ import { SearchPayoutsFormService } from './search-payouts-form.service';
     styleUrls: ['search-payouts-form.component.less']
 })
 export class SearchPayoutsFormComponent implements OnInit {
-
     @Output()
     public onReadyParams: EventEmitter<void> = new EventEmitter<void>();
 
     public form: FormGroup;
 
-    constructor(private searchPayoutsFormService: SearchPayoutsFormService) { }
+    constructor(private searchPayoutsFormService: SearchPayoutsFormService) {}
 
     public ngOnInit() {
         this.form = this.searchPayoutsFormService.form;
         this.form.valueChanges
-            .filter((value) => this.form.status === 'VALID')
+            .filter(value => this.form.status === 'VALID')
             .debounceTime(100)
             .subscribe(() => this.onReadyParams.emit());
     }

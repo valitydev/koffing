@@ -1,11 +1,18 @@
-import { Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers } from '@angular/http';
+import {
+    Http,
+    ConnectionBackend,
+    RequestOptions,
+    Request,
+    RequestOptionsArgs,
+    Response,
+    Headers
+} from '@angular/http';
 import { Observable, Observer } from 'rxjs';
 
 import { HttpErrorBroadcaster } from 'koffing/broadcaster';
 import { AuthService } from 'koffing/auth/auth.service';
 
 export class KoffingHttp extends Http {
-
     constructor(
         connectionBackend: ConnectionBackend,
         defaultOptions: RequestOptions,
@@ -57,30 +64,37 @@ export class KoffingHttp extends Http {
         const tokenUpdateObservable: Observable<any> = Observable.create((observer: any) => {
             if (!options) {
                 const headers = new Headers();
-                options = new RequestOptions({headers});
+                options = new RequestOptions({ headers });
             }
             this.setHeaders(options);
             observer.next();
             observer.complete();
         });
-        const requestObservable: Observable<Response> = Observable.create((observer: Observer<any>) => {
-            let result: any;
-            if (body) {
-                result = f.apply(this, [url, body, options]);
-            } else {
-                result = f.apply(this, [url, options]);
+        const requestObservable: Observable<Response> = Observable.create(
+            (observer: Observer<any>) => {
+                let result: any;
+                if (body) {
+                    result = f.apply(this, [url, body, options]);
+                } else {
+                    result = f.apply(this, [url, options]);
+                }
+                result.subscribe(
+                    (response: any) => {
+                        observer.next(response);
+                        observer.complete();
+                    },
+                    (error: any) => {
+                        this.httpErrorBroadcaster.fire(error.status);
+                        observer.error(error);
+                    }
+                );
             }
-            result.subscribe((response: any) => {
-                observer.next(response);
-                observer.complete();
-            }, (error: any) => {
-                this.httpErrorBroadcaster.fire(error.status);
-                observer.error(error);
-            });
-        });
-        return <Observable<Response>> Observable
-            .merge(tokenObservable, tokenUpdateObservable, requestObservable, 1)
-            .filter((response) => response instanceof Response);
+        );
+        return <Observable<Response>>(
+            Observable.merge(tokenObservable, tokenUpdateObservable, requestObservable, 1).filter(
+                response => response instanceof Response
+            )
+        );
     }
 
     private getToken(): Promise<string> {
@@ -107,7 +121,9 @@ export class KoffingHttp extends Http {
 
     private guid(): string {
         function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
         }
         return `${s4()}${s4()}-${s4()}-${s4()}`;
     }

@@ -1,3 +1,5 @@
 export enum ShopCreationStep {
-    contract, payoutTool, shop
+    contract,
+    payoutTool,
+    shop
 }

@@ -30,12 +30,7 @@ import { CommonModule } from '../common/common.module';
 import { InternationalBankAccountPartFormComponent } from './bank-account-form/international-bank-account-part-form/international-bank-account-part-form.component';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CommonModule
-    ],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule],
     declarations: [
         ShopDetailsComponent,
         ContractDetailsComponent,
@@ -84,4 +79,4 @@ import { InternationalBankAccountPartFormComponent } from './bank-account-form/i
         RussianBankAccountFormService
     ]
 })
-export class DomainModule { }
+export class DomainModule {}

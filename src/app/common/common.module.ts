@@ -20,12 +20,7 @@ import { StepperComponent } from './stepper/stepper.component';
 import { WithdrawalStatusPipe } from './withdrawal-status.pipe';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CalendarModule
-    ],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, CalendarModule],
     declarations: [
         SelectComponent,
         LoadingComponent,
@@ -58,8 +53,6 @@ import { WithdrawalStatusPipe } from './withdrawal-status.pipe';
         WithdrawalStatusPipe,
         StepperComponent
     ],
-    providers: [
-        EventPollerService
-    ]
+    providers: [EventPollerService]
 })
-export class CommonModule { }
+export class CommonModule {}

@@ -8,15 +8,16 @@ import { BreadcrumbBroadcaster, BreadcrumbConfig } from 'koffing/broadcaster';
     styleUrls: ['landing-top-panel.component.less']
 })
 export class LandingTopPanelComponent implements OnInit {
-
     public breadcrumbConfig: BreadcrumbConfig[];
 
-    private initialBreadcrumbConfig: BreadcrumbConfig[] = [{
-        label: 'Главная',
-        routerLink: '/'
-    }];
+    private initialBreadcrumbConfig: BreadcrumbConfig[] = [
+        {
+            label: 'Главная',
+            routerLink: '/'
+        }
+    ];
 
-    constructor(private breadcrumbBroadcaster: BreadcrumbBroadcaster) { }
+    constructor(private breadcrumbBroadcaster: BreadcrumbBroadcaster) {}
 
     public ngOnInit() {
         this.breadcrumbBroadcaster.on().subscribe((config: BreadcrumbConfig[]) => {

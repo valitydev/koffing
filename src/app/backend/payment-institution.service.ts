@@ -7,14 +7,10 @@ import { PaymentInstitution } from 'koffing/backend';
 
 @Injectable()
 export class PaymentInstitutionService {
-
-    constructor(
-        private http: KoffingHttp,
-        private config: ConfigService
-    ) { }
+    constructor(private http: KoffingHttp, private config: ConfigService) {}
 
     public getPaymentInstitutions(): Observable<PaymentInstitution[]> {
-        return this.http.get(this.getEndpoint()).map((res) => res.json());
+        return this.http.get(this.getEndpoint()).map(res => res.json());
     }
 
     private getEndpoint(): string {

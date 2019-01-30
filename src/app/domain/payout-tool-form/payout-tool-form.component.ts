@@ -7,7 +7,6 @@ import { BankAccount } from 'koffing/backend';
     templateUrl: 'payout-tool-form.component.pug'
 })
 export class PayoutToolFormComponent implements OnInit {
-
     @Input()
     public form: FormGroup;
 

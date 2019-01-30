@@ -8,7 +8,6 @@ import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
     templateUrl: 'withdrawal-details.component.pug'
 })
 export class WithdrawalDetailsComponent {
-
     @Input()
     public withdrawal: Withdrawal;
 

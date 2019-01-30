@@ -14,21 +14,14 @@ import { PayoutToolSelectComponent } from './payout-tool-select/payout-tool-sele
 import { PayoutToolCreateComponent } from './payout-tool-create/payout-tool-create.component';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        GrowlModule,
-        CommonModule,
-        BackendModule,
-        DomainModule
-    ],
+    imports: [BrowserModule, FormsModule, GrowlModule, CommonModule, BackendModule, DomainModule],
     declarations: [
         ShopInfoComponent,
         ContractManageComponent,
         ContractCreateComponent,
         ContractSelectComponent,
         PayoutToolSelectComponent,
-        PayoutToolCreateComponent,
+        PayoutToolCreateComponent
     ]
 })
-export class ShopInfoModule { }
+export class ShopInfoModule {}

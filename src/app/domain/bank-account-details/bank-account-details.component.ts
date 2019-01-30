@@ -6,7 +6,6 @@ import { BankAccount } from 'koffing/backend/model/bank-account';
     templateUrl: 'bank-account-details.component.pug'
 })
 export class BankAccountDetailsComponent {
-
     @Input()
     public bankAccount: BankAccount;
 }

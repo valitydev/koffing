@@ -61,7 +61,7 @@ import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
         TopPanelActionsComponent
     ]
 })
-export class RootModule { }
+export class RootModule {}
 
 export * from './components/container/container.component';
 export * from './components/sidebar/sidebar.component';

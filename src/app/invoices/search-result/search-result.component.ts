@@ -9,17 +9,15 @@ import { ActivatedRoute, Router } from '@angular/router';
     templateUrl: 'search-result.component.pug'
 })
 export class SearchResultComponent implements OnInit {
-
     @Input()
     public invoices: Observable<Invoice[]>;
 
     private shopID: string;
 
-    constructor(private router: Router,
-                private route: ActivatedRoute) { }
+    constructor(private router: Router, private route: ActivatedRoute) {}
 
     public ngOnInit() {
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
     }

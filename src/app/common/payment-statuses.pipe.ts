@@ -5,7 +5,6 @@ import { PAYMENT_STATUS_LABEL } from 'koffing/invoices/payment-status-label';
     name: 'kofPaymentStatus'
 })
 export class PaymentStatusPipe implements PipeTransform {
-
     public transform(input: string): string {
         const status = PAYMENT_STATUS_LABEL[input];
         return status ? status : input;

@@ -5,10 +5,10 @@ import { InternationalBankAccountFormService } from './international-bank-accoun
 
 @Injectable()
 export class BankAccountFormService {
-
-    constructor(private russianBankAccountFormService: RussianBankAccountFormService,
-                private internationalBankAccountFormService: InternationalBankAccountFormService) {
-    }
+    constructor(
+        private russianBankAccountFormService: RussianBankAccountFormService,
+        private internationalBankAccountFormService: InternationalBankAccountFormService
+    ) {}
 
     public initForm(type?: string): FormGroup {
         if (type) {

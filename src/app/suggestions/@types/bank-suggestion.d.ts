@@ -95,7 +95,7 @@ interface BankSuggestionAddressBody {
 interface BankSuggestionAddress {
     unrestricted_value: StringOrNull;
     value: StringOrNull;
-    data: BankSuggestionAddressBody | null
+    data: BankSuggestionAddressBody | null;
 }
 
 interface BankSuggestionBody {

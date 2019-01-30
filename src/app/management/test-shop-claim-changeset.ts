@@ -46,10 +46,17 @@ const defaultPayoutToolDetails = {
 
 const defaultLegalAgreement = {
     id: '000000/00',
-    signedAt: moment().subtract(1, 'days').utc().format() as any
+    signedAt: moment()
+        .subtract(1, 'days')
+        .utc()
+        .format() as any
 } as LegalAgreement;
 
-const contractCreationChange = (contractID: string, paymentInstitutionID: number, contractor?: Contractor): ContractCreation => {
+const contractCreationChange = (
+    contractID: string,
+    paymentInstitutionID: number,
+    contractor?: Contractor
+): ContractCreation => {
     return {
         partyModificationType: 'ContractModification',
         contractID,
@@ -59,7 +66,12 @@ const contractCreationChange = (contractID: string, paymentInstitutionID: number
     } as ContractCreation;
 };
 
-const contractPayoutToolCreationChange = (contractID: string, payoutToolID: string, currency: string, details?: PayoutToolDetails): ContractPayoutToolCreation => {
+const contractPayoutToolCreationChange = (
+    contractID: string,
+    payoutToolID: string,
+    currency: string,
+    details?: PayoutToolDetails
+): ContractPayoutToolCreation => {
     return {
         partyModificationType: 'ContractModification',
         contractID,
@@ -70,7 +82,10 @@ const contractPayoutToolCreationChange = (contractID: string, payoutToolID: stri
     } as ContractPayoutToolCreation;
 };
 
-const contractLegalAgreementBindingChange = (contractID: string, legalAgreement?: LegalAgreement): ContractLegalAgreementBinding => {
+const contractLegalAgreementBindingChange = (
+    contractID: string,
+    legalAgreement?: LegalAgreement
+): ContractLegalAgreementBinding => {
     return {
         partyModificationType: 'ContractModification',
         contractID,
@@ -79,7 +94,11 @@ const contractLegalAgreementBindingChange = (contractID: string, legalAgreement?
     } as ContractLegalAgreementBinding;
 };
 
-const shopCreationChange = (shopID: string, contractID: string, payoutToolID: string): ShopCreation => {
+const shopCreationChange = (
+    shopID: string,
+    contractID: string,
+    payoutToolID: string
+): ShopCreation => {
     return {
         partyModificationType: 'ShopModification',
         shopID,
@@ -116,7 +135,6 @@ const shopAccountCreationChange = (shopID: string, currency: string): ShopAccoun
 };
 
 export const testShopClaimChangeset = (id?: string): any => {
-
     const testShopID = id || uuid();
     const testContractID = id || uuid();
     const testPayoutToolID = id || uuid();

@@ -4,18 +4,17 @@ import { toDisplayAmount } from 'koffing/common/amount-utils';
 
 @Injectable()
 export class PaymentRefundService {
-
     public form: FormGroup;
 
-    constructor(private fb: FormBuilder) {
-    }
+    constructor(private fb: FormBuilder) {}
 
     public initForm(amount: number, availableAmount: number = 0): FormGroup {
         const displayAmount = toDisplayAmount(amount);
         const displayAvailableAmount = toDisplayAmount(availableAmount);
         return this.fb.group({
             amount: [
-                displayAmount, [
+                displayAmount,
+                [
                     Validators.required,
                     Validators.min(1),
                     Validators.max(displayAmount),

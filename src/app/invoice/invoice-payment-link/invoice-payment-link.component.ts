@@ -13,7 +13,6 @@ import { copy } from 'koffing/common/copy';
     templateUrl: 'invoice-payment-link.component.pug'
 })
 export class InvoicePaymentLinkComponent implements OnInit {
-
     @Input()
     public invoice: Invoice;
 
@@ -25,18 +24,18 @@ export class InvoicePaymentLinkComponent implements OnInit {
     public paymentLinkVisible: boolean = false;
     public methods: PaymentMethod[];
 
-    constructor(private checkoutConfigFormService: CheckoutConfigFormService,
-                private paymentLinkService: PaymentLinkService,
-                private invoiceService: InvoiceService) {
-    }
+    constructor(
+        private checkoutConfigFormService: CheckoutConfigFormService,
+        private paymentLinkService: PaymentLinkService,
+        private invoiceService: InvoiceService
+    ) {}
 
     public ngOnInit() {
         this.checkoutConfigForm = this.checkoutConfigFormService.form;
-        this.checkoutConfigForm.valueChanges.subscribe(() => this.paymentLinkVisible = false);
-        this.invoiceService.getInvoicePaymentMethods(this.invoice.id)
-            .subscribe((methods) => {
-                this.methods = methods;
-            });
+        this.checkoutConfigForm.valueChanges.subscribe(() => (this.paymentLinkVisible = false));
+        this.invoiceService.getInvoicePaymentMethods(this.invoice.id).subscribe(methods => {
+            this.methods = methods;
+        });
     }
 
     public copy() {
@@ -45,9 +44,11 @@ export class InvoicePaymentLinkComponent implements OnInit {
 
     public generatePaymentLink() {
         const value = this.checkoutConfigForm.getRawValue();
-        this.paymentLinkService.getInvoicePaymentLink(this.invoice, value).subscribe((paymentLink) => {
-            this.paymentLink = paymentLink;
-            this.paymentLinkVisible = true;
-        });
+        this.paymentLinkService
+            .getInvoicePaymentLink(this.invoice, value)
+            .subscribe(paymentLink => {
+                this.paymentLink = paymentLink;
+                this.paymentLinkVisible = true;
+            });
     }
 }

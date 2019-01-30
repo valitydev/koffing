@@ -12,13 +12,20 @@ import {
 
 @Injectable()
 export class ClaimDetailsService {
-
     public toContractCreations(partyModifications: PartyModification[]): ContractCreation[] {
-        return this.findContractChangesetPart(partyModifications, 'ContractCreation') as ContractCreation[];
+        return this.findContractChangesetPart(
+            partyModifications,
+            'ContractCreation'
+        ) as ContractCreation[];
     }
 
-    public toContractPayoutToolCreations(partyModifications: PartyModification[]): ContractPayoutToolCreation[] {
-        return this.findContractChangesetPart(partyModifications, 'ContractPayoutToolCreation') as ContractPayoutToolCreation[];
+    public toContractPayoutToolCreations(
+        partyModifications: PartyModification[]
+    ): ContractPayoutToolCreation[] {
+        return this.findContractChangesetPart(
+            partyModifications,
+            'ContractPayoutToolCreation'
+        ) as ContractPayoutToolCreation[];
     }
 
     public toShopCreation(partyModifications: PartyModification[]): ShopCreation[] {
@@ -26,22 +33,39 @@ export class ClaimDetailsService {
     }
 
     public toContractBinding(partyModifications: PartyModification[]): ShopContractBinding[] {
-        return this.findShopChangesetPart(partyModifications, 'ShopContractBinding') as ShopContractBinding[];
+        return this.findShopChangesetPart(
+            partyModifications,
+            'ShopContractBinding'
+        ) as ShopContractBinding[];
     }
 
-    private findContractChangesetPart(partyModifications: PartyModification[], modificationTypeName: string): ContractModification[] {
+    private findContractChangesetPart(
+        partyModifications: PartyModification[],
+        modificationTypeName: string
+    ): ContractModification[] {
         return partyModifications
-            .filter((modificationUnit: PartyModification) =>
-                modificationUnit.partyModificationType === 'ContractModification')
-            .filter((contractModification: ContractModification) =>
-                contractModification.contractModificationType === modificationTypeName) as ContractModification[];
+            .filter(
+                (modificationUnit: PartyModification) =>
+                    modificationUnit.partyModificationType === 'ContractModification'
+            )
+            .filter(
+                (contractModification: ContractModification) =>
+                    contractModification.contractModificationType === modificationTypeName
+            ) as ContractModification[];
     }
 
-    private findShopChangesetPart(partyModifications: PartyModification[], modificationTypeName: string): ShopModification[] {
+    private findShopChangesetPart(
+        partyModifications: PartyModification[],
+        modificationTypeName: string
+    ): ShopModification[] {
         return partyModifications
-            .filter((modificationUnit: PartyModification) =>
-                modificationUnit.partyModificationType === 'ShopModification')
-            .filter((shopModification: ShopModification) =>
-                shopModification.shopModificationType === modificationTypeName) as ShopModification[];
+            .filter(
+                (modificationUnit: PartyModification) =>
+                    modificationUnit.partyModificationType === 'ShopModification'
+            )
+            .filter(
+                (shopModification: ShopModification) =>
+                    shopModification.shopModificationType === modificationTypeName
+            ) as ShopModification[];
     }
 }

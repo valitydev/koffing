@@ -11,7 +11,6 @@ import { SearchResult } from './search-result';
     providers: [PaymentsService]
 })
 export class PaymentsComponent implements OnChanges {
-
     @Input()
     public invoice: Invoice;
 
@@ -20,7 +19,7 @@ export class PaymentsComponent implements OnChanges {
 
     public searchResult: SearchResult;
 
-    constructor(private paymentsService: PaymentsService) { }
+    constructor(private paymentsService: PaymentsService) {}
 
     public ngOnChanges() {
         if (this.invoice) {
@@ -29,9 +28,13 @@ export class PaymentsComponent implements OnChanges {
     }
 
     public search() {
-        this.paymentsService.search(this.invoice.shopID, this.invoice.id).subscribe((result) => {
-            const processedPayment = result.payments.find((payment) => payment.status === PAYMENT_STATUS.processed);
-            const pendingPayment = result.payments.find((payment) => payment.status === PAYMENT_STATUS.pending);
+        this.paymentsService.search(this.invoice.shopID, this.invoice.id).subscribe(result => {
+            const processedPayment = result.payments.find(
+                payment => payment.status === PAYMENT_STATUS.processed
+            );
+            const pendingPayment = result.payments.find(
+                payment => payment.status === PAYMENT_STATUS.pending
+            );
             this.onProcessedPayment.emit(!!processedPayment || !!pendingPayment);
             this.searchResult = result;
         });

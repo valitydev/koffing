@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofPaymentToolDetailsTokenProvider'
 })
 export class PaymentToolDetailsTokenProviderPipe implements PipeTransform {
-
     private names = {
         applepay: 'Apple Pay',
         googlepay: 'Google Pay',

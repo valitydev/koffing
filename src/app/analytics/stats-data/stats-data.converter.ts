@@ -11,11 +11,12 @@ import { Dataset } from './dataset';
 import { DoughnutChartData } from './doughnut-chart-data';
 
 export class StatsDataConverter {
-
     public static toPaymentMethodChartData(stat: PaymentMethodStat[]): DoughnutChartData {
         const group = groupBy(stat, 'paymentSystem');
         const paymentSystems = keys(group);
-        const data = paymentSystems.map((system) => group[system].reduce((acc, item) => acc + item.totalCount, 0));
+        const data = paymentSystems.map(system =>
+            group[system].reduce((acc, item) => acc + item.totalCount, 0)
+        );
         const labels = paymentSystems.map(system => {
             let result = system;
             if (system === 'visa') {
@@ -27,32 +28,46 @@ export class StatsDataConverter {
             }
             return result;
         });
-        return {data, labels};
+        return { data, labels };
     }
 
     public static toGeoChartData(stat: PaymentGeoStat[]): DoughnutChartData {
         const group = groupBy(stat, 'geoID');
         const labels = keys(group);
-        const data = labels.map(geoID => group[geoID].reduce((acc, item) => acc + item.profit, 0) / 100);
-        return {data, labels};
+        const data = labels.map(
+            geoID => group[geoID].reduce((acc, item) => acc + item.profit, 0) / 100
+        );
+        return { data, labels };
     }
 
     public static toRevenueChartData(from: Date, stat: PaymentRevenueStat[]): LineChartData {
-        const labels = stat.map((item) => moment(from).add(item.offset, 's').format('DD.MM HH:mm'));
-        const datasets: Dataset[] = [{
-            label: 'Оборот',
-            data: stat.map((item) => round(item.profit / 100, 2))
-        }];
-        return {labels, datasets};
+        const labels = stat.map(item =>
+            moment(from)
+                .add(item.offset, 's')
+                .format('DD.MM HH:mm')
+        );
+        const datasets: Dataset[] = [
+            {
+                label: 'Оборот',
+                data: stat.map(item => round(item.profit / 100, 2))
+            }
+        ];
+        return { labels, datasets };
     }
 
     public static toConversionChartData(from: Date, stat: PaymentConversionStat[]): LineChartData {
-        const labels = stat.map((item) => moment(from).add(item.offset, 's').format('DD.MM HH:mm'));
-        const datasets: Dataset[] = [{
-            label: 'Конверсия',
-            data: stat.map((item) => round(item.conversion * 100, 0))
-        }];
-        return {labels, datasets};
+        const labels = stat.map(item =>
+            moment(from)
+                .add(item.offset, 's')
+                .format('DD.MM HH:mm')
+        );
+        const datasets: Dataset[] = [
+            {
+                label: 'Конверсия',
+                data: stat.map(item => round(item.conversion * 100, 0))
+            }
+        ];
+        return { labels, datasets };
     }
 
     public static toTotalProfit(stat: PaymentRevenueStat[]): number {
@@ -60,11 +75,14 @@ export class StatsDataConverter {
     }
 
     public static toPaymentCountInfo(stat: PaymentConversionStat[]): PaymentCount {
-        return stat.reduce((acc, item) => {
-            return {
-                successfulCount: acc.successfulCount + item.successfulCount,
-                unfinishedCount: acc.unfinishedCount + (item.totalCount - item.successfulCount)
-            };
-        }, {successfulCount: 0, unfinishedCount: 0});
+        return stat.reduce(
+            (acc, item) => {
+                return {
+                    successfulCount: acc.successfulCount + item.successfulCount,
+                    unfinishedCount: acc.unfinishedCount + (item.totalCount - item.successfulCount)
+                };
+            },
+            { successfulCount: 0, unfinishedCount: 0 }
+        );
     }
 }

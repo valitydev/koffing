@@ -3,18 +3,17 @@ import { ShopLocation } from '../../../shop/shop-location/shop-location';
 import { ShopDetails } from '../../../shop/shop-details';
 
 export class ShopCreation extends ShopModification {
-
     public location: ShopLocation;
     public details: ShopDetails;
     public contractID: string;
     public payoutToolID: string;
 
     constructor(options: {
-        shopID: string,
-        location: ShopLocation,
-        details: ShopDetails,
-        contractID: string,
-        payoutToolID: string
+        shopID: string;
+        location: ShopLocation;
+        details: ShopDetails;
+        contractID: string;
+        payoutToolID: string;
     }) {
         super();
         this.shopModificationType = 'ShopCreation';

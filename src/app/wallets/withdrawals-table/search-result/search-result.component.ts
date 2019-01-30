@@ -10,18 +10,15 @@ import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
     templateUrl: 'search-result.component.pug'
 })
 export class SearchResultComponent implements OnInit {
-
     @Input()
     public withdrawals: Observable<Withdrawal[]>;
 
     private shopID: string;
 
-    constructor(private router: Router,
-                private route: ActivatedRoute) {
-    }
+    constructor(private router: Router, private route: ActivatedRoute) {}
 
     public ngOnInit() {
-        this.route.parent.params.subscribe((params) => {
+        this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
     }

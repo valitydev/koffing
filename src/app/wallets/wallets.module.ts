@@ -12,13 +12,7 @@ import { SearchResultComponent as WalletsSearchResultComponent } from './wallets
 import { WalletsTableComponent } from './wallets-table/wallets-table.component';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CommonModule,
-        CalendarModule
-    ],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule, CalendarModule],
     declarations: [
         WalletsComponent,
         WithdrawalsTableComponent,

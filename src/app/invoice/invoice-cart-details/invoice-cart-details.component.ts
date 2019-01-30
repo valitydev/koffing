@@ -6,7 +6,6 @@ import { Invoice } from 'koffing/backend';
     templateUrl: 'invoice-cart-details.component.pug'
 })
 export class InvoiceCartDetailsComponent {
-
     @Input()
     public invoice: Invoice;
 }

@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: 'russian-bank-account-form.component.pug'
 })
 export class RussianBankAccountFormComponent implements AfterViewInit, OnInit {
-
     @Input()
     public form: FormGroup;
 
@@ -18,12 +17,10 @@ export class RussianBankAccountFormComponent implements AfterViewInit, OnInit {
     @Input()
     public suggestionCssClass: string;
 
-    constructor(
-        private suggestionsService: SuggestionsService,
-        private route: ActivatedRoute) { }
+    constructor(private suggestionsService: SuggestionsService, private route: ActivatedRoute) {}
 
     public ngOnInit() {
-        this.route.params.subscribe((params) => {
+        this.route.params.subscribe(params => {
             this.type = params.type;
         });
     }
@@ -33,7 +30,9 @@ export class RussianBankAccountFormComponent implements AfterViewInit, OnInit {
     }
 
     private initBankSuggestions() {
-        const selector = this.suggestionCssClass ? `.${this.suggestionCssClass}` : '.bank-suggestions';
+        const selector = this.suggestionCssClass
+            ? `.${this.suggestionCssClass}`
+            : '.bank-suggestions';
         this.suggestionsService.initBankSuggestions(selector, this.handleBank.bind(this));
     }
 

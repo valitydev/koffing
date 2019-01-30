@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'kofCustomerStatus'
 })
 export class CustomerStatusPipe implements PipeTransform {
-
     private statuses = {
         ready: 'Готов',
         unready: 'Не готов'

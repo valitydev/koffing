@@ -76,7 +76,7 @@ interface OgranizationSuggestionAddressBody {
 interface OgranizationSuggestionAddress {
     unrestricted_value: StringOrNull;
     value: StringOrNull;
-    data: OgranizationSuggestionAddressBody | null
+    data: OgranizationSuggestionAddressBody | null;
 }
 
 interface OgranizationSuggestionState {

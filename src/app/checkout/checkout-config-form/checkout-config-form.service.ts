@@ -5,7 +5,6 @@ import { HOLD_EXPIRATION } from 'koffing/backend/constants/hold-expiration';
 
 @Injectable()
 export class CheckoutConfigFormService {
-
     public form: FormGroup;
 
     constructor(private fb: FormBuilder) {

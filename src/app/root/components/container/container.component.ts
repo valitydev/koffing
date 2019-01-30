@@ -5,4 +5,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
     templateUrl: './container.component.pug',
     encapsulation: ViewEncapsulation.None
 })
-export class ContainerComponent { }
+export class ContainerComponent {}

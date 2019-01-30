@@ -16,4 +16,4 @@ import { BreadcrumbBroadcaster } from './services/breadcrumb.broadcaster';
         BreadcrumbBroadcaster
     ]
 })
-export class BroadcasterModule { }
+export class BroadcasterModule {}
