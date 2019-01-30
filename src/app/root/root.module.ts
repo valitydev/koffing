@@ -27,6 +27,8 @@ import { ShopTopPanelComponent } from 'koffing/root/components/shop-container/sh
 import { ShopContainerComponent } from './components/shop-container/shop-container.component';
 import { WalletsModule } from 'koffing/wallets/wallets.module';
 import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
+import { WalletsContainerComponent } from './components/wallets-container/wallets-container.component';
+import { WalletsSidebarComponent } from './components/wallets-container/wallets-sidebar/wallets-sidebar.component';
 
 @NgModule({
     imports: [
@@ -58,7 +60,9 @@ import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
         HttpErrorHandleComponent,
         ShopSelectorComponent,
         LandingTopPanelComponent,
-        TopPanelActionsComponent
+        TopPanelActionsComponent,
+        WalletsContainerComponent,
+        WalletsSidebarComponent
     ]
 })
 export class RootModule {}

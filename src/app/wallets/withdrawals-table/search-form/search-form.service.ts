@@ -18,8 +18,9 @@ export class SearchFormService {
         this.route.parent.params.subscribe(params => {
             this.shopID = params['shopID'];
         });
-        this.route.queryParams.subscribe(queryParams => this.updateFormValue(queryParams));
-        this.searchForm.valueChanges.subscribe(values => this.updateQueryParams(values));
+        // TODO не требуется
+        // this.route.queryParams.subscribe(queryParams => this.updateFormValue(queryParams));
+        // this.searchForm.valueChanges.subscribe(values => this.updateQueryParams(values));
     }
 
     public hasFormAdditionalParams(): boolean {
