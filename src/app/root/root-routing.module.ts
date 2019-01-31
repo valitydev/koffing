@@ -80,10 +80,6 @@ import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component'
                         component: PayoutsComponent
                     },
                     {
-                        path: 'withdrawal/:withdrawalID',
-                        component: WithdrawalComponent
-                    },
-                    {
                         path: 'info',
                         component: ShopInfoComponent
                     },
@@ -136,6 +132,10 @@ import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component'
                     {
                         path: 'withdrawals',
                         component: WithdrawalsComponent
+                    },
+                    {
+                        path: 'withdrawal/:withdrawalID',
+                        component: WithdrawalComponent
                     }
                 ]
             }

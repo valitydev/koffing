@@ -14,21 +14,18 @@ export class WithdrawalService {
 
     private withdrawal: Withdrawal;
 
-    private shopID: string;
-
     constructor(
         private searchService: SearchService,
         private route: ActivatedRoute,
         private router: Router
     ) {
         Observable.combineLatest(this.route.parent.params, this.route.params).subscribe(result => {
-            this.shopID = result[0].shopID;
             this.searchWithdrawal(result[1].withdrawalID);
         });
     }
 
     public back() {
-        this.router.navigate(['shop', this.shopID, 'wallets']);
+        this.router.navigate(['wallets', 'withdrawals']);
     }
 
     private searchWithdrawal(withdrawalID: string) {

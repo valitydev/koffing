@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Withdrawal } from 'koffing/backend';
 import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
@@ -9,19 +9,11 @@ import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
     selector: 'kof-withdrawal-search-result',
     templateUrl: 'search-result.component.pug'
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent {
     @Input()
     public withdrawals: Observable<Withdrawal[]>;
 
-    private shopID: string;
-
-    constructor(private router: Router, private route: ActivatedRoute) {}
-
-    public ngOnInit() {
-        this.route.parent.params.subscribe(params => {
-            this.shopID = params['shopID'];
-        });
-    }
+    constructor(private router: Router) {}
 
     public getLabelClass(status: string) {
         return {
@@ -32,6 +24,6 @@ export class SearchResultComponent implements OnInit {
     }
 
     public gotToWithdrawalDetails(withdrawalID: string) {
-        this.router.navigate(['shop', this.shopID, 'withdrawal', withdrawalID]);
+        this.router.navigate(['wallets', 'withdrawal', withdrawalID]);
     }
 }
