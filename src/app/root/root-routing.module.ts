@@ -23,6 +23,7 @@ import { ReportType } from 'koffing/backend';
 import { WalletsComponent } from 'koffing/wallets/wallets.component';
 import { WithdrawalComponent } from 'koffing/withdrawal/withdrawal.component';
 import { WalletsContainerComponent } from './components/wallets-container/wallets-container.component';
+import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component';
 
 @NgModule({
     imports: [
@@ -125,7 +126,16 @@ import { WalletsContainerComponent } from './components/wallets-container/wallet
                 children: [
                     {
                         path: '',
+                        redirectTo: 'list',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'list',
                         component: WalletsComponent
+                    },
+                    {
+                        path: 'withdrawals',
+                        component: WithdrawalsComponent
                     }
                 ]
             }
