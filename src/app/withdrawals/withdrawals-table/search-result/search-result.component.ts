@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Withdrawal } from 'koffing/backend';
-import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
+import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
 
 @Component({
     selector: 'kof-withdrawal-search-result',

@@ -1,4 +1,4 @@
-import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
+import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
 import { LogicError } from 'koffing/backend';
 import { WithdrawalBody } from './withdrawal-body';
 import { WithdrawalFee } from './withdrawal-fee';

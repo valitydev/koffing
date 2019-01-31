@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Withdrawal } from 'koffing/backend';
-import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
+import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
 
 @Component({
     selector: 'kof-withdrawal-details',

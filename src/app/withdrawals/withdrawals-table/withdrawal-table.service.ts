@@ -1,4 +1,3 @@
-import { Withdrawal } from './../../backend/model/wallets/withdrawal';
 import { Injectable } from '@angular/core';
 
 import { SearchWalletWithdrawals } from 'koffing/backend';

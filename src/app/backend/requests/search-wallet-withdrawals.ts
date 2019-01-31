@@ -1,4 +1,4 @@
-import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
+import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
 
 export class SearchWalletWithdrawals {
     public walletID: string;
