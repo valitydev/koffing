@@ -8,19 +8,14 @@ import * as moment from 'moment';
 export class SearchFormService {
     public searchForm: FormGroup;
 
-    private shopID: string;
     private urlDateFormat = 'YYYY-MM-DD';
     private defaultValues: any;
     private mainSearchFields = ['walletID', 'identityID', 'status', 'withdrawalID'];
 
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
         this.searchForm = this.initForm();
-        this.route.parent.params.subscribe(params => {
-            this.shopID = params['shopID'];
-        });
-        // TODO не требуется
-        // this.route.queryParams.subscribe(queryParams => this.updateFormValue(queryParams));
-        // this.searchForm.valueChanges.subscribe(values => this.updateQueryParams(values));
+        this.route.queryParams.subscribe(queryParams => this.updateFormValue(queryParams));
+        this.searchForm.valueChanges.subscribe(values => this.updateQueryParams(values));
     }
 
     public hasFormAdditionalParams(): boolean {
@@ -47,7 +42,7 @@ export class SearchFormService {
 
     private updateQueryParams(value: any) {
         const queryParams = this.formValueToQueryParams(value);
-        this.router.navigate(['shop', this.shopID, 'wallets'], { queryParams });
+        this.router.navigate(['wallets', 'withdrawals'], { queryParams });
     }
 
     private initForm(): FormGroup {
