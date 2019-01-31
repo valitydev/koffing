@@ -4,190 +4,188 @@
 @subtext-label-color: #f5f5f5;
 
 .box-sizing(@sizing: border-box) {
-  -ms-box-sizing: @sizing;
-  -moz-box-sizing: @sizing;
-  -webkit-box-sizing: @sizing;
-  box-sizing: @sizing;
+    -ms-box-sizing: @sizing;
+    -moz-box-sizing: @sizing;
+    -webkit-box-sizing: @sizing;
+    box-sizing: @sizing;
 }
 
 .rounded(@radius) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
 }
 
 .cross-button-mixin() {
-  @cross-padding: 20;
-  @cross-ray-width: 10;
-  @cross-ray-length: 50 - @cross-padding - @cross-ray-width;
-  @svg: "<svg width='100' height='100' xmlns='http://www.w3.org/2000/svg'><g><path d='m@{cross-padding},@{cross-padding}m@{cross-ray-width},0l@{cross-ray-length},@{cross-ray-length}l@{cross-ray-length},-@{cross-ray-length}l@{cross-ray-width},@{cross-ray-width}l-@{cross-ray-length},@{cross-ray-length}l@{cross-ray-length},@{cross-ray-length}l-@{cross-ray-width},@{cross-ray-width}l-@{cross-ray-length},-@{cross-ray-length}l-@{cross-ray-length},@{cross-ray-length}l-@{cross-ray-width},-@{cross-ray-width}l@{cross-ray-length},-@{cross-ray-length}l-@{cross-ray-length},-@{cross-ray-length}l@{cross-ray-width},-@{cross-ray-width}' fill='#999'/></g></svg>";
-  @svg64: `new Buffer(@{svg}).toString('base64')`;
-  background: transparent url("data:image/svg+xml;base64,@{svg64}") 50% 50% no-repeat;
-  background-size: contain;
+    @cross-padding: 20;
+    @cross-ray-width: 10;
+    @cross-ray-length: 50 - @cross-padding - @cross-ray-width;
+    @svg: "<svg width='100' height='100' xmlns='http://www.w3.org/2000/svg'><g><path d='m@{cross-padding},@{cross-padding}m@{cross-ray-width},0l@{cross-ray-length},@{cross-ray-length}l@{cross-ray-length},-@{cross-ray-length}l@{cross-ray-width},@{cross-ray-width}l-@{cross-ray-length},@{cross-ray-length}l@{cross-ray-length},@{cross-ray-length}l-@{cross-ray-width},@{cross-ray-width}l-@{cross-ray-length},-@{cross-ray-length}l-@{cross-ray-length},@{cross-ray-length}l-@{cross-ray-width},-@{cross-ray-width}l@{cross-ray-length},-@{cross-ray-length}l-@{cross-ray-length},-@{cross-ray-length}l@{cross-ray-width},-@{cross-ray-width}' fill='#999'/></g></svg>";
+    @svg64: `new Buffer(@{svg}) .toString('base64') `;
+    background: transparent url('data:image/svg+xml;base64,@{svg64}') 50% 50% no-repeat;
+    background-size: contain;
 
-  cursor: pointer;
-  opacity: 0.8;
+    cursor: pointer;
+    opacity: 0.8;
 
-  &:hover {
-    opacity: 1;
-  }
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .suggestions-nowrap {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 .suggestions-input {
-  // IE9 can't determine border-style until it is specified in stylesheets
-  //  border: 1px solid grey;
-  .box-sizing();
-  width: 100%;
+    // IE9 can't determine border-style until it is specified in stylesheets
+    //  border: 1px solid grey;
+    .box-sizing();
+    width: 100%;
 
-  &::-ms-clear {
-    display: none;
-  }
+    &::-ms-clear {
+        display: none;
+    }
 }
 
 .suggestions-wrapper {
-  display: block;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  vertical-align: top;
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
 
-  //Prevent font scaling in landscape while allowing user zoom
-  -webkit-text-size-adjust: 100%;
+    //Prevent font scaling in landscape while allowing user zoom
+    -webkit-text-size-adjust: 100%;
 }
 
 .suggestions-suggestions {
-  background: @suggestions-bg-color;
-  border: 1px solid #999;
-  .box-sizing;
-  cursor: default;
-  z-index: 9999;
+    background: @suggestions-bg-color;
+    border: 1px solid #999;
+    .box-sizing;
+    cursor: default;
+    z-index: 9999;
 
-  //Prevent font scaling in landscape while allowing user zoom
-  -webkit-text-size-adjust: 100%;
+    //Prevent font scaling in landscape while allowing user zoom
+    -webkit-text-size-adjust: 100%;
 
-  strong {
-    font-weight: normal;
-    color: #3399FF;
-  }
-
-  &.suggestions-mobile {
-    left: 0 !important;
-    top: 0 !important;
-
-    .suggestions-suggestion {
-      padding-left: 5px !important;
+    strong {
+        font-weight: normal;
+        color: #3399ff;
     }
 
-  }
+    &.suggestions-mobile {
+        left: 0 !important;
+        top: 0 !important;
+
+        .suggestions-suggestion {
+            padding-left: 5px !important;
+        }
+    }
 }
 
 .suggestions-suggestion {
-  padding: 4px 4px;
-  overflow: hidden;
+    padding: 4px 4px;
+    overflow: hidden;
 
-  &:hover {
-    background: darken(@suggestions-bg-color, 3%);
-  }
+    &:hover {
+        background: darken(@suggestions-bg-color, 3%);
+    }
 }
 
 .suggestions-selected {
-  background: darken(@suggestions-bg-color, 6%);
-
-  &:hover {
     background: darken(@suggestions-bg-color, 6%);
-  }
+
+    &:hover {
+        background: darken(@suggestions-bg-color, 6%);
+    }
 }
 
 .suggestions-hint {
-  padding: 4px 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  color: #777;
-  font-size: 85%;
+    padding: 4px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #777;
+    font-size: 85%;
 }
 
 .suggestions-constraints {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: absolute !important;
-  white-space: nowrap !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
 
-  &:empty {
-    display: none !important;
-  }
-
-  li {
-    background: #f8f8f8;
-    border: 1px solid #ccc;
-    .rounded(3px);
-    cursor: default;
-    display: inline-block;
-    margin: 0 4px 0 0;
-    padding: 0 0.5em;
-
-    .suggestions-remove {
-      @icon-size: 1em;
-      height: @icon-size;
-      width: @icon-size;
-      display: inline-block;
-
-      margin: 0 0 0 0.25em;
-      .cross-button-mixin();
+    &:empty {
+        display: none !important;
     }
 
-    span {
-      vertical-align: middle;
-    }
+    li {
+        background: #f8f8f8;
+        border: 1px solid #ccc;
+        .rounded(3px);
+        cursor: default;
+        display: inline-block;
+        margin: 0 4px 0 0;
+        padding: 0 0.5em;
 
-  }
+        .suggestions-remove {
+            @icon-size: 1em;
+            height: @icon-size;
+            width: @icon-size;
+            display: inline-block;
+
+            margin: 0 0 0 0.25em;
+            .cross-button-mixin();
+        }
+
+        span {
+            vertical-align: middle;
+        }
+    }
 }
 
 .suggestions-subtext {
-  color: @subtext-color;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    color: @subtext-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .suggestions-subtext_inline {
-  display: inline-block;
-  min-width: 6em;
-  vertical-align: bottom;
-  margin: 0 0.5em 0 0;
+    display: inline-block;
+    min-width: 6em;
+    vertical-align: bottom;
+    margin: 0 0.5em 0 0;
 }
 
 .suggestions-subtext-delimiter {
-  display: inline-block;
-  width: 2px;
+    display: inline-block;
+    width: 2px;
 }
 
 .suggestions-subtext_label {
-  margin: 0 0 0 0.25em;
-  .rounded(3px);
-  padding: 0 3px;
+    margin: 0 0 0 0.25em;
+    .rounded(3px);
+    padding: 0 3px;
 
-  background: @subtext-label-color;
-  font-size: 85%;
+    background: @subtext-label-color;
+    font-size: 85%;
 }
 
 .suggestions-value {
-  &[data-suggestion-status="LIQUIDATED"] {
-    position: relative;
+    &[data-suggestion-status='LIQUIDATED'] {
+        position: relative;
 
-    &:after {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
+        &:after {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
 
-      border-top: 1px solid rgba(0, 0, 0, 0.4);
+            border-top: 1px solid rgba(0, 0, 0, 0.4);
 
-      content: '';
+            content: '';
+        }
     }
-  }
 }
