@@ -134,7 +134,7 @@ import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component'
                         component: WithdrawalsComponent
                     },
                     {
-                        path: 'withdrawal/:withdrawalID',
+                        path: 'withdrawals/:withdrawalID',
                         component: WithdrawalComponent
                     }
                 ]

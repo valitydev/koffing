@@ -24,6 +24,6 @@ export class SearchResultComponent {
     }
 
     public gotToWithdrawalDetails(withdrawalID: string) {
-        this.router.navigate(['wallets', 'withdrawal', withdrawalID]);
+        this.router.navigate(['wallets', 'withdrawals', withdrawalID]);
     }
 }
