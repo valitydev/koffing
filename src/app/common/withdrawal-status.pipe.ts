@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { WithdrawalStatus } from 'koffing/wallets/withdrawal-status';
+import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
 
 @Pipe({
     name: 'kofWithdrawalStatus'

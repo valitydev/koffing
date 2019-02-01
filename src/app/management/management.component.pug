@@ -41,6 +41,11 @@
                 h5 Действия
             .x_content
                 button.btn.btn-default((click)="createShop()") Создать магазин
+        .x_panel
+            .x_title
+                h5 Кошельки
+            .x_content
+                button.btn.btn-default((click)="toWallets()") Управление кошельками
 p-dialog([(visible)]="displayWarning", width="660")
     div(*ngIf="!displayWarningDetails")
         p В целях предоставления документов просим СРОЧНО связаться по телефону +7(495)648-68-58, либо по электронной почте

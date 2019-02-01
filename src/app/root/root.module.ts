@@ -20,13 +20,16 @@ import { AnalyticsModule } from 'koffing/analytics/analytics.module';
 import { ShopInfoModule } from 'koffing/shop-info/shop-info.module';
 import { PayoutsModule } from 'koffing/payouts/payouts.module';
 import { LandingContainerComponent } from './components/landing-container/landing-container.component';
-import { LandingTopPanelComponent } from './components/landing-container/landing-top-panel/landing-top-panel.component';
+import { TopPanelComponent } from './components/top-panel/top-panel.component';
 import { TopPanelActionsComponent } from './components/top-panel-actions/top-panel-actions.component';
 import { ShopSelectorComponent } from 'koffing/root/components/shop-container/shop-top-panel/shop-selector/shop-selector.component';
 import { ShopTopPanelComponent } from 'koffing/root/components/shop-container/shop-top-panel/shop-top-panel.component';
 import { ShopContainerComponent } from './components/shop-container/shop-container.component';
 import { WalletsModule } from 'koffing/wallets/wallets.module';
 import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
+import { WalletsContainerComponent } from './components/wallets-container/wallets-container.component';
+import { WalletsSidebarComponent } from './components/wallets-container/wallets-sidebar/wallets-sidebar.component';
+import { WithdrawalsModule } from 'koffing/withdrawals/withdrawals.module';
 
 @NgModule({
     imports: [
@@ -47,7 +50,8 @@ import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
         ShopInfoModule,
         PayoutsModule,
         WalletsModule,
-        WithdrawalModule
+        WithdrawalModule,
+        WithdrawalsModule
     ],
     declarations: [
         ContainerComponent,
@@ -57,8 +61,10 @@ import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
         ShopTopPanelComponent,
         HttpErrorHandleComponent,
         ShopSelectorComponent,
-        LandingTopPanelComponent,
-        TopPanelActionsComponent
+        TopPanelComponent,
+        TopPanelActionsComponent,
+        WalletsContainerComponent,
+        WalletsSidebarComponent
     ]
 })
 export class RootModule {}

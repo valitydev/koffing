@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { BreadcrumbBroadcaster, BreadcrumbConfig } from 'koffing/broadcaster';
 
 @Component({
-    selector: 'kof-landing-top-panel',
-    templateUrl: 'landing-top-panel.component.pug',
-    styleUrls: ['landing-top-panel.component.less']
+    selector: 'kof-top-panel',
+    templateUrl: 'top-panel.component.pug',
+    styleUrls: ['top-panel.component.less']
 })
-export class LandingTopPanelComponent implements OnInit {
-    public breadcrumbConfig: BreadcrumbConfig[];
+export class TopPanelComponent implements OnInit {
+    public breadcrumbConfig: BreadcrumbConfig[] = [];
 
     private initialBreadcrumbConfig: BreadcrumbConfig[] = [
         {

@@ -22,6 +22,8 @@ import { ReportsComponent } from 'koffing/documents/reports/reports.component';
 import { ReportType } from 'koffing/backend';
 import { WalletsComponent } from 'koffing/wallets/wallets.component';
 import { WithdrawalComponent } from 'koffing/withdrawal/withdrawal.component';
+import { WalletsContainerComponent } from './components/wallets-container/wallets-container.component';
+import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component';
 
 @NgModule({
     imports: [
@@ -78,14 +80,6 @@ import { WithdrawalComponent } from 'koffing/withdrawal/withdrawal.component';
                         component: PayoutsComponent
                     },
                     {
-                        path: 'wallets',
-                        component: WalletsComponent
-                    },
-                    {
-                        path: 'withdrawal/:withdrawalID',
-                        component: WithdrawalComponent
-                    },
-                    {
                         path: 'info',
                         component: ShopInfoComponent
                     },
@@ -119,6 +113,29 @@ import { WithdrawalComponent } from 'koffing/withdrawal/withdrawal.component';
                     {
                         path: 'key',
                         component: TokenComponent
+                    }
+                ]
+            },
+            {
+                path: 'wallets',
+                component: WalletsContainerComponent,
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'list',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'list',
+                        component: WalletsComponent
+                    },
+                    {
+                        path: 'withdrawals',
+                        component: WithdrawalsComponent
+                    },
+                    {
+                        path: 'withdrawals/:withdrawalID',
+                        component: WithdrawalComponent
                     }
                 ]
             }

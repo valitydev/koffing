@@ -73,6 +73,10 @@ export class ManagementComponent implements OnInit {
         this.router.navigate(['/shop/create']);
     }
 
+    public toWallets() {
+        this.router.navigate(['/wallets']);
+    }
+
     public createTestShop() {
         this.isCreating = true;
         this.managementService.createTestShop().subscribe(shops => {
