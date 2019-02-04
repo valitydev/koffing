@@ -30,6 +30,7 @@ import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
 import { WalletsContainerComponent } from './components/wallets-container/wallets-container.component';
 import { WalletsSidebarComponent } from './components/wallets-container/wallets-sidebar/wallets-sidebar.component';
 import { WithdrawalsModule } from 'koffing/withdrawals/withdrawals.module';
+import { WalletsDocumentsModule } from 'koffing/wallets-documents/wallets-documents.module';
 
 @NgModule({
     imports: [
@@ -51,7 +52,8 @@ import { WithdrawalsModule } from 'koffing/withdrawals/withdrawals.module';
         PayoutsModule,
         WalletsModule,
         WithdrawalModule,
-        WithdrawalsModule
+        WithdrawalsModule,
+        WalletsDocumentsModule
     ],
     declarations: [
         ContainerComponent,

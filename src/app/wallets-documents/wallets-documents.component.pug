@@ -1,0 +1,9 @@
+.row
+    .col-xs-12.col-md-10.col-md-offset-1
+        .x_panel
+            .x_content
+                ul.nav.nav-tabs.bar_tabs
+                    li.hand-cursor([routerLink]="['reports', reportTypes.withdrawalRegistry]", [routerLinkActive]="['active']")
+                        a Отчет по выводам
+                .tab-content
+                    router-outlet

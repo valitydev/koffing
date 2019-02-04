@@ -1,0 +1,17 @@
+form([formGroup]="form")
+    .row
+        .col-xs-12.col-sm-3
+            .form-group
+                label ID личности владельца:
+                input.form-control(formControlName="identityID")
+        .col-xs-12.col-sm-6
+            kof-date-range((onSelect)="selectDateRange($event)")
+        .col-xs-12.col-sm-3
+            .row
+                .col-xs-12
+                    button.btn.btn-default.create-report(
+                        (click)="createReports()",
+                        [disabled]="isLoading") Создать
+    .row
+        .col-xs-12
+            kof-search-reports-result([reports$]="reports$", [filter]="filter")
