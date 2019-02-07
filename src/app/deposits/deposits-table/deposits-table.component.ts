@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { WithdrawalTableService } from './withdrawal-table.service';
+import { DepositsTableService } from './deposits-table.service';
 import { SearchService } from 'koffing/backend/search.service';
 import { Withdrawal } from 'koffing/backend';
 import { SearchFormService } from './search-form/search-form.service';
 
 @Component({
-    selector: 'kof-wallets-withdrawal',
-    templateUrl: 'withdrawals-table.component.pug',
-    styleUrls: ['withdrawal-table.component.less'],
-    providers: [WithdrawalTableService, SearchFormService]
+    selector: 'kof-wallets-deposits',
+    templateUrl: 'deposits-table.component.pug',
+    styleUrls: ['deposits-table.component.less'],
+    providers: [DepositsTableService, SearchFormService]
 })
-export class WithdrawalsTableComponent {
+export class DepositsTableComponent {
     public page: number = 0;
     public limit: number = 20;
-    public withdrawals: Subject<Withdrawal[]> = new Subject();
+    public deposits: Subject<Withdrawal[]> = new Subject();
     private continuationTokens: string[] = [];
     private formValue: any;
 
     constructor(
-        private withdrawalTableService: WithdrawalTableService,
+        private depositsTableService: DepositsTableService,
         private searchService: SearchService
     ) {}
 
@@ -46,14 +46,14 @@ export class WithdrawalsTableComponent {
     private search(num: number = 0) {
         this.page += num;
         const continuationToken = this.continuationTokens[this.page];
-        const request = this.withdrawalTableService.toSearchParams(
+        const request = this.depositsTableService.toSearchParams(
             this.limit,
             continuationToken,
             this.formValue
         );
         this.searchService.searchWalletDeposits(request).subscribe(response => {
             this.continuationTokens[this.page + 1] = response.continuationToken;
-            this.withdrawals.next(response.result);
+            this.deposits.next(response.result);
         });
     }
 }

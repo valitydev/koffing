@@ -77,7 +77,7 @@ export class SearchService {
             .map(res => res.json());
     }
 
-    public searchWalletWithdrawals(
+    public searchWalletDeposits(
         withdrawalsParams: SearchWalletWithdrawals
     ): Observable<WithdrawalSearchResult> {
         const search = this.toSearchParams(withdrawalsParams);

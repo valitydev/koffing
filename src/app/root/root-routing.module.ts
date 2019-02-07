@@ -27,6 +27,7 @@ import { WalletsContainerComponent } from './components/wallets-container/wallet
 import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component';
 import { WalletsReportsComponent } from 'koffing/wallets-documents/reports/wallets-reports.component';
 import { WalletsDocumentsComponent } from 'koffing/wallets-documents/wallets-documents.component';
+import { DepositsComponent } from 'koffing/deposits/deposits.component';
 
 @NgModule({
     imports: [
@@ -131,6 +132,10 @@ import { WalletsDocumentsComponent } from 'koffing/wallets-documents/wallets-doc
                     {
                         path: 'list',
                         component: WalletsComponent
+                    },
+                    {
+                        path: 'deposits',
+                        component: DepositsComponent
                     },
                     {
                         path: 'withdrawals',
