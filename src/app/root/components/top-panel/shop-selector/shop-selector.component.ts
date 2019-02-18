@@ -12,7 +12,7 @@ import { SelectItem } from './select-item';
 export class ShopSelectorComponent implements OnInit {
     public selectorItems: SelectItem[];
 
-    private selectedShopID: string;
+    private selectedShopID: string = '';
 
     constructor(private shopSelectorService: ShopSelectorService) {}
 

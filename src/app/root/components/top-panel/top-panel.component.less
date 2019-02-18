@@ -1,5 +1,4 @@
 .top-panel-breadcrumb {
-    width: 50%;
     display: table-cell;
     vertical-align: middle;
     background: none;
@@ -9,4 +8,9 @@
     @media (max-width: 991px) {
         display: none;
     }
+}
+
+/deep/.top-panel__link:hover *,
+/deep/.top-panel__link_active * {
+    text-decoration: underline;
 }

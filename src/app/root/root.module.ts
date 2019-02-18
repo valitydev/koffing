@@ -20,10 +20,9 @@ import { AnalyticsModule } from 'koffing/analytics/analytics.module';
 import { ShopInfoModule } from 'koffing/shop-info/shop-info.module';
 import { PayoutsModule } from 'koffing/payouts/payouts.module';
 import { LandingContainerComponent } from './components/landing-container/landing-container.component';
-import { TopPanelComponent } from './components/top-panel/top-panel.component';
 import { TopPanelActionsComponent } from './components/top-panel-actions/top-panel-actions.component';
-import { ShopSelectorComponent } from 'koffing/root/components/shop-container/shop-top-panel/shop-selector/shop-selector.component';
-import { ShopTopPanelComponent } from 'koffing/root/components/shop-container/shop-top-panel/shop-top-panel.component';
+import { ShopSelectorComponent } from 'koffing/root/components/top-panel/shop-selector/shop-selector.component';
+import { TopPanelComponent } from 'koffing/root/components/top-panel/top-panel.component';
 import { ShopContainerComponent } from './components/shop-container/shop-container.component';
 import { WalletsModule } from 'koffing/wallets/wallets.module';
 import { WithdrawalModule } from 'koffing/withdrawal/withdrawal.module';
@@ -62,10 +61,9 @@ import { DepositsModule } from 'koffing/deposits/deposits.module';
         LandingContainerComponent,
         ShopContainerComponent,
         SidebarComponent,
-        ShopTopPanelComponent,
+        TopPanelComponent,
         HttpErrorHandleComponent,
         ShopSelectorComponent,
-        TopPanelComponent,
         TopPanelActionsComponent,
         WalletsContainerComponent,
         WalletsSidebarComponent

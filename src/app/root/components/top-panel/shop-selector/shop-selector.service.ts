@@ -26,15 +26,19 @@ export class ShopSelectorService {
 
     public getActiveShopID(): string {
         const routeShopID = this.route.snapshot.params['shopID'];
-        return routeShopID ? routeShopID : this.getFromStorage(this.shops);
+        return routeShopID ? routeShopID : '';
     }
 
     public navigateToShop(shopID: string) {
         ShopIDStorage.set(shopID);
-        const hasChildren = this.route.children.length > 0;
-        const childRoute = hasChildren ? this.route.children[0].routeConfig.path : 'invoices';
-        const childComponents = childRoute.split('/');
-        this.router.navigate(['shop', shopID].concat(childComponents));
+        let childRoute = ['invoices'];
+        if (
+            this.route.children.length &&
+            this.route.children[0].parent.routeConfig.path === 'shops'
+        ) {
+            childRoute = this.route.children[0].routeConfig.path.split('/');
+        }
+        this.router.navigate(['shop', shopID].concat(childRoute));
     }
 
     private toSelectorItems(shops: Shop[]): SelectItem[] {
