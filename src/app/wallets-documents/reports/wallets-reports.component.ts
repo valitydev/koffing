@@ -54,7 +54,7 @@ export class WalletsReportsComponent implements OnInit {
                 { identityID: this.form.value.identityID },
                 {
                     ...this.dateRange.getValue(),
-                    type: this.reportType
+                    reportType: this.reportType
                 }
             )
             .subscribe(

@@ -7,5 +7,5 @@ export interface CreateReportPath {
 export interface CreateReportQuery {
     fromTime: Date;
     toTime: Date;
-    type?: ReportType;
+    reportType?: ReportType;
 }

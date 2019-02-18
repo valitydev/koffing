@@ -1,7 +1,6 @@
 import moment = require('moment');
 
-export function toUTC(date: Date): string {
-    return moment(date)
+export const toUTC = (date: Date): string =>
+    moment(date)
         .utc()
         .format();
-}
