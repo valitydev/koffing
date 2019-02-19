@@ -51,7 +51,7 @@ export class DepositsTableComponent {
             continuationToken,
             this.formValue
         );
-        this.searchService.searchWalletDeposits(request).subscribe(response => {
+        this.searchService.searchWalletWithdrawals(request).subscribe(response => {
             this.continuationTokens[this.page + 1] = response.continuationToken;
             this.deposits.next(response.result);
         });
