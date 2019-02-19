@@ -11,7 +11,7 @@ table.table.table-striped
     tbody(*ngFor="let deposit of deposits | async")
         tr
             td {{deposit.id}}
-            td {{deposit.body.amount | kofRoubleCurrency}} {{withdepositdrawal.body.currency | kofCurrency}}
+            td {{deposit.body.amount | kofRoubleCurrency}} {{deposit.body.currency | kofCurrency}}
             td {{deposit.fee.amount | kofRoubleCurrency }} {{deposit.fee.currency | kofCurrency }}
             td {{deposit.body.amount + deposit.fee.amount | kofRoubleCurrency}} {{deposit.body.currency | kofCurrency}}
             td {{deposit.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
