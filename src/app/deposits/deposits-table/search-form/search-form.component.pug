@@ -10,8 +10,8 @@ form([formGroup]="searchForm", novalidate)
                 input.form-control(formControlName="identityID")
         .col-sm-2.col-xs-12
             .form-group
-                label ID вывода:
-                input.form-control(formControlName="withdrawalID")
+                label ID ввода:
+                input.form-control(formControlName="depositID")
         .col-sm-3.col-xs-12
             .form-group
                 label Статус вывода
@@ -45,8 +45,8 @@ form([formGroup]="searchForm", novalidate)
                                 readonlyInput="true")
             .col-sm-2.col-xs-12
                 .form-group
-                    label ID приёмника средств:
-                    input.form-control(formControlName="destinationID")
+                    label ID источника средств:
+                    input.form-control(formControlName="sourceID")
             .col-sm-2.col-xs-12
                 .form-group
                     label Сумма от:

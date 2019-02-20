@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { SearchWalletWithdrawals } from 'koffing/backend';
 import { toMinor } from 'koffing/common/amount-utils';
+import { SearchDeposits } from 'koffing/backend/wapi/requests/search-deposits-params';
 
 @Injectable()
 export class DepositsTableService {
@@ -9,20 +9,20 @@ export class DepositsTableService {
         limit: number,
         continuationToken: string,
         formParams: any
-    ): SearchWalletWithdrawals {
-        const result = new SearchWalletWithdrawals();
-        result.limit = limit;
-        result.continuationToken = continuationToken;
-        result.walletID = formParams.walletID;
-        result.identityID = formParams.identityID;
-        result.destinationID = formParams.destinationID;
-        result.withdrawalID = formParams.withdrawalID;
-        result.status = formParams.status;
-        result.createdAtFrom = formParams.createdAtFrom;
-        result.createdAtTo = formParams.createdAtTo;
-        result.amountFrom = toMinor(formParams.amountFrom);
-        result.amountTo = toMinor(formParams.amountTo);
-        result.currencyID = formParams.currencyID;
-        return result;
+    ): SearchDeposits {
+        return {
+            limit,
+            walletID: formParams.walletID,
+            continuationToken,
+            identityID: formParams.identityID,
+            sourceID: formParams.sourceID,
+            depositID: formParams.depositID,
+            status: formParams.status,
+            createdAtFrom: formParams.createdAtFrom,
+            createdAtTo: formParams.createdAtTo,
+            amountFrom: toMinor(formParams.amountFrom),
+            amountTo: toMinor(formParams.amountTo),
+            currencyID: formParams.currencyID
+        };
     }
 }

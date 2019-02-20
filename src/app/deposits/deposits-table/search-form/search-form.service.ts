@@ -10,7 +10,7 @@ export class SearchFormService {
 
     private urlDateFormat = 'YYYY-MM-DD';
     private defaultValues: any;
-    private mainSearchFields = ['walletID', 'identityID', 'status', 'withdrawalID'];
+    private mainSearchFields = ['walletID', 'identityID', 'status', 'depositID'];
 
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
         this.searchForm = this.initForm();
@@ -49,8 +49,8 @@ export class SearchFormService {
         const form = this.fb.group({
             walletID: '',
             identityID: '',
-            destinationID: '',
-            withdrawalID: '',
+            sourceID: '',
+            depositID: '',
             status: '',
             createdAtFrom: moment()
                 .subtract(1, 'month')
