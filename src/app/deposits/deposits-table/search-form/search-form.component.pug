@@ -16,7 +16,7 @@ form([formGroup]="searchForm", novalidate)
             .form-group
                 label Статус вывода
                 kof-select(
-                [items]="withdrawalStatuses",
+                [items]="depositStatuses",
                 [placeholder]="'Любой статус'",
                 formControlName="status")
         .col-sm-3.col-xs-12

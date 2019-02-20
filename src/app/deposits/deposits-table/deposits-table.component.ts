@@ -3,8 +3,8 @@ import { Subject } from 'rxjs';
 
 import { DepositsTableService } from './deposits-table.service';
 import { SearchService } from 'koffing/backend/search.service';
-import { Withdrawal } from 'koffing/backend';
 import { SearchFormService } from './search-form/search-form.service';
+import { Deposit } from 'koffing/backend/wapi/model/deposit';
 
 @Component({
     selector: 'kof-wallets-deposits',
@@ -15,7 +15,7 @@ import { SearchFormService } from './search-form/search-form.service';
 export class DepositsTableComponent {
     public page: number = 0;
     public limit: number = 20;
-    public deposits: Subject<Withdrawal[]> = new Subject();
+    public deposits: Subject<Deposit[]> = new Subject();
     private continuationTokens: string[] = [];
     private formValue: any;
 

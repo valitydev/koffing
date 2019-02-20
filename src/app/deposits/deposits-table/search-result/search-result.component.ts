@@ -2,8 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
-import { Withdrawal } from 'koffing/backend';
-import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
+import { DepositStatus, Deposit } from 'koffing/backend/wapi/model/deposit';
 
 @Component({
     selector: 'kof-deposits-search-result',
@@ -11,15 +10,15 @@ import { WithdrawalStatus } from 'koffing/withdrawals/withdrawal-status';
 })
 export class SearchResultComponent {
     @Input()
-    public deposits: Observable<Withdrawal[]>;
+    public deposits: Observable<Deposit[]>;
 
     constructor(private router: Router) {}
 
     public getLabelClass(status: string) {
         return {
-            'label-success': status === WithdrawalStatus.Succeeded,
-            'label-danger': status === WithdrawalStatus.Failed,
-            'label-warning': status === WithdrawalStatus.Pending
+            'label-success': status === DepositStatus.Succeeded,
+            'label-danger': status === DepositStatus.Failed,
+            'label-warning': status === DepositStatus.Pending
         };
     }
 

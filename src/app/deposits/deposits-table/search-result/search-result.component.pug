@@ -16,7 +16,7 @@ table.table.table-striped
             td {{deposit.body.amount + deposit.fee.amount | kofRoubleCurrency}} {{deposit.body.currency | kofCurrency}}
             td {{deposit.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
             td
-                span.label.label-default([ngClass]="getLabelClass(deposit.status)") {{deposit.status | kofWithdrawalStatus}}
+                span.label.label-default([ngClass]="getLabelClass(deposit.status)") {{deposit.status | kofDepositStatus}}
             td
                 .pull-right
                     button.btn.btn-xs.btn-default((click)="gotToDepositDetails(deposit.id)") Детали

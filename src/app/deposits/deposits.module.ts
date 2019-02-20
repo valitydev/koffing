@@ -8,6 +8,7 @@ import { DepositsComponent } from './deposits.component';
 import { DepositsTableComponent } from './deposits-table/deposits-table.component';
 import { SearchFormComponent } from './deposits-table/search-form/search-form.component';
 import { SearchResultComponent } from './deposits-table/search-result/search-result.component';
+import { DepositStatusPipe } from './deposit-status.pipe';
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule, CalendarModule],
@@ -15,7 +16,9 @@ import { SearchResultComponent } from './deposits-table/search-result/search-res
         DepositsComponent,
         DepositsTableComponent,
         SearchFormComponent,
-        SearchResultComponent
-    ]
+        SearchResultComponent,
+        DepositStatusPipe
+    ],
+    exports: [DepositStatusPipe]
 })
 export class DepositsModule {}

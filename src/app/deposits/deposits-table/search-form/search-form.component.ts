@@ -4,7 +4,7 @@ import { map } from 'lodash';
 
 import { SelectItem } from 'koffing/common/select/select-item';
 import { SearchFormService } from './search-form.service';
-import { DEPOSIT_STATUS_LABEL } from '../../deposit-status-label';
+import { DepositStatusLabel } from '../../deposit-status-label';
 
 @Component({
     selector: 'kof-deposits-search-form',
@@ -23,7 +23,7 @@ export class SearchFormComponent implements OnInit {
     constructor(private searchFormService: SearchFormService) {}
 
     public ngOnInit() {
-        this.depositStatuses = map(DEPOSIT_STATUS_LABEL, (name, key) => new SelectItem(key, name));
+        this.depositStatuses = map(DepositStatusLabel, (name, key) => new SelectItem(key, name));
         this.searchForm = this.searchFormService.searchForm;
         this.onSearch.emit(this.searchForm.value);
         this.searchForm.valueChanges
