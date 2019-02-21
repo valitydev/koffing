@@ -67,10 +67,11 @@ export class WalletsReportsComponent implements OnInit {
     }
 
     private getReports() {
-        this.isLoading = true;
         const identityID = this.form.value.identityID;
         const dateRange = this.dateRange.getValue();
+        this.reports$.next([]);
         if (identityID && dateRange && dateRange.fromTime && dateRange.toTime) {
+            this.isLoading = true;
             const { fromTime, toTime } = dateRange;
             this.reportsService
                 .getReports({ identityID }, { fromTime, toTime, type: this.reportType })

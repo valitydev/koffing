@@ -15,3 +15,5 @@ form([formGroup]="form")
     .row
         .col-xs-12
             kof-search-reports-result([reports$]="reports$", [filter]="filter")
+    div(*ngIf="isLoading")
+        a.fa.fa-cog.fa-spin.fa-fw.loading_spinner
