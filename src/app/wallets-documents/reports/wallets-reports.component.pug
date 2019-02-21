@@ -4,14 +4,17 @@ form([formGroup]="form")
             .form-group
                 label ID личности владельца:
                 input.form-control(formControlName="identityID")
-        .col-xs-12.col-sm-6
+        .col-xs-12.col-sm-5
             kof-date-range((onSelect)="selectDateRange($event)")
-        .col-xs-12.col-sm-3
+        .col-xs-12.col-sm-4
             .row
                 .col-xs-12
                     button.btn.btn-default.create-report(
                         (click)="createReports()",
                         [disabled]="isLoading") Создать
+                    button.btn.btn-default.create-report(
+                        (click)="getReports()",
+                        [disabled]="isLoading") Обновить
     .row
         .col-xs-12
             kof-search-reports-result([reports$]="reports$", [filter]="filter")
