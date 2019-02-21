@@ -16,6 +16,7 @@ import { UrlShortenerService } from './url-shortener.service';
 import { ClaimService } from './claim.service';
 import { CustomerService } from './customer.service';
 import { DownloadService } from './download.service';
+import { WAPIModule } from './wapi/wapi.module';
 
 @NgModule({
     providers: [
@@ -35,6 +36,7 @@ import { DownloadService } from './download.service';
         ClaimService,
         CustomerService,
         DownloadService
-    ]
+    ],
+    imports: [WAPIModule]
 })
 export class BackendModule {}

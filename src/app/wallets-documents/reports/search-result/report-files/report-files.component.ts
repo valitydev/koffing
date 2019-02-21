@@ -1,34 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import * as moment from 'moment';
 
-import { DownloadService } from 'koffing/backend/download.service';
-import { FileMeta } from 'koffing/backend';
+import { DownloadFileService } from 'koffing/backend/wapi/download-file.service';
+import { Report } from 'koffing/backend/wapi/model/report';
 
 @Component({
     selector: 'kof-report-files',
     templateUrl: 'report-files.component.pug'
 })
-export class ReportFilesComponent implements OnInit {
+export class ReportFilesComponent {
     @Input()
-    public files: FileMeta[];
+    public files: Report['files'];
 
     @Input()
     public reportID: number;
 
-    private shopID: string;
-
-    constructor(private route: ActivatedRoute, private downloadService: DownloadService) {}
-
-    public ngOnInit() {
-        this.route.parent.parent.params.subscribe(params => {
-            this.shopID = params['shopID'];
-        });
-    }
+    constructor(private downloadFileService: DownloadFileService) {}
 
     public downloadFile(fileID: string, fileName: string) {
-        this.downloadService
-            .downloadReport(this.shopID, this.reportID, fileID)
-            .subscribe(reportLink => this.download(fileName, reportLink.url));
+        this.downloadFileService
+            .downloadFile(
+                { fileID },
+                {
+                    expiresAt: moment()
+                        .add(1, 'minute')
+                        .utc()
+                        .format()
+                }
+            )
+            .subscribe(file => this.download(fileName, file.url));
     }
 
     private download(fileName: string, url: string) {

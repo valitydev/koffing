@@ -1,5 +1,3 @@
-import { FileMeta } from 'koffing/backend/model/file-meta';
-
 export enum ReportType {
     withdrawalRegistry = 'withdrawalRegistry'
 }
@@ -17,7 +15,7 @@ export interface Report {
     toTime: string;
     status: ReportStatus;
     type: ReportType;
-    files: FileMeta[];
+    files: string[];
 }
 
 export interface SearchReportParams {
