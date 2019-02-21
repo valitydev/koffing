@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DepositStatus } from 'koffing/backend/wapi/model/deposit';
-import { DepositStatusLabel } from './deposit-status-label';
+import { DepositStatusLabel } from '../deposits/deposit-status-label';
 
 @Pipe({
     name: 'kofDepositStatus'

@@ -18,6 +18,7 @@ import { PaymentStatusPipe } from './payment-statuses.pipe';
 import { CurrencyPipe } from './currency.pipe';
 import { StepperComponent } from './stepper/stepper.component';
 import { WithdrawalStatusPipe } from './withdrawal-status.pipe';
+import { DepositStatusPipe } from './deposit-status.pipe';
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule, CalendarModule],
@@ -35,7 +36,8 @@ import { WithdrawalStatusPipe } from './withdrawal-status.pipe';
         PaymentStatusPipe,
         CurrencyPipe,
         WithdrawalStatusPipe,
-        StepperComponent
+        StepperComponent,
+        DepositStatusPipe
     ],
     exports: [
         SelectComponent,
@@ -51,7 +53,8 @@ import { WithdrawalStatusPipe } from './withdrawal-status.pipe';
         PaymentStatusPipe,
         CurrencyPipe,
         WithdrawalStatusPipe,
-        StepperComponent
+        StepperComponent,
+        DepositStatusPipe
     ],
     providers: [EventPollerService]
 })
