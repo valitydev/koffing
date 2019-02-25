@@ -42,7 +42,7 @@ export class DepositService {
             )
             .subscribe(searchResult => {
                 if (searchResult) {
-                    this.deposit = searchResult[0];
+                    this.deposit = searchResult.result[0];
                     this.depositSubject.next(this.deposit);
                     this.depositSubject.complete();
                 }
