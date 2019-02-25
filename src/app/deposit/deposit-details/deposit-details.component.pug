@@ -1,7 +1,7 @@
 form.form-horizontal.form-label-left.css-form
     .form-group(*ngIf="deposit?.id")
         .col-xs-12.col-sm-4
-            label.text-left Идентификатор пополнения:
+            label.text-left Идентификатор поступления денежных средств:
         .col-xs-12.col-sm-8
             div {{deposit?.id}}
     .form-group(*ngIf="deposit?.status")
@@ -21,17 +21,17 @@ form.form-horizontal.form-label-left.css-form
             div {{deposit?.source}}
     .form-group
         .col-xs-12.col-sm-4
-            label.text-left Дата и время создания:
+            label.text-left Дата и время запуска пополнения:
         .col-xs-12.col-sm-8
             div {{deposit?.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
     .form-group
         .col-xs-12.col-sm-4
-            label.text-left Объем пополнения средств:
+            label.text-left Объём поступивших средств:
         .col-xs-12.col-sm-8
             div {{deposit?.body.amount | kofRoubleCurrency}} {{deposit.body.currency | kofCurrency}}
     .form-group(*ngIf="deposit?.fee")
         .col-xs-12.col-sm-4
-            label.text-left Коммисия:
+            label.text-left Сумма коммисии:
         .col-xs-12.col-sm-8
             div {{deposit?.fee.amount | kofRoubleCurrency}} {{deposit.fee.currency | kofCurrency}}
     .form-group(*ngIf="deposit?.failure")
