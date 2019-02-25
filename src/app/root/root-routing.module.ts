@@ -20,10 +20,15 @@ import { DocumentsComponent } from 'koffing/documents/documents.component';
 import { InitCreateShopComponent } from 'koffing/management/init-create-shop/init-create-shop.component';
 import { ReportsComponent } from 'koffing/documents/reports/reports.component';
 import { ReportType } from 'koffing/backend';
+import { ReportType as WalletsReportType } from 'koffing/backend/wapi/model/report';
 import { WalletsComponent } from 'koffing/wallets/wallets.component';
 import { WithdrawalComponent } from 'koffing/withdrawal/withdrawal.component';
 import { WalletsContainerComponent } from './components/wallets-container/wallets-container.component';
 import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component';
+import { WalletsReportsComponent } from 'koffing/wallets-documents/reports/wallets-reports.component';
+import { WalletsDocumentsComponent } from 'koffing/wallets-documents/wallets-documents.component';
+import { DepositsComponent } from 'koffing/deposits/deposits.component';
+import { DepositComponent } from 'koffing/deposit/deposit.component';
 
 @NgModule({
     imports: [
@@ -130,12 +135,35 @@ import { WithdrawalsComponent } from 'koffing/withdrawals/withdrawals.component'
                         component: WalletsComponent
                     },
                     {
+                        path: 'deposits',
+                        component: DepositsComponent
+                    },
+                    {
+                        path: 'deposits/:depositID',
+                        component: DepositComponent
+                    },
+                    {
                         path: 'withdrawals',
                         component: WithdrawalsComponent
                     },
                     {
                         path: 'withdrawals/:withdrawalID',
                         component: WithdrawalComponent
+                    },
+                    {
+                        path: 'documents',
+                        component: WalletsDocumentsComponent,
+                        children: [
+                            {
+                                path: '',
+                                redirectTo: 'reports/' + WalletsReportType.withdrawalRegistry,
+                                pathMatch: 'full'
+                            },
+                            {
+                                path: 'reports/:type',
+                                component: WalletsReportsComponent
+                            }
+                        ]
                     }
                 ]
             }

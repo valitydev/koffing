@@ -1,8 +1,14 @@
 .top_nav
     nav.nav_menu
+        .nav.toggle.toggle-menu
+            a((click)="toggleMenu()")
+                i.fa.fa-bars
         .nav.toggle.logo
-            a([routerLink]=["/"])
-                | RBKmoney
+            a([routerLink]=["/"]) RBKmoney
+        div([class]="'nav toggle shop-selector top-panel__link' + (activeLink === links.shop ? ' top-panel__link_active' : '')")
+            kof-shop-selector
+        div([class]="'nav toggle top-panel__link' + (activeLink === links.wallets ? ' top-panel__link_active' : '')")
+            a([routerLink]=["/wallets"]) Кошельки
         ol.breadcrumb.top-panel-breadcrumb(*ngIf="breadcrumbConfig.length > 1")
             li(*ngFor="let config of breadcrumbConfig", [ngClass]="{'active': !config.routerLink}")
                 a(*ngIf="config.routerLink", [routerLink]="config.routerLink") {{config.label}}

@@ -25,6 +25,8 @@ import {
     Withdrawal,
     WithdrawalSearchResult
 } from './model';
+import { SearchDeposits } from './wapi/requests/search-deposits-params';
+import { SearchDepositResult } from './wapi/requests/search-deposits-result';
 
 @Injectable()
 export class SearchService {
@@ -84,6 +86,11 @@ export class SearchService {
         return this.http
             .get(`${this.config.wapiUrl}/withdrawals`, { search })
             .map(res => res.json());
+    }
+
+    public searchWalletDeposits(depositsParams: SearchDeposits): Observable<SearchDepositResult> {
+        const search = this.toSearchParams(depositsParams);
+        return this.http.get(`${this.config.wapiUrl}/deposits`, { search }).map(res => res.json());
     }
 
     public searchWalletWithdrawal(withdrawalID: string): Observable<Withdrawal> {

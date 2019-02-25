@@ -1,0 +1,22 @@
+table.table.table-striped
+    thead
+        tr
+            th ID выплаты
+            th Сумма пополнения
+            th Комиссия
+            th Сумма зачисления
+            th Дата создания
+            th Статус
+            th
+    tbody(*ngFor="let deposit of deposits | async")
+        tr
+            td {{deposit.id}}
+            td {{deposit.body.amount | kofRoubleCurrency}} {{deposit.body.currency | kofCurrency}}
+            td {{deposit.fee.amount | kofRoubleCurrency }} {{deposit.fee.currency | kofCurrency }}
+            td {{deposit.body.amount - deposit.fee.amount | kofRoubleCurrency}} {{deposit.body.currency | kofCurrency}}
+            td {{deposit.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
+            td
+                span.label.label-default([ngClass]="getLabelClass(deposit.status)") {{deposit.status | kofDepositStatus}}
+            td
+                .pull-right
+                    button.btn.btn-xs.btn-default((click)="gotToDepositDetails(deposit.id)") Детали

@@ -1,0 +1,66 @@
+form([formGroup]="searchForm", novalidate)
+    .row
+        .col-sm-2.col-xs-12
+            .form-group
+                label ID кошелька:
+                input.form-control(formControlName="walletID")
+        .col-sm-2.col-xs-12
+            .form-group
+                label ID личности владельца:
+                input.form-control(formControlName="identityID")
+        .col-sm-2.col-xs-12
+            .form-group
+                label ID ввода:
+                input.form-control(formControlName="depositID")
+        .col-sm-3.col-xs-12
+            .form-group
+                label Статус вывода
+                kof-select(
+                [items]="depositStatuses",
+                [placeholder]="'Любой статус'",
+                formControlName="status")
+        .col-sm-3.col-xs-12
+            .toggle-button-container
+                button.btn.btn-default((click)="toggleAdditionalParamsVisible()") ...
+
+    div(*ngIf="additionalParamsVisible")
+        .row
+            .col-sm-4.col-xs-12
+                .form-group
+                    label Временной интервал:
+                    .row
+                        .col-sm-6.col-xs-12
+                            .ui-calendar.search-form
+                                p-calendar.ui-inputtext.search-form(
+                                formControlName="createdAtFrom",
+                                dateFormat = "dd.mm.yy",
+                                [maxDate]="searchForm.controls.createdAtTo.value",
+                                readonlyInput="true")
+                        .col-sm-6.col-xs-12
+                            .ui-calendar.search-form
+                                p-calendar.ui-inputtext.search-form(
+                                formControlName="createdAtTo",
+                                dateFormat = "dd.mm.yy",
+                                [minDate]="searchForm.controls.createdAtFrom.value",
+                                readonlyInput="true")
+            .col-sm-2.col-xs-12
+                .form-group
+                    label ID источника средств:
+                    input.form-control(formControlName="sourceID")
+            .col-sm-2.col-xs-12
+                .form-group
+                    label Сумма от:
+                    input.form-control(formControlName="amountFrom", type="number")
+            .col-sm-2.col-xs-12
+                .form-group
+                    label Сумма до:
+                    input.form-control(formControlName="amountTo", type="number")
+            .col-sm-2.col-xs-12
+                .form-group
+                    label Валюта:
+                    input.form-control(formControlName="currencyID")
+
+        .row
+            .col-sm-9.col-xs-12
+                .reset-button-container
+                    button.btn.btn-default((click)="reset()") Сбросить параметры поиска

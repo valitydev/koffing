@@ -1,2 +1,3 @@
 select.shop-selector([(ngModel)]="selected")
+    option(value="", disabled="disabled") Магазины
     option(*ngFor="let item of selectorItems", [value]="item.value") {{item.label}}
