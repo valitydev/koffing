@@ -1,0 +1,11 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Название магазина:
+        .col-xs-12.col-sm-8
+            div {{detailsChange?.details?.name}}
+    .form-group(*ngIf="detailsChange?.details?.description")
+        .col-xs-12.col-sm-4
+            label.text-left Описание:
+        .col-xs-12.col-sm-8
+            div {{detailsChange?.details?.description}}

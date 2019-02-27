@@ -11,11 +11,6 @@
                 form.form-horizontal.form-label-left.css-form
                     .form-group
                         .col-xs-12.col-sm-4
-                            label.text-left Тип заявки:
-                        .col-xs-12.col-sm-8
-                            div {{modificationType | kofClaimModificationType}}
-                    .form-group
-                        .col-xs-12.col-sm-4
                             label.text-left Идентификатор:
                         .col-xs-12.col-sm-8
                             div {{claim?.id}}
@@ -49,15 +44,6 @@
                     .col-xs-12
                         kof-revoke-claim([claim]="claim")
 
-        kof-shop-creation-details(
-            *ngIf="modificationType === MODIFICATION_TYPE.ShopCreation",
-            [partyModifications]="claim.changeset")
-        kof-contract-creation-details(
-            *ngIf="modificationType === MODIFICATION_TYPE.ContractCreation",
-            [partyModifications]="claim.changeset")
-        kof-payout-tool-creation-details(
-            *ngIf="modificationType === MODIFICATION_TYPE.ContractPayoutToolCreation",
-            [partyModifications]="claim.changeset")
-        kof-contract-binding-details(
-            *ngIf="modificationType === MODIFICATION_TYPE.ShopContractBinding",
-            [partyModifications]="claim.changeset")
+        kof-claim-modification-details(
+            *ngFor="let modification of claim.changeset",
+            [partyModification]="modification")

@@ -1,0 +1,65 @@
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ShopCreation")
+    .x_title
+        h5 {{partyModification.shopModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-shop-creation([modification]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ShopDetailsChange")
+    .x_title
+        h5 {{partyModification.shopModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-shop-details-change([detailsChange]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ShopCategoryChange")
+    .x_title
+        h5 {{partyModification.shopModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-shop-category-change([categoryChange]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ShopLocationChange")
+    .x_title
+        h5 {{partyModification.shopModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-shop-location-change([locationChange]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ShopAccountCreation")
+    .x_title
+        h5 {{partyModification.shopModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-shop-account-creation([account]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ShopPayoutScheduleChange")
+    .x_title
+        h5 {{partyModification.shopModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-shop-payout-schedule-change([scheduleChange]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ContractCreation")
+    .x_title
+        h5 {{partyModification.contractModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-contract-details([contract]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ContractPayoutToolCreation")
+    .x_title
+        h5 {{partyModification.contractModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-payout-tool-details([payoutTool]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ContractTermination")
+    .x_title
+        h5 {{partyModification.contractModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-contract-termination([termination]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ContractLegalAgreementBinding")
+    .x_title
+        h5 {{partyModification.contractModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-contract-legal-agreement-binding([legalAgreement]="partyModification")
+
+.x_panel(*ngIf="modificationType === MODIFICATION_TYPE.ContractAdjustmentCreation")
+    .x_title
+        h5 {{partyModification.contractModificationType | kofClaimDetailsTitle}}
+    .x_content
+        kof-contract-adjustment-creation([adjustment]="partyModification")

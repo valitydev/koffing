@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ShopDetailsComponent } from './shop-details/shop-details.component';
+import { ShopDetailsComponent } from '../shop-info/shop-details/shop-details.component';
 import { ContractDetailsComponent } from './contract-details/contract-details.component';
 import { ContractorDetailsComponent } from './contractor-details/contractor-details.component';
 import { BankAccountDetailsComponent } from './bank-account-details/bank-account-details.component';
@@ -28,6 +28,15 @@ import { RussianContractorDetailsComponent } from './contractor-details/russian-
 import { InternationalContractorDetailsComponent } from './contractor-details/international-contractor-details/international-contractor-details.component';
 import { CommonModule } from '../common/common.module';
 import { InternationalBankAccountPartFormComponent } from './bank-account-form/international-bank-account-part-form/international-bank-account-part-form.component';
+import { ShopDetailsChangeComponent } from 'koffing/domain/shop-details-change/shop-details-change.component';
+import { ShopCreationComponent } from 'koffing/domain/shop-creation/shop-creation.component';
+import { ShopCategoryChangeComponent } from 'koffing/domain/shop-category-change/shop-category-change.component';
+import { ShopLocationChangeComponent } from 'koffing/domain/shop-location-change/shop-location-change.component';
+import { ContractTerminationComponent } from 'koffing/domain/contract-termination/contract-termination.component';
+import { ShopAccountCreationComponent } from 'koffing/domain/shop-account-creation/shop-account-creation.component';
+import { ShopPayoutScheduleChangeComponent } from 'koffing/domain/shop-payout-schedule-change/shop-payout-schedule-change.component';
+import { ContractLegalAgreementBindingComponent } from 'koffing/domain/contract-legal-agreement-binding/contract-legal-agreement-binding.component';
+import { ContractAdjustmentCreationComponent } from 'koffing/domain/contract-adjustment-creation/contract-adjustment-creation.component';
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule],
@@ -49,7 +58,16 @@ import { InternationalBankAccountPartFormComponent } from './bank-account-form/i
         RussianContractFormComponent,
         InternationalBankAccountFormComponent,
         InternationalBankAccountPartFormComponent,
-        RussianBankAccountFormComponent
+        RussianBankAccountFormComponent,
+        ShopCreationComponent,
+        ShopDetailsChangeComponent,
+        ShopCategoryChangeComponent,
+        ShopLocationChangeComponent,
+        ContractTerminationComponent,
+        ShopAccountCreationComponent,
+        ShopPayoutScheduleChangeComponent,
+        ContractLegalAgreementBindingComponent,
+        ContractAdjustmentCreationComponent
     ],
     exports: [
         ShopDetailsComponent,
@@ -66,7 +84,16 @@ import { InternationalBankAccountPartFormComponent } from './bank-account-form/i
         BankAccountFormComponent,
         RussianContractFormComponent,
         InternationalBankAccountFormComponent,
-        RussianBankAccountFormComponent
+        RussianBankAccountFormComponent,
+        ShopCreationComponent,
+        ShopDetailsChangeComponent,
+        ShopCategoryChangeComponent,
+        ShopLocationChangeComponent,
+        ContractTerminationComponent,
+        ShopAccountCreationComponent,
+        ShopPayoutScheduleChangeComponent,
+        ContractLegalAgreementBindingComponent,
+        ContractAdjustmentCreationComponent
     ],
     providers: [
         ShopFormService,

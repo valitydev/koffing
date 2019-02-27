@@ -18,6 +18,7 @@ import { PaymentStatusPipe } from './payment-statuses.pipe';
 import { CurrencyPipe } from './currency.pipe';
 import { StepperComponent } from './stepper/stepper.component';
 import { WithdrawalStatusPipe } from './withdrawal-status.pipe';
+import { ClaimDetailsTitlePipe } from 'koffing/management/claim-details/claim-details-title.pipe';
 import { DepositStatusPipe } from './deposit-status.pipe';
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DepositStatusPipe } from './deposit-status.pipe';
         PaginationPipe,
         InvoiceStatusPipe,
         PaymentStatusPipe,
+        ClaimDetailsTitlePipe,
         CurrencyPipe,
         WithdrawalStatusPipe,
         StepperComponent,
@@ -51,6 +53,7 @@ import { DepositStatusPipe } from './deposit-status.pipe';
         PaginationPipe,
         InvoiceStatusPipe,
         PaymentStatusPipe,
+        ClaimDetailsTitlePipe,
         CurrencyPipe,
         WithdrawalStatusPipe,
         StepperComponent,

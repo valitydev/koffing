@@ -7,15 +7,15 @@
                 table.table.table-striped
                     thead
                         tr
-                            th Магазин
-                            th Тип заявки
+                            th Идентификатор заявки
                             th Статус
+                            th Время создания
                             th
                     tbody(*ngFor="let claim of claims")
                         tr
-                            td {{getShopName(claim)}}
-                            td {{getModificationType(claim) | kofClaimModificationType}}
+                            td {{claim.id}}
                             td {{claim.status | kofClaimStatus}}
+                            td {{claim.createdAt | date: "dd.MM.yyyy HH:mm:ss"}}
                             td
                                 button.btn.btn-xs.btn-default.pull-right((click)="goToClaimDetails(claim.id)") Детали заявки
         .x_panel

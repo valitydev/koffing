@@ -11,6 +11,7 @@ export * from './party-modification/shop-modification/shop-creation';
 export * from './party-modification/shop-modification/shop-details-change';
 export * from './party-modification/shop-modification/shop-location-change';
 export * from './party-modification/shop-modification/shop-modification';
+export * from './party-modification/shop-modification/shop-payout-schedule-change';
 export * from './party-modification/party-modification';
 export * from './claim';
 export * from './claim-accepted';

@@ -1,0 +1,16 @@
+form.form-horizontal.form-label-left.css-form
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Номер соглашения:
+        .col-xs-12.col-sm-8
+            div {{legalAgreement?.legalAgreement.id}}
+    .form-group
+        .col-xs-12.col-sm-4
+            label.text-left Дата заключения:
+        .col-xs-12.col-sm-8
+            div {{legalAgreement?.legalAgreement?.signedAt | date: "dd.MM.yyyy"}}
+    .form-group(*ngIf="legalAgreement?.legalAgreement?.validUntil")
+        .col-xs-12.col-sm-4
+            label.text-left Действительно до:
+        .col-xs-12.col-sm-8
+            div {{legalAgreement?.legalAgreement?.validUntil | date: "dd.MM.yyyy"}}

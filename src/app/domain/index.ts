@@ -8,6 +8,6 @@ export * from './contractor-details/contractor-details.component';
 export * from './payout-tool-details/payout-tool-details.component';
 export * from './payout-tool-form/payout-tool-form.component';
 export * from './payout-tool-form/payout-tool-form.service';
-export * from './shop-details/shop-details.component';
+export * from '../shop-info/shop-details/shop-details.component';
 export * from './shop-form/shop-form.component';
 export * from './shop-form/shop-form.service';

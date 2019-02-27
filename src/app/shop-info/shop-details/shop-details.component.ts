@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { Shop, Category } from 'koffing/backend';
-import { CategoryService } from 'koffing/backend/category.service';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Shop, Category } from 'src/app/backend';
+import { CategoryService } from 'src/app/backend/category.service';
 
 @Component({
     selector: 'kof-shop-details',
