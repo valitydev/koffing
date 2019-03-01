@@ -44,6 +44,21 @@ export class CreateWebhookService {
             'при проведении платежа возникла ошибка',
             'InvoicesTopic'
         ),
+        new EventTypePresent(
+            'PaymentRefundCreated',
+            'возврат платежа успешно создан',
+            'InvoicesTopic'
+        ),
+        new EventTypePresent(
+            'PaymentRefundSucceeded',
+            'возврат платежа прошел успешно',
+            'InvoicesTopic'
+        ),
+        new EventTypePresent(
+            'PaymentRefundFailed',
+            'возврат платежа завершился неудачей',
+            'InvoicesTopic'
+        ),
         new EventTypePresent('CustomerCreated', 'плательщик создан', 'CustomersTopic'),
         new EventTypePresent('CustomerDeleted', 'плательщик удален', 'CustomersTopic'),
         new EventTypePresent('CustomerReady', 'плательщик готов', 'CustomersTopic'),
