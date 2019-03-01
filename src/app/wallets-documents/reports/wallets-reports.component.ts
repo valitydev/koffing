@@ -29,7 +29,6 @@ export class WalletsReportsComponent implements OnInit {
         private fb: FormBuilder
     ) {
         this.form = this.fb.group({ identityID: [''] });
-        this.form.valueChanges.subscribe(() => this.getReports());
     }
 
     public ngOnInit() {
@@ -40,7 +39,6 @@ export class WalletsReportsComponent implements OnInit {
                 value: params['type']
             };
         });
-        this.dateRange.subscribe(() => this.getReports());
     }
 
     public selectDateRange(dateRange: DateRange) {

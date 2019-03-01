@@ -15,7 +15,7 @@ export interface Report {
     toTime: string;
     status: ReportStatus;
     type: ReportType;
-    files: string[];
+    files: Array<{ id: string }>;
 }
 
 export interface SearchReportParams {
