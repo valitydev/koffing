@@ -1,5 +1,6 @@
 import { CreatePayoutParams } from 'koffing/backend';
 import * as uuid from 'uuid/v4';
+import { toMinor } from 'koffing/common/amount-utils';
 
 export class CreateWalletPayoutService {
     public static getCreatePayoutParams(formValue: any, shopID: string): CreatePayoutParams {
@@ -7,7 +8,7 @@ export class CreateWalletPayoutService {
         params.id = uuid();
         params.shopID = shopID;
         params.payoutToolID = formValue.payoutTool;
-        params.amount = formValue.amount * 100;
+        params.amount = toMinor(formValue.amount);
         params.currency = formValue.currency;
         params.metadata = {};
         return params;
