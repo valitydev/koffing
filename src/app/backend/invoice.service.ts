@@ -7,6 +7,7 @@ import { InvoiceParams } from './requests';
 import { InvoiceAndToken, InvoiceAccessToken, PaymentMethod } from './model';
 import { RefundParams } from 'koffing/backend/requests/refund-params';
 import { PaymentRefund } from 'koffing/backend/model';
+import { toMinor } from 'koffing/common/amount-utils';
 
 @Injectable()
 export class InvoiceService {
@@ -24,9 +25,17 @@ export class InvoiceService {
             .map(res => res.json());
     }
 
-    public capturePayment(invoiceID: string, paymentID: string, reason: string): Observable<void> {
+    public capturePayment(
+        invoiceID: string,
+        paymentID: string,
+        reason: string,
+        amount: number
+    ): Observable<void> {
         return this.http
-            .post(`${this.endpoint}/${invoiceID}/payments/${paymentID}/capture`, { reason })
+            .post(`${this.endpoint}/${invoiceID}/payments/${paymentID}/capture`, {
+                reason,
+                amount: toMinor(amount)
+            })
             .map(res => null);
     }
 

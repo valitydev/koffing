@@ -25,6 +25,6 @@
     .col-xs-12
         kof-payment-refund(
         [invoice]="invoice",
-        [paymentID]="payment.id",
+        [payment]="payment",
         [refunds]="refunds",
         (onRefund)="onRefund()")

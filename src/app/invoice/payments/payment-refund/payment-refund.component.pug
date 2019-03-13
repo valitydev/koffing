@@ -1,8 +1,8 @@
 doctype html
-button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + paymentID + 'refund'", (click)="open()")
+button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#' + payment.id + 'refund'", (click)="open()")
     | Совершить возврат платежа
 
-.modal.fade(tabindex="-1", role="dialog", id="{{paymentID}}refund", data-backdrop="false")
+.modal.fade(tabindex="-1", role="dialog", id="{{payment.id}}refund", data-backdrop="false")
     .modal-dialog.modal-md
         .modal-content
             .modal-header

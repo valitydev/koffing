@@ -9,6 +9,7 @@ div(*ngFor="let payment of searchResult?.payments")
             kof-payment-capture(
                 [invoiceID]="invoice.id",
                 [paymentID]="payment.id",
+                [inputAmount]="payment.amount",
                 (onChangeStatus)="changeStatus($event, payment)")
             kof-payment-cancel(
                 [invoiceID]="invoice.id",
