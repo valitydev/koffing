@@ -77,12 +77,6 @@ form([formGroup]="searchForm", novalidate)
                     label Fingerprint:
                     input.form-control(formControlName="fingerprint")
         .row
-            .col-sm-3.col-xs-12
-                .form-group
-                    label.text-left
-                        input(type="checkbox", formControlName="invoicesWithPayments")
-                        | &nbsp;Инвойсы с платежами
-        .row
             .col-sm-9.col-xs-12
                 .reset-button-container
                     button.btn.btn-default((click)="reset()") Сбросить параметры поиска

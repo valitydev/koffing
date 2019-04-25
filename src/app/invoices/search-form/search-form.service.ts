@@ -4,6 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
 import { mapValues, isEqual, chain, keys, difference } from 'lodash';
 
+import { PAYMENT_STATUS } from 'koffing/backend';
+
 @Injectable()
 export class SearchFormService {
     public searchForm: FormGroup;
@@ -18,7 +20,7 @@ export class SearchFormService {
         to: moment()
             .endOf('day')
             .toDate(),
-        invoicesWithPayments: true
+        paymentStatus: PAYMENT_STATUS.captured
     };
 
     private mainSearchFields = ['invoiceID', 'invoiceStatus', 'paymentStatus'];
@@ -68,13 +70,12 @@ export class SearchFormService {
             ip: '',
             email: '',
             paymentID: '',
-            paymentStatus: '',
+            paymentStatus: this.defaultValues.paymentStatus,
             paymentMethod: '',
             paymentFlow: '',
             fingerprint: '',
             customerID: '',
-            bankCardTokenProvider: '',
-            invoicesWithPayments: this.defaultValues.invoicesWithPayments
+            bankCardTokenProvider: ''
         });
     }
 
@@ -96,8 +97,7 @@ export class SearchFormService {
                 .toDate(),
             to: moment(params.to)
                 .endOf('day')
-                .toDate(),
-            invoicesWithPayments: params.invoicesWithPayments === 'true'
+                .toDate()
         };
     }
 }
