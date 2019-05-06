@@ -2,9 +2,9 @@ div(*ngFor="let file of files")
     form.form-horizontal.css-form.form-list
         .form-group
             .col-xs-12.col-sm-2
-                label.text-left Имя файла:
+                label.text-left ID файла:
             .col-xs-12.col-sm-10
-                div {{file}}
+                div {{file?.id}}
         .form-group
             .col-xs-12
                 .btn.btn-sm.btn-primary((click)="downloadFile(file.id, file.id)") Загрузить
