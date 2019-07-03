@@ -111,6 +111,12 @@ form.form-horizontal.form-label-left.css-form
                             .col-sm-7
                                 div {{payment.payer?.paymentToolDetails?.phoneNumberMask}}
 
+                    .col-xs-12(*ngIf="payment.transactionInfo?.rrn")
+                        .form-group
+                            label.col-sm-5 RRN:
+                            .col-sm-7
+                                div {{payment.transactionInfo?.rrn}}
+
             div(*ngIf="payment.payer?.payerType === 'CustomerPayer'")
                 .row
                     .col-xs-12

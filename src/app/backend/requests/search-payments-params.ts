@@ -14,7 +14,8 @@ export class SearchPaymentsParams {
     public payerFingerprint?: string;
     public customerID?: string;
     public paymentAmount?: number;
-    public bin?: string;
-    public lastDigits?: string;
+    public first6?: string;
+    public last4?: string;
+    public rrn?: string;
     public bankCardTokenProvider?: 'applepay' | 'googlepay' | 'samsungpay';
 }

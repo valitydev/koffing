@@ -2,6 +2,7 @@ import { LogicError } from '../logic-error';
 import { PaymentFlow } from './payment-flow';
 import { GeoLocationInfo } from '../geo-location-info';
 import { Payer } from '../payer';
+import { TransactionInfo } from 'koffing/backend/model/payment/transaction-info';
 
 export class Payment {
     public id: string;
@@ -19,4 +20,5 @@ export class Payment {
     public payer: Payer;
     public shortID: string;
     public statusChangedAt: string;
+    public transactionInfo: TransactionInfo;
 }

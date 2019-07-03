@@ -16,7 +16,7 @@ export class SearchInvoicesParams {
     public payerEmail?: string;
     public payerFingerprint?: string;
     public customerID?: string;
-    public bin?: string;
-    public lastDigits?: string;
+    public first6?: string;
+    public last4?: string;
     public bankCardTokenProvider?: 'applepay' | 'googlepay' | 'samsungpay';
 }

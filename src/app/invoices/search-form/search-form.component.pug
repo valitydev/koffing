@@ -70,8 +70,12 @@ form([formGroup]="searchForm", novalidate)
         .row
             .col-sm-3.col-xs-12
                 .form-group
+                    label Номер карты (первые 6 цифр):
+                    input.form-control(maxlength=6, formControlName="first6")
+            .col-sm-3.col-xs-12
+                .form-group
                     label Номер карты (последние 4 цифры):
-                    input.form-control(maxlength=4, formControlName="lastDigits")
+                    input.form-control(maxlength=4, formControlName="last4")
             .col-sm-3.col-xs-12
                 .form-group
                     label Fingerprint:
