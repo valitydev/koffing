@@ -12,7 +12,7 @@ build('koffing', 'docker-host') {
     withWsCache = load("${env.JENKINS_LIB}/withWsCache.groovy")
   }
 
-  pipeDefault() {
+  def pipeline = {
     runStage('init') {
       withGithubSshCredentials {
         withWsCache("node_modules") {
@@ -43,4 +43,5 @@ build('koffing', 'docker-host') {
       }
     }
   }
+  pipeDefault(pipeline, 'dr2.rbkmoney.com', 'jenkins_harbor')
 }
