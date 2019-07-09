@@ -61,7 +61,8 @@ export class SearchFormService {
         return this.fb.group({
             from: [this.defaultValues.from, Validators.required],
             to: [this.defaultValues.to, Validators.required],
-            lastDigits: ['', Validators.pattern(/^\d{4}$/)],
+            first6: ['', Validators.pattern(/^\d{6}$/)],
+            last4: ['', Validators.pattern(/^\d{4}$/)],
             invoiceID: '',
             invoiceStatus: '',
             ip: '',
