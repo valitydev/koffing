@@ -2,7 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { get } from 'lodash';
 
 import { CustomerService } from 'koffing/backend/customer.service';
-import { PAYMENT_STATUS, Customer, CustomerPayer, PaymentError, Payment } from 'koffing/backend';
+import { PAYMENT_STATUS, Customer, CustomerPayer, PaymentError, Payment, RecurrentPayer } from 'koffing/backend';
 import * as errors from './errors.json';
 
 @Component({
@@ -14,6 +14,7 @@ export class PaymentDetailsComponent implements OnChanges {
     public payment: Payment;
 
     public customer: Customer;
+    public recurrentPayer: RecurrentPayer;
 
     constructor(private customerService: CustomerService) {}
 
