@@ -136,3 +136,23 @@ form.form-horizontal.form-label-left.css-form
                             label.col-sm-5 Статус плательщика:
                             .col-sm-7
                                 div {{ customer?.status | kofCustomerStatus }}
+
+            div(*ngIf="payment.payer?.payerType === 'RecurrentPayer'")
+                .row
+                    .col-xs-12
+                        .form-group
+                            label.col-sm-5 Email плательщика:
+                            .col-sm-7
+                                div {{ recurrentPayer?.contactInfo?.email }}
+                .row
+                    .col-xs-12
+                        .form-group
+                            label.col-sm-5 ID родительского платежа:
+                            .col-sm-7
+                                div {{ recurrentPayer?.paymentRecurrentParent?.paymentID }}
+                .row
+                    .col-xs-12
+                        .form-group
+                            label.col-sm-5 ID родительского инвойса:
+                            .col-sm-7
+                                div {{ recurrentPayer?.paymentRecurrentParent?.invoiceID }}
