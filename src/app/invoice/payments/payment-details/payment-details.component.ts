@@ -32,6 +32,9 @@ export class PaymentDetailsComponent implements OnChanges {
                 .getCustomerById(payer.customerID)
                 .subscribe(customer => (this.customer = customer));
         }
+        if (this.payment && this.payment.payer.payerType === 'RecurrentPayer') {
+            this.recurrentPayer = this.payment.payer as RecurrentPayer;
+        }
     }
 
     public isFlowInformationAvailable(payment: Payment) {

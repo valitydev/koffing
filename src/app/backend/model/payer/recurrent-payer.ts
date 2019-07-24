@@ -4,7 +4,7 @@ import { PaymentRecurrentParent } from 'koffing/backend/model/payer/payment-recu
 
 export class RecurrentPayer extends Payer {
     public contactInfo: ContactInfo;
-    public paymentRecurrentParent: PaymentRecurrentParent;
+    public recurrentParentPayment: PaymentRecurrentParent;
 
     constructor() {
         super();
