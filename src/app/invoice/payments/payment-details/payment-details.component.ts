@@ -21,6 +21,7 @@ export class PaymentDetailsComponent implements OnChanges {
     public payment: Payment;
 
     public customer: Customer;
+    public customerPayer: CustomerPayer;
     public recurrentPayer: RecurrentPayer;
 
     constructor(private customerService: CustomerService) {}
