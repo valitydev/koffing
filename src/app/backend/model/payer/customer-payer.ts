@@ -3,7 +3,7 @@ import { PaymentToolDetailsBankCard } from 'koffing/backend';
 
 export class CustomerPayer extends Payer {
     public customerID: string;
-    public pymentToolDetails: PaymentToolDetailsBankCard;
+    public paymentToolDetails: PaymentToolDetailsBankCard;
 
     constructor() {
         super();

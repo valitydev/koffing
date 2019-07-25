@@ -137,12 +137,12 @@ form.form-horizontal.form-label-left.css-form
                             label.col-sm-5 Статус плательщика:
                             .col-sm-7
                                 div {{ customer?.status | kofCustomerStatus }}
-                .row(*ngIf="customerPayer?.pymentToolDetails?.cardNumberMask")
+                .row(*ngIf="customerPayer?.paymentToolDetails?.cardNumberMask")
                     .col-xs-12
                         .form-group
                             label.col-sm-5 Данные карты:
                             .col-sm-7
-                                div {{ customerPayer?.pymentToolDetails?.cardNumberMask }} ({{ customerPayer?.pymentToolDetails?.paymentSystem }})
+                                div {{ customerPayer?.paymentToolDetails?.cardNumberMask }} ({{ customerPayer?.paymentToolDetails?.paymentSystem }})
 
             div(*ngIf="payment.payer?.payerType === 'RecurrentPayer'")
                 .row(*ngIf="recurrentPayer?.contactInfo?.email")
@@ -163,9 +163,9 @@ form.form-horizontal.form-label-left.css-form
                             label.col-sm-5 ID родительского инвойса:
                             .col-sm-7
                                 div {{ recurrentPayer?.recurrentParentPayment?.invoiceID }}
-                .row(*ngIf="recurrentPayer?.pymentToolDetails?.cardNumberMask")
+                .row(*ngIf="recurrentPayer?.paymentToolDetails?.cardNumberMask")
                     .col-xs-12
                         .form-group
                             label.col-sm-5 Данные карты:
                             .col-sm-7
-                                div {{ recurrentPayer?.pymentToolDetails?.cardNumberMask }} ({{ recurrentPayer?.pymentToolDetails?.paymentSystem }})
+                                div {{ recurrentPayer?.paymentToolDetails?.cardNumberMask }} ({{ recurrentPayer?.paymentToolDetails?.paymentSystem }})
