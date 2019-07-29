@@ -23,6 +23,7 @@ import { PaymentRefundsComponent } from './payments/payment-refunds/payment-refu
 import { PaymentRefundDetailsComponent } from './payments/payment-refund-details/payment-refund-details.component';
 import { PaymentRefundsPipe } from './payments/payment-refunds/payment-refunds.pipe';
 import { PaymentToolDetailsTokenProviderPipe } from './payments/payment-details/payment-tool-details-token-provider.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import { PaymentToolDetailsTokenProviderPipe } from './payments/payment-details/
         CommonModule,
         BackendModule,
         CheckoutModule,
-        CommonModule
+        CommonModule,
+        RouterModule
     ],
     declarations: [
         InvoiceComponent,

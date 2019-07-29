@@ -16,9 +16,16 @@ export class PaymentsService {
 
     private continuationToken: string;
 
+    private currentInvoiceID: string;
+
     constructor(private searchService: SearchService) {}
 
     public search(shopID: string, invoiceID: string): Observable<SearchResult> {
+        if (invoiceID !== this.currentInvoiceID) {
+            this.currentInvoiceID = invoiceID;
+            this.payments = [];
+            this.continuationToken = undefined;
+        }
         const request = this.toSearchParams(invoiceID, this.limit, this.continuationToken);
         return this.searchService
             .searchPayments(shopID, request)

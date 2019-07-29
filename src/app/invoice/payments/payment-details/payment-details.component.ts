@@ -1,16 +1,23 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { get } from 'lodash';
 
 import { CustomerService } from 'koffing/backend/customer.service';
 import {
-    PAYMENT_STATUS,
     Customer,
     CustomerPayer,
-    PaymentError,
     Payment,
+    PAYMENT_STATUS,
+    PaymentError,
+    PaymentFlowHold,
+    PaymentFlowInstant,
+    PaymentResourcePayer,
+    PaymentToolDetailsBankCard,
+    PaymentToolDetailsPaymentTerminal,
     RecurrentPayer
 } from 'koffing/backend';
 import * as errors from './errors.json';
+import { DigitalWalletDetailsQIWI } from 'koffing/backend/model/payment-tool-details/digital-wallet-details-qiwi';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'kof-payment-details',
@@ -21,27 +28,75 @@ export class PaymentDetailsComponent implements OnChanges {
     public payment: Payment;
 
     public customer: Customer;
+    public paymentResourcePayer: PaymentResourcePayer;
     public customerPayer: CustomerPayer;
     public recurrentPayer: RecurrentPayer;
+
+    public bankCard: PaymentToolDetailsBankCard;
+    public digitalWallet: DigitalWalletDetailsQIWI;
+    public terminal: PaymentToolDetailsPaymentTerminal;
+
+    public flowInstant: PaymentFlowInstant;
+    public flowHold: PaymentFlowHold;
 
     constructor(private customerService: CustomerService) {}
 
     public ngOnChanges() {
-        if (this.payment && this.payment.payer.payerType === 'CustomerPayer') {
+        if (this.payment) {
+            this.initPayer();
+            this.initPaymentTool();
+            this.initFlow();
+        }
+    }
+
+    public initPayer() {
+        if (this.payment.payer.payerType === 'CustomerPayer') {
             this.customerPayer = this.payment.payer as CustomerPayer;
             this.customerService
                 .getCustomerById(this.customerPayer.customerID)
                 .subscribe(customer => (this.customer = customer));
         }
-        if (this.payment && this.payment.payer.payerType === 'RecurrentPayer') {
+        if (this.payment.payer.payerType === 'RecurrentPayer') {
             this.recurrentPayer = this.payment.payer as RecurrentPayer;
+        }
+        if (this.payment.payer.payerType === 'PaymentResourcePayer') {
+            this.paymentResourcePayer = this.payment.payer as PaymentResourcePayer;
         }
     }
 
-    public isFlowInformationAvailable(payment: Payment) {
+    public initPaymentTool() {
+        if (this.payment.payer.paymentToolDetails.detailsType === 'PaymentToolDetailsBankCard') {
+            this.bankCard = this.payment.payer.paymentToolDetails as PaymentToolDetailsBankCard;
+        }
+        if (
+            this.payment.payer.paymentToolDetails.detailsType === 'PaymentToolDetailsDigitalWallet'
+        ) {
+            this.digitalWallet = this.payment.payer.paymentToolDetails as DigitalWalletDetailsQIWI;
+        }
+        if (
+            this.payment.payer.paymentToolDetails.detailsType ===
+            'PaymentToolDetailsPaymentTerminal'
+        ) {
+            this.terminal = this.payment.payer
+                .paymentToolDetails as PaymentToolDetailsPaymentTerminal;
+        }
+    }
+
+    public initFlow() {
+        if (this.payment.flow.type === 'PaymentFlowInstant') {
+            this.flowInstant = this.payment.flow as PaymentFlowInstant;
+        }
+        if (this.payment.flow.type === 'PaymentFlowHold') {
+            this.flowHold = this.payment.flow as PaymentFlowHold;
+        }
+    }
+
+    public getRecurrentParentInvoiceLink(): string {
         return (
-            payment.flow.type === 'PaymentFlowHold' &&
-            this.payment.status === PAYMENT_STATUS.processed
+            '/shop/' +
+            this.payment.shopID +
+            '/invoice/' +
+            this.recurrentPayer.recurrentParentPayment.invoiceID
         );
     }
 

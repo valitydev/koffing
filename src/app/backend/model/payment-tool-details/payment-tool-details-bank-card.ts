@@ -5,6 +5,7 @@ export class PaymentToolDetailsBankCard extends PaymentToolDetails {
     public first6: string;
     public last4: string;
     public paymentSystem: string;
+    public tokenProvider: string;
 
     constructor() {
         super();
