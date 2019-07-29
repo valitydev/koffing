@@ -126,7 +126,7 @@ form.form-horizontal.form-label-left.css-form
                         .form-group
                             label.col-sm-5 ID родительского платежа:
                             .col-sm-7
-                                a([routerLink]="[getRecurrentParentInvoiceLink()]") {{ recurrentPayer?.recurrentParentPayment?.paymentID }}
+                                div {{ recurrentPayer?.recurrentParentPayment?.paymentID }}
                 .row(*ngIf="recurrentPayer?.recurrentParentPayment?.invoiceID")
                     .col-xs-12
                         .form-group

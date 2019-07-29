@@ -50,44 +50,46 @@ export class PaymentDetailsComponent implements OnChanges {
     }
 
     public initPayer() {
-        if (this.payment.payer.payerType === 'CustomerPayer') {
-            this.customerPayer = this.payment.payer as CustomerPayer;
-            this.customerService
-                .getCustomerById(this.customerPayer.customerID)
-                .subscribe(customer => (this.customer = customer));
-        }
-        if (this.payment.payer.payerType === 'RecurrentPayer') {
-            this.recurrentPayer = this.payment.payer as RecurrentPayer;
-        }
-        if (this.payment.payer.payerType === 'PaymentResourcePayer') {
-            this.paymentResourcePayer = this.payment.payer as PaymentResourcePayer;
+        switch (this.payment.payer.payerType) {
+            case 'CustomerPayer':
+                this.customerPayer = this.payment.payer as CustomerPayer;
+                this.customerService
+                    .getCustomerById(this.customerPayer.customerID)
+                    .subscribe(customer => (this.customer = customer));
+                break;
+            case 'RecurrentPayer':
+                this.recurrentPayer = this.payment.payer as RecurrentPayer;
+                break;
+            case 'PaymentResourcePayer':
+                this.paymentResourcePayer = this.payment.payer as PaymentResourcePayer;
+                break;
         }
     }
 
     public initPaymentTool() {
-        if (this.payment.payer.paymentToolDetails.detailsType === 'PaymentToolDetailsBankCard') {
-            this.bankCard = this.payment.payer.paymentToolDetails as PaymentToolDetailsBankCard;
-        }
-        if (
-            this.payment.payer.paymentToolDetails.detailsType === 'PaymentToolDetailsDigitalWallet'
-        ) {
-            this.digitalWallet = this.payment.payer.paymentToolDetails as DigitalWalletDetailsQIWI;
-        }
-        if (
-            this.payment.payer.paymentToolDetails.detailsType ===
-            'PaymentToolDetailsPaymentTerminal'
-        ) {
-            this.terminal = this.payment.payer
-                .paymentToolDetails as PaymentToolDetailsPaymentTerminal;
+        switch (this.payment.payer.paymentToolDetails.detailsType) {
+            case 'PaymentToolDetailsBankCard':
+                this.bankCard = this.payment.payer.paymentToolDetails as PaymentToolDetailsBankCard;
+                break;
+            case 'PaymentToolDetailsDigitalWallet':
+                this.digitalWallet = this.payment.payer
+                    .paymentToolDetails as DigitalWalletDetailsQIWI;
+                break;
+            case 'PaymentToolDetailsPaymentTerminal':
+                this.terminal = this.payment.payer
+                    .paymentToolDetails as PaymentToolDetailsPaymentTerminal;
+                break;
         }
     }
 
     public initFlow() {
-        if (this.payment.flow.type === 'PaymentFlowInstant') {
-            this.flowInstant = this.payment.flow as PaymentFlowInstant;
-        }
-        if (this.payment.flow.type === 'PaymentFlowHold') {
-            this.flowHold = this.payment.flow as PaymentFlowHold;
+        switch (this.payment.flow.type) {
+            case 'PaymentFlowInstant':
+                this.flowInstant = this.payment.flow as PaymentFlowInstant;
+                break;
+            case 'PaymentFlowHold':
+                this.flowInstant = this.payment.flow as PaymentFlowHold;
+                break;
         }
     }
 
