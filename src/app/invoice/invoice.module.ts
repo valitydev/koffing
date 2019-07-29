@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -23,7 +24,6 @@ import { PaymentRefundsComponent } from './payments/payment-refunds/payment-refu
 import { PaymentRefundDetailsComponent } from './payments/payment-refund-details/payment-refund-details.component';
 import { PaymentRefundsPipe } from './payments/payment-refunds/payment-refunds.pipe';
 import { PaymentToolDetailsTokenProviderPipe } from './payments/payment-details/payment-tool-details-token-provider.pipe';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [

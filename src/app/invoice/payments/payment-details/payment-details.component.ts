@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { get } from 'lodash';
 
 import { CustomerService } from 'koffing/backend/customer.service';
@@ -17,7 +17,6 @@ import {
 } from 'koffing/backend';
 import * as errors from './errors.json';
 import { DigitalWalletDetailsQIWI } from 'koffing/backend/model/payment-tool-details/digital-wallet-details-qiwi';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'kof-payment-details',
@@ -94,12 +93,9 @@ export class PaymentDetailsComponent implements OnChanges {
     }
 
     public getRecurrentParentInvoiceLink(): string {
-        return (
-            '/shop/' +
-            this.payment.shopID +
-            '/invoice/' +
+        return `/shop/${this.payment.shopID}/invoice/${
             this.recurrentPayer.recurrentParentPayment.invoiceID
-        );
+        }`;
     }
 
     public getLabelClass(status: string) {

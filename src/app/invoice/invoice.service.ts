@@ -35,7 +35,7 @@ export class InvoiceService {
 
     private searchInvoice(shopID: string, invoiceID: string) {
         const searchRetries = 20;
-        this.invoiceSubject.next(undefined);
+        this.invoiceSubject.next(null);
         this.searchService
             .searchInvoices(shopID, {
                 fromTime: moment()

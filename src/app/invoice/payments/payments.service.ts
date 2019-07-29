@@ -24,7 +24,7 @@ export class PaymentsService {
         if (invoiceID !== this.currentInvoiceID) {
             this.currentInvoiceID = invoiceID;
             this.payments = [];
-            this.continuationToken = undefined;
+            this.continuationToken = null;
         }
         const request = this.toSearchParams(invoiceID, this.limit, this.continuationToken);
         return this.searchService
