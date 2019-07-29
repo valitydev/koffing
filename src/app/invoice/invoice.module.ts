@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -32,7 +33,8 @@ import { PaymentToolDetailsTokenProviderPipe } from './payments/payment-details/
         CommonModule,
         BackendModule,
         CheckoutModule,
-        CommonModule
+        CommonModule,
+        RouterModule
     ],
     declarations: [
         InvoiceComponent,
