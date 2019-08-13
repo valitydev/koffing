@@ -35,7 +35,9 @@ export class WebhooksComponent implements OnInit {
 
     private prepareTableItems() {
         this.webhooksService.getWebhooks().subscribe(webhooks => {
-            const filtered = webhooks.filter(webhook => webhook.scope.shopID === this.shopID);
+            const filtered = webhooks
+                .filter(webhook => webhook.scope.shopID === this.shopID)
+                .filter(webhook => webhook.active);
             this.webhooksTableItems = filtered.map(webhook => new WebhookTableItem(webhook));
         });
     }
