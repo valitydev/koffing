@@ -19,4 +19,5 @@ export class SearchInvoicesParams {
     public first6?: string;
     public last4?: string;
     public bankCardTokenProvider?: 'applepay' | 'googlepay' | 'samsungpay';
+    public rrn?: string;
 }

@@ -78,6 +78,11 @@ form([formGroup]="searchForm", novalidate)
                     input.form-control(maxlength=4, formControlName="last4")
             .col-sm-3.col-xs-12
                 .form-group
+                    label RRN:
+                    input.form-control(formControlName="rrn")
+        .row
+            .col-xs-12
+                .form-group
                     label Fingerprint:
                     input.form-control(formControlName="fingerprint")
         .row

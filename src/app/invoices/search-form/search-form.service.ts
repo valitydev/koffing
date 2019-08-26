@@ -72,6 +72,7 @@ export class SearchFormService {
             paymentMethod: '',
             paymentFlow: '',
             fingerprint: '',
+            rrn: '',
             customerID: '',
             bankCardTokenProvider: ''
         });
