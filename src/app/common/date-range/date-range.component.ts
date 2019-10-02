@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { DateRange } from './date-range';
@@ -10,6 +10,9 @@ import { DateRange } from './date-range';
     encapsulation: ViewEncapsulation.None
 })
 export class DateRangeComponent implements OnInit {
+    @Input()
+    public mark = false;
+
     @Output()
     public onSelect = new EventEmitter<DateRange>();
 

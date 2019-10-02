@@ -1,5 +1,6 @@
 form([formGroup]="form", novalidate)
     label Временной интервал:
+        span.highlighted(*ngIf="mark") &nbsp;*
     .row
         .col-xs-6
             .ui-calendar.search-form

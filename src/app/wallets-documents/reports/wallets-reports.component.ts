@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 import { Report, ReportType } from 'koffing/backend/wapi/model/report';
@@ -28,7 +28,7 @@ export class WalletsReportsComponent implements OnInit {
         private reportsService: ReportsService,
         private fb: FormBuilder
     ) {
-        this.form = this.fb.group({ identityID: [''] });
+        this.form = this.fb.group({ identityID: ['', Validators.required] });
     }
 
     public ngOnInit() {

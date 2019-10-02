@@ -3,15 +3,16 @@ form([formGroup]="form")
         .col-xs-12.col-sm-3
             .form-group
                 label ID личности владельца:
+                    span.highlighted &nbsp;*
                 input.form-control(formControlName="identityID")
         .col-xs-12.col-sm-5
-            kof-date-range((onSelect)="selectDateRange($event)")
+            kof-date-range((onSelect)="selectDateRange($event)", [mark]="true")
         .col-xs-12.col-sm-4
             .row
                 .col-xs-12
                     button.btn.btn-default.create-report(
                         (click)="createReports()",
-                        [disabled]="isLoading") Создать
+                        [disabled]="form.invalid || isLoading") Создать
                     button.btn.btn-default.create-report(
                         (click)="getReports()",
                         [disabled]="isLoading") Обновить
