@@ -20,7 +20,8 @@ import { DigitalWalletDetailsQIWI } from 'koffing/backend/model/payment-tool-det
 
 @Component({
     selector: 'kof-payment-details',
-    templateUrl: 'payment-details.component.pug'
+    templateUrl: 'payment-details.component.pug',
+    styleUrls: ['payment-details.component.less']
 })
 export class PaymentDetailsComponent implements OnChanges {
     @Input()
