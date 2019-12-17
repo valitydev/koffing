@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';

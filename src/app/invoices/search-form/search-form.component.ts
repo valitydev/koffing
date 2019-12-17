@@ -1,6 +1,6 @@
-import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { map } from 'lodash';
 
 import { SelectItem } from 'koffing/common/select/select-item';
