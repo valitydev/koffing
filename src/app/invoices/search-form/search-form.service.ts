@@ -72,7 +72,7 @@ export class SearchFormService {
             paymentMethod: '',
             paymentFlow: '',
             fingerprint: '',
-            rrn: '',
+            rrn: ['', Validators.pattern(/^[a-zA-Z0-9]{12}$/)],
             customerID: '',
             bankCardTokenProvider: ''
         });
