@@ -51,7 +51,7 @@ export class PaymentsService {
         result.limit = limit;
         result.continuationToken = continuationToken;
         result.fromTime = moment()
-            .subtract(1, 'year')
+            .subtract(3, 'year')
             .startOf('day')
             .toDate();
         result.toTime = moment()

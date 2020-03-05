@@ -39,7 +39,7 @@ export class InvoiceService {
         this.searchService
             .searchInvoices(shopID, {
                 fromTime: moment()
-                    .subtract(1, 'year')
+                    .subtract(3, 'year')
                     .startOf('day')
                     .toDate(),
                 toTime: moment()
