@@ -15,7 +15,6 @@
     "@angular/animations": "^5.2.10",
     "@angular/common": "^5.2.10",
     "@angular/compiler": "^5.2.10",
-    "@angular/compiler-cli": "^5.2.10",
     "@angular/core": "^5.2.10",
     "@angular/forms": "^5.2.10",
     "@angular/http": "^5.2.10",
@@ -43,6 +42,7 @@
     "zone.js": "~0.8.5"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "^5.2.11",
     "@ngtools/webpack": "~1.8.0",
     "@types/core-js": "~0.9.42",
     "@types/file-saver": "~0.0.1",
@@ -81,7 +81,7 @@
     "typescript": "~2.5",
     "url-loader": "^2.2.0",
     "webpack": "~2.3.2",
-    "webpack-dev-server": "~2.5.0",
+    "webpack-dev-server": "^2.11.5",
     "webpack-merge": "~4.1.0"
   }
 }
