@@ -41,7 +41,7 @@ export class PaymentRefundsComponent implements OnInit {
                     (acc, current) => (current.status === 'succeeded' ? acc + current.amount : acc),
                     0
                 );
-                result = totalRefunded < this.payment.amount - 1000;
+                result = totalRefunded < this.payment.amount;
             } else {
                 result = true;
             }
