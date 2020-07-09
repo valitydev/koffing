@@ -30,7 +30,7 @@ build('koffing', 'docker-host') {
     runStage('test image') {
       sh 'make test'
     }
-
+    runFESecurityTools()
     try {
       if (env.BRANCH_NAME == 'master') {
         runStage('push image') {
@@ -43,5 +43,5 @@ build('koffing', 'docker-host') {
       }
     }
   }
-  pipeDefault(pipeline, 'dr2.rbkmoney.com', 'jenkins_harbor')
+  pipeDefault(pipeline)
 }
