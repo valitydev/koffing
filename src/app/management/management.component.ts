@@ -10,10 +10,11 @@ import { Observable } from 'rxjs/Observable';
 import { ManagementService } from './management.service';
 import { AuthService } from 'koffing/auth/auth.service';
 import { WarningsService } from 'koffing/backend/warnings.service';
+import { SettingsService } from 'koffing/management/settings.service';
 
 @Component({
     templateUrl: 'management.component.pug',
-    providers: [WarningsService]
+    providers: [WarningsService, SettingsService]
 })
 export class ManagementComponent implements OnInit {
     public claims: Claim[];
@@ -21,8 +22,9 @@ export class ManagementComponent implements OnInit {
     public isCreating: boolean = false;
     public partyId: string;
 
-    public displayWarning = false;
-    public displayWarningDetails = false;
+    public warning =
+        this.settingsService.getLocalStorageItem('warning-banner') === 'true' ||
+        this.settingsService.getLocalStorageItem('warning-banner') === null;
 
     constructor(
         private claimService: ClaimService,
@@ -31,30 +33,22 @@ export class ManagementComponent implements OnInit {
         private claimModificationService: ClaimModificationService,
         private managementService: ManagementService,
         private breadcrumbBroadcaster: BreadcrumbBroadcaster,
-        private warningsService: WarningsService
+        private settingsService: SettingsService
     ) {}
 
     public ngOnInit() {
         Observable.zip(
             this.claimService.getClaims(CLAIM_STATUS.pending),
-            this.shopService.getShops(),
-            this.warningsService.loginWarnings
+            this.shopService.getShops()
         ).subscribe(response => {
             this.claims = response[0];
             this.shops = response[1];
-            this.displayWarning =
-                response[2].filter(warning => warning === this.partyId).length > 0;
-
             if (this.shops.length === 0) {
                 this.createTestShop();
             }
         });
         this.breadcrumbBroadcaster.fire([]);
         this.partyId = AuthService.getAccountInfo().partyId;
-    }
-
-    public toggleWarningDetails() {
-        this.displayWarningDetails = !this.displayWarningDetails;
     }
 
     public getModificationType(claim: Claim) {
@@ -91,5 +85,10 @@ export class ManagementComponent implements OnInit {
 
     public goToShop(shopID: string) {
         this.router.navigate([`/shop/${shopID}/invoices`]);
+    }
+
+    public closeWarning() {
+        this.warning = false;
+        this.settingsService.setLocalStorageItem('warning-banner', 'false');
     }
 }
