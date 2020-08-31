@@ -29,7 +29,7 @@
     "gentelella": "git@github.com:rbkmoney/gentelella.git#0ef12576ea401235c39f8621f6b51e4afcff83fd",
     "jquery": "^3.5.0",
     "keycloak-js": "4.5.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "moment": "^2.24.0",
     "ng2-charts": "~1.6.0",
     "primeng": "~4.2.1",
