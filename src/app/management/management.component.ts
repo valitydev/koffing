@@ -14,7 +14,8 @@ import { SettingsService } from 'koffing/management/settings.service';
 
 @Component({
     templateUrl: 'management.component.pug',
-    providers: [WarningsService, SettingsService]
+    providers: [WarningsService, SettingsService],
+    styleUrls: ['management.component.less']
 })
 export class ManagementComponent implements OnInit {
     public claims: Claim[];

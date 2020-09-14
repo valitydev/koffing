@@ -50,5 +50,6 @@ p-dialog([(visible)]="warning", width="660")
     p Уважаемый клиент!
     p Мы обновили Личный кабинет. Теперь он удобнее и информативнее, а скоро там появятся и новые полезные функции.
     p Все ваши настройки были сохранены и отобразятся в новой версии.
-    p Прежняя версия кабинета будет доступна на old.dashboard.rbk.money до 10 сентября 2020 г.
+    p 
+      a.new-dashboard-link(href="https://dashboard.rbk.money") Перейти на новую версию кабинета dashboard.rbk.money
     button.btn.btn-default((click)="closeWarning()") OK
